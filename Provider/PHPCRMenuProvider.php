@@ -44,11 +44,11 @@ class PHPCRMenuProvider implements MenuProviderInterface
      * @param string $className the menu document class name. with phpcr-odm
      *      this can be null
      */
-    public function __construct(ContainerInterface $container, FactoryInterface $factory, $objectManagerName, $menuRoot, $className=null)
+    public function __construct(ContainerInterface $container, FactoryInterface $factory, $objectManagerName, $menuRoot, $className = null)
     {
         $this->container = $container;
         $this->factory = $factory;
-        $this->dm = $this->container->get($objectManagerName);
+        $this->dm = $this->container->get('doctrine_phpcr')->getManager($objectManagerName);
         $this->menuRoot = $menuRoot;
         $this->className = $className;
     }

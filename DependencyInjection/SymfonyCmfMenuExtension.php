@@ -21,7 +21,7 @@ class SymfonyCmfMenuExtension extends Extension
         $loader->load('phpcr-menu.xml');
 
         $container->setParameter($this->getAlias() . '.menu_basepath', $config['menu_basepath']);
-        $container->setParameter($this->getAlias() . '.document_manager', $config['document_manager']);
+        $container->setParameter($this->getAlias() . '.document_manager_name', $config['document_manager_name']);
         $container->setParameter($this->getAlias() . '.menu_document_class', $config['menu_document_class']);
 
         $factory = $container->getDefinition($this->getAlias().'.factory');

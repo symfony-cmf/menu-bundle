@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('menu_basepath')->defaultValue('/cms/menu')->end()
-                ->scalarNode('document_manager')->defaultValue('doctrine_phpcr.odm.default_document_manager')->end()
+                ->scalarNode('document_manager_name')->defaultValue('default')->end()
                 ->scalarNode('menu_document_class')->defaultNull()->end()
 
                 ->scalarNode('content_url_generator')->defaultValue('symfony_cmf_routing_extra.doctrine_router')->end()
