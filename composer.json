@@ -16,7 +16,7 @@
         "symfony/symfony": "2.1.*",
         "doctrine/phpcr-bundle": "dev-master",
         "doctrine/phpcr-odm": "dev-master",
-        "knplabs/knp-menu-bundle": "dev-master"
+        "knplabs/knp-menu-bundle": "1.1.*"
     },
     "autoload":{
         "psr-0":{
