@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('document_manager_name')->defaultValue('default')->end()
                 ->scalarNode('menu_document_class')->defaultNull()->end()
 
-                ->scalarNode('content_url_generator')->defaultValue('symfony_cmf_routing_extra.doctrine_router')->end()
+                ->scalarNode('content_url_generator')->defaultValue('router')->end()
                 ->scalarNode('content_key')->defaultNull()->end()
                 ->scalarNode('route_name')->defaultNull()->end()
             ->end()
