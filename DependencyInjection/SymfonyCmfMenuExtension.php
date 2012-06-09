@@ -20,6 +20,19 @@ class SymfonyCmfMenuExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('phpcr-menu.xml');
 
+        if ($config['use_sonata_admin']) {
+            $loader->load('menu-admin.xml');
+            $contentBasepath = $config['content_basepath'];
+            if (null === $contentBasepath) {
+                if ($container->hasParameter('symfony_cmf_core.content_basepath')) {
+                    $contentBasepath = $container->getParameter('symfony_cmf_core.content_basepath');
+                } else {
+                    $contentBasepath = '/cms/content';
+                }
+            }
+            $container->setParameter($this->getAlias() . '.content_basepath', $contentBasepath);
+        }
+
         $container->setParameter($this->getAlias() . '.menu_basepath', $config['menu_basepath']);
         $container->setParameter($this->getAlias() . '.document_manager_name', $config['document_manager_name']);
         $container->setParameter($this->getAlias() . '.menu_document_class', $config['menu_document_class']);

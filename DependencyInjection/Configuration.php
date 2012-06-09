@@ -21,6 +21,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
                 ->scalarNode('content_key')->defaultNull()->end()
                 ->scalarNode('route_name')->defaultNull()->end()
+
+                ->scalarNode('use_sonata_admin')->defaultTrue()->end()
+                ->scalarNode('content_basepath')->defaultNull()->end()
             ->end()
         ;
 

@@ -12,18 +12,31 @@ use Doctrine\Common\Collections\Collection;
  * To protect against accidentally injecting things into the tree, all menu
  * item node names must end on -item.
  *
+ * @author Uwe Jöger <uwej711@googlemail.com>
+ *
  * @PHPCRODM\Document
  */
 class MenuItem implements NodeInterface {
 
     /**
-     * to create the document at the specified location. read only for existing documents.
+     * Id of this menu item
      *
      * @PHPCRODM\Id
      */
-    protected $path;
+    protected $id;
 
-    /** @PHPCRODM\String */
+    /**
+     * Parent node
+     *
+     * @PHPCRODM\ParentDocument
+     */
+    protected $parent;
+
+    /**
+     * Node name
+     *
+     * @PHPCRODM\Nodename
+     */
     protected $name;
 
     /** @PHPCRODM\String */
@@ -76,14 +89,24 @@ class MenuItem implements NodeInterface {
     protected $children;
 
 
-    public function getPath()
+    public function getId()
     {
-        return $this->path;
+        return $this->id;
     }
 
-    public function setPath($path)
+    public function setId($id)
     {
-        $this->path = $path;
+        $this->id = $id;
+    }
+
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     public function getName()
@@ -228,4 +251,5 @@ class MenuItem implements NodeInterface {
     {
         return $this->getLabel();
     }
+
 }
