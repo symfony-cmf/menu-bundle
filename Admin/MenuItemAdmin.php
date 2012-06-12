@@ -30,12 +30,12 @@ class MenuItemAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('parent', 'doctrine_phpcr_type_tree_model', array('rootNode' => $this->menuRoot, 'choice_list' => array(), 'root_selectable' => true))
+                ->add('parent', 'doctrine_phpcr_type_tree_model', array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true))
                 ->add('name', 'text', ($this->hasSubject() && null !== $this->getSubject()->getId()) ? array('attr' => array('readonly' => 'readonly')) : array())
                 ->add('label', 'text')
                 ->add('uri', 'text', array('required' => false))
                 ->add('route', 'text', array('required' => false))
-                ->add('content', 'doctrine_phpcr_type_tree_model', array('rootNode' => $this->contentRoot, 'choice_list' => array(), 'required' => false))
+                ->add('content', 'doctrine_phpcr_type_tree_model', array('root_node' => $this->contentRoot, 'choice_list' => array(), 'required' => false))
             ->end();
     }
 
@@ -48,6 +48,19 @@ class MenuItemAdmin extends Admin
                 ->add('uri', 'text')
                 ->add('content', 'text')
             ;
+    }
+
+    public function getNewInstance()
+    {
+        /** @var $new MenuItem */
+        $new = parent::getNewInstance();
+        if ($this->hasRequest()) {
+            $parentId = $this->getRequest()->query->get('parent');
+            if (null !== $parentId) {
+                $new->setParent($this->getModelManager()->find(null, $parentId));
+            }
+        }
+        return $new;
     }
 
     public function getExportFormats()
@@ -82,10 +95,17 @@ class MenuItemAdmin extends Admin
         }
     }
 
+    /**
+     * Return the content tree to show at the left, current node (or parent for new ones) selected
+     *
+     * @param string $position
+     * @return array
+     */
     public function getBlocks($position)
     {
         if ('left' == $position) {
-            return array(array('type' => 'sonata_admin_doctrine_phpcr.tree_block'));
+            $selected = ($this->hasSubject() && $this->getSubject()->getId()) ? $this->getSubject()->getId() : ($this->hasRequest() ? $this->getRequest()->query->get('parent') : null);
+            return array(array('type' => 'sonata_admin_doctrine_phpcr.tree_block', 'settings' => array('selected' => $selected)));
         }
     }
 
