@@ -212,7 +212,7 @@ class MenuItem implements NodeInterface {
             'route' => $this->getRoute(),
             'label' => $this->getLabel(),
             'attributes' => $this->getAttributes(),
-            'childrenAttributes' => $this->getChildrenAttributes(),            
+            'childrenAttributes' => $this->getChildrenAttributes(),
             'display' => true,
             'displayChildren' => true,
             'content' => $this->getContent(),
@@ -222,5 +222,10 @@ class MenuItem implements NodeInterface {
             'linkAttributes' => array(),
             'labelAttributes' => array(),
         );
+    }
+
+    public function __toString()
+    {
+        return $this->getLabel();
     }
 }
