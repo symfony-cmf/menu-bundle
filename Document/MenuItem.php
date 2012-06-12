@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\Collection;
  * To protect against accidentally injecting things into the tree, all menu
  * item node names must end on -item.
  *
- * @author Uwe Jöger <uwej711@googlemail.com>
+ * @author Uwe Jäger <uwej711@googlemail.com>
  *
  * @PHPCRODM\Document
  */
