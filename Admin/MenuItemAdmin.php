@@ -42,12 +42,12 @@ class MenuItemAdmin extends Admin
     protected function configureShowField(ShowMapper $showMapper)
     {
         $showMapper
-                ->add('id', 'text')
-                ->add('name', 'text')
-                ->add('label', 'text')
-                ->add('uri', 'text')
-                ->add('content', 'text')
-            ;
+            ->add('id', 'text')
+            ->add('name', 'text')
+            ->add('label', 'text')
+            ->add('uri', 'text')
+            ->add('content', 'text')
+        ;
     }
 
     public function getNewInstance()
