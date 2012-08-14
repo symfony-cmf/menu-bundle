@@ -16,8 +16,8 @@ use Doctrine\Common\Collections\Collection;
  *
  * @PHPCRODM\Document
  */
-class MenuItem implements NodeInterface {
-
+class MenuItem implements NodeInterface
+{
     /**
      * Id of this menu item
      *
@@ -188,12 +188,12 @@ class MenuItem implements NodeInterface {
         if (is_null($this->attributeKeys)) {
             return array();
         }
-        $keys = $this->attributeKeys instanceof Collection ?
-            $this->attributeKeys->toArray() :
-            $this->attributeKeys;
-        $values = $this->attributes instanceof Collection ?
-            $this->attributes->toArray() :
-            $this->attributes;
+        $keys = $this->attributeKeys instanceof Collection
+            ? $this->attributeKeys->toArray()
+            : $this->attributeKeys;
+        $values = $this->attributes instanceof Collection
+            ? $this->attributes->toArray()
+            : $this->attributes;
         return array_combine($keys, $values);
     }
 
@@ -208,12 +208,12 @@ class MenuItem implements NodeInterface {
         if (is_null($this->childrenAttributeKeys)) {
             return array();
         }
-        $keys = $this->childrenAttributeKeys instanceof Collection ?
-            $this->childrenAttributeKeys->toArray() :
-            $this->childrenAttributeKeys;
-        $values = $this->childrenAttributes instanceof Collection ?
-            $this->childrenAttributes->toArray() :
-            $this->childrenAttributes;
+        $keys = $this->childrenAttributeKeys instanceof Collection
+            ? $this->childrenAttributeKeys->toArray()
+            : $this->childrenAttributeKeys;
+        $values = $this->childrenAttributes instanceof Collection
+            ? $this->childrenAttributes->toArray()
+            : $this->childrenAttributes;
         return array_combine($keys, $values);
     }
 
@@ -251,5 +251,4 @@ class MenuItem implements NodeInterface {
     {
         return $this->getLabel();
     }
-
 }
