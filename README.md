@@ -19,7 +19,8 @@ There are some items you can configure:
 - route_name:
     default: null
 - use_sonata_admin:
-    default: true - set this to false if you don't want to use sonata admin for menu items
+    default: auto - set this to false if you have sonata admin in your project
+        but do not want to use the provided admin service for menu items
 - content_basepath:
     default: taken from the core bundle or /cms/content - used for the menu admin
 

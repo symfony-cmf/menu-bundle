@@ -21,16 +21,7 @@ class SymfonyCmfMenuExtension extends Extension
         $loader->load('phpcr-menu.xml');
 
         if ($config['use_sonata_admin']) {
-            $loader->load('menu-admin.xml');
-            $contentBasepath = $config['content_basepath'];
-            if (null === $contentBasepath) {
-                if ($container->hasParameter('symfony_cmf_core.content_basepath')) {
-                    $contentBasepath = $container->getParameter('symfony_cmf_core.content_basepath');
-                } else {
-                    $contentBasepath = '/cms/content';
-                }
-            }
-            $container->setParameter($this->getAlias() . '.content_basepath', $contentBasepath);
+            $this->loadSonataAdmin($config, $loader, $container);
         }
 
         $container->setParameter($this->getAlias() . '.menu_basepath', $config['menu_basepath']);
@@ -48,5 +39,23 @@ class SymfonyCmfMenuExtension extends Extension
         }
         $container->setParameter($this->getAlias() . '.content_key', $config['content_key']);
         $container->setParameter($this->getAlias() . '.route_name', $config['route_name']);
+    }
+
+    public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        if ('auto' === $config['use_sonata_admin'] && !class_exists('Sonata\\AdminBundle\\Admin\\Admin')) {
+            return;
+        }
+
+        $loader->load('menu-admin.xml');
+        $contentBasepath = $config['content_basepath'];
+        if (null === $contentBasepath) {
+            if ($container->hasParameter('symfony_cmf_core.content_basepath')) {
+                $contentBasepath = $container->getParameter('symfony_cmf_core.content_basepath');
+            } else {
+                $contentBasepath = '/cms/content';
+            }
+        }
+        $container->setParameter($this->getAlias() . '.content_basepath', $contentBasepath);
     }
 }
