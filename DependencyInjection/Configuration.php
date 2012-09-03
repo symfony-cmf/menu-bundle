@@ -22,7 +22,6 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('content_key')->defaultNull()->end()
                 ->scalarNode('route_name')->defaultNull()->end()
 
-                ->scalarNode('use_sonata_admin')->defaultValue('auto')->end()
                 ->scalarNode('use_sonata_admin')
                     ->defaultValue('auto')
                     ->validate()
