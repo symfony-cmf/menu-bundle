@@ -43,7 +43,8 @@ class SymfonyCmfMenuExtension extends Extension
 
     public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
-        if ('auto' === $config['use_sonata_admin'] && !class_exists('Sonata\\DoctrinePHPCRAdminBundle\\SonataDoctrinePHPCRAdminBundle')) {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
             return;
         }
 
