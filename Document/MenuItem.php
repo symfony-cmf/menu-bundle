@@ -85,7 +85,7 @@ class MenuItem implements NodeInterface
      */
     protected $childrenAttributes;
 
-    /** @PHPCRODM\Children(filter="*item") */
+    /** @PHPCRODM\Children() */
     protected $children;
 
 
@@ -225,7 +225,13 @@ class MenuItem implements NodeInterface
 
     public function getChildren()
     {
-        return $this->children;
+        $children = array();
+        foreach ($this->children as $child) {
+            if(! $child instanceof NodeInterface) continue;
+            $children[] = $child;    
+        }
+
+        return $children
     }
 
     public function getOptions()
