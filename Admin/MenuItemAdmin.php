@@ -83,18 +83,6 @@ class MenuItemAdmin extends Admin
         $this->contentTreeBlock = $contentTreeBlock;
     }
 
-    public function prePersist($object)
-    {
-        if ($object->getParent() instanceof MenuItem) {
-            // check the name and append item in case it's missing
-            $name = $object->getName();
-            if ('item' !==  substr($name, -strlen($name))) {
-                $name .= '-item';
-                $object->setName($name);
-            }
-        }
-    }
-
     /**
      * Return the content tree to show at the left, current node (or parent for new ones) selected
      *
