@@ -227,7 +227,9 @@ class MenuItem implements NodeInterface
     {
         $children = array();
         foreach ($this->children as $child) {
-            if(! $child instanceof NodeInterface) continue;
+            if (!$child instanceof NodeInterface){
+                continue;
+            } 
             $children[] = $child;    
         }
 
