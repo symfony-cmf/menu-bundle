@@ -233,7 +233,7 @@ class MenuItem implements NodeInterface
             $children[] = $child;    
         }
 
-        return $children
+        return $children;
     }
 
     public function getOptions()
