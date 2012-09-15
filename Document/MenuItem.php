@@ -223,14 +223,20 @@ class MenuItem implements NodeInterface
         $this->childrenAttributeKeys = array_keys($attributes);
     }
 
+    /**
+     * Get all child menu items of this menu item. This will filter out all
+     * non-NodeInterface items.
+     *
+     * @return array of NodeInterface
+     */
     public function getChildren()
     {
         $children = array();
         foreach ($this->children as $child) {
-            if (!$child instanceof NodeInterface){
+            if (!$child instanceof NodeInterface) {
                 continue;
-            } 
-            $children[] = $child;    
+            }
+            $children[] = $child;
         }
 
         return $children;
