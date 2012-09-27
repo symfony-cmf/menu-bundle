@@ -39,25 +39,13 @@ There are some items you can configure:
 
 This bundle extends [KnpMenuBundle](https://github.com/KnpLabs/KnpMenuBundle) in order to work with PHPCR ODM. It can go through a [PHPCR](http://phpcr.github.com/) repository and build the corresponding menu. 
 
-The [CMF website](http://cmf.symfony.com) is a concrete example of code using this bundle. It uses the CMF MenuBundle with a custom menu provider, on top of a SQLite PHPCR repository. 
+The [CMF website](http://cmf.symfony.com) is a concrete example of code using this bundle. It uses the MenuBundle with a custom menu provider, on top of a SQLite PHPCR repository. 
 
 ### Installation
 
 This bundle is best included using Composer.
 
-Edit your project composer.json file to add a new require for symfony-cmf/menu-bundle.
-
-	"require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "2.1.*",
-		"symfony-cmf/symfony-cmf": "1.0.*",
-		"symfony-cmf/simple-cms-bundle": "1.0.*",
-		"symfony-cmf/menu-bundle": "1.0.*"
-
-		//optional dependencies
-        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.*",
-
-        },
+Edit your project composer file to add a new require for `symfony-cmf/menu-bundle`.
 
 Add this bundle (and its dependencies, if they are not already there) to your application's kernel:
 
@@ -66,15 +54,9 @@ Add this bundle (and its dependencies, if they are not already there) to your ap
 	{
 			return array(
 			// ...
+			new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
 			new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-			new Symfony\Cmf\Bundle\SimpleCmsBundle\SymfonyCmfSimpleCmsBundle(),
-			new Symfony\Cmf\Bundle\RoutingExtraBundle\SymfonyCmfRoutingExtraBundle(),
 			new Symfony\Cmf\Bundle\MenuBundle\SymfonyCmfMenuBundle(),
-
-			// optional dependencies:
-			new Sonata\AdminBundle\SonataAdminBundle(),
-			new Sonata\DoctrinePHPCRAdminBundle\SonataDoctrinePHPCRAdminBundle(),
-
 			// ...
 		);
 	}
@@ -87,8 +69,12 @@ Add a mapping to `config.yml`, for the knp_menu and for the CMF menu.
 		twig: true
 
 	symfony_cmf_menu:
-		use_sonata_admin: false
+		use_sonata_admin: auto|true|false
 		menu_basepath: /cms
+
+If `sonata-project/doctrine-phpcr-admin-bundle` is added to the composer.json require, the MenuBundle can be used inside the SonataAdminBundle. But then, the SonataAdminBundle has to be instantiated in your application's kernel.
+
+By default, `use_sonata_admin` configuration is set to true, if the SonataAdminBundle is available.
 
 ### Usage
 
