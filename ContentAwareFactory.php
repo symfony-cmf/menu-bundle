@@ -43,8 +43,7 @@ class ContentAwareFactory extends RouterAwareFactory
             } catch (\Exception $e) {}
 
             $routeParameters = $options['routeParameters'];
-            $routeParameters['content'] = $options['content'];
-            $options['uri'] = $this->contentRouter->generate($this->routeName, $routeParameters, $options['routeAbsolute']);
+            $options['uri'] = $this->contentRouter->generate($options['content'], $routeParameters, $options['routeAbsolute']);
             unset($options['route']);
         }
 

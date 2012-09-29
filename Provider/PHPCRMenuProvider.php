@@ -13,25 +13,28 @@ class PHPCRMenuProvider implements MenuProviderInterface
      * @var ContainerInterface
      */
     protected $container;
+
     /**
      * @var FactoryInterface
      */
     protected $factory = null;
+
     /**
      * @var \Doctrine\Common\Persistence\ObjectManager
      */
     protected $dm;
+
     /**
      * base for menu ids
      * @var string
      */
     protected $menuRoot;
+
     /**
      * doctrine document class name
      * @var string
      */
     protected $className;
-
 
     /**
      * @param ContainerInterface $container di container to get request from to
