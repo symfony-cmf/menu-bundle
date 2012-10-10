@@ -5,6 +5,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\NodeInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
 
 class PHPCRMenuProvider implements MenuProviderInterface
@@ -58,9 +59,15 @@ class PHPCRMenuProvider implements MenuProviderInterface
 
     public function get($name, array $options = array())
     {
+        if (empty($name)) {
+            throw new \InvalidArgumentException('The menu name may not be empty');
+        }
         $menu = $this->dm->find($this->className, $this->menuRoot . '/' . $name);
         if ($menu === null) {
             throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
+        }
+        if (! $menu instanceof NodeInterface) {
+            throw new \InvalidArgumentException("Menu at '$name' is not a valid menu item");
         }
         $menuItem = $this->factory->createFromNode($menu);
         $menuItem->setCurrentUri($this->container->get('request')->getRequestUri());

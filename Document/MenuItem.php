@@ -40,7 +40,7 @@ class MenuItem implements NodeInterface
     protected $name;
 
     /** @PHPCRODM\String */
-    protected $label;
+    protected $label = '';
 
     /** @PHPCRODM\Uri */
     protected $uri;
