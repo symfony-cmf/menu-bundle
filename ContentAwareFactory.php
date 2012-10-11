@@ -19,7 +19,7 @@ class ContentAwareFactory extends RouterAwareFactory
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
-     * @param string routeName the name of the route to use. DynamicRouter
+     * @param string $routeName the name of the route to use. DynamicRouter
      *      ignores this.
      */
     public function __construct(ContainerInterface $container, UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter, $contentKey, $routeName = null)
