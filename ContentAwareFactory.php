@@ -5,6 +5,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle;
 use Knp\Menu\Silex\RouterAwareFactory;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -37,7 +38,7 @@ class ContentAwareFactory extends RouterAwareFactory
         if (!empty($options['content'])) {
             try {
                 $request = $this->container->get('request');
-                if ($options['content'] instanceof \Symfony\Component\Routing\Route
+                if ($options['content'] instanceof Route
                     && $options['content']->getOption('currentUriPrefix')
                     && 0 === strpos($request->getPathinfo(), $options['content']->getOption('currentUriPrefix'))
                 ) {
