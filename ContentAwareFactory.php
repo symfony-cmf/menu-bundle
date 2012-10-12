@@ -37,7 +37,9 @@ class ContentAwareFactory extends RouterAwareFactory
         if (!empty($options['content'])) {
             try {
                 $request = $this->container->get('request');
-                if ($options['content']->getOption('currentUriPrefix')
+                if (class_exists('Symfony\Component\Routing\Route')
+                    && $options['content'] instanceof \Symfony\Component\Routing\Route
+                    && $options['content']->getOption('currentUriPrefix')
                     && 0 === strpos($request->getPathinfo(), $options['content']->getOption('currentUriPrefix'))
                 ) {
                     $current = true;
