@@ -24,9 +24,21 @@ class SymfonyCmfMenuExtension extends Extension
             $this->loadSonataAdmin($config, $loader, $container);
         }
 
+        if ($config['multilang']) {
+            if ($config['multilang']['use_sonata_admin']) {
+                $this->loadSonataAdmin($config['multilang'], $loader, $container, 'multilang.');
+            }
+            if (isset($config['multilang']['document_class'])) {
+                $container->setParameter($this->getAlias() . '.multilang.document_class', $config['multilang']['document_class']);
+            }
+        }
+
+        if (isset($config['document_class'])) {
+            $container->setParameter($this->getAlias() . '.document_class', $config['document_class']);
+        }
+
         $container->setParameter($this->getAlias() . '.menu_basepath', $config['menu_basepath']);
         $container->setParameter($this->getAlias() . '.document_manager_name', $config['document_manager_name']);
-        $container->setParameter($this->getAlias() . '.menu_document_class', $config['menu_document_class']);
 
         $factory = $container->getDefinition($this->getAlias().'.factory');
         $factory->replaceArgument(2, new Reference($config['content_url_generator']));
@@ -39,16 +51,7 @@ class SymfonyCmfMenuExtension extends Extension
         }
         $container->setParameter($this->getAlias() . '.content_key', $config['content_key']);
         $container->setParameter($this->getAlias() . '.route_name', $config['route_name']);
-    }
 
-    public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container)
-    {
-        $bundles = $container->getParameter('kernel.bundles');
-        if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
-            return;
-        }
-
-        $loader->load('menu-admin.xml');
         $contentBasepath = $config['content_basepath'];
         if (null === $contentBasepath) {
             if ($container->hasParameter('symfony_cmf_core.content_basepath')) {
@@ -58,5 +61,19 @@ class SymfonyCmfMenuExtension extends Extension
             }
         }
         $container->setParameter($this->getAlias() . '.content_basepath', $contentBasepath);
+    }
+
+    public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container, $prefix = '')
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+        if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
+            return;
+        }
+
+        if (isset($config['admin_class'])) {
+            $container->setParameter($this->getAlias() . $prefix. '.admin_class', $config['admin_class']);
+        }
+
+        $loader->load($prefix.'admin.xml');
     }
 }
