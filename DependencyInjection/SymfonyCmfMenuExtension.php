@@ -24,7 +24,7 @@ class SymfonyCmfMenuExtension extends Extension
             $this->loadSonataAdmin($config, $loader, $container);
         }
 
-        if ($config['multilang']) {
+        if (isset($config['multilang'])) {
             if ($config['multilang']['use_sonata_admin']) {
                 $this->loadSonataAdmin($config['multilang'], $loader, $container, 'multilang.');
             }
