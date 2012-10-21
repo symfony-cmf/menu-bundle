@@ -5,14 +5,14 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="symfony_cmf_menu.admin_class">Symfony\Cmf\Bundle\MenuBundle\Admin\MenuItemAdmin</parameter>
+        <parameter key="symfony_cmf_menu.multilang.admin_class">Symfony\Cmf\Bundle\MenuBundle\Admin\MultilangMenuItemAdmin</parameter>
     </parameters>
 
     <services>
-        <service id="symfony_cmf_menu.admin" class="%symfony_cmf_menu.admin_class%">
-            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="menu" label="menu item" />
-            <argument></argument>
-            <argument>Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem</argument>
+        <service id="symfony_cmf_menu.multilang.admin" class="%symfony_cmf_menu.multilang.admin_class%">
+            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="menu" label="multilang menu item" />
+            <argument/>
+            <argument>%symfony_cmf_menu.multilang.document_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
 
             <call method="setRouteBuilder">
@@ -28,6 +28,7 @@
             </call>
 
         </service>
+
     </services>
 
 </container>
