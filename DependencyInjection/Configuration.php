@@ -10,9 +10,8 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('symfony_cmf_menu');
 
-        $rootNode
+        $treeBuilder->root('symfony_cmf_menu')
             ->children()
                 ->scalarNode('menu_basepath')->defaultValue('/cms/menu')->end()
                 ->scalarNode('document_manager_name')->defaultValue('default')->end()
@@ -38,10 +37,10 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('admin_class')->defaultNull()->end()
                         ->scalarNode('document_class')->defaultNull()->end()
                         ->arrayNode('locales')
-                            ->prototype('scalar')
-                        ->end()->end()
+                            ->prototype('scalar')->end()
+                        ->end()
                     ->end()
-                ->end()->end()
+                ->end()
             ->end()
         ;
 
