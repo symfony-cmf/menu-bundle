@@ -4,7 +4,7 @@ This is part of the Symfony Cmf: <http://cmf.symfony.com/>
 
 
 ## Documentation
-<http://symfony-cmf.readthedocs.org/en/latest/reference/menu.html>
+<http://symfony-cmf.readthedocs.org/en/latest/bundles/menu.html>
 
 
 ## Installation
