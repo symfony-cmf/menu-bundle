@@ -4,13 +4,13 @@ This is part of the Symfony Cmf: <http://cmf.symfony.com/>
 
 
 ## Documentation
-<http://symfony-cmf.readthedocs.org/en/latest/bundles/menu.html>
+<http://symfony.com/doc/master/cmf/bundles/menu.html>
 
 
 ## Installation
 
 The general installation documentation for the CMF can be found here:
-<http://symfony-cmf.readthedocs.org/en/latest/tutorials/installing-configuring-cmf.html>
+<http://symfony.com/doc/master/cmf/tutorials/installing-configuring-cmf.html>
 
 This chapter is only valuable if you want to use this bundle alone. 
 
