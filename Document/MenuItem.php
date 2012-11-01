@@ -88,6 +88,12 @@ class MenuItem implements NodeInterface
     /** @PHPCRODM\Children() */
     protected $children;
 
+    /** 
+     * Hashmap for extra stuff associated to the item
+     *
+     * @PHPCRODM\String(assoc="") 
+     */
+    protected $extras;
 
     public function getId()
     {
@@ -260,6 +266,26 @@ class MenuItem implements NodeInterface
             'labelAttributes' => array(),
         );
     }
+
+    public function getExtras()
+    {
+        if (is_null($this->extras)) {
+            return array();
+        }
+
+        $extras = $this->extras instanceof Collection
+            ? $this->extras->toArray()
+            : $this->extras;
+
+        return $extras;
+    }
+
+    public function setExtras($extras)
+    {
+        $this->extras = $extras instanceof Collection
+            ? $extras->toArray()
+            : $extras;
+    } 
 
     public function __toString()
     {
