@@ -57,33 +57,11 @@ class MenuItem implements NodeInterface
     /** @PHPCRODM\Boolean */
     protected $weak = true;
 
-    /**
-     * Simulate a php hashmap in phpcr. This holds the keys
-     *
-     * @PHPCRODM\String(multivalue=true)
-     */
-    protected $attributeKeys;
+    /** @PHPCRODM\String(multivalue=true, assoc="") */
+    protected $attributes = array();
 
-    /**
-     * Simulate a php hashmap in phpcr. This holds the keys
-     *
-     * @PHPCRODM\String(multivalue=true)
-     */
-    protected $attributes;
-
-    /**
-     * Simulate a php hashmap in phpcr. This holds the keys.
-     *
-     * @PHPCRODM\String(multivalue=true)
-     */
-    protected $childrenAttributeKeys;
-
-    /**
-     * Simulate a php hashmap in phpcr.
-     *
-     * @PHPCRODM\String(multivalue=true)
-     */
-    protected $childrenAttributes;
+    /** @PHPCRODM\String(multivalue=true, assoc="") */
+    protected $childrenAttributes = array();
 
     /** @PHPCRODM\Children() */
     protected $children;
@@ -191,42 +169,22 @@ class MenuItem implements NodeInterface
 
     public function getAttributes()
     {
-        if (is_null($this->attributeKeys)) {
-            return array();
-        }
-        $keys = $this->attributeKeys instanceof Collection
-            ? $this->attributeKeys->toArray()
-            : $this->attributeKeys;
-        $values = $this->attributes instanceof Collection
-            ? $this->attributes->toArray()
-            : $this->attributes;
-        return array_combine($keys, $values);
+        return $this->attributes;
     }
 
     public function setAttributes($attributes)
     {
         $this->attributes = $attributes;
-        $this->attributeKeys = array_keys($attributes);
     }
 
     public function getChildrenAttributes()
     {
-        if (is_null($this->childrenAttributeKeys)) {
-            return array();
-        }
-        $keys = $this->childrenAttributeKeys instanceof Collection
-            ? $this->childrenAttributeKeys->toArray()
-            : $this->childrenAttributeKeys;
-        $values = $this->childrenAttributes instanceof Collection
-            ? $this->childrenAttributes->toArray()
-            : $this->childrenAttributes;
-        return array_combine($keys, $values);
+        return $this->childrenAttributes;
     }
 
     public function setChildrenAttributes($attributes)
     {
         $this->childrenAttributes = $attributes;
-        $this->childrenAttributeKeys = array_keys($attributes);
     }
 
     /**
@@ -269,22 +227,12 @@ class MenuItem implements NodeInterface
 
     public function getExtras()
     {
-        if (is_null($this->extras)) {
-            return array();
-        }
-
-        $extras = $this->extras instanceof Collection
-            ? $this->extras->toArray()
-            : $this->extras;
-
-        return $extras;
+        return $this->extras;
     }
 
     public function setExtras($extras)
     {
-        $this->extras = $extras instanceof Collection
-            ? $extras->toArray()
-            : $extras;
+        $this->extras = $extras;
     } 
 
     public function __toString()
