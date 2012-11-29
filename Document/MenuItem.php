@@ -103,6 +103,15 @@ class MenuItem implements NodeInterface
         $this->name = $name;
     }
 
+    /**
+     * Convenience method to set parent and name at the same time.
+     */
+    public function setPosition($parent, $name)
+    {
+        $this->parent = $parent;
+        $this->name = $name;
+    }
+
     public function getLabel()
     {
         return $this->label;
