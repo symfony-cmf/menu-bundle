@@ -2,7 +2,9 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle;
 
+use Knp\Menu\NodeInterface;
 use Knp\Menu\Silex\RouterAwareFactory;
+use Knp\Menu\MenuItem;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
@@ -30,6 +32,25 @@ class ContentAwareFactory extends RouterAwareFactory
         $this->container = $container;
         $this->contentKey = $contentKey;
         $this->routeName = $routeName;
+    }
+
+    /**
+     * Create a menu item from a NodeInterface
+     *
+     * @param NodeInterface $node
+     * @return MenuItem
+     */
+    public function createFromNode(NodeInterface $node)
+    {
+        $item = $this->createItem($node->getName(), $node->getOptions());
+
+        foreach ($node->getChildren() as $childNode) {
+            if ($childNode instanceof NodeInterface) {
+                $item->addChild($this->createFromNode($childNode));
+            }
+        }
+
+        return $item;
     }
 
     public function createItem($name, array $options = array())
