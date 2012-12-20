@@ -9,11 +9,10 @@ class MultilangMenuItemAdmin extends MenuItemAdmin
 {
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper
-            ->add('locale', 'text') // TODO: this should rather list all defined locales
-        ;
-
         parent::configureListFields($listMapper);
+        $listMapper
+            ->add('locales', 'choice', array('template' => 'SonataDoctrinePHPCRAdminBundle:CRUD:locales.html.twig'))
+        ;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
