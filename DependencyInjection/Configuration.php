@@ -37,6 +37,8 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('admin_class')->defaultNull()->end()
                         ->scalarNode('document_class')->defaultNull()->end()
                         ->arrayNode('locales')
+                            ->isRequired()
+                            ->requiresAtLeastOneElement()
                             ->prototype('scalar')->end()
                         ->end()
                     ->end()
