@@ -3,8 +3,11 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
-use Knp\Menu\NodeInterface;
+use Knp\Menu\MenuItem as BaseMenuItem;
+use Knp\Menu\ItemInterface;
+use Knp\Menu\FactoryInterface;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Cmf\Bundle\MenuBundle\Factory\MenuFactory;
 
 /**
  * This class represents a menu item for the cmf.
@@ -16,7 +19,7 @@ use Doctrine\Common\Collections\Collection;
  *
  * @PHPCRODM\Document
  */
-class MenuItem implements NodeInterface
+class MenuItem extends BaseMenuItem
 {
     /**
      * Id of this menu item
@@ -64,7 +67,10 @@ class MenuItem implements NodeInterface
     protected $childrenAttributes = array();
 
     /** @PHPCRODM\Children() */
-    protected $children;
+    protected $children = array();
+
+    /** @PHPCRODM\String(multivalue=true, assoc="") */
+    protected $linkAttributes = array();
 
     /** 
      * Hashmap for extra stuff associated to the item
@@ -72,6 +78,19 @@ class MenuItem implements NodeInterface
      * @PHPCRODM\String(assoc="") 
      */
     protected $extras;
+
+    protected $factory;
+
+    public function __construct($name = null, MenuFactory $factory = null)
+    {
+        $this->name = $name;
+        $this->factory = $factory;
+    }
+
+    public function setFactory(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
 
     public function getId()
     {
@@ -81,26 +100,8 @@ class MenuItem implements NodeInterface
     public function setId($id)
     {
         $this->id = $id;
-    }
 
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-    }
-
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
+        return $this;
     }
 
     /**
@@ -110,26 +111,8 @@ class MenuItem implements NodeInterface
     {
         $this->parent = $parent;
         $this->name = $name;
-    }
 
-    public function getLabel()
-    {
-        return $this->label;
-    }
-
-    public function setLabel($label)
-    {
-        $this->label = $label;
-    }
-
-    public function getUri()
-    {
-        return $this->uri;
-    }
-
-    public function setUri($uri)
-    {
-        $this->uri = $uri;
+        return $this;
     }
 
     public function getRoute()
@@ -140,6 +123,8 @@ class MenuItem implements NodeInterface
     public function setRoute($route)
     {
         $this->route = $route;
+
+        return $this;
     }
 
     public function getContent()
@@ -147,6 +132,7 @@ class MenuItem implements NodeInterface
         if ($this->weak) {
             return $this->weakContent;
         }
+
         return $this->strongContent;
     }
 
@@ -157,6 +143,8 @@ class MenuItem implements NodeInterface
         } else {
             $this->strongContent = $content;
         }
+
+        return $this;
     }
 
     public function getWeak()
@@ -174,26 +162,8 @@ class MenuItem implements NodeInterface
             $this->strongContent = null;
         }
         $this->weak = $weak;
-    }
 
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    public function setAttributes($attributes)
-    {
-        $this->attributes = $attributes;
-    }
-
-    public function getChildrenAttributes()
-    {
-        return $this->childrenAttributes;
-    }
-
-    public function setChildrenAttributes($attributes)
-    {
-        $this->childrenAttributes = $attributes;
+        return $this;
     }
 
     /**
@@ -206,7 +176,7 @@ class MenuItem implements NodeInterface
     {
         $children = array();
         foreach ($this->children as $child) {
-            if (!$child instanceof NodeInterface) {
+            if (!$child instanceof ItemInterface) {
                 continue;
             }
             $children[] = $child;
@@ -215,6 +185,7 @@ class MenuItem implements NodeInterface
         return $children;
     }
 
+    // @QUESTION: Should this be removed in favor of ->toArray ?
     public function getOptions()
     {
         return array(
@@ -234,18 +205,80 @@ class MenuItem implements NodeInterface
         );
     }
 
-    public function getExtras()
-    {
-        return $this->extras;
-    }
-
-    public function setExtras($extras)
-    {
-        $this->extras = $extras;
-    } 
-
     public function __toString()
     {
         return $this->getLabel();
+    }
+
+    public function toArray($depth = null)
+    {
+        $array = array(
+            'id' => $this->id,
+            'parent' => (string) $this->parent,
+            'name' => $this->name,
+            'label' => $this->label,
+            'uri' => $this->uri,
+            'route' => $this->route,
+            'content' => $this->weak ? (string) $this->weakContent : (string) $this->strongContent,
+            'weak' => $this->weak,
+            'attributes' => $this->attributes,
+            'extras' => $this->extras,
+            'childrenAttributes' => $this->childrenAttributes,
+        );
+
+        // export the children as well, unless explicitly disabled
+        if (0 !== $depth) {
+            $childDepth = (null === $depth) ? null : $depth - 1;
+            $array['children'] = array();
+            if (null !== $this->children) {
+                foreach ($this->children as $key => $child) {
+                    $array['children'][$key] = $child->toArray($childDepth);
+                }
+            }
+        }
+
+        return $array;
+    }
+
+    /**
+     * Add a child menu item to this menu
+     *
+     * Returns the child item
+     *
+     * @param mixed $child   An ItemInterface instance or the name of a new item to create
+     * @param array $options If creating a new item, the options passed to the factory for the item
+     * @return \Knp\Menu\ItemInterface
+     */
+    public function addChild($child, array $options = array())
+    {
+        if (!$child instanceof ItemInterface) {
+            $child = $this->factory->createItem($child, $options);
+        } elseif (null !== $child->getParent()) {
+            throw new \InvalidArgumentException('Cannot add menu item as child, it already belongs to another menu (e.g. has a parent).');
+        }
+
+        $child->setParent($this);
+        $child->setCurrentUri($this->getCurrentUri());
+
+        $this->children[] = $child;
+
+        return $child;
+    }
+
+    /**
+     * Returns the child menu identified by the given name
+     *
+     * @param  string $name  Then name of the child menu to return
+     * @return \Knp\Menu\ItemInterface|null
+     */
+    public function getChild($name)
+    {
+        foreach ($this->children as $child) {
+            if ($child->getName() == $name) {
+                return $child;
+            }
+        }
+
+        return null;
     }
 }
