@@ -3,8 +3,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
-use Knp\Menu\MenuItem as BaseMenuItem;
-use Knp\Menu\ItemInterface;
+use Knp\Menu\NodeInterface;
 use Knp\Menu\FactoryInterface;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Cmf\Bundle\MenuBundle\Factory\MenuFactory;
@@ -16,10 +15,11 @@ use Symfony\Cmf\Bundle\MenuBundle\Factory\MenuFactory;
  * item node names must end on -item.
  *
  * @author Uwe Jäger <uwej711@googlemail.com>
+ * @author Daniel Leech <daniel@dantleech.com>
  *
  * @PHPCRODM\Document
  */
-class MenuItem extends BaseMenuItem
+class MenuItem  implements NodeInterface
 {
     /**
      * Id of this menu item
@@ -69,9 +69,6 @@ class MenuItem extends BaseMenuItem
     /** @PHPCRODM\Children() */
     protected $children = array();
 
-    /** @PHPCRODM\String(multivalue=true, assoc="") */
-    protected $linkAttributes = array();
-
     /** 
      * Hashmap for extra stuff associated to the item
      *
@@ -104,6 +101,30 @@ class MenuItem extends BaseMenuItem
         return $this;
     }
 
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     /**
      * Convenience method to set parent and name at the same time.
      */
@@ -111,6 +132,30 @@ class MenuItem extends BaseMenuItem
     {
         $this->parent = $parent;
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function getUri()
+    {
+        return $this->uri;
+    }
+
+    public function setUri($uri)
+    {
+        $this->uri = $uri;
 
         return $this;
     }
@@ -166,6 +211,30 @@ class MenuItem extends BaseMenuItem
         return $this;
     }
 
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    public function getChildrenAttributes()
+    {
+        return $this->childrenAttributes;
+    }
+
+    public function setChildrenAttributes(array $attributes)
+    {
+        $this->childrenAttributes = $attributes;
+
+        return $this;
+    }
+
     /**
      * Get all child menu items of this menu item. This will filter out all
      * non-NodeInterface items.
@@ -176,7 +245,7 @@ class MenuItem extends BaseMenuItem
     {
         $children = array();
         foreach ($this->children as $child) {
-            if (!$child instanceof ItemInterface) {
+            if (!$child instanceof NodeInterface) {
                 continue;
             }
             $children[] = $child;
@@ -185,7 +254,6 @@ class MenuItem extends BaseMenuItem
         return $children;
     }
 
-    // @QUESTION: Should this be removed in favor of ->toArray ?
     public function getOptions()
     {
         return array(
@@ -203,6 +271,33 @@ class MenuItem extends BaseMenuItem
             'linkAttributes' => array(),
             'labelAttributes' => array(),
         );
+    }
+
+    public function getExtras()
+    {
+        return $this->extras;
+    }
+
+    public function setExtras(array $extras)
+    {
+        $this->extras = $extras;
+
+        return $this;
+    } 
+
+    public function addChild($child, $options = array())
+    {
+        if (!$child instanceof NodeInterface) {
+            $child = $this->factory->createItem($child, $options);
+        } elseif (null !== $child->getParent()) {
+            throw new \InvalidArgumentException('Cannot add menu item as child, it already belongs to another menu (e.g. has a parent).');
+        }
+
+        $child->setParent($this);
+
+        $this->children[] = $child;
+
+        return $child;
     }
 
     public function __toString()
@@ -238,47 +333,5 @@ class MenuItem extends BaseMenuItem
         }
 
         return $array;
-    }
-
-    /**
-     * Add a child menu item to this menu
-     *
-     * Returns the child item
-     *
-     * @param mixed $child   An ItemInterface instance or the name of a new item to create
-     * @param array $options If creating a new item, the options passed to the factory for the item
-     * @return \Knp\Menu\ItemInterface
-     */
-    public function addChild($child, array $options = array())
-    {
-        if (!$child instanceof ItemInterface) {
-            $child = $this->factory->createItem($child, $options);
-        } elseif (null !== $child->getParent()) {
-            throw new \InvalidArgumentException('Cannot add menu item as child, it already belongs to another menu (e.g. has a parent).');
-        }
-
-        $child->setParent($this);
-        $child->setCurrentUri($this->getCurrentUri());
-
-        $this->children[] = $child;
-
-        return $child;
-    }
-
-    /**
-     * Returns the child menu identified by the given name
-     *
-     * @param  string $name  Then name of the child menu to return
-     * @return \Knp\Menu\ItemInterface|null
-     */
-    public function getChild($name)
-    {
-        foreach ($this->children as $child) {
-            if ($child->getName() == $name) {
-                return $child;
-            }
-        }
-
-        return null;
     }
 }

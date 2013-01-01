@@ -12,12 +12,10 @@ class MenuFactoryTest extends \PHPUnit_Framework_TestCase
         $array = array(
             'name' => 'joe',
             'uri' => '/foobar',
-            'display' => false,
         );
         $item = $factory->createFromArray($array);
         $this->assertEquals('joe', $item->getName());
         $this->assertEquals('/foobar', $item->getUri());
-        $this->assertFalse($item->isDisplayed());
         $this->assertEmpty($item->getAttributes());
         $this->assertEmpty($item->getChildren());
     }
@@ -40,8 +38,7 @@ class MenuFactoryTest extends \PHPUnit_Framework_TestCase
         $item = $factory->createFromArray($array);
         $this->assertEquals('joe', $item->getName());
         $this->assertEmpty($item->getAttributes());
-        $this->assertCount(2, $item);
-        $this->assertTrue(isset($item['john']));
+        $this->assertCount(2, $item->getChildren()); // @todo: Implement countable ?
     }
 
     public function testFromArrayWithChildrenOmittingName()
@@ -58,12 +55,11 @@ class MenuFactoryTest extends \PHPUnit_Framework_TestCase
                 )
             ),
         );
+
         $item = $factory->createFromArray($array);
         $this->assertEquals('joe', $item->getName());
         $this->assertEmpty($item->getAttributes());
-        $this->assertCount(2, $item);
-        $this->assertTrue(isset($item['john']));
-        $this->assertTrue(isset($item['jack']));
+        $this->assertCount(2, $item->getChildren()); // @todo: Implement countable ?
     }
 }
 

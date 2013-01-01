@@ -25,7 +25,6 @@ class MenuFactory implements FactoryInterface
             'weak' => null,
             'attributes' => array(),
             'extras' => array(),
-            'display' => null,
             'childrenAttributes' => array(),
         ), $options);
 
@@ -40,7 +39,6 @@ class MenuFactory implements FactoryInterface
             ->setWeak($options['weak'])
             ->setAttributes($options['attributes'])
             ->setExtras($options['extras'])
-            ->setDisplay($options['display'])
             ->setChildrenAttributes($options['childrenAttributes']);
 
         return $item;
