@@ -11,7 +11,7 @@ class MenuItemTest extends \PHPUnit_Framework_Testcase
         $c1->setLabel('Child 1');
         $c2 = new MenuItem;
         $c2->setLabel('Child 2');
-        $this->content = new DummyContent;;
+        $this->content = new \StdClass;
         $this->parentItem = new MenuItem;
         $this->item = new MenuItem;
         $this->item->setId('/foo/bar')
@@ -24,8 +24,7 @@ class MenuItemTest extends \PHPUnit_Framework_Testcase
             ->setWeak(false)
             ->setAttributes(array('foo' => 'bar'))
             ->setChildrenAttributes(array('bar' => 'foo'))
-            ->setExtras(array('far' => 'boo'))
-            ->setChildren(array($c1));
+            ->setExtras(array('far' => 'boo'));
     }
 
     public function testGetters()
@@ -53,63 +52,11 @@ class MenuItemTest extends \PHPUnit_Framework_Testcase
         $c1 = new MenuItem;
         $c2 = new MenuItem;
         $m = new MenuItem;
-        $m->addChild($c1)
-            ->addChild($c2);
+        $m->addChild($c1);
+        $m->addChild($c2);
 
         $children = $m->getChildren();
         $this->assertCount(2, $children);
         $this->assertSame($m, $children[0]->getParent());
-    }
-
-    public function testToArray()
-    {
-        $expected = array (
-            'id' => '/foo/bar',
-            'parent' => '',
-            'name' => 'test',
-            'label' => 'Test',
-            'uri' => 'http://www.example.com',
-            'route' => 'test_route',
-            'content' => 'This is a test content reference',
-            'weak' => false,
-            'attributes' => array (
-                'foo' => 'bar',
-            ),
-            'extras' => array (
-                'far' => 'boo',
-            ),
-            'childrenAttributes' => array (
-                'bar' => 'foo',
-            ),
-            'children' => array (
-                0 => array (
-                    'id' => NULL,
-                    'parent' => 'Test',
-                    'name' => NULL,
-                    'label' => 'Child 1',
-                    'uri' => NULL,
-                    'route' => NULL,
-                    'content' => '',
-                    'weak' => true,
-                    'attributes' => array (
-                    ),
-                    'extras' => NULL,
-                    'childrenAttributes' => array (
-                    ),
-                    'children' => array (
-                    ),
-                ),
-            ),
-        );
-
-        $this->assertEquals($expected, $this->item->toArray());
-    }
-}
-
-class DummyContent
-{
-    public function __toString()
-    {
-        return 'This is a test content reference';
     }
 }

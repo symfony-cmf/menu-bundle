@@ -19,7 +19,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Factory\MenuFactory;
  *
  * @PHPCRODM\Document
  */
-class MenuItem  implements NodeInterface
+class MenuItem implements NodeInterface
 {
     /**
      * Id of this menu item
@@ -223,6 +223,28 @@ class MenuItem  implements NodeInterface
         return $this;
     }
 
+    /**
+     * @param  string $name     The name of the attribute to return
+     * @param  mixed  $default  The value to return if the attribute doesn't exist
+     *
+     * @return mixed
+     */
+    public function getAttribute($name, $default = null)
+    {
+        if (isset($this->attributes[$name])) {
+            return $this->attributes[$name];
+        }
+
+        return $default;
+    }
+
+    public function setAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+
+        return $this;
+    }
+
     public function getChildrenAttributes()
     {
         return $this->childrenAttributes;
@@ -303,35 +325,5 @@ class MenuItem  implements NodeInterface
     public function __toString()
     {
         return $this->getLabel();
-    }
-
-    public function toArray($depth = null)
-    {
-        $array = array(
-            'id' => $this->id,
-            'parent' => (string) $this->parent,
-            'name' => $this->name,
-            'label' => $this->label,
-            'uri' => $this->uri,
-            'route' => $this->route,
-            'content' => $this->weak ? (string) $this->weakContent : (string) $this->strongContent,
-            'weak' => $this->weak,
-            'attributes' => $this->attributes,
-            'extras' => $this->extras,
-            'childrenAttributes' => $this->childrenAttributes,
-        );
-
-        // export the children as well, unless explicitly disabled
-        if (0 !== $depth) {
-            $childDepth = (null === $depth) ? null : $depth - 1;
-            $array['children'] = array();
-            if (null !== $this->children) {
-                foreach ($this->children as $key => $child) {
-                    $array['children'][$key] = $child->toArray($childDepth);
-                }
-            }
-        }
-
-        return $array;
     }
 }
