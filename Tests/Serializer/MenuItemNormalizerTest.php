@@ -39,6 +39,7 @@ class MenuItemNormalizerTest extends \PHPUnit_Framework_Testcase
     {
         $this->dm->expects($this->exactly(2))
             ->method('getClassMetadata')
+            ->with('Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem')
             ->will($this->returnValue($this->classMetadata));
         $this->classMetadata->expects($this->at(0))
             ->method('getIdentifierValue')

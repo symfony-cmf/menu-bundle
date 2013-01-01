@@ -4,7 +4,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Serializer;
 use Symfony\Component\Serializer\Normalizer\SerializerAwareNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerAwareInterface;
-use Symfony\Cmf\Bundle\MenuBundle\DocumentManager\MenuItem;
+use Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem;
 use Doctrine\ODM\PHPCR\DocumentManager;
 
 class MenuItemNormalizer extends SerializerAwareNormalizer implements NormalizerInterface
@@ -30,7 +30,7 @@ class MenuItemNormalizer extends SerializerAwareNormalizer implements Normalizer
             'childrenAttributes' => $object->getChildrenAttributes(),
         );
 
-        $meta = $this->dm->getClassMetadata($object);
+        $meta = $this->dm->getClassMetadata(get_class($object));
         $contentId = $meta->getIdentifierValue($object);
 
         $array['content'] = $contentId;

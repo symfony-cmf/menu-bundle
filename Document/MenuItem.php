@@ -76,17 +76,9 @@ class MenuItem implements NodeInterface
      */
     protected $extras;
 
-    protected $factory;
-
-    public function __construct($name = null, MenuFactory $factory = null)
+    public function __construct($name = null)
     {
         $this->name = $name;
-        $this->factory = $factory;
-    }
-
-    public function setFactory(FactoryInterface $factory)
-    {
-        $this->factory = $factory;
     }
 
     public function getId()
@@ -307,16 +299,13 @@ class MenuItem implements NodeInterface
         return $this;
     } 
 
-    public function addChild($child, $options = array())
+    public function addChild($child)
     {
         if (!$child instanceof NodeInterface) {
-            $child = $this->factory->createItem($child, $options);
-        } elseif (null !== $child->getParent()) {
             throw new \InvalidArgumentException('Cannot add menu item as child, it already belongs to another menu (e.g. has a parent).');
         }
 
         $child->setParent($this);
-
         $this->children[] = $child;
 
         return $child;
