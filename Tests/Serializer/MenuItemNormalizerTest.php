@@ -33,18 +33,8 @@ class MenuItemNormalizerTest extends \PHPUnit_Framework_Testcase
         $c1 = new MenuItem;
         $c1->setLabel('Child 1');
         $this->item->addChild($c1);
-    }
 
-    public function testNormalize()
-    {
-        $this->dm->expects($this->exactly(2))
-            ->method('getClassMetadata')
-            ->with('Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem')
-            ->will($this->returnValue($this->classMetadata));
-        $this->classMetadata->expects($this->at(0))
-            ->method('getIdentifierValue')
-            ->will($this->returnValue('/this/is/content'));
-        $expected = array (
+        $this->expectedMenu = array (
             'id' => '/foo/bar',
             'name' => 'test',
             'label' => 'Test',
@@ -80,7 +70,56 @@ class MenuItemNormalizerTest extends \PHPUnit_Framework_Testcase
                 ),
             ),
         );
+    }
 
-        $this->assertEquals($expected, $this->normalizer->normalize($this->item));
+    public function testNormalize()
+    {
+        $this->dm->expects($this->exactly(2))
+            ->method('getClassMetadata')
+            ->with('Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem')
+            ->will($this->returnValue($this->classMetadata));
+        $this->classMetadata->expects($this->at(0))
+            ->method('getIdentifierValue')
+            ->will($this->returnValue('/this/is/content'));
+
+        $this->assertEquals($this->expectedMenu, $this->normalizer->normalize($this->item));
+    }
+
+    public function testSupportsNormalization()
+    {
+        $res = $this->normalizer->supportsNormalization($this->item);
+        $this->assertTrue($res);
+
+        $res = $this->normalizer->supportsNormalization(new \StdClass);
+        $this->assertFalse($res);
+    }
+
+    public function testDenormalize()
+    {
+        $this->dm->expects($this->at(0))
+            ->method('find')
+            ->with('Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem', '/this/is/content')
+            ->will($this->returnValue('test_content'));
+
+        $rootItem = $this->normalizer->denormalize($this->expectedMenu, get_class($this->item));
+
+        $this->assertNull($rootItem->getId());
+        $this->assertEquals('0-item', $rootItem->getName());
+        $this->assertEquals('Test', $rootItem->getLabel());
+        $this->assertEquals('http://www.example.com', $rootItem->getUri());
+        $this->assertEquals('test_route', $rootItem->getRoute());
+        $this->assertEquals('test_content', $rootItem->getContent());
+        $this->assertEquals(array('far' => 'boo'), $rootItem->getExtras());
+        $this->assertEquals(array('bar' => 'foo'), $rootItem->getChildrenAttributes());
+        $this->assertCount(1, $rootItem->getChildren());
+    }
+
+    public function testSupportsDenormalization()
+    {
+        $res = $this->normalizer->supportsDenormalization($this->expectedMenu, get_class($this->item));
+        $this->assertTrue($res);
+
+        $res = $this->normalizer->supportsDenormalization($this->expectedMenu, 'Bar');
+        $this->assertFalse($res);
     }
 }
