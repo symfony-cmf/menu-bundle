@@ -74,12 +74,13 @@ class MenuItemNormalizerTest extends \PHPUnit_Framework_Testcase
 
     public function testNormalize()
     {
-        $this->dm->expects($this->exactly(2))
+        $this->dm->expects($this->exactly(1))
             ->method('getClassMetadata')
-            ->with('Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem')
+            ->with(get_class($this->content))
             ->will($this->returnValue($this->classMetadata));
         $this->classMetadata->expects($this->at(0))
             ->method('getIdentifierValue')
+            ->with($this->content)
             ->will($this->returnValue('/this/is/content'));
 
         $this->assertEquals($this->expectedMenu, $this->normalizer->normalize($this->item));
@@ -98,7 +99,7 @@ class MenuItemNormalizerTest extends \PHPUnit_Framework_Testcase
     {
         $this->dm->expects($this->at(0))
             ->method('find')
-            ->with('Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem', '/this/is/content')
+            ->with(null, '/this/is/content')
             ->will($this->returnValue('test_content'));
 
         $rootItem = $this->normalizer->denormalize($this->expectedMenu, get_class($this->item));

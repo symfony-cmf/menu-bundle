@@ -40,12 +40,15 @@ class MenuItemNormalizer extends SerializerAwareNormalizer implements Normalizer
             'attributes' => $object->getAttributes(),
             'extras' => $object->getExtras(),
             'childrenAttributes' => $object->getChildrenAttributes(),
+            'content' => ''
         );
 
-        $meta = $this->dm->getClassMetadata(get_class($object));
-        $contentId = $meta->getIdentifierValue($object);
+        if ($content = $object->getContent()) {
+            $meta = $this->dm->getClassMetadata(get_class($content));
+            $contentId = $meta->getIdentifierValue($content);
+            $array['content'] = $contentId;
+        }
 
-        $array['content'] = $contentId;
 
         // export the children as well, unless explicitly disabled
         $array['children'] = array();
@@ -90,7 +93,7 @@ class MenuItemNormalizer extends SerializerAwareNormalizer implements Normalizer
         $menuItem->setChildrenAttributes($this->getValue($data, 'childrenAttributes', array()));
 
         if (isset($data['content'])) {
-            $contentDoc = $this->dm->find($this->menuItemClass, $data['content']);
+            $contentDoc = $this->dm->find(null, $data['content']);
             $menuItem->setContent($contentDoc);
         }
 

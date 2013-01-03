@@ -297,7 +297,7 @@ class MenuItem implements NodeInterface
     /**
      * Return the attributes associated with this menu item
      *
-     * @notsure: What do these attributes apply to are they generic?
+     * @return array
      */
     public function getAttributes()
     {
@@ -352,8 +352,6 @@ class MenuItem implements NodeInterface
 
     /**
      * Return the children attributes
-     *
-     * @notsure: What does this apply to?
      *
      * @return array
      */
@@ -420,8 +418,6 @@ class MenuItem implements NodeInterface
     /**
      * Get extra attributes
      *
-     * @notsure: How is this different from getAttributes?
-     *
      * @return array
      */
     public function getExtras()
@@ -466,6 +462,6 @@ class MenuItem implements NodeInterface
 
     public function __toString()
     {
-        return $this->getLabel();
+        return $this->getLabel() ? : ' -no label-';
     }
 }
