@@ -81,11 +81,23 @@ class MenuItem implements NodeInterface
         $this->name = $name;
     }
 
+    /**
+     * Return ID (path) of this menu item
+     *
+     * @return string
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Sets ID (path) of this menu item
+     *
+     * @param $id string
+     *
+     * @return MenuItem - this instance
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -93,6 +105,13 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    /**
+     * Set the parent of this menu item
+     *
+     * @param $parent MenuItem - Parent item
+     *
+     * @return MenuItem - this instance
+     */
     public function setParent($parent)
     {
         $this->parent = $parent;
@@ -100,16 +119,31 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    /**
+     * Returns the parent of this menu item
+     *
+     * @return object
+     */
     public function getParent()
     {
         return $this->parent;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Set the name of this item (used in ID)
+     *
+     * @param string $name
+     *
+     * @return MenuItem - this instance
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -119,6 +153,11 @@ class MenuItem implements NodeInterface
 
     /**
      * Convenience method to set parent and name at the same time.
+     *
+     * @param $parent MenuItem
+     * @param $name string
+     *
+     * @return MenuItem - this instance
      */
     public function setPosition($parent, $name)
     {
@@ -133,6 +172,13 @@ class MenuItem implements NodeInterface
         return $this->label;
     }
 
+    /**
+     * Set label for this menu item
+     *
+     * @param $label string
+     *
+     * @return MenuItem - this instance
+     */
     public function setLabel($label)
     {
         $this->label = $label;
@@ -140,11 +186,23 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    /**
+     * Return the URI
+     *
+     * @return $uri string
+     */
     public function getUri()
     {
         return $this->uri;
     }
 
+    /**
+     * Set the URI
+     *
+     * @param $uri string
+     *
+     * @return MenuItem - this instance
+     */
     public function setUri($uri)
     {
         $this->uri = $uri;
@@ -152,11 +210,23 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    /**
+     * Return the route name
+     *
+     * @return string
+     */
     public function getRoute()
     {
         return $this->route;
     }
 
+    /**
+     * Set the route name
+     *
+     * @param $route string - name of route
+     *
+     * @return MenuItem - this instance
+     */
     public function setRoute($route)
     {
         $this->route = $route;
@@ -164,6 +234,11 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    /**
+     * Return the content document associcated with this menu item
+     *
+     * @return object - ODM document
+     */
     public function getContent()
     {
         if ($this->weak) {
@@ -173,6 +248,13 @@ class MenuItem implements NodeInterface
         return $this->strongContent;
     }
 
+    /**
+     * Set the content document associated with this menu item
+     *
+     * @param object $content
+     *
+     * @return MenuItem - this instance
+     */
     public function setContent($content)
     {
         if ($this->weak) {
@@ -184,11 +266,23 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    /**
+     * Return true if this the content is referenced weakly.
+     *
+     * @return boolean
+     */
     public function getWeak()
     {
         return $this->weak;
     }
 
+    /**
+     * Specify if the content should be referenced weakly.
+     *
+     * @param $weak boolean
+     *
+     * @return MenuItem - this instance
+     */
     public function setWeak($weak)
     {
         if ($this->weak && !$weak) {
@@ -203,11 +297,23 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    /**
+     * Return the attributes associated with this menu item
+     *
+     * @notsure: What do these attributes apply to are they generic?
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
+    /**
+     * Set the attributes associcated with this menu item
+     *
+     * @param $attributes array
+     *
+     * @return MenuItem - this instance
+     */
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
@@ -216,6 +322,8 @@ class MenuItem implements NodeInterface
     }
 
     /**
+     * Return the given attribute, optionally specifying a default value
+     *
      * @param  string $name     The name of the attribute to return
      * @param  mixed  $default  The value to return if the attribute doesn't exist
      *
@@ -230,6 +338,14 @@ class MenuItem implements NodeInterface
         return $default;
     }
 
+    /**
+     * Set the named attribute
+     *
+     * @param $name string - attribute name
+     * @param $value mixed - attribute value
+     *
+     * @return MenuItem - this instance
+     */
     public function setAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
@@ -237,11 +353,25 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    /**
+     * Return the children attributes
+     *
+     * @notsure: What does this apply to?
+     *
+     * @return array
+     */
     public function getChildrenAttributes()
     {
         return $this->childrenAttributes;
     }
 
+    /**
+     * Set the children attributes
+     *
+     * @param $attributes array
+     *
+     * @return MenuItem - this instance
+     */
     public function setChildrenAttributes(array $attributes)
     {
         $this->childrenAttributes = $attributes;
@@ -253,7 +383,7 @@ class MenuItem implements NodeInterface
      * Get all child menu items of this menu item. This will filter out all
      * non-NodeInterface items.
      *
-     * @return array of NodeInterface
+     * @return MenuItem[]
      */
     public function getChildren()
     {
@@ -268,6 +398,9 @@ class MenuItem implements NodeInterface
         return $children;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getOptions()
     {
         return array(
@@ -287,11 +420,25 @@ class MenuItem implements NodeInterface
         );
     }
 
+    /**
+     * Get extra attributes
+     *
+     * @notsure: How is this different from getAttributes?
+     *
+     * @return array
+     */
     public function getExtras()
     {
         return $this->extras;
     }
 
+    /**
+     * Set the extra attributes
+     *
+     * @param $extras array
+     *
+     * @return MenuItem - this instance
+     */
     public function setExtras(array $extras)
     {
         $this->extras = $extras;
@@ -299,10 +446,17 @@ class MenuItem implements NodeInterface
         return $this;
     } 
 
+    /**
+     * Add a child menu item, automatically setting the parent node.
+     *
+     * @param MenuItem - Menu item to add
+     *
+     * @return MenuItem - Same item.
+     */
     public function addChild($child)
     {
-        if (!$child instanceof NodeInterface) {
-            throw new \InvalidArgumentException('Cannot add menu item as child, it already belongs to another menu (e.g. has a parent).');
+        if (!$child instanceof MenuItem) {
+            throw new \InvalidArgumentException('Cannot add menu item, it is not an instance of MenuItem.');
         }
 
         $child->setParent($this);
