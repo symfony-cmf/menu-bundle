@@ -4,9 +4,6 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Knp\Menu\NodeInterface;
-use Knp\Menu\FactoryInterface;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Cmf\Bundle\MenuBundle\Factory\MenuFactory;
 
 /**
  * This class represents a menu item for the cmf.
@@ -456,7 +453,9 @@ class MenuItem implements NodeInterface
     public function addChild($child)
     {
         if (!$child instanceof MenuItem) {
-            throw new \InvalidArgumentException('Cannot add menu item, it is not an instance of MenuItem.');
+            throw new \InvalidArgumentException(
+                sprintf('Cannot add menu item of class "%s", it is not an instance of MenuItem.', get_class($child)
+            ));
         }
 
         $child->setParent($this);

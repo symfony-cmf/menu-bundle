@@ -53,10 +53,21 @@ class MenuItemTest extends \PHPUnit_Framework_Testcase
         $c2 = new MenuItem;
         $m = new MenuItem;
         $m->addChild($c1);
-        $m->addChild($c2);
+        $ret = $m->addChild($c2);
 
         $children = $m->getChildren();
         $this->assertCount(2, $children);
         $this->assertSame($m, $children[0]->getParent());
+        $this->assertSame($c2, $ret);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testAddChild_notMenuItem()
+    {
+        $c1 = new \stdClass;
+        $m = new MenuItem;
+        $m->addChild($c1);
     }
 }
