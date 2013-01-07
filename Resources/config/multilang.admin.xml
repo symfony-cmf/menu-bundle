@@ -10,7 +10,7 @@
 
     <services>
         <service id="symfony_cmf_menu.multilang.admin" class="%symfony_cmf_menu.multilang.admin_class%">
-            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="menu" label="multilang menu item" />
+            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="dashboard.group_menu" label_catalogue="SymfonyCmfMenuBundle" label="dashboard.label_multilang_menu_item" label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument/>
             <argument>%symfony_cmf_menu.multilang.document_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
