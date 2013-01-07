@@ -1,0 +1,30 @@
+dashboard:
+    group_menu: Menu
+    label_menu_item: Menu item
+    label_multilang_menu_item: Multilingual menu item
+
+breadcrumb:
+    link_menu_item_list: Menu items
+    link_menu_item_create: Create
+    link_menu_item_edit: Edit
+    link_multilang_menu_item_list: Multilingual menu items
+    link_multilang_menu_item_create: Create
+    link_multilang_menu_item_edit: Edit
+
+list:
+    label_id: Id
+    label_name: Name
+    label_label: Label
+    label_uri: URI
+    label_route: Route
+    label_locales: Locales
+
+form:
+    group_general: General
+    label_locale: Locale
+    label_parent: Parent
+    label_name: Name
+    label_label: Label
+    label_uri: URI
+    label_route: Route
+    label_content: Content
