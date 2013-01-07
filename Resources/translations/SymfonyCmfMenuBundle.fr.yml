@@ -7,9 +7,11 @@ breadcrumb:
     link_menu_item_list: Eléments de menu
     link_menu_item_create: Créer
     link_menu_item_edit: Éditer
+    link_menu_item_delete: Supprimer
     link_multilang_menu_item_list: Eléments de menu multilingues
     link_multilang_menu_item_create: Créer
     link_multilang_menu_item_edit: Éditer
+    link_multilang_menu_item_delete: Supprimer
 
 list:
     label_id: Id
