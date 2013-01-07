@@ -12,6 +12,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem;
 
 class MenuItemAdmin extends Admin
 {
+    protected $translationDomain = 'SymfonyCmfMenuBundle';
     protected $contentRoot;
     protected $menuRoot;
 
@@ -29,7 +30,7 @@ class MenuItemAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General')
+            ->with('form.group_general')
                 ->add('parent', 'doctrine_phpcr_type_tree_model', array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true))
                 ->add('name', 'text', ($this->hasSubject() && null !== $this->getSubject()->getId()) ? array('attr' => array('readonly' => 'readonly')) : array())
                 ->add('label', 'text')
