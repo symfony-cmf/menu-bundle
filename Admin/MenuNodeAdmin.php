@@ -8,9 +8,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-use Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem;
+use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 
-class MenuItemAdmin extends Admin
+class MenuNodeAdmin extends Admin
 {
     protected $contentRoot;
     protected $menuRoot;
@@ -52,7 +52,7 @@ class MenuItemAdmin extends Admin
 
     public function getNewInstance()
     {
-        /** @var $new MenuItem */
+        /** @var $new MenuNode */
         $new = parent::getNewInstance();
         if ($this->hasRequest()) {
             $parentId = $this->getRequest()->query->get('parent');

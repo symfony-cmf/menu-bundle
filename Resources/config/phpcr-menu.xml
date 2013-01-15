@@ -7,8 +7,8 @@
     <parameters>
         <parameter key="symfony_cmf_menu.provider_class">Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider</parameter>
         <parameter key="symfony_cmf_menu.factory_class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
-        <parameter key="symfony_cmf_menu.document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem</parameter>
-        <parameter key="symfony_cmf_menu.multilang.document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuItem</parameter>
+        <parameter key="symfony_cmf_menu.document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode</parameter>
+        <parameter key="symfony_cmf_menu.multilang.document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode</parameter>
     </parameters>
 
     <services>

@@ -13,7 +13,7 @@ use Knp\Menu\NodeInterface;
  *
  * @PHPCRODM\Document
  */
-class MenuItem implements NodeInterface
+class MenuNode implements NodeInterface
 {
     /**
      * Id of this menu item
@@ -90,7 +90,7 @@ class MenuItem implements NodeInterface
      *
      * @param $id string
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setId($id)
     {
@@ -102,9 +102,9 @@ class MenuItem implements NodeInterface
     /**
      * Set the parent of this menu item
      *
-     * @param $parent MenuItem - Parent item
+     * @param $parent MenuNode - Parent item
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setParent($parent)
     {
@@ -136,7 +136,7 @@ class MenuItem implements NodeInterface
      *
      * @param string $name
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setName($name)
     {
@@ -148,10 +148,10 @@ class MenuItem implements NodeInterface
     /**
      * Convenience method to set parent and name at the same time.
      *
-     * @param $parent MenuItem
+     * @param $parent MenuNode
      * @param $name string
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setPosition($parent, $name)
     {
@@ -176,7 +176,7 @@ class MenuItem implements NodeInterface
      *
      * @param $label string
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setLabel($label)
     {
@@ -200,7 +200,7 @@ class MenuItem implements NodeInterface
      *
      * @param $uri string
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setUri($uri)
     {
@@ -224,7 +224,7 @@ class MenuItem implements NodeInterface
      *
      * @param $route string - name of route
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setRoute($route)
     {
@@ -254,7 +254,7 @@ class MenuItem implements NodeInterface
      *
      * @param object $content
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setContent($content)
     {
@@ -282,7 +282,7 @@ class MenuItem implements NodeInterface
      *
      * @param $weak boolean
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setWeak($weak)
     {
@@ -313,7 +313,7 @@ class MenuItem implements NodeInterface
      *
      * @param $attributes array
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setAttributes(array $attributes)
     {
@@ -345,7 +345,7 @@ class MenuItem implements NodeInterface
      * @param $name string - attribute name
      * @param $value mixed - attribute value
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setAttribute($name, $value)
     {
@@ -369,7 +369,7 @@ class MenuItem implements NodeInterface
      *
      * @param $attributes array
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setChildrenAttributes(array $attributes)
     {
@@ -382,7 +382,7 @@ class MenuItem implements NodeInterface
      * Get all child menu items of this menu item. This will filter out all
      * non-NodeInterface items.
      *
-     * @return MenuItem[]
+     * @return MenuNode[]
      */
     public function getChildren()
     {
@@ -434,7 +434,7 @@ class MenuItem implements NodeInterface
      *
      * @param $extras array
      *
-     * @return MenuItem - this instance
+     * @return MenuNode - this instance
      */
     public function setExtras(array $extras)
     {
@@ -446,11 +446,11 @@ class MenuItem implements NodeInterface
     /**
      * Add a child menu item, automatically setting the parent node.
      *
-     * @param MenuItem - Menu item to add
+     * @param MenuNode - Menu item to add
      *
-     * @return MenuItem - Same item.
+     * @return MenuNode - Same item.
      */
-    public function addChild(MenuItem $child)
+    public function addChild(MenuNode $child)
     {
         $child->setParent($this);
         $this->children[] = $child;

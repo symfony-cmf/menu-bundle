@@ -1,19 +1,19 @@
 <?php
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Document;
-use Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem;
+use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 
-class MenuItemTest extends \PHPUnit_Framework_Testcase
+class MenuNodeTest extends \PHPUnit_Framework_Testcase
 {
     public function setUp()
     {
-        $c1 = new MenuItem;
+        $c1 = new MenuNode;
         $c1->setLabel('Child 1');
-        $c2 = new MenuItem;
+        $c2 = new MenuNode;
         $c2->setLabel('Child 2');
         $this->content = new \StdClass;
-        $this->parentItem = new MenuItem;
-        $this->item = new MenuItem;
+        $this->parentItem = new MenuNode;
+        $this->item = new MenuNode;
         $this->item->setId('/foo/bar')
             ->setParent($this->parentItem)
             ->setName('test')
@@ -41,7 +41,7 @@ class MenuItemTest extends \PHPUnit_Framework_Testcase
         $this->assertEquals(array('bar' => 'foo'), $this->item->getChildrenAttributes());
         $this->assertEquals(array('far' => 'boo'), $this->item->getExtras());
 
-        $this->parentItem = new MenuItem;
+        $this->parentItem = new MenuNode;
         $this->item->setPosition($this->parentItem, 'FOOO');
         $this->assertSame($this->parentItem, $this->item->getParent());
         $this->assertEquals('FOOO', $this->item->getName());
@@ -49,9 +49,9 @@ class MenuItemTest extends \PHPUnit_Framework_Testcase
 
     public function testAddChild()
     {
-        $c1 = new MenuItem;
-        $c2 = new MenuItem;
-        $m = new MenuItem;
+        $c1 = new MenuNode;
+        $c2 = new MenuNode;
+        $m = new MenuNode;
         $m->addChild($c1);
         $ret = $m->addChild($c2);
 
@@ -59,15 +59,5 @@ class MenuItemTest extends \PHPUnit_Framework_Testcase
         $this->assertCount(2, $children);
         $this->assertSame($m, $children[0]->getParent());
         $this->assertSame($c2, $ret);
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testAddChild_notMenuItem()
-    {
-        $c1 = new \stdClass;
-        $m = new MenuItem;
-        $m->addChild($c1);
     }
 }

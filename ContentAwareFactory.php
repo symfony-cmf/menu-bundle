@@ -4,7 +4,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle;
 
 use Knp\Menu\NodeInterface;
 use Knp\Menu\Silex\RouterAwareFactory;
-use Knp\Menu\MenuItem;
+use Knp\Menu\MenuNode;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
@@ -38,7 +38,7 @@ class ContentAwareFactory extends RouterAwareFactory
      * Create a menu item from a NodeInterface
      *
      * @param NodeInterface $node
-     * @return MenuItem
+     * @return MenuNode
      */
     public function createFromNode(NodeInterface $node)
     {

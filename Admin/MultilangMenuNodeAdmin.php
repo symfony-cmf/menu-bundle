@@ -5,7 +5,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
-class MultilangMenuItemAdmin extends MenuItemAdmin
+class MultilangMenuNodeAdmin extends MenuNodeAdmin
 {
     protected function configureListFields(ListMapper $listMapper)
     {
