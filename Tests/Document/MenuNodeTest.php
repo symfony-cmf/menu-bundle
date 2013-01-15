@@ -2,6 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Document;
 use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Document\MenuItem;
 
 class MenuNodeTest extends \PHPUnit_Framework_Testcase
 {
@@ -59,5 +60,11 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->assertCount(2, $children);
         $this->assertSame($m, $children[0]->getParent());
         $this->assertSame($c2, $ret);
+    }
+
+    public function testDeprecatedMenuItem()
+    {
+        $menuItem = new MenuItem;
+        $menuItem->setLabel('foobar'); // no crashes? ok, good.
     }
 }
