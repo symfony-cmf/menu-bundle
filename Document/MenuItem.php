@@ -8,9 +8,6 @@ use Knp\Menu\NodeInterface;
 /**
  * This class represents a menu item for the cmf.
  *
- * To protect against accidentally injecting things into the tree, all menu
- * item node names must end on -item.
- *
  * @author Uwe Jäger <uwej711@googlemail.com>
  * @author Daniel Leech <daniel@dantleech.com>
  *
@@ -164,6 +161,11 @@ class MenuItem implements NodeInterface
         return $this;
     }
 
+    /**
+     * Return the label assigned to this menu item
+     *
+     * @return string
+     */
     public function getLabel()
     {
         return $this->label;
@@ -247,6 +249,8 @@ class MenuItem implements NodeInterface
 
     /**
      * Set the content document associated with this menu item
+     *
+     * NOTE: Content should be mapped by the ODM so that it can be persisted.
      *
      * @param object $content
      *
@@ -446,14 +450,8 @@ class MenuItem implements NodeInterface
      *
      * @return MenuItem - Same item.
      */
-    public function addChild($child)
+    public function addChild(MenuItem $child)
     {
-        if (!$child instanceof MenuItem) {
-            throw new \InvalidArgumentException(
-                sprintf('Cannot add menu item of class "%s", it is not an instance of MenuItem.', get_class($child)
-            ));
-        }
-
         $child->setParent($this);
         $this->children[] = $child;
 
@@ -462,6 +460,6 @@ class MenuItem implements NodeInterface
 
     public function __toString()
     {
-        return $this->getLabel() ? : ' -no label-';
+        return $this->getLabel() ? : '(no label set)';
     }
 }
