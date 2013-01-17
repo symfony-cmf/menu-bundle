@@ -6,9 +6,9 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Knp\Menu\NodeInterface;
 
 /**
- * This class has been renamed to something more appropriate, MultilangMenuNode,
- * this class is therefore deprecated. Please change your implementation
- * to use MultilangMenuNode instead of MultilangMenuItem.
+ * @deprecated Use the MenuNode instead.
+ * 
+ * This class has been renamed to something more appropriate.
  *
  * @PHPCRODM\Document
  */
