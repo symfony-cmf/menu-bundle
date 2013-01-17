@@ -5,13 +5,10 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 
 /**
- * This class represents a multilanguage menu item for the cmf.
+ * This class represents a multilanguage menu node for the cmf.
  *
  * The label and uri are translatable, to have a language specific menu caption
  * and to be able to have external links language specific.
- *
- * To protect against accidentally injecting things into the tree, all menu
- * item node names must end on -item.
  *
  * @PHPCRODM\Document(translator="attribute")
  */

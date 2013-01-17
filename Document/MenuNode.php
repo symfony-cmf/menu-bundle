@@ -6,7 +6,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Knp\Menu\NodeInterface;
 
 /**
- * This class represents a menu item for the cmf.
+ * This class represents a menu node for the cmf.
  *
  * @author Uwe Jäger <uwej711@googlemail.com>
  * @author Daniel Leech <daniel@dantleech.com>
@@ -63,10 +63,10 @@ class MenuNode implements NodeInterface
     /** @PHPCRODM\Children() */
     protected $children = array();
 
-    /** 
+    /**
      * Hashmap for extra stuff associated to the item
      *
-     * @PHPCRODM\String(assoc="") 
+     * @PHPCRODM\String(assoc="")
      */
     protected $extras;
 
@@ -441,7 +441,7 @@ class MenuNode implements NodeInterface
         $this->extras = $extras;
 
         return $this;
-    } 
+    }
 
     /**
      * Add a child menu item, automatically setting the parent node.

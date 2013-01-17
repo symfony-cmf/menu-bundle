@@ -5,6 +5,8 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
+use Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode;
+
 class MultilangMenuNodeAdmin extends MenuNodeAdmin
 {
     /**
@@ -48,7 +50,7 @@ class MultilangMenuNodeAdmin extends MenuNodeAdmin
 
     public function getNewInstance()
     {
-        /** @var $new MultilangMenuItem */
+        /** @var $new MultilangMenuNode */
         $new = parent::getNewInstance();
 
         if ($this->hasRequest()) {

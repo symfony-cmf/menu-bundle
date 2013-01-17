@@ -51,6 +51,9 @@ class MenuNodeAdmin extends Admin
         ;
     }
 
+    /**
+     * @return MenuNode
+     */
     public function getNewInstance()
     {
         /** @var $new MenuNode */
