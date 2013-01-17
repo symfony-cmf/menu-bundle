@@ -19,9 +19,6 @@
         "doctrine/phpcr-odm": "1.0.*",
         "knplabs/knp-menu-bundle": "1.1.*"
     },
-    "require-dev": {
-        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.*"
-    },
     "suggest": {
         "sonata-project/doctrine-phpcr-admin-bundle": "if you want to have editing capabilities"
     },
