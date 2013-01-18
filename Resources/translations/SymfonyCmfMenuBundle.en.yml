@@ -1,17 +1,17 @@
 dashboard:
     group_menu: Menu
-    label_menu_item: Menu item
-    label_multilang_menu_item: Multilingual menu item
+    label_menu_node: Menu node
+    label_multilang_menu_node: Multilingual menu node
 
 breadcrumb:
-    link_menu_item_list: Menu items
-    link_menu_item_create: Create
-    link_menu_item_edit: Edit
-    link_menu_item_delete: Delete
-    link_multilang_menu_item_list: Multilingual menu items
-    link_multilang_menu_item_create: Create
-    link_multilang_menu_item_edit: Edit
-    link_multilang_menu_item_delete: Delete
+    link_menu_node_list: Menu nodes
+    link_menu_node_create: Create
+    link_menu_node_edit: Edit
+    link_menu_node_delete: Delete
+    link_multilang_menu_node_list: Multilingual menu nodes
+    link_multilang_menu_node_create: Create
+    link_multilang_menu_node_edit: Edit
+    link_multilang_menu_node_delete: Delete
 
 list:
     label_id: Id
