@@ -25,7 +25,7 @@ class MultilangMenuNode extends MenuNode
     protected $uri;
 
     /**
-     * @return string the loaded locale of this menu item
+     * @return string the loaded locale of this menu node
      */
     public function getLocale()
     {
@@ -33,10 +33,10 @@ class MultilangMenuNode extends MenuNode
     }
 
     /**
-     * Set the locale this menu item should be. When doing a flush,
+     * Set the locale this menu node should be. When doing a flush,
      * this will have the translated fields be stored as that locale.
      *
-     * @param string $locale the locale to use for this menu item
+     * @param string $locale the locale to use for this menu node
      */
     public function setLocale($locale)
     {

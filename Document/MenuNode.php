@@ -16,7 +16,7 @@ use Knp\Menu\NodeInterface;
 class MenuNode implements NodeInterface
 {
     /**
-     * Id of this menu item
+     * Id of this menu node
      *
      * @PHPCRODM\Id
      */
@@ -64,7 +64,7 @@ class MenuNode implements NodeInterface
     protected $children = array();
 
     /**
-     * Hashmap for extra stuff associated to the item
+     * Hashmap for extra stuff associated to the node
      *
      * @PHPCRODM\String(assoc="")
      */
@@ -76,7 +76,7 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Return ID (path) of this menu item
+     * Return ID (PHPCR path) of this menu node
      *
      * @return string
      */
@@ -86,7 +86,9 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Sets ID (path) of this menu item
+     * Sets ID (PHPCR path) of this menu node
+     *
+     * The recommended way is to use setParent and setName rather than setId.
      *
      * @param $id string
      *
@@ -100,9 +102,9 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Set the parent of this menu item
+     * Set the parent of this menu node
      *
-     * @param $parent MenuNode - Parent item
+     * @param $parent MenuNode - Parent node
      *
      * @return MenuNode - this instance
      */
@@ -114,7 +116,7 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Returns the parent of this menu item
+     * Returns the parent of this menu node
      *
      * @return object
      */
@@ -132,7 +134,7 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Set the name of this item (used in ID)
+     * Set the name of this node (used in ID)
      *
      * @param string $name
      *
@@ -162,7 +164,7 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Return the label assigned to this menu item
+     * Return the label assigned to this menu node
      *
      * @return string
      */
@@ -172,7 +174,7 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Set label for this menu item
+     * Set label for this menu node
      *
      * @param $label string
      *
@@ -234,7 +236,7 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Return the content document associcated with this menu item
+     * Return the content document associated with this menu node
      *
      * @return object - ODM document
      */
@@ -248,9 +250,9 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Set the content document associated with this menu item
+     * Set the content document associated with this menu node
      *
-     * NOTE: Content should be mapped by the ODM so that it can be persisted.
+     * NOTE: Content documents must be mapped by PHPCR-ODM so that it can be persisted.
      *
      * @param object $content
      *
@@ -299,7 +301,7 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Return the attributes associated with this menu item
+     * Return the attributes associated with this menu node
      *
      * @return array
      */
@@ -309,7 +311,7 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Set the attributes associcated with this menu item
+     * Set the attributes associated with this menu node
      *
      * @param $attributes array
      *
@@ -379,8 +381,8 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Get all child menu items of this menu item. This will filter out all
-     * non-NodeInterface items.
+     * Get all child menu nodes of this menu node. This will filter out all
+     * non-NodeInterface nodes.
      *
      * @return MenuNode[]
      */
@@ -444,11 +446,11 @@ class MenuNode implements NodeInterface
     }
 
     /**
-     * Add a child menu item, automatically setting the parent node.
+     * Add a child menu node, automatically setting the parent node.
      *
-     * @param MenuNode - Menu item to add
+     * @param MenuNode - Menu node to add
      *
-     * @return MenuNode - Same item.
+     * @return MenuNode - The newly added child node.
      */
     public function addChild(MenuNode $child)
     {

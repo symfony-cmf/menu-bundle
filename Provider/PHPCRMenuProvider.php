@@ -66,7 +66,7 @@ class PHPCRMenuProvider implements MenuProviderInterface
             throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
         }
         if (! $menu instanceof NodeInterface) {
-            throw new \InvalidArgumentException("Menu at '$name' is not a valid menu item");
+            throw new \InvalidArgumentException("Menu at '$name' is not a valid menu node");
         }
         $menuItem = $this->factory->createFromNode($menu);
         $menuItem->setCurrentUri($this->container->get('request')->getRequestUri());

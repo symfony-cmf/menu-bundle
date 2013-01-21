@@ -13,10 +13,10 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $c2 = new MenuNode;
         $c2->setLabel('Child 2');
         $this->content = new \StdClass;
-        $this->parentItem = new MenuNode;
-        $this->item = new MenuNode;
-        $this->item->setId('/foo/bar')
-            ->setParent($this->parentItem)
+        $this->parentNode = new MenuNode;
+        $this->node = new MenuNode;
+        $this->node->setId('/foo/bar')
+            ->setParent($this->parentNode)
             ->setName('test')
             ->setLabel('Test')
             ->setUri('http://www.example.com')
@@ -30,22 +30,22 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
 
     public function testGetters()
     {
-        $this->assertSame($this->parentItem, $this->item->getParent());
-        $this->assertEquals('test', $this->item->getName());
-        $this->assertEquals('Test', $this->item->getLabel());
-        $this->assertEquals('http://www.example.com', $this->item->getUri());
-        $this->assertEquals('test_route', $this->item->getRoute());
-        $this->assertSame($this->content, $this->item->getContent());
-        $this->assertFalse($this->item->getWeak());
-        $this->assertEquals(array('foo' => 'bar'), $this->item->getAttributes());
-        $this->assertEquals('bar', $this->item->getAttribute('foo'));
-        $this->assertEquals(array('bar' => 'foo'), $this->item->getChildrenAttributes());
-        $this->assertEquals(array('far' => 'boo'), $this->item->getExtras());
+        $this->assertSame($this->parentNode, $this->node->getParent());
+        $this->assertEquals('test', $this->node->getName());
+        $this->assertEquals('Test', $this->node->getLabel());
+        $this->assertEquals('http://www.example.com', $this->node->getUri());
+        $this->assertEquals('test_route', $this->node->getRoute());
+        $this->assertSame($this->content, $this->node->getContent());
+        $this->assertFalse($this->node->getWeak());
+        $this->assertEquals(array('foo' => 'bar'), $this->node->getAttributes());
+        $this->assertEquals('bar', $this->node->getAttribute('foo'));
+        $this->assertEquals(array('bar' => 'foo'), $this->node->getChildrenAttributes());
+        $this->assertEquals(array('far' => 'boo'), $this->node->getExtras());
 
-        $this->parentItem = new MenuNode;
-        $this->item->setPosition($this->parentItem, 'FOOO');
-        $this->assertSame($this->parentItem, $this->item->getParent());
-        $this->assertEquals('FOOO', $this->item->getName());
+        $this->parentNode = new MenuNode;
+        $this->node->setPosition($this->parentNode, 'FOOO');
+        $this->assertSame($this->parentNode, $this->node->getParent());
+        $this->assertEquals('FOOO', $this->node->getName());
     }
 
     public function testAddChild()
