@@ -59,7 +59,7 @@ class MenuNodeAdmin extends Admin
         /** @var $new MenuNode */
         $new = parent::getNewInstance();
         if ($this->hasRequest()) {
-            $parentId = $this->getRequest()->query->get('parent');
+            $parentId = $this->getRequest()->query->get('id');
             if (null !== $parentId) {
                 $new->setParent($this->getModelManager()->find(null, $parentId));
             }
