@@ -12,7 +12,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
  *
  * @PHPCRODM\Document(translator="attribute")
  */
-class MultilangMenuNode extends MenuNode
+class MultilangMenuNode extends AbstractMenuNode
 {
 
     /** @PHPCRODM\Locale */
