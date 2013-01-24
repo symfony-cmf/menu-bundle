@@ -68,9 +68,9 @@ class PHPCRMenuProvider implements MenuProviderInterface
         if (! $menu instanceof NodeInterface) {
             throw new \InvalidArgumentException("Menu at '$name' is not a valid menu node");
         }
-        $menuItem = $this->factory->createFromNode($menu);
-        $menuItem->setCurrentUri($this->container->get('request')->getRequestUri());
-        return $menuItem;
+        $menuNode = $this->factory->createFromNode($menu);
+        $menuNode->setCurrentUri($this->container->get('request')->getRequestUri());
+        return $menuNode;
     }
 
     public function has($name, array $options = array())
