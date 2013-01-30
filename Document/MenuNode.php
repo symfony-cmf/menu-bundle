@@ -70,6 +70,9 @@ class MenuNode implements NodeInterface
      */
     protected $extras;
 
+    /** @PHPCRODM\String(multivalue=true, assoc="") */
+    protected $routeParameters = array();
+
     public function __construct($name = null)
     {
         $this->name = $name;
@@ -400,6 +403,26 @@ class MenuNode implements NodeInterface
     }
 
     /**
+     * Gets the route parameters
+     *
+     * @return array
+     */
+    public function getRouteParameters()
+    {
+        return $this->routeParameters;
+    }
+
+    /**
+     * Sets the route parameters
+     *
+     * @param array the parameters
+     */
+    public function setRouteParameters($routeParameters)
+    {
+        $this->routeParameters = $routeParameters;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function getOptions()
@@ -413,8 +436,8 @@ class MenuNode implements NodeInterface
             'display' => true,
             'displayChildren' => true,
             'content' => $this->getContent(),
+            'routeParameters' => $this->getRouteParameters(),
             // TODO provide the following information
-            'routeParameters' => array(),
             'routeAbsolute' => false,
             'linkAttributes' => array(),
             'labelAttributes' => array(),
