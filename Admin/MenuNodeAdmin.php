@@ -31,12 +31,12 @@ class MenuNodeAdmin extends Admin
     {
         $formMapper
             ->with('form.group_general')
-                ->add('parent', 'doctrine_phpcr_type_tree_model', array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true))
+                ->add('parent', 'doctrine_phpcr_odm_tree', array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true))
                 ->add('name', 'text', ($this->hasSubject() && null !== $this->getSubject()->getId()) ? array('attr' => array('readonly' => 'readonly')) : array())
                 ->add('label', 'text')
                 ->add('uri', 'text', array('required' => false))
                 ->add('route', 'text', array('required' => false))
-                ->add('content', 'doctrine_phpcr_type_tree_model', array('root_node' => $this->contentRoot, 'choice_list' => array(), 'required' => false))
+                ->add('content', 'doctrine_phpcr_odm_tree', array('root_node' => $this->contentRoot, 'choice_list' => array(), 'required' => false))
             ->end();
     }
 
