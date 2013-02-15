@@ -56,6 +56,30 @@ class PHPCRMenuProvider implements MenuProviderInterface
         $this->menuRoot = $menuRoot;
     }
 
+    /**
+     * @param string $menuRoot
+     */
+    public function setMenuRoot($menuRoot)
+    {
+        $this->menuRoot = $menuRoot;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMenuRoot()
+    {
+        return $this->menuRoot;
+    }
+
+    /**
+     * Get a menu node by name
+     *
+     * @param  string $name
+     * @param  array  $options
+     * @return \Knp\Menu\ItemInterface
+     * @throws \InvalidArgumentException
+     */
     public function get($name, array $options = array())
     {
         if (empty($name)) {
@@ -73,6 +97,13 @@ class PHPCRMenuProvider implements MenuProviderInterface
         return $menuNode;
     }
 
+    /**
+     * Check if a menu node exists
+     *
+     * @param  string $name
+     * @param  array  $options
+     * @return bool
+     */
     public function has($name, array $options = array())
     {
         $menu = $this->dm->find(null, $this->menuRoot . '/' . $name);
