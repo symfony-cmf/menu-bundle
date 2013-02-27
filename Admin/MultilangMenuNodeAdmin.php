@@ -2,9 +2,9 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-
+use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Cmf\Bundle\MenuBundle\Admin\MenuNodeAdmin;
 use Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode;
 
 class MultilangMenuNodeAdmin extends MenuNodeAdmin
@@ -22,7 +22,7 @@ class MultilangMenuNodeAdmin extends MenuNodeAdmin
      */
     public function __construct($code, $class, $baseControllerName, $locales)
     {
-        parent::__construct($code, $class, $baseControllerName);
+        parent::__construct($code, $class, $baseControllerName, $locales);
 
         $this->locales = $locales;
     }
