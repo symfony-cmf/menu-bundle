@@ -22,7 +22,7 @@ class MultilangMenuNodeAdmin extends MenuNodeAdmin
      */
     public function __construct($code, $class, $baseControllerName, $locales)
     {
-        parent::__construct($code, $class, $baseControllerName, $locales);
+        parent::__construct($code, $class, $baseControllerName);
 
         $this->locales = $locales;
     }
