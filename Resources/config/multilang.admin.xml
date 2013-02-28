@@ -6,7 +6,6 @@
 
     <parameters>
         <parameter key="symfony_cmf_menu.multilang.admin_class">Symfony\Cmf\Bundle\MenuBundle\Admin\MultilangMenuNodeAdmin</parameter>
-        <parameter key="symfony_cmf_menu.minimal.multilang.admin_class">Symfony\Cmf\Bundle\MenuBundle\Admin\MinimalMenuAdmin</parameter>
     </parameters>
 
     <services>
@@ -30,24 +29,6 @@
             </call>
 
         </service>
-
-        <service id="symfony_cmf_menu.minimal.multilang.admin" class="%symfony_cmf_menu.minimal.multilang.admin_class%">
-            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="dashboard.group_menu" label_catalogue="SymfonyCmfMenuBundle" label="dashboard.label_multilang_menu_node" label_translator_strategy="sonata.admin.label.strategy.underscore" />
-            <argument/>
-            <argument>%symfony_cmf_menu.multilang.document_class%</argument>
-            <argument>SonataAdminBundle:CRUD</argument>
-            <argument>%symfony_cmf_menu.multilang.locales%</argument>
-
-            <call method="setRouteBuilder">
-                <argument type="service" id="sonata.admin.route.path_info_slashes" />
-            </call>
-
-            <call method="setMenuRoot">
-                <argument>%symfony_cmf_menu.menu_basepath%</argument>
-            </call>
-
-        </service>
-
     </services>
 
 </container>
