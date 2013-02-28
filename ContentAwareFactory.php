@@ -9,6 +9,7 @@ use Knp\Menu\MenuNode;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ContentAwareFactory extends RouterAwareFactory
@@ -43,10 +44,14 @@ class ContentAwareFactory extends RouterAwareFactory
     public function createFromNode(NodeInterface $node)
     {
         $item = $this->createItem($node->getName(), $node->getOptions());
-
-        foreach ($node->getChildren() as $childNode) {
-            if ($childNode instanceof NodeInterface) {
-                $item->addChild($this->createFromNode($childNode));
+        if (!empty($item)) {
+            foreach ($node->getChildren() as $childNode) {
+                if ($childNode instanceof NodeInterface) {
+                    $child = $this->createFromNode($childNode);
+                    if (!empty($child)) {
+                        $item->addChild($child);
+                    }
+                }
             }
         }
 
@@ -69,8 +74,12 @@ class ContentAwareFactory extends RouterAwareFactory
                 }
             } catch (\Exception $e) {}
 
-            $routeParameters = $options['routeParameters'];
-            $options['uri'] = $this->contentRouter->generate($options['content'], $routeParameters, $options['routeAbsolute']);
+            try {
+                $options['uri'] = $this->contentRouter->generate($options['content'], $options['routeParameters'], $options['routeAbsolute']);
+            } catch (RouteNotFoundException $e) {
+                return null;
+            }
+
             unset($options['route']);
         }
 
