@@ -18,7 +18,7 @@ class MinimalMenuAdmin extends Admin
     /**
      * Those two properties are needed to make it possible to have 2 Admin classes for the same Document / Entity
      */
-    protected $baseRouteName = 'admin_bundle_menu_minimal_multilangmenunode_list';
+    protected $baseRouteName = 'admin_bundle_menu_minimal_menunode_list';
     protected $baseRoutePattern = 'admin/bundle/minimalMenu';
 
     protected function configureListFields(ListMapper $listMapper)
