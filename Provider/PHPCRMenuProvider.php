@@ -21,7 +21,7 @@ class PHPCRMenuProvider implements MenuProviderInterface
     protected $factory = null;
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectManager
+     * @var \Doctrine\ODM\PHPCR\DocumentManager
      */
     protected $dm;
 
@@ -85,14 +85,21 @@ class PHPCRMenuProvider implements MenuProviderInterface
         if (empty($name)) {
             throw new \InvalidArgumentException('The menu name may not be empty');
         }
+
         $menu = $this->dm->find(null, $this->menuRoot . '/' . $name);
         if ($menu === null) {
             throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
         }
+
         if (! $menu instanceof NodeInterface) {
             throw new \InvalidArgumentException("Menu at '$name' is not a valid menu node");
         }
+
         $menuNode = $this->factory->createFromNode($menu);
+        if (empty($menuNode)) {
+            throw new \InvalidArgumentException("Menu at '$name' is misconfigured (f.e. the route might be incorrect) and could therefore not be instanciated");
+        }
+
         $menuNode->setCurrentUri($this->container->get('request')->getRequestUri());
         return $menuNode;
     }
@@ -107,6 +114,6 @@ class PHPCRMenuProvider implements MenuProviderInterface
     public function has($name, array $options = array())
     {
         $menu = $this->dm->find(null, $this->menuRoot . '/' . $name);
-        return $menu !== null;
+        return $menu instanceof NodeInterface;
     }
 }
