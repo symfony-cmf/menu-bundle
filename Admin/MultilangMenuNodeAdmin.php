@@ -13,7 +13,7 @@ class MultilangMenuNodeAdmin extends MenuNodeAdmin
      * to have 2 Admin classes for the same Document / Entity
      */
     protected $baseRouteName = 'admin_bundle_menu_multilangmenunode_list';
-    protected $baseRoutePattern = 'admin/bundle/multilangMenuNode';
+    protected $baseRoutePattern = 'bundle/multilangMenuNode';
 
     /**
      * @var array

@@ -12,7 +12,7 @@ class MenuNodeAdmin extends MinimalMenuAdmin
      * to have 2 Admin classes for the same Document / Entity
      */
     protected $baseRouteName = 'admin_bundle_menu_menunode_list';
-    protected $baseRoutePattern = 'admin/bundle/menuNode';
+    protected $baseRoutePattern = 'bundle/menuNode';
 
     protected function configureFormFields(FormMapper $formMapper)
     {
