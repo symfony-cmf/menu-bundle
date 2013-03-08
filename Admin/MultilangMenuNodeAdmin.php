@@ -49,7 +49,8 @@ class MultilangMenuNodeAdmin extends MenuNodeAdmin
                     'choices' => array_combine($this->locales, $this->locales),
                     'empty_value' => '',
                 ))
-            ->end();
+            ->end()
+        ;
 
         parent::configureFormFields($formMapper);
     }

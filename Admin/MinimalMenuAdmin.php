@@ -27,7 +27,8 @@ class MinimalMenuAdmin extends Admin
             ->addIdentifier('id', 'text')
             ->add('name', 'text')
             ->add('label', 'text')
-            ->add('uri', 'text');
+            ->add('uri', 'text')
+        ;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -45,7 +46,8 @@ class MinimalMenuAdmin extends Admin
                 ($this->hasSubject() && null !== $this->getSubject()->getId()) ? array('attr' => array('readonly' => 'readonly')) : array())
             ->add('label', 'text')
             ->add('uri', 'text', array('required' => false))
-            ->end();
+            ->end()
+        ;
     }
 
     protected function configureShowField(ShowMapper $showMapper)
@@ -55,7 +57,8 @@ class MinimalMenuAdmin extends Admin
             ->add('name', 'text')
             ->add('label', 'text')
             ->add('uri', 'text')
-            ->add('content', 'text');
+            ->add('content', 'text')
+        ;
     }
 
     /**
