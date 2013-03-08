@@ -20,6 +20,7 @@ class MenuNodeAdmin extends MinimalMenuAdmin
 
         $formMapper
             ->with('form.group_general')
+                ->add('route', 'text')
                 ->add(
                     'content',
                     'doctrine_phpcr_odm_tree',
