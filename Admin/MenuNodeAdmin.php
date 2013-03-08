@@ -2,6 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class MenuNodeAdmin extends MinimalMenuAdmin
@@ -14,18 +15,30 @@ class MenuNodeAdmin extends MinimalMenuAdmin
     protected $baseRouteName = 'admin_bundle_menu_menunode_list';
     protected $baseRoutePattern = 'bundle/menu/menunode';
 
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        parent::configureListFields($listMapper);
+
+        $listMapper
+            ->add('route', 'text')
+        ;
+    }
+
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
 
         $formMapper
             ->with('form.group_general')
+                ->add('route', 'text', array('required' => false))
                 ->add(
                     'content',
                     'doctrine_phpcr_odm_tree',
                     array('root_node' => $this->contentRoot, 'choice_list' => array(), 'required' => false)
                 )
-            ->end();
+            ->end()
+        ;
     }
 
 }
