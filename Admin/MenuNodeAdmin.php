@@ -32,6 +32,7 @@ class MenuNodeAdmin extends MinimalMenuAdmin
         $formMapper
             ->with('form.group_general')
                 ->add('route', 'text', array('required' => false))
+                ->add('uri', 'text', array('required' => false))
                 ->add(
                     'content',
                     'doctrine_phpcr_odm_tree',

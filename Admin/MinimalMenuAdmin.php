@@ -45,7 +45,6 @@ class MinimalMenuAdmin extends Admin
                 'text',
                 ($this->hasSubject() && null !== $this->getSubject()->getId()) ? array('attr' => array('readonly' => 'readonly')) : array())
             ->add('label', 'text')
-            ->add('uri', 'text', array('required' => false))
             ->end()
         ;
     }
