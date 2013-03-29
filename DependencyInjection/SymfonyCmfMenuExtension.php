@@ -33,9 +33,6 @@ class SymfonyCmfMenuExtension extends Extension
             }
 
             $container->setParameter($this->getAlias() . '.multilang.locales', $config['multilang']['locales']);
-
-            $minimalAdmin = $container->getDefinition($this->getAlias().'.minimal.admin');
-            $minimalAdmin->addArgument('%'.$this->getAlias().'.multilang.locales%');
         }
 
         if (isset($config['document_class'])) {
