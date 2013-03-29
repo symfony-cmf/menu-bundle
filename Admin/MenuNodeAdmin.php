@@ -22,13 +22,8 @@ class MenuNodeAdmin extends Admin
             ->add('name', 'text')
             ->add('label', 'text')
             ->add('uri', 'text')
+            ->add('route', 'text')
         ;
-
-        if (null === $this->getParentFieldDescription()) {
-            $listMapper
-                ->add('route', 'text')
-            ;
-        }
     }
 
     protected function configureFormFields(FormMapper $formMapper)
