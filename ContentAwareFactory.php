@@ -4,7 +4,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle;
 
 use Knp\Menu\NodeInterface;
 use Knp\Menu\Silex\RouterAwareFactory;
-use Knp\Menu\MenuNode;
+use Knp\Menu\MenuItem;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
@@ -12,13 +12,17 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * This factory builds menu items from the menu nodes and builds urls based on
+ * the content these menu nodes stand for.
+ */
 class ContentAwareFactory extends RouterAwareFactory
 {
     protected $contentRouter;
     protected $container;
 
     /**
-     * @param Container $container to fetch the request in order to determine
+     * @param ContainerInterface $container to fetch the request in order to determine
      *      whether this is the current menu item
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
@@ -36,10 +40,11 @@ class ContentAwareFactory extends RouterAwareFactory
     }
 
     /**
-     * Create a menu item from a NodeInterface
+     * Create a MenuItem from a NodeInterface instance
      *
      * @param NodeInterface $node
-     * @return MenuNode
+     *
+     * @return MenuItem
      */
     public function createFromNode(NodeInterface $node)
     {
@@ -58,6 +63,14 @@ class ContentAwareFactory extends RouterAwareFactory
         return $item;
     }
 
+    /**
+     * Create a MenuItem
+     *
+     * @param string $name    the menu item name
+     * @param array  $options options for the menu item, we care about 'content'
+     *
+     * @return MenuItem|null returns null if no route can be built for this menu item
+     */
     public function createItem($name, array $options = array())
     {
         $current = false;
