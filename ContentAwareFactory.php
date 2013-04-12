@@ -27,6 +27,7 @@ class ContentAwareFactory extends RouterAwareFactory
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
+     * @param string $contentKey
      * @param string $routeName the name of the route to use. DynamicRouter
      *      ignores this.
      */
@@ -77,10 +78,14 @@ class ContentAwareFactory extends RouterAwareFactory
         if (!empty($options['content'])) {
             try {
                 $request = $this->container->get('request');
-                if ($options['content'] instanceof Route
-                    && $options['content']->getOption('currentUriPrefix')
-                    && 0 === strpos($request->getPathinfo(), $options['content']->getOption('currentUriPrefix'))
-                ) {
+                $currentUriPrefix = null;
+
+                if ($options['content'] instanceof Route && $options['content']->getOption('currentUriPrefix')) {
+                    $currentUriPrefix = $options['content']->getOption('currentUriPrefix');
+                    $currentUriPrefix = preg_replace('#\{_locale\}#', $request->getLocale(), $currentUriPrefix);
+                }
+
+                if ($currentUriPrefix !== null && 0 === strpos($request->getPathinfo(), $currentUriPrefix)) {
                     $current = true;
                 } elseif ($request->attributes->get($this->contentKey) === $options['content']) {
                     $current = true;
