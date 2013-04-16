@@ -82,7 +82,7 @@ class ContentAwareFactory extends RouterAwareFactory
 
                 if ($options['content'] instanceof Route && $options['content']->getOption('currentUriPrefix')) {
                     $currentUriPrefix = $options['content']->getOption('currentUriPrefix');
-                    $currentUriPrefix = \str_replace('{_locale}', $request->getLocale(), $currentUriPrefix);
+                    $currentUriPrefix = str_replace('{_locale}', $request->getLocale(), $currentUriPrefix);
                 }
 
                 if ($currentUriPrefix !== null && 0 === strpos($request->getPathinfo(), $currentUriPrefix)) {
