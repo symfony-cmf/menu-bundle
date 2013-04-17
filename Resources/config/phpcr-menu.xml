@@ -29,6 +29,13 @@
             <argument>%symfony_cmf_menu.route_name%</argument>
         </service>
 
+        <service id="symfony_cmf_menu.initializer" class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
+            <argument type="collection">
+                <argument>%symfony_cmf_menu.menu_basepath%</argument>
+            </argument>
+            <tag name="doctrine_phpcr.initializer" />
+        </service>
+
     </services>
 
 </container>
