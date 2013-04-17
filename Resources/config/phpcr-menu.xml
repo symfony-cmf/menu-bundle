@@ -33,7 +33,7 @@
             <argument type="collection">
                 <argument>%symfony_cmf_menu.menu_basepath%</argument>
             </argument>
-            <tag name="doctrine_phpcr.initializer" alias="cmf-menu" />
+            <tag name="doctrine_phpcr.initializer" />
         </service>
 
     </services>
