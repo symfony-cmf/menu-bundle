@@ -20,7 +20,6 @@ class Configuration implements ConfigurationInterface
 
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
                 ->scalarNode('content_key')->defaultNull()->end()
-                ->scalarNode('route_name')->defaultNull()->end()
 
                 ->scalarNode('content_basepath')->defaultNull()->end()
 

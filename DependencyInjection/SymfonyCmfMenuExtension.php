@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
+// this use is only used if the class really is present, no hard dependency
 use Symfony\Cmf\Bundle\RoutingExtraBundle\Routing\DynamicRouter;
 
 class SymfonyCmfMenuExtension extends Extension
@@ -52,7 +53,6 @@ class SymfonyCmfMenuExtension extends Extension
             $config['content_key'] = DynamicRouter::CONTENT_KEY;
         }
         $container->setParameter($this->getAlias() . '.content_key', $config['content_key']);
-        $container->setParameter($this->getAlias() . '.route_name', $config['route_name']);
 
         $contentBasepath = $config['content_basepath'];
         if (null === $contentBasepath) {

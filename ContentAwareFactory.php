@@ -2,24 +2,40 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle;
 
-use Knp\Menu\NodeInterface;
 use Knp\Menu\Silex\RouterAwareFactory;
 use Knp\Menu\MenuItem;
+use Knp\Menu\NodeInterface;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+use Symfony\Cmf\Bundle\MenuBundle\Voter\CurrentItemVoterInterface;
+
 /**
  * This factory builds menu items from the menu nodes and builds urls based on
  * the content these menu nodes stand for.
+ *
+ * The createItem method uses a voting process to decide whether the menu item
+ * is the current item.
  */
 class ContentAwareFactory extends RouterAwareFactory
 {
     protected $contentRouter;
     protected $container;
+    /**
+     * List of priority => array of CurrentItemVoterInterface
+     *
+     * @var array
+     */
+    private $voters;
+    /**
+     * Sorted list of current item voters
+     *
+     * @var CurrentItemVoterInterface[]
+     */
+    private $sortedVoters;
 
     /**
      * @param ContainerInterface $container to fetch the request in order to determine
@@ -27,17 +43,48 @@ class ContentAwareFactory extends RouterAwareFactory
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
-     * @param string $contentKey
-     * @param string $routeName the name of the route to use. DynamicRouter
-     *      ignores this.
      */
-    public function __construct(ContainerInterface $container, UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter, $contentKey, $routeName = null)
+    public function __construct(ContainerInterface $container, UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter)
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
         $this->container = $container;
-        $this->contentKey = $contentKey;
-        $this->routeName = $routeName;
+    }
+
+    /**
+     * Add a voter to decide on current item.
+     *
+     * @param CurrentItemVoterInterface $voter
+     * @param int                       $priority High numbers can vote first
+     *
+     * @see CurrentItemVoterInterface
+     */
+    public function addCurrentItemVoter(CurrentItemVoterInterface $voter, $priority)
+    {
+        if (! isset($this->voters[$priority])) {
+            $this->voters[$priority] = array();
+        }
+        $this->voters[$priority][] = $voter;
+        $this->sortedVoters = null;
+    }
+
+    /**
+     * Get the ordered list of all menu item voters.
+     *
+     * @return CurrentItemVoterInterface[]
+     */
+    private function getVoters()
+    {
+        if (!$this->sortedVoters) {
+            $this->sortedVoters = array();
+            krsort($this->voters);
+
+            foreach ($this->voters as $voters) {
+                $this->sortedVoters = array_merge($this->sortedVoters, $voters);
+            }
+        }
+
+        return $this->sortedVoters;
     }
 
     /**
@@ -49,7 +96,7 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     public function createFromNode(NodeInterface $node)
     {
-        $item = $this->createItem($node->getName(), $node->getOptions());
+        $item = $this->createItem($node->getName(), $node->getOptions(), $node);
         if (!empty($item)) {
             foreach ($node->getChildren() as $childNode) {
                 if ($childNode instanceof NodeInterface) {
@@ -65,41 +112,28 @@ class ContentAwareFactory extends RouterAwareFactory
     }
 
     /**
-     * Create a MenuItem
+     * Create a MenuItem. This triggers the voters to decide if its the current
+     * item.
      *
-     * @param string $name    the menu item name
-     * @param array  $options options for the menu item, we care about 'content'
+     * @param string        $name    the menu item name
+     * @param array         $options options for the menu item, we care about
+     *                               'content'
+     * @param NodeInterface $node    optional node this item is created from,
+     *                               passed to the voters.
      *
      * @return MenuItem|null returns null if no route can be built for this menu item
      */
-    public function createItem($name, array $options = array())
+    public function createItem($name, array $options = array(), NodeInterface $node = null)
     {
-        $current = false;
-        if (!empty($options['content'])) {
-            try {
-                $request = $this->container->get('request');
-                $currentUriPrefix = null;
-
-                if ($options['content'] instanceof Route && $options['content']->getOption('currentUriPrefix')) {
-                    $currentUriPrefix = $options['content']->getOption('currentUriPrefix');
-                    $currentUriPrefix = str_replace('{_locale}', $request->getLocale(), $currentUriPrefix);
-                }
-
-                if ($currentUriPrefix !== null && 0 === strpos($request->getPathinfo(), $currentUriPrefix)) {
-                    $current = true;
-                } elseif ($request->attributes->get($this->contentKey) === $options['content']) {
-                    $current = true;
-                }
-            } catch (\Exception $e) {}
-
-            try {
-                $options['uri'] = $this->contentRouter->generate($options['content'], $options['routeParameters'], $options['routeAbsolute']);
-            } catch (RouteNotFoundException $e) {
-                return null;
-            }
-
-            unset($options['route']);
+        try {
+            $options['uri'] = $this->contentRouter->generate($options['content'], $options['routeParameters'], $options['routeAbsolute']);
+        } catch (RouteNotFoundException $e) {
+            return null;
         }
+        unset($options['route']);
+
+        $request = $this->container->get('request');
+        $current = $this->voteCurrentItem($request, $options, $node);
 
         $item = parent::createItem($name, $options);
         if ($current) {
@@ -107,5 +141,36 @@ class ContentAwareFactory extends RouterAwareFactory
         }
 
         return $item;
+    }
+
+    /**
+     * Cycle through all voters. If any votes YES, this is the current item. If
+     * any votes NO cycling stops. While we get ABSTAIN we continue cycling.
+     *
+     * @param Request       $request The request fetched from the container
+     * @param array         $options The menu item options
+     * @param NodeInterface $node    Optional
+     *
+     * @return bool
+     *
+     * @see CurrentItemVoterInterface
+     */
+    private function voteCurrentItem(Request $request, array $options, NodeInterface $node = null)
+    {
+        foreach ($this->getVoters() as $voter) {
+            try {
+                switch ($voter->isCurrentItem($request, $options, $node)) {
+                    case CurrentItemVoterInterface::VOTE_YES:
+                        return true;
+                    case CurrentItemVoterInterface::VOTE_NO:
+                        return false;
+                    // on abstain just continue
+                }
+            } catch (\Exception $e) {
+                // ignore
+            }
+        }
+
+        return false;
     }
 }

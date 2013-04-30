@@ -101,6 +101,7 @@ class PHPCRMenuProvider implements MenuProviderInterface
         }
 
         $menuNode->setCurrentUri($this->container->get('request')->getRequestUri());
+
         return $menuNode;
     }
 
