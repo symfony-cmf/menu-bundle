@@ -26,10 +26,12 @@ interface CurrentItemVoterInterface
      * continue.
      */
     const VOTE_ABSTAIN = 0;
+
     /**
      * This is the current item, stop voting.
      */
     const VOTE_YES     = 1;
+
     /**
      * This can not be the current item, stop voting.
      */

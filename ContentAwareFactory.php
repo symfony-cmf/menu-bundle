@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+use Psr\Log\LoggerInterface;
+
 use Symfony\Cmf\Bundle\MenuBundle\Voter\CurrentItemVoterInterface;
 
 /**
@@ -22,14 +24,23 @@ use Symfony\Cmf\Bundle\MenuBundle\Voter\CurrentItemVoterInterface;
  */
 class ContentAwareFactory extends RouterAwareFactory
 {
+    /**
+     * @var UrlGeneratorInterface
+     */
     protected $contentRouter;
+
+    /**
+     * @var ContainerInterface
+     */
     protected $container;
+
     /**
      * List of priority => array of CurrentItemVoterInterface
      *
      * @var array
      */
     private $voters;
+
     /**
      * Sorted list of current item voters
      *
@@ -38,17 +49,23 @@ class ContentAwareFactory extends RouterAwareFactory
     private $sortedVoters;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * @param ContainerInterface $container to fetch the request in order to determine
      *      whether this is the current menu item
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
      */
-    public function __construct(ContainerInterface $container, UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter)
+    public function __construct(ContainerInterface $container, UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter, LoggerInterface $logger)
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
         $this->container = $container;
+        $this->logger = $logger;
     }
 
     /**
@@ -61,11 +78,11 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     public function addCurrentItemVoter(CurrentItemVoterInterface $voter, $priority)
     {
-        if (! isset($this->voters[$priority])) {
+        if (!isset($this->voters[$priority])) {
             $this->voters[$priority] = array();
         }
         $this->voters[$priority][] = $voter;
-        $this->sortedVoters = null;
+        $this->sortedVoters = false;
     }
 
     /**
@@ -75,7 +92,7 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     private function getVoters()
     {
-        if (!$this->sortedVoters) {
+        if ($this->sortedVoters === false) {
             $this->sortedVoters = array();
             krsort($this->voters);
 
@@ -133,7 +150,7 @@ class ContentAwareFactory extends RouterAwareFactory
         unset($options['route']);
 
         $request = $this->container->get('request');
-        $current = $this->voteCurrentItem($request, $options, $node);
+        $current = $this->isCurrentItem($request, $options, $node);
 
         $item = parent::createItem($name, $options);
         if ($current) {
@@ -155,7 +172,7 @@ class ContentAwareFactory extends RouterAwareFactory
      *
      * @see CurrentItemVoterInterface
      */
-    private function voteCurrentItem(Request $request, array $options, NodeInterface $node = null)
+    private function isCurrentItem(Request $request, array $options, NodeInterface $node = null)
     {
         foreach ($this->getVoters() as $voter) {
             try {
@@ -168,6 +185,7 @@ class ContentAwareFactory extends RouterAwareFactory
                 }
             } catch (\Exception $e) {
                 // ignore
+                $this->logger->error(sprintf('Current item voter failed with: "%s"', $e->getMessage()));
             }
         }
 

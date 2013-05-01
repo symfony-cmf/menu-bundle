@@ -27,7 +27,8 @@ class CurrentItemVoterPass implements CompilerPassInterface
 
         $router = $container->getDefinition('symfony_cmf_menu.factory');
 
-        foreach ($container->findTaggedServiceIds('symfony_cmf_menu.current_item_voter') as $id => $attributes) {
+        $voterServices = $container->findTaggedServiceIds('symfony_cmf_menu.current_item_voter');
+        foreach ($voterServices as $id => $attributes) {
             $priority = isset($attributes[0]['priority']) ? (integer) $attributes[0]['priority'] : 0;
             $router->addMethodCall('addCurrentItemVoter', array(new Reference($id), $priority));
         }
