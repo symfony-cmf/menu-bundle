@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
  *
  * @author David Buchmann <mail@davidbu.ch>
  */
-class CurrentItemVoterPass implements CompilerPassInterface
+class AddVotersPass implements CompilerPassInterface
 {
     /**
      * Adds any tagged current item voters to the content aware factory
@@ -25,12 +25,18 @@ class CurrentItemVoterPass implements CompilerPassInterface
             return;
         }
 
-        $router = $container->getDefinition('symfony_cmf_menu.factory');
+        $factory = $container->getDefinition('symfony_cmf_menu.factory');
+        $listener = $container->getDefinition('symfony_cmf_menu.listener.voters_request');
 
-        $voterServices = $container->findTaggedServiceIds('symfony_cmf_menu.current_item_voter');
+        $voterServices = $container->findTaggedServiceIds('symfony_cmf_menu.voter');
         foreach ($voterServices as $id => $attributes) {
-            $priority = isset($attributes[0]['priority']) ? (integer) $attributes[0]['priority'] : 0;
-            $router->addMethodCall('addCurrentItemVoter', array(new Reference($id), $priority));
+            $factory->addMethodCall('addCurrentItemVoter', array(new Reference($id)));
+
+            foreach ($attributes as $attribute) {
+                if (isset($attribute['request']) && $attribute['request']) {
+                    $listener->addMethodCall('addVoter', array(new Reference($id)));
+                }
+            }
         }
     }
 }

@@ -24,7 +24,6 @@
         </service>
 
         <service id="symfony_cmf_menu.factory" class="%symfony_cmf_menu.factory_class%">
-            <argument type="service" id="service_container"/>
             <argument type="service" id="router"/>
             <argument/> <!-- content url generator -->
             <argument type="service" id="logger"/>
@@ -37,13 +36,17 @@
             <tag name="doctrine_phpcr.initializer" />
         </service>
 
+        <service id="symfony_cmf_menu.listener.voters_request" class="Symfony\Cmf\Bundle\MenuBundle\EventListener\VoterInitializerListener">
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
+        </service>
+
         <service id="symfony_cmf_menu.current_item_voter.uri_prefix" class="%symfony_cmf_menu.current_item_voter.uri_prefix_class%">
-            <tag name="symfony_cmf_menu.current_item_voter" priority="100"/>
+            <tag name="symfony_cmf_menu.voter" request="true"/>
         </service>
 
         <service id="symfony_cmf_menu.current_item_voter.request_content" class="%symfony_cmf_menu.current_item_voter.request_content_class%">
             <argument>%symfony_cmf_menu.content_key%</argument>
-            <tag name="symfony_cmf_menu.current_item_voter" priority="200"/>
+            <tag name="symfony_cmf_menu.voter" request="true"/>
         </service>
 
     </services>

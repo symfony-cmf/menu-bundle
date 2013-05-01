@@ -3,8 +3,9 @@
 namespace Symfony\Cmf\Bundle\MenuBundle;
 
 use Knp\Menu\Silex\RouterAwareFactory;
-use Knp\Menu\MenuItem;
+use Knp\Menu\ItemInterface;
 use Knp\Menu\NodeInterface;
+use Knp\Menu\MenuItem;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -13,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Psr\Log\LoggerInterface;
 
-use Symfony\Cmf\Bundle\MenuBundle\Voter\CurrentItemVoterInterface;
+use Symfony\Cmf\Bundle\MenuBundle\Voter\VoterInterface;
 
 /**
  * This factory builds menu items from the menu nodes and builds urls based on
@@ -30,12 +31,7 @@ class ContentAwareFactory extends RouterAwareFactory
     protected $contentRouter;
 
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * List of priority => array of CurrentItemVoterInterface
+     * List of priority => array of VoterInterface
      *
      * @var array
      */
@@ -44,7 +40,7 @@ class ContentAwareFactory extends RouterAwareFactory
     /**
      * Sorted list of current item voters
      *
-     * @var CurrentItemVoterInterface[]
+     * @var VoterInterface[]
      */
     private $sortedVoters;
 
@@ -60,48 +56,34 @@ class ContentAwareFactory extends RouterAwareFactory
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
      */
-    public function __construct(ContainerInterface $container, UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter, LoggerInterface $logger)
+    public function __construct(UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter, LoggerInterface $logger)
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
-        $this->container = $container;
         $this->logger = $logger;
     }
 
     /**
      * Add a voter to decide on current item.
      *
-     * @param CurrentItemVoterInterface $voter
+     * @param VoterInterface $voter
      * @param int                       $priority High numbers can vote first
      *
-     * @see CurrentItemVoterInterface
+     * @see VoterInterface
      */
-    public function addCurrentItemVoter(CurrentItemVoterInterface $voter, $priority)
+    public function addCurrentItemVoter(VoterInterface $voter)
     {
-        if (!isset($this->voters[$priority])) {
-            $this->voters[$priority] = array();
-        }
-        $this->voters[$priority][] = $voter;
-        $this->sortedVoters = false;
+        $this->voters[] = $voter;
     }
 
     /**
      * Get the ordered list of all menu item voters.
      *
-     * @return CurrentItemVoterInterface[]
+     * @return VoterInterface[]
      */
     private function getVoters()
     {
-        if ($this->sortedVoters === false) {
-            $this->sortedVoters = array();
-            krsort($this->voters);
-
-            foreach ($this->voters as $voters) {
-                $this->sortedVoters = array_merge($this->sortedVoters, $voters);
-            }
-        }
-
-        return $this->sortedVoters;
+        return $this->voters;
     }
 
     /**
@@ -149,10 +131,9 @@ class ContentAwareFactory extends RouterAwareFactory
         }
         unset($options['route']);
 
-        $request = $this->container->get('request');
-        $current = $this->isCurrentItem($request, $options, $node);
-
         $item = parent::createItem($name, $options);
+
+        $current = $this->isCurrentItem($item);
         if ($current) {
             $item->setCurrent(true);
         }
@@ -161,28 +142,25 @@ class ContentAwareFactory extends RouterAwareFactory
     }
 
     /**
-     * Cycle through all voters. If any votes YES, this is the current item. If
-     * any votes NO cycling stops. While we get ABSTAIN we continue cycling.
+     * Cycle through all voters. If any votes true, this is the current item. If
+     * any votes false cycling stops. Continue cycling while we get null.
      *
-     * @param Request       $request The request fetched from the container
-     * @param array         $options The menu item options
-     * @param NodeInterface $node    Optional
+     * @param ItemInterface $item the newly created menu item
      *
      * @return bool
      *
-     * @see CurrentItemVoterInterface
+     * @see VoterInterface
      */
-    private function isCurrentItem(Request $request, array $options, NodeInterface $node = null)
+    private function isCurrentItem(ItemInterface $item)
     {
         foreach ($this->getVoters() as $voter) {
             try {
-                switch ($voter->isCurrentItem($request, $options, $node)) {
-                    case CurrentItemVoterInterface::VOTE_YES:
-                        return true;
-                    case CurrentItemVoterInterface::VOTE_NO:
-                        return false;
-                    // on abstain just continue
+                $vote = $voter->matchItem($item);
+                if (null ===$vote) {
+                    continue;
                 }
+
+                return $vote;
             } catch (\Exception $e) {
                 // ignore
                 $this->logger->error(sprintf('Current item voter failed with: "%s"', $e->getMessage()));

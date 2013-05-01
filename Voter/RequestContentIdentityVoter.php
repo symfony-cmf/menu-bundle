@@ -1,7 +1,7 @@
 <?php
 namespace Symfony\Cmf\Bundle\MenuBundle\Voter;
 
-use Knp\Menu\NodeInterface;
+use Knp\Menu\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -10,9 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author David Buchmann <mail@davidbu.ch>
  */
-class RequestContentIdentityVoter implements CurrentItemVoterInterface
+class RequestContentIdentityVoter implements VoterInterface
 {
     private $requestKey;
+    private $request;
 
     /**
      * @param string $requestKey The key to look up the content in the request
@@ -22,19 +23,25 @@ class RequestContentIdentityVoter implements CurrentItemVoterInterface
         $this->requestKey = $requestKey;
     }
 
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+    }
+
     /**
      * {@inheritDoc}
      */
-    public function isCurrentItem(Request $request, array $options, NodeInterface $node = null)
+    public function matchItem(ItemInterface $item = null)
     {
-        if ($request->attributes->has($this->requestKey)
+        $options = $item->getAttributes();
+        if ($this->request->attributes->has($this->requestKey)
             && isset($options['content'])
             && null !== $options['content']
-            && $request->attributes->get($this->requestKey) === $options['content']
+            && $this->request->attributes->get($this->requestKey) === $options['content']
         ) {
-            return self::VOTE_YES;
+            return true;
         }
 
-        return self::VOTE_ABSTAIN;
+        return null;
     }
 }

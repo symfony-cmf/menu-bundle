@@ -2,7 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Voter;
 
-use Knp\Menu\NodeInterface;
+use Knp\Menu\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -15,10 +15,11 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author David Buchmann <mail@davidbu.ch>
  */
-class RequestParentContentIdentityVoter implements CurrentItemVoterInterface
+class RequestParentContentIdentityVoter implements VoterInterface
 {
     private $requestKey;
     private $childClass;
+    private $request;
 
     /**
      * @param string $requestKey The key to look up the content in the request
@@ -33,19 +34,24 @@ class RequestParentContentIdentityVoter implements CurrentItemVoterInterface
         $this->childClass = $childClass;
     }
 
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+    }
+
     /**
      * {@inheritDoc}
      */
-    public function isCurrentItem(Request $request, array $options, NodeInterface $node = null)
+    public function matchITem(ItemInterface $node = null)
     {
-        if ($request->attributes->has($this->requestKey)
+        if ($this->request->attributes->has($this->requestKey)
             && isset($options['content'])
-            && $request->attributes->get($this->requestKey) instanceof $this->childClass
-            && $request->attributes->get($this->requestKey)->getParent() === $options['content']
+            && $this->request->attributes->get($this->requestKey) instanceof $this->childClass
+            && $this->request->attributes->get($this->requestKey)->getParent() === $options['content']
         ) {
-            return self::VOTE_YES;
+            return true;
         }
 
-        return self::VOTE_ABSTAIN;
+        return null;
     }
 }

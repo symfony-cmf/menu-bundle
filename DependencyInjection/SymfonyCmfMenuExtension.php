@@ -44,7 +44,7 @@ class SymfonyCmfMenuExtension extends Extension
         $container->setParameter($this->getAlias() . '.document_manager_name', $config['document_manager_name']);
 
         $factory = $container->getDefinition($this->getAlias().'.factory');
-        $factory->replaceArgument(2, new Reference($config['content_url_generator']));
+        $factory->replaceArgument(1, new Reference($config['content_url_generator']));
         $container->setParameter($this->getAlias() . '.content_key', $config['content_key']);
         if (empty($config['content_key'])) {
             if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingExtraBundle\\Routing\\DynamicRouter')) {
