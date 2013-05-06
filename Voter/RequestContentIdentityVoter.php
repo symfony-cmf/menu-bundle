@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
  * This voter compares whether a key in the request is identical to the content
  * entry in the options array.
  *
+ * This voter is NOT enabled by default, as usually this is already covered
+ * by the core menu bundle looking at request URLs.
+ *
  * @author David Buchmann <mail@davidbu.ch>
  */
 class RequestContentIdentityVoter implements VoterInterface

@@ -63,6 +63,13 @@ class SymfonyCmfMenuExtension extends Extension
             }
         }
         $container->setParameter($this->getAlias() . '.content_basepath', $contentBasepath);
+
+        if (! $config['voters']['content_identity']) {
+            $container->removeDefinition('symfony_cmf_menu.current_item_voter.content_identity');
+        }
+        if (! $config['voters']['uri_prefix']) {
+            $container->removeDefinition('symfony_cmf_menu.current_item_voter.uri_prefix');
+        }
     }
 
     public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container, $prefix = '')

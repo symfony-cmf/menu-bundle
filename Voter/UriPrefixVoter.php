@@ -8,8 +8,13 @@ use Knp\Menu\ItemInterface;
 
 /**
  * This voter checks if the content option is a Symfony Route instance and if
- * so compares its currentUriPrefix with the request path.
+ * so compares its option "currentUriPrefix" with the request path. This allows
+ * to configure a menu entry to be the current entry for a whole sub path.
  *
+ * This voter is NOT enabled by default. Enable it in your bundle configuration
+ * and set up a currentUriPrefix on menu content that is routes.
+ *
+ * @author Lukas Kahwe Smith <smith@pooteeweet.org>
  * @author David Buchmann <mail@davidbu.ch>
  */
 class UriPrefixVoter implements VoterInterface

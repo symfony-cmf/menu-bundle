@@ -35,14 +35,7 @@ class ContentAwareFactory extends RouterAwareFactory
      *
      * @var array
      */
-    private $voters;
-
-    /**
-     * Sorted list of current item voters
-     *
-     * @var VoterInterface[]
-     */
-    private $sortedVoters;
+    private $voters = array();
 
     /**
      * @var LoggerInterface

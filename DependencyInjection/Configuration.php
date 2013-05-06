@@ -23,6 +23,14 @@ class Configuration implements ConfigurationInterface
 
                 ->scalarNode('content_basepath')->defaultNull()->end()
 
+                ->arrayNode('voters')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('content_identity')->defaultFalse()->end()
+                        ->scalarNode('uri_prefix')->defaultFalse()->end()
+                    ->end()
+                ->end()
+
                 ->enumNode('use_sonata_admin')
                     ->values(array(true, false, 'auto'))
                     ->defaultValue('auto')
