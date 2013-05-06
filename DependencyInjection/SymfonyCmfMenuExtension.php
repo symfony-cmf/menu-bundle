@@ -21,6 +21,8 @@ class SymfonyCmfMenuExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('phpcr-menu.xml');
 
+        $this->loadVoters($config, $container);
+
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
         }
@@ -45,14 +47,6 @@ class SymfonyCmfMenuExtension extends Extension
 
         $factory = $container->getDefinition($this->getAlias().'.factory');
         $factory->replaceArgument(1, new Reference($config['content_url_generator']));
-        $container->setParameter($this->getAlias() . '.content_key', $config['content_key']);
-        if (empty($config['content_key'])) {
-            if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingExtraBundle\\Routing\\DynamicRouter')) {
-                throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingExtraBundle DynamicRouter');
-            }
-            $config['content_key'] = DynamicRouter::CONTENT_KEY;
-        }
-        $container->setParameter($this->getAlias() . '.content_key', $config['content_key']);
 
         $contentBasepath = $config['content_basepath'];
         if (null === $contentBasepath) {
@@ -63,11 +57,25 @@ class SymfonyCmfMenuExtension extends Extension
             }
         }
         $container->setParameter($this->getAlias() . '.content_basepath', $contentBasepath);
+    }
 
-        if (! $config['voters']['content_identity']) {
+    public function loadVoters($config, ContainerBuilder $container)
+    {
+        if (isset($config['voters']['content_identity'])) {
+            if (empty($config['voters']['content_identity']['content_key'])) {
+                if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingExtraBundle\\Routing\\DynamicRouter')) {
+                    throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingExtraBundle DynamicRouter');
+                }
+                $contentKey = DynamicRouter::CONTENT_KEY;
+            } else {
+                $contentKey = $config['voters']['content_identity']['content_key'];
+            }
+            $container->setParameter($this->getAlias() . '.content_key', $contentKey);
+        } else {
             $container->removeDefinition('symfony_cmf_menu.current_item_voter.content_identity');
         }
-        if (! $config['voters']['uri_prefix']) {
+
+        if (! isset($config['voters']['uri_prefix'])) {
             $container->removeDefinition('symfony_cmf_menu.current_item_voter.uri_prefix');
         }
     }

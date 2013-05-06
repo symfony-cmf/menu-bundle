@@ -19,14 +19,16 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('document_class')->defaultNull()->end()
 
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
-                ->scalarNode('content_key')->defaultNull()->end()
 
                 ->scalarNode('content_basepath')->defaultNull()->end()
 
                 ->arrayNode('voters')
-                    ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('content_identity')->defaultFalse()->end()
+                        ->arrayNode('content_identity')
+                            ->children()
+                                ->scalarNode('content_key')->defaultNull()->end()
+                            ->end()
+                        ->end()
                         ->scalarNode('uri_prefix')->defaultFalse()->end()
                     ->end()
                 ->end()
