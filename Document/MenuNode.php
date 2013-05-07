@@ -73,6 +73,21 @@ class MenuNode implements NodeInterface
     /** @PHPCRODM\String(multivalue=true, assoc="") */
     protected $routeParameters = array();
 
+    /**
+     * @PHPCRODM\Boolean()
+     */
+    protected $isPublishable = true;
+
+    /**
+     * @PHPCRODM\Date()
+     */
+    protected $publishStartDate;
+
+    /**
+     * @PHPCRODM\Date()
+     */
+    protected $publishEndDate;
+
     public function __construct($name = null)
     {
         $this->name = $name;
@@ -486,5 +501,35 @@ class MenuNode implements NodeInterface
     public function __toString()
     {
         return $this->getLabel() ? : '(no label set)';
+    }
+
+    public function isPublishable()
+    {
+        return $this->isPublishable;
+    }
+
+    public function setIsPublishable($isPublishable)
+    {
+        $this->isPublishable = $isPublishable;
+    }
+
+    public function getPublishStartDate()
+    {
+        return $this->publishStartDate;
+    }
+
+    public function setPublishStartDate(\DateTime $date)
+    {
+        $this->publishStartDate = $date;
+    }
+
+    public function getPublishEndDate()
+    {
+        return $this->publishEndDate;
+    }
+
+    public function setPublishEndDate(\DateTime $date)
+    {
+        $this->publishEndDate = $date;
     }
 }
