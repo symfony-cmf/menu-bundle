@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-use Symfony\Cmf\Bundle\RoutingExtraBundle\Routing\DynamicRouter;
+use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
 class SymfonyCmfMenuExtension extends Extension
 {
@@ -46,8 +46,8 @@ class SymfonyCmfMenuExtension extends Extension
         $factory->replaceArgument(2, new Reference($config['content_url_generator']));
         $container->setParameter($this->getAlias() . '.content_key', $config['content_key']);
         if (empty($config['content_key'])) {
-            if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingExtraBundle\\Routing\\DynamicRouter')) {
-                throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingExtraBundle DynamicRouter');
+            if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
+                throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingBundle DynamicRouter');
             }
             $config['content_key'] = DynamicRouter::CONTENT_KEY;
         }
