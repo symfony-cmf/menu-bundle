@@ -8,9 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-
 // this use is only used if the class really is present, no hard dependency
-use Symfony\Cmf\Bundle\RoutingExtraBundle\Routing\DynamicRouter;
+use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
 class SymfonyCmfMenuExtension extends Extension
 {
@@ -63,8 +62,8 @@ class SymfonyCmfMenuExtension extends Extension
     {
         if (isset($config['voters']['content_identity'])) {
             if (empty($config['voters']['content_identity']['content_key'])) {
-                if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingExtraBundle\\Routing\\DynamicRouter')) {
-                    throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingExtraBundle DynamicRouter');
+                if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
+                    throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingBundle DynamicRouter');
                 }
                 $contentKey = DynamicRouter::CONTENT_KEY;
             } else {
