@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+$vendorDir = realpath(__DIR__.'/../../../vendor');
+
+require_once $vendorDir.'/symfony-cmf/testing-bootstrap/bootstrap/bootstrap.php';
+require_once __DIR__.'/AppKernel.php';
+
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+$kernel = new AppKernel('test', true);
+$application = new Application($kernel);
+$application->run();

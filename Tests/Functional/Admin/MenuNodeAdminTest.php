@@ -2,12 +2,15 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Admin\MenuNodeAdminTest;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 
-class MenuNodeAdminTest extends WebTestCase
+class MenuNodeAdminTest extends BaseTestCase
 {
     public function setUp()
     {
+        $this->db('PHPCR')->loadFixtures(array(
+            'Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\DataFixtures\PHPCR\LoadMenuData',
+        ));
         $this->client = $this->createClient();
     }
 
