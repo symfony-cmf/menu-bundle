@@ -12,6 +12,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
 
         $treeBuilder->root('symfony_cmf_menu')
+            ->fixXmlConfig('voter')
             ->children()
                 ->scalarNode('menu_basepath')->defaultValue('/cms/menu')->end()
                 ->scalarNode('document_manager_name')->defaultValue('default')->end()
@@ -19,10 +20,19 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('document_class')->defaultNull()->end()
 
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
-                ->scalarNode('content_key')->defaultNull()->end()
-                ->scalarNode('route_name')->defaultNull()->end()
 
                 ->scalarNode('content_basepath')->defaultNull()->end()
+
+                ->arrayNode('voters')
+                    ->children()
+                        ->arrayNode('content_identity')
+                            ->children()
+                                ->scalarNode('content_key')->defaultNull()->end()
+                            ->end()
+                        ->end()
+                        ->scalarNode('uri_prefix')->defaultFalse()->end()
+                    ->end()
+                ->end()
 
                 ->enumNode('use_sonata_admin')
                     ->values(array(true, false, 'auto'))
