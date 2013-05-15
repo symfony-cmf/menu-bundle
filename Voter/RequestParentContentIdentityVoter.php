@@ -42,8 +42,10 @@ class RequestParentContentIdentityVoter implements VoterInterface
     /**
      * {@inheritDoc}
      */
-    public function matchITem(ItemInterface $node = null)
+    public function matchItem(ItemInterface $item = null)
     {
+        $options = $item->getAttributes();
+
         if ($this->request->attributes->has($this->requestKey)
             && isset($options['content'])
             && $this->request->attributes->get($this->requestKey) instanceof $this->childClass

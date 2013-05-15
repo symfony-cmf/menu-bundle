@@ -37,6 +37,7 @@ class RequestContentIdentityVoter implements VoterInterface
     public function matchItem(ItemInterface $item = null)
     {
         $options = $item->getAttributes();
+
         if ($this->request->attributes->has($this->requestKey)
             && isset($options['content'])
             && null !== $options['content']

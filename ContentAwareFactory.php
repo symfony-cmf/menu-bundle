@@ -125,6 +125,7 @@ class ContentAwareFactory extends RouterAwareFactory
         unset($options['route']);
 
         $item = parent::createItem($name, $options);
+        $item->setAttribute('content', $options['content']);
 
         $current = $this->isCurrentItem($item);
         if ($current) {

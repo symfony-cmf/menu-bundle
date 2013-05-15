@@ -36,17 +36,15 @@
             <tag name="doctrine_phpcr.initializer" />
         </service>
 
-        <service id="symfony_cmf_menu.listener.voters_request" class="Symfony\Cmf\Bundle\MenuBundle\EventListener\VoterInitializerListener">
-            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
-        </service>
-
         <service id="symfony_cmf_menu.current_item_voter.uri_prefix" class="%symfony_cmf_menu.current_item_voter.uri_prefix_class%">
-            <tag name="symfony_cmf_menu.voter" request="true"/>
+            <tag name="symfony_cmf_menu.voter"/>
+            <tag name="cmf_request_aware"/>
         </service>
 
         <service id="symfony_cmf_menu.current_item_voter.content_identity" class="%symfony_cmf_menu.current_item_voter.content_identity_class%">
             <argument>%symfony_cmf_menu.content_key%</argument>
-            <tag name="symfony_cmf_menu.voter" request="true"/>
+            <tag name="symfony_cmf_menu.voter"/>
+            <tag name="cmf_request_aware"/>
         </service>
 
     </services>

@@ -26,17 +26,10 @@ class AddVotersPass implements CompilerPassInterface
         }
 
         $factory = $container->getDefinition('symfony_cmf_menu.factory');
-        $listener = $container->getDefinition('symfony_cmf_menu.listener.voters_request');
 
         $voterServices = $container->findTaggedServiceIds('symfony_cmf_menu.voter');
         foreach ($voterServices as $id => $attributes) {
             $factory->addMethodCall('addCurrentItemVoter', array(new Reference($id)));
-
-            foreach ($attributes as $attribute) {
-                if (isset($attribute['request']) && $attribute['request']) {
-                    $listener->addMethodCall('addVoter', array(new Reference($id)));
-                }
-            }
         }
     }
 }
