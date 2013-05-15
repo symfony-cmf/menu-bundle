@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-
+// this use is only used if the class really is present, no hard dependency
 use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
 class SymfonyCmfMenuExtension extends Extension
@@ -19,6 +19,8 @@ class SymfonyCmfMenuExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('phpcr-menu.xml');
+
+        $this->loadVoters($config, $container);
 
         if ($config['use_sonata_admin']) {
             $this->loadSonataAdmin($config, $loader, $container);
@@ -43,16 +45,7 @@ class SymfonyCmfMenuExtension extends Extension
         $container->setParameter($this->getAlias() . '.document_manager_name', $config['document_manager_name']);
 
         $factory = $container->getDefinition($this->getAlias().'.factory');
-        $factory->replaceArgument(2, new Reference($config['content_url_generator']));
-        $container->setParameter($this->getAlias() . '.content_key', $config['content_key']);
-        if (empty($config['content_key'])) {
-            if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
-                throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingBundle DynamicRouter');
-            }
-            $config['content_key'] = DynamicRouter::CONTENT_KEY;
-        }
-        $container->setParameter($this->getAlias() . '.content_key', $config['content_key']);
-        $container->setParameter($this->getAlias() . '.route_name', $config['route_name']);
+        $factory->replaceArgument(1, new Reference($config['content_url_generator']));
 
         $contentBasepath = $config['content_basepath'];
         if (null === $contentBasepath) {
@@ -63,6 +56,27 @@ class SymfonyCmfMenuExtension extends Extension
             }
         }
         $container->setParameter($this->getAlias() . '.content_basepath', $contentBasepath);
+    }
+
+    public function loadVoters($config, ContainerBuilder $container)
+    {
+        if (isset($config['voters']['content_identity'])) {
+            if (empty($config['voters']['content_identity']['content_key'])) {
+                if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
+                    throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingBundle DynamicRouter');
+                }
+                $contentKey = DynamicRouter::CONTENT_KEY;
+            } else {
+                $contentKey = $config['voters']['content_identity']['content_key'];
+            }
+            $container->setParameter($this->getAlias() . '.content_key', $contentKey);
+        } else {
+            $container->removeDefinition('symfony_cmf_menu.current_item_voter.content_identity');
+        }
+
+        if (! isset($config['voters']['uri_prefix'])) {
+            $container->removeDefinition('symfony_cmf_menu.current_item_voter.uri_prefix');
+        }
     }
 
     public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container, $prefix = '')
