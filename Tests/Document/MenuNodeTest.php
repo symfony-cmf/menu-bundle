@@ -68,6 +68,11 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
 
         $n = new MenuNode;
 
+        $this->assertInstanceOf(
+            'Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface', 
+            $n
+        );
+
         // test defaults
         $this->assertTrue($n->isPublishable());
         $this->assertNull($n->getPublishStartDate());

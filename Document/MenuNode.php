@@ -4,6 +4,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Knp\Menu\NodeInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
 
 /**
  * This class represents a menu node for the cmf.
@@ -13,7 +14,7 @@ use Knp\Menu\NodeInterface;
  *
  * @PHPCRODM\Document
  */
-class MenuNode implements NodeInterface
+class MenuNode implements NodeInterface, PublishWorkflowInterface
 {
     /**
      * Id of this menu node
@@ -518,7 +519,7 @@ class MenuNode implements NodeInterface
         return $this->publishStartDate;
     }
 
-    public function setPublishStartDate(\DateTime $date)
+    public function setPublishStartDate(\DateTime $date = null)
     {
         $this->publishStartDate = $date;
     }
@@ -528,7 +529,7 @@ class MenuNode implements NodeInterface
         return $this->publishEndDate;
     }
 
-    public function setPublishEndDate(\DateTime $date)
+    public function setPublishEndDate(\DateTime $date = null)
     {
         $this->publishEndDate = $date;
     }
