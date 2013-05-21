@@ -5,14 +5,22 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="cmf_menu.admin_class">Symfony\Cmf\Bundle\MenuBundle\Admin\MenuNodeAdmin</parameter>
+        <parameter key="cmf_menu.menu_admin_class">Symfony\Cmf\Bundle\MenuBundle\Admin\MenuAdmin</parameter>
+        <parameter key="cmf_menu.node_admin_class">Symfony\Cmf\Bundle\MenuBundle\Admin\MenuNodeAdmin</parameter>
     </parameters>
 
     <services>
-        <service id="cmf_menu.admin" class="%cmf_menu.admin_class%">
-            <tag name="sonata.admin" manager_type="doctrine_phpcr" group="dashboard.group_menu" label_catalogue="CmfMenuBundle" label="dashboard.label_menu_node" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+        <service id="cmf_menu.menu_admin" class="%cmf_menu.menu_admin_class%">
+            <tag 
+                name="sonata.admin" 
+                manager_type="doctrine_phpcr" 
+                group="dashboard.group_menu" 
+                label_catalogue="CmfMenuBundle" 
+                label="dashboard.label_menu" 
+                label_translator_strategy="sonata.admin.label.strategy.underscore" 
+                />
             <argument/>
-            <argument>%cmf_menu.document_class%</argument>
+            <argument>%cmf_menu.menu_document_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
 
             <call method="setRouteBuilder">
@@ -29,6 +37,32 @@
 
         </service>
 
+        <service id="cmf_menu.node_admin" class="%cmf_menu.node_admin_class%">
+            <tag 
+                name="sonata.admin" 
+                manager_type="doctrine_phpcr" 
+                group="dashboard.group_menu" 
+                label_catalogue="CmfMenuBundle" 
+                label="dashboard.label_menu_node" 
+                label_translator_strategy="sonata.admin.label.strategy.underscore" 
+            />
+            <argument/>
+            <argument>%cmf_menu.node_document_class%</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+
+            <call method="setRouteBuilder">
+                <argument type="service" id="sonata.admin.route.path_info_slashes" />
+            </call>
+
+            <call method="setContentRoot">
+                <argument>%cmf_menu.content_basepath%</argument>
+            </call>
+
+            <call method="setMenuRoot">
+                <argument>%cmf_menu.menu_basepath%</argument>
+            </call>
+
+        </service>
     </services>
 
 </container>
