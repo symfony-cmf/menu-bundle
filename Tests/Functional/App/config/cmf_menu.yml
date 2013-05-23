@@ -1,4 +1,3 @@
 symfony_cmf_menu:
     use_sonata_admin: true
     menu_basepath: /cms/menu
-    content_key: foobar
