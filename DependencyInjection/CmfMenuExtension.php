@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 // this use is only used if the class really is present, no hard dependency
 use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
-class SymfonyCmfMenuExtension extends Extension
+class CmfMenuExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -49,8 +49,8 @@ class SymfonyCmfMenuExtension extends Extension
 
         $contentBasepath = $config['content_basepath'];
         if (null === $contentBasepath) {
-            if ($container->hasParameter('symfony_cmf_core.content_basepath')) {
-                $contentBasepath = $container->getParameter('symfony_cmf_core.content_basepath');
+            if ($container->hasParameter('cmf_core.content_basepath')) {
+                $contentBasepath = $container->getParameter('cmf_core.content_basepath');
             } else {
                 $contentBasepath = '/cms/content';
             }
@@ -63,7 +63,7 @@ class SymfonyCmfMenuExtension extends Extension
         if (isset($config['voters']['content_identity'])) {
             if (empty($config['voters']['content_identity']['content_key'])) {
                 if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
-                    throw new \RuntimeException('You need to set the content_key when not using the SymfonyCmfRoutingBundle DynamicRouter');
+                    throw new \RuntimeException('You need to set the content_key when not using the CmfRoutingBundle DynamicRouter');
                 }
                 $contentKey = DynamicRouter::CONTENT_KEY;
             } else {
@@ -71,11 +71,11 @@ class SymfonyCmfMenuExtension extends Extension
             }
             $container->setParameter($this->getAlias() . '.content_key', $contentKey);
         } else {
-            $container->removeDefinition('symfony_cmf_menu.current_item_voter.content_identity');
+            $container->removeDefinition('cmf_menu.current_item_voter.content_identity');
         }
 
         if (! isset($config['voters']['uri_prefix'])) {
-            $container->removeDefinition('symfony_cmf_menu.current_item_voter.uri_prefix');
+            $container->removeDefinition('cmf_menu.current_item_voter.uri_prefix');
         }
     }
 

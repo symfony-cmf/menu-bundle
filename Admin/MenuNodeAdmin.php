@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MenuNodeAdmin extends Admin
 {
-    protected $translationDomain = 'SymfonyCmfMenuBundle';
+    protected $translationDomain = 'CmfMenuBundle';
     protected $contentRoot;
     protected $menuRoot;
 

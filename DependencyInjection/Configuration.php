@@ -11,7 +11,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
-        $treeBuilder->root('symfony_cmf_menu')
+        $treeBuilder->root('cmf_menu')
             ->fixXmlConfig('voter')
             ->children()
                 ->scalarNode('menu_basepath')->defaultValue('/cms/menu')->end()

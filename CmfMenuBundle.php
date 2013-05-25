@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 use Symfony\Cmf\Bundle\MenuBundle\DependencyInjection\Compiler\AddVotersPass;
 
-class SymfonyCmfMenuBundle extends Bundle
+class CmfMenuBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

@@ -13,7 +13,7 @@ class AppKernel extends TestKernel
 
         $this->addBundles(array(
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new \Symfony\Cmf\Bundle\MenuBundle\SymfonyCmfMenuBundle(),
+            new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
         ));
     }
 
