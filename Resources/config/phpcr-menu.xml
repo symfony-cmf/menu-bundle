@@ -5,45 +5,45 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="symfony_cmf_menu.provider_class">Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider</parameter>
-        <parameter key="symfony_cmf_menu.factory_class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
-        <parameter key="symfony_cmf_menu.current_item_voter.uri_prefix_class">Symfony\Cmf\Bundle\MenuBundle\Voter\UriPrefixVoter</parameter>
-        <parameter key="symfony_cmf_menu.current_item_voter.content_identity_class">Symfony\Cmf\Bundle\MenuBundle\Voter\RequestContentIdentityVoter</parameter>
-        <parameter key="symfony_cmf_menu.document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode</parameter>
-        <parameter key="symfony_cmf_menu.multilang.document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode</parameter>
+        <parameter key="cmf_menu.provider_class">Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider</parameter>
+        <parameter key="cmf_menu.factory_class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
+        <parameter key="cmf_menu.current_item_voter.uri_prefix_class">Symfony\Cmf\Bundle\MenuBundle\Voter\UriPrefixVoter</parameter>
+        <parameter key="cmf_menu.current_item_voter.content_identity_class">Symfony\Cmf\Bundle\MenuBundle\Voter\RequestContentIdentityVoter</parameter>
+        <parameter key="cmf_menu.document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode</parameter>
+        <parameter key="cmf_menu.multilang.document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode</parameter>
     </parameters>
 
     <services>
 
-        <service id="symfony_cmf_menu.provider" class="%symfony_cmf_menu.provider_class%">
+        <service id="cmf_menu.provider" class="%cmf_menu.provider_class%">
             <tag name="knp_menu.provider" />
             <argument type="service" id="service_container"/>
-            <argument type="service" id="symfony_cmf_menu.factory"/>
-            <argument>%symfony_cmf_menu.document_manager_name%</argument>
-            <argument>%symfony_cmf_menu.menu_basepath%</argument>
+            <argument type="service" id="cmf_menu.factory"/>
+            <argument>%cmf_menu.document_manager_name%</argument>
+            <argument>%cmf_menu.menu_basepath%</argument>
         </service>
 
-        <service id="symfony_cmf_menu.factory" class="%symfony_cmf_menu.factory_class%">
+        <service id="cmf_menu.factory" class="%cmf_menu.factory_class%">
             <argument type="service" id="router"/>
             <argument/> <!-- content url generator -->
             <argument type="service" id="logger"/>
         </service>
 
-        <service id="symfony_cmf_menu.initializer" class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
+        <service id="cmf_menu.initializer" class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
             <argument type="collection">
-                <argument>%symfony_cmf_menu.menu_basepath%</argument>
+                <argument>%cmf_menu.menu_basepath%</argument>
             </argument>
             <tag name="doctrine_phpcr.initializer" />
         </service>
 
-        <service id="symfony_cmf_menu.current_item_voter.uri_prefix" class="%symfony_cmf_menu.current_item_voter.uri_prefix_class%">
-            <tag name="symfony_cmf_menu.voter"/>
+        <service id="cmf_menu.current_item_voter.uri_prefix" class="%cmf_menu.current_item_voter.uri_prefix_class%">
+            <tag name="cmf_menu.voter"/>
             <tag name="cmf_request_aware"/>
         </service>
 
-        <service id="symfony_cmf_menu.current_item_voter.content_identity" class="%symfony_cmf_menu.current_item_voter.content_identity_class%">
-            <argument>%symfony_cmf_menu.content_key%</argument>
-            <tag name="symfony_cmf_menu.voter"/>
+        <service id="cmf_menu.current_item_voter.content_identity" class="%cmf_menu.current_item_voter.content_identity_class%">
+            <argument>%cmf_menu.content_key%</argument>
+            <tag name="cmf_menu.voter"/>
             <tag name="cmf_request_aware"/>
         </service>
 
