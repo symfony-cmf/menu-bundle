@@ -21,13 +21,13 @@ class AddVotersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('symfony_cmf_menu.factory')) {
+        if (!$container->hasDefinition('cmf_menu.factory')) {
             return;
         }
 
-        $factory = $container->getDefinition('symfony_cmf_menu.factory');
+        $factory = $container->getDefinition('cmf_menu.factory');
 
-        $voterServices = $container->findTaggedServiceIds('symfony_cmf_menu.voter');
+        $voterServices = $container->findTaggedServiceIds('cmf_menu.voter');
         foreach ($voterServices as $id => $attributes) {
             $factory->addMethodCall('addCurrentItemVoter', array(new Reference($id)));
         }
