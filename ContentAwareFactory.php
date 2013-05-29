@@ -117,12 +117,13 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     public function createItem($name, array $options = array(), NodeInterface $node = null)
     {
-        try {
-            $options['uri'] = $this->contentRouter->generate($options['content'], $options['routeParameters'], $options['routeAbsolute']);
-        } catch (RouteNotFoundException $e) {
-            return null;
+        if (empty($options['uri']) && empty($options['route'])) {
+            try {
+                $options['uri'] = $this->contentRouter->generate($options['content'], $options['routeParameters'], $options['routeAbsolute']);
+            } catch (RouteNotFoundException $e) {
+                return null;
+            }
         }
-        unset($options['route']);
 
         $item = parent::createItem($name, $options);
         $item->setAttribute('content', $options['content']);
