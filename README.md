@@ -29,7 +29,7 @@ application's kernel:
             // ...
             new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Symfony\Cmf\Bundle\MenuBundle\SymfonyCmfMenuBundle(),
+            new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             // ...
         );
     }
