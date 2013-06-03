@@ -12,9 +12,10 @@
         }
     ],
     "minimum-stability": "dev",
+    "prefer-stable": false,
     "require": {
         "php": ">=5.3.2",
-        "symfony/framework-bundle": ">=2.1,<2.3-dev",
+        "symfony/framework-bundle": "~2.1",
         "doctrine/phpcr-bundle": "1.0.*",
         "doctrine/phpcr-odm": "1.0.*",
         "knplabs/knp-menu-bundle": "1.1.*"
