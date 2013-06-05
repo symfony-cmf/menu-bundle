@@ -1,0 +1,14 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/phpcr/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <document 
+        name="Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode" 
+        translator="attribute"
+        >
+
+        <locale name="locale"/>
+    </document>
+
+</doctrine-mapping>
+
+

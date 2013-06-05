@@ -1,0 +1,33 @@
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping
+    https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd"
+    >
+
+    <document
+        name="Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode"
+        >
+
+        <id name="id">
+            <generator strategy="PARENT"/>
+        </id>
+        <nodename name="name"/>
+        <parent-document name="parent"/>
+
+        <field name="uri" type="string"/>
+        <field name="route" type="string"/>
+
+        <reference-one name="weakContent" strategy="WEAK"/>
+        <reference-one name="strongContent" strategy="HARD"/>
+
+        <field name="weak" type="boolean"/>
+
+        <field name="attributes" type="string" assoc=""/>
+        <field name="childrenAttributes" type="string" assoc=""/>
+        <field name="extras" type="string" multivalue="true" assoc=""/>
+        <field name="routeParameters" type="string" assoc=""/>
+
+    </document>
+
+</doctrine-mapping>

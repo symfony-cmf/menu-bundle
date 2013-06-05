@@ -2,27 +2,18 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
-use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
-
 /**
  * This class represents a multilanguage menu node for the cmf.
  *
  * The label and uri are translatable, to have a language specific menu caption
  * and to be able to have external links language specific.
- *
- * @PHPCRODM\Document(translator="attribute")
  */
 class MultilangMenuNode extends MenuNode
 {
-
-    /** @PHPCRODM\Locale */
+    /**
+     * @var string
+     */
     protected $locale;
-
-    /** @PHPCRODM\String(translated=true) */
-    protected $label = '';
-
-    /** @PHPCRODM\Uri(translated=true) */
-    protected $uri;
 
     /**
      * @return string the loaded locale of this menu node

@@ -2,7 +2,6 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
-use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Knp\Menu\NodeInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
 
@@ -11,67 +10,85 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
  *
  * @author Uwe Jäger <uwej711@googlemail.com>
  * @author Daniel Leech <daniel@dantleech.com>
- *
- * @PHPCRODM\Document
  */
 class MenuNode implements NodeInterface, PublishWorkflowInterface
 {
     /**
      * Id of this menu node
-     *
-     * @PHPCRODM\Id
+     * @var string
      */
     protected $id;
 
     /**
      * Parent node
-     *
-     * @PHPCRODM\ParentDocument
+     * @var mixed
      */
     protected $parent;
 
     /**
      * Node name
-     *
-     * @PHPCRODM\Nodename
+     * @var string
      */
     protected $name;
 
-    /** @PHPCRODM\String */
+
+    /**
+     * Menu label
+     * @var string
+     */
     protected $label = '';
 
-    /** @PHPCRODM\Uri */
+    /**
+     * @var string
+     */
     protected $uri;
 
-    /** @PHPCRODM\String */
+    /**
+     * @var string
+     */
     protected $route;
 
-    /** @PHPCRODM\ReferenceOne(strategy="weak") */
+    /**
+     * @var mixed
+     */
     protected $weakContent;
 
-    /** @PHPCRODM\ReferenceOne(strategy="hard") */
+    /**
+     * @var mixed
+     */
     protected $hardContent;
 
-    /** @PHPCRODM\Boolean */
+    /**
+     * If we should use the weak or the strong
+     * referened content.
+     * @var boolean
+     */
     protected $weak = true;
 
-    /** @PHPCRODM\String(multivalue=true, assoc="") */
+    /**
+     * @var array
+     */
     protected $attributes = array();
 
-    /** @PHPCRODM\String(multivalue=true, assoc="") */
+    /**
+     * @var array
+     */
     protected $childrenAttributes = array();
 
-    /** @PHPCRODM\Children() */
+    /**
+     * @var array
+     */
     protected $children = array();
 
     /**
      * Hashmap for extra stuff associated to the node
-     *
-     * @PHPCRODM\String(assoc="")
+     * @var array
      */
     protected $extras;
 
-    /** @PHPCRODM\String(multivalue=true, assoc="") */
+    /**
+     * @var array
+     */
     protected $routeParameters = array();
 
     /**
