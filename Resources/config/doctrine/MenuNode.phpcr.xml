@@ -15,6 +15,7 @@
         <nodename name="name"/>
         <parent-document name="parent"/>
 
+        <field name="label" type="string"/>
         <field name="uri" type="string"/>
         <field name="route" type="string"/>
 
@@ -28,6 +29,7 @@
         <field name="extras" type="string" multivalue="true" assoc=""/>
         <field name="routeParameters" type="string" assoc=""/>
 
+        <children name="children"/>
     </document>
 
 </doctrine-mapping>
