@@ -29,6 +29,11 @@ class MenuNodeTest extends BaseTestCase
         $this->child1->setName('child1');
     }
 
+    protected function getNewInstance()
+    {
+        return new MenuNode;
+    }
+
     public function testMenuNode()
     {
         $data = array(
@@ -56,7 +61,7 @@ class MenuNodeTest extends BaseTestCase
             ),
         );
 
-        $menuNode = new MenuNode;
+        $menuNode = $this->getNewInstance();
         $refl = new \ReflectionClass($menuNode);
 
         $menuNode->setParent($this->baseNode);
