@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 use Symfony\Cmf\Bundle\MenuBundle\Voter\VoterInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowCheckerInterface;
 
 /**
  * This factory builds menu items from the menu nodes and builds urls based on
@@ -43,16 +44,27 @@ class ContentAwareFactory extends RouterAwareFactory
     private $logger;
 
     /**
+     * @var PublishWorkflowCheckerInterface
+     */
+    private $publishChecker;
+
+    /**
      * @param ContainerInterface $container to fetch the request in order to determine
      *      whether this is the current menu item
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
      */
-    public function __construct(UrlGeneratorInterface $generator, UrlGeneratorInterface $contentRouter, LoggerInterface $logger)
+    public function __construct(
+        UrlGeneratorInterface $generator, 
+        UrlGeneratorInterface $contentRouter, 
+        PublishWorkflowCheckerInterface $publishChecker,
+        LoggerInterface $logger
+    )
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
+        $this->publishChecker = $publishChecker;
         $this->logger = $logger;
     }
 
@@ -89,13 +101,20 @@ class ContentAwareFactory extends RouterAwareFactory
     public function createFromNode(NodeInterface $node)
     {
         $item = $this->createItem($node->getName(), $node->getOptions(), $node);
-        if (!empty($item)) {
-            foreach ($node->getChildren() as $childNode) {
-                if ($childNode instanceof NodeInterface) {
-                    $child = $this->createFromNode($childNode);
-                    if (!empty($child)) {
-                        $item->addChild($child);
-                    }
+
+        if (empty($item)) {
+            return null;
+        }
+
+        foreach ($node->getChildren() as $childNode) {
+            if (false === $this->publishChecker->checkIsPublished($childNode)) {
+                continue;
+            }
+
+            if ($childNode instanceof NodeInterface) {
+                $child = $this->createFromNode($childNode);
+                if (!empty($child)) {
+                    $item->addChild($child);
                 }
             }
         }
