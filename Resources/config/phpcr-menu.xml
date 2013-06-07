@@ -28,6 +28,7 @@
             <argument/> <!-- content url generator -->
             <argument type="service" id="symfony_cmf_core.publish_workflow_checker"/>
             <argument type="service" id="logger"/>
+            <argument>%cmf_menu.allow_empty_items%</argument>
         </service>
 
         <service id="cmf_menu.initializer" class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">

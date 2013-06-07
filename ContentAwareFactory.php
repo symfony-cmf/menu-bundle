@@ -42,11 +42,16 @@ class ContentAwareFactory extends RouterAwareFactory
      * @var LoggerInterface
      */
     private $logger;
-
+    
     /**
      * @var PublishWorkflowCheckerInterface
      */
     private $publishChecker;
+
+    /**
+     * @var boolean
+     */
+    private $allowEmptyItems;
 
     /**
      * @param ContainerInterface $container to fetch the request in order to determine
@@ -66,6 +71,7 @@ class ContentAwareFactory extends RouterAwareFactory
         $this->contentRouter = $contentRouter;
         $this->publishChecker = $publishChecker;
         $this->logger = $logger;
+        $this->allowEmptyItems = $allowEmptyItems;
     }
 
     /**
@@ -106,18 +112,18 @@ class ContentAwareFactory extends RouterAwareFactory
             return null;
         }
 
-        foreach ($node->getChildren() as $childNode) {
+            foreach ($node->getChildren() as $childNode) {
             if (false === $this->publishChecker->checkIsPublished($childNode)) {
                 continue;
             }
 
-            if ($childNode instanceof NodeInterface) {
-                $child = $this->createFromNode($childNode);
-                if (!empty($child)) {
-                    $item->addChild($child);
+                if ($childNode instanceof NodeInterface) {
+                    $child = $this->createFromNode($childNode);
+                    if (!empty($child)) {
+                        $item->addChild($child);
+                    }
                 }
             }
-        }
 
         return $item;
     }
@@ -136,7 +142,7 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     public function createItem($name, array $options = array(), NodeInterface $node = null)
     {
-        if (empty($options['uri']) && empty($options['route'])) {
+        if (empty($options['uri']) && empty($options['route']) && !$this->allowEmptyItems) {
             try {
                 $options['uri'] = $this->contentRouter->generate($options['content'], $options['routeParameters'], $options['routeAbsolute']);
             } catch (RouteNotFoundException $e) {
