@@ -59,12 +59,14 @@ class ContentAwareFactory extends RouterAwareFactory
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
+     * @param boolean $allowEmptyItems to allow empty items 
      */
     public function __construct(
         UrlGeneratorInterface $generator, 
         UrlGeneratorInterface $contentRouter, 
         PublishWorkflowCheckerInterface $publishChecker,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        $allowEmptyItems
     )
     {
         parent::__construct($generator);
