@@ -1,0 +1,32 @@
+dashboard:
+    group_menu: Menü
+    label_menu_node: Menüeintrag
+    label_multilang_menu_node: Mehrsprachiger Menüeintrag
+
+breadcrumb:
+    link_menu_node_list: Menüeintrag
+    link_menu_node_create: Erstellen
+    link_menu_node_edit: Bearbeiten
+    link_menu_node_delete: Löschen
+    link_multilang_menu_node_list: Mehrsprachige Menüknoten
+    link_multilang_menu_node_create: Erstellen
+    link_multilang_menu_node_edit: Bearbeiten
+    link_multilang_menu_node_delete: Löschen
+
+list:
+    label_id: Id
+    label_name: Name
+    label_label: Beschriftung
+    label_uri: URI
+    label_route: Route
+    label_locales: Sprache
+
+form:
+    group_general: Allgemein
+    label_locale: Sprache
+    label_parent: Übergeordnet
+    label_name: Name
+    label_label: Beschriftung
+    label_uri: URI
+    label_route: Route
+    label_content: Inhalt
