@@ -49,23 +49,31 @@ class ContentAwareFactory extends RouterAwareFactory
     private $publishChecker;
 
     /**
+     * @var boolean
+     */
+    private $allowEmptyItems;
+
+    /**
      * @param ContainerInterface $container to fetch the request in order to determine
      *      whether this is the current menu item
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
+     * @param boolean $allowEmptyItems to allow empty items 
      */
     public function __construct(
         UrlGeneratorInterface $generator, 
         UrlGeneratorInterface $contentRouter, 
         PublishWorkflowCheckerInterface $publishChecker,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        $allowEmptyItems
     )
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
         $this->publishChecker = $publishChecker;
         $this->logger = $logger;
+        $this->allowEmptyItems = $allowEmptyItems;
     }
 
     /**
@@ -140,7 +148,9 @@ class ContentAwareFactory extends RouterAwareFactory
             try {
                 $options['uri'] = $this->contentRouter->generate($options['content'], $options['routeParameters'], $options['routeAbsolute']);
             } catch (RouteNotFoundException $e) {
-                return null;
+                if (!$this->allowEmptyItems) {
+                    return null;
+                }
             }
         }
 
