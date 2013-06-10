@@ -22,6 +22,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
 
                 ->scalarNode('content_basepath')->defaultNull()->end()
+                
+                ->scalarNode('allow_empty_items')->defaultValue(false)->end()
 
                 ->arrayNode('voters')
                     ->children()
