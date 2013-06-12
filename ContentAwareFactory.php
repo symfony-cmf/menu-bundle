@@ -59,21 +59,23 @@ class ContentAwareFactory extends RouterAwareFactory
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
-     * @param boolean $allowEmptyItems to allow empty items 
      */
     public function __construct(
         UrlGeneratorInterface $generator, 
         UrlGeneratorInterface $contentRouter, 
         PublishWorkflowCheckerInterface $publishChecker,
-        LoggerInterface $logger,
-        $allowEmptyItems
+        LoggerInterface $logger
     )
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
         $this->publishChecker = $publishChecker;
         $this->logger = $logger;
-        $this->allowEmptyItems = $allowEmptyItems;
+    }
+
+    public function setAllowEmptyItems($boolean)
+    {
+        $this->allowEmptyItems = $boolean;
     }
 
     /**
@@ -144,9 +146,21 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     public function createItem($name, array $options = array(), NodeInterface $node = null)
     {
+        $options = array_merge(array(
+            'content' => null,
+            'routeParameters' => array(),
+            'routeAbsolute' => false,
+            'uri' => null,
+            'route' => null,
+        ), $options);
+
         if (empty($options['uri']) && empty($options['route'])) {
             try {
-                $options['uri'] = $this->contentRouter->generate($options['content'], $options['routeParameters'], $options['routeAbsolute']);
+                $options['uri'] = $this->contentRouter->generate(
+                    $options['content'], 
+                    $options['routeParameters'], 
+                    $options['routeAbsolute']
+                );
             } catch (RouteNotFoundException $e) {
                 if (!$this->allowEmptyItems) {
                     return null;

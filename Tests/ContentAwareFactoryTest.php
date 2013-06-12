@@ -3,6 +3,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests;
 use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 {
@@ -96,5 +97,16 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 
         $res = $this->factory->createFromNode($this->node1);
         $this->assertInstanceOf('Knp\Menu\MenuItem', $res);
+    }
+
+    public function testCreateItemEmpty()
+    {
+        $content = new \stdClass;
+
+        $this->contentUrlGenerator->expects($this->once())
+            ->method('generate')
+            ->will($this->throwException(new RouteNotFoundException('test')));
+
+        $this->factory->createItem('foobar', array());
     }
 }
