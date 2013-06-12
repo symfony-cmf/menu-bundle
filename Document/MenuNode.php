@@ -50,7 +50,7 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $weakContent;
 
     /** @PHPCRODM\ReferenceOne(strategy="hard") */
-    protected $strongContent;
+    protected $hardContent;
 
     /** @PHPCRODM\Boolean */
     protected $weak = true;
@@ -265,7 +265,7 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
             return $this->weakContent;
         }
 
-        return $this->strongContent;
+        return $this->hardContent;
     }
 
     /**
@@ -282,7 +282,7 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
         if ($this->weak) {
             $this->weakContent = $content;
         } else {
-            $this->strongContent = $content;
+            $this->hardContent = $content;
         }
 
         return $this;
@@ -308,11 +308,11 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     public function setWeak($weak)
     {
         if ($this->weak && !$weak) {
-            $this->strongContent = $this->weakContent;
+            $this->hardContent = $this->weakContent;
             $this->weakContent = null;
         } elseif (!$this->weak && $weak) {
-            $this->weakContent = $this->strongContent;
-            $this->strongContent = null;
+            $this->weakContent = $this->hardContent;
+            $this->hardContent = null;
         }
         $this->weak = $weak;
 
