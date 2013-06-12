@@ -42,7 +42,7 @@ class MenuNodeTest extends BaseTestCase
             'uri' => 'http://www.example.com/foo',
             'route' => 'foo_route',
             'weakContent' => $this->weakContent,
-            'strongContent' => $this->hardContent,
+            'hardContent' => $this->hardContent,
             'attributes' => array(
                 'attr_foobar_1' => 'barfoo',
                 'attr_foobar_2' => 'barfoo',
@@ -99,7 +99,7 @@ class MenuNodeTest extends BaseTestCase
         $content = $prop->getValue($menuNode);
         $this->assertEquals('fake_weak_content', $content->getName());
 
-        $prop = $refl->getProperty('strongContent');
+        $prop = $refl->getProperty('hardContent');
         $prop->setAccessible(true);
         $content = $prop->getValue($menuNode);
         $menuNode = $this->dm->find(null, '/test/test-node');
