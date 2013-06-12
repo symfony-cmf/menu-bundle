@@ -25,7 +25,8 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
             $this->urlGenerator,
             $this->contentUrlGenerator,
             $this->pwfc,
-            $this->logger
+            $this->logger,
+            false // refactore this empty items option
         );
 
         $this->node1 = $this->getMock('Knp\Menu\NodeInterface');

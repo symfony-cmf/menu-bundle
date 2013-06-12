@@ -144,6 +144,12 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     public function createItem($name, array $options = array(), NodeInterface $node = null)
     {
+        $options = array_merge(array(
+            'content' => null,
+            'routeParameters' => array(),
+            'routeAbsolute' => false,
+        ), $options);
+
         if (empty($options['uri']) && empty($options['route'])) {
             try {
                 $options['uri'] = $this->contentRouter->generate($options['content'], $options['routeParameters'], $options['routeAbsolute']);
