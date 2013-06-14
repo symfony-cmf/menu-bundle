@@ -99,14 +99,49 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
         $this->assertInstanceOf('Knp\Menu\MenuItem', $res);
     }
 
-    public function testCreateItemEmpty()
+    public function provideCreateItem()
     {
+        return array(
+            array(array(
+                'allow_empty_items' => false,
+
+                'has_content_route' => true,
+                'content_found' => false,
+            )),
+        );
+    }
+
+    /**
+     * @dataProvider @provideCreateItem
+     */
+    public function testCreateItem($options)
+    {
+        $options = array_merge(array(
+            'allow_empty_items' => false,
+
+            'has_content_route' => false,
+            'content_found' => false,
+        ));
+
         $content = new \stdClass;
 
-        $this->contentUrlGenerator->expects($this->once())
-            ->method('generate')
-            ->will($this->throwException(new RouteNotFoundException('test')));
+        if ($options['has_content_route']) {
+            if (!$options['content_found']) {
+                $this->contentUrlGenerator->expects($this->once())
+                    ->method('generate')
+                    ->will($this->throwException(new RouteNotFoundException('test')));
+            }
+        }
 
-        $this->factory->createItem('foobar', array());
+        $this->factory->setAllowEmptyItems($options['allow_empty_items']);
+        $res = $this->factory->createItem('foobar', array());
+
+        if (
+            $options['has_content'] && 
+            !$options['content_not_found'] &&
+            $options['allow_empty_items']
+        ) {
+            $this->assertNull($res);
+        }
     }
 }
