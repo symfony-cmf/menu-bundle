@@ -26,7 +26,8 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
             $this->urlGenerator,
             $this->contentUrlGenerator,
             $this->pwfc,
-            $this->logger
+            $this->logger,
+            false // refactore this empty items option
         );
 
         $this->node1 = $this->getMock('Knp\Menu\NodeInterface');
@@ -104,7 +105,6 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
         return array(
             array(array(
                 'allow_empty_items' => false,
-
                 'has_content_route' => true,
                 'content_found' => false,
             )),
@@ -112,7 +112,7 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
     }
 
     /**
-     * @dataProvider @provideCreateItem
+     * @dataProvider provideCreateItem
      */
     public function testCreateItem($options)
     {
@@ -121,7 +121,7 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 
             'has_content_route' => false,
             'content_found' => false,
-        ));
+        ), $options);
 
         $content = new \stdClass;
 
@@ -137,7 +137,7 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
         $res = $this->factory->createItem('foobar', array());
 
         if (
-            $options['has_content'] && 
+            $options['has_content_route'] && 
             !$options['content_not_found'] &&
             $options['allow_empty_items']
         ) {
