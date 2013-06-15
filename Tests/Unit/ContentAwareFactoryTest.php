@@ -105,7 +105,12 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
         return array(
             array(array(
                 'allow_empty_items' => false,
+                'has_content_route' => true,
+                'content_found' => false,
+            )),
 
+            array(array(
+                'allow_empty_items' => true,
                 'has_content_route' => true,
                 'content_found' => false,
             )),
