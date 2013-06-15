@@ -105,8 +105,21 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
         return array(
             array(array(
                 'allow_empty_items' => false,
+
                 'has_content_route' => true,
                 'content_found' => false,
+            )),
+
+            array(array(
+                'allow_empty_items' => true,
+
+                'has_content_route' => true,
+                'content_found' => false,
+            )),
+
+            array(array(
+                'has_content_route' => true,
+                'content_found' => true,
             )),
         );
     }
@@ -121,7 +134,7 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 
             'has_content_route' => false,
             'content_found' => false,
-        ), $options);
+        ));
 
         $content = new \stdClass;
 
@@ -136,12 +149,15 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
         $this->factory->setAllowEmptyItems($options['allow_empty_items']);
         $res = $this->factory->createItem('foobar', array());
 
-        if (
-            $options['has_content_route'] && 
-            !$options['content_not_found'] &&
-            $options['allow_empty_items']
-        ) {
-            $this->assertNull($res);
+        if (true === $options['has_content_route']) {
+            if (false === $options['content_found']) {
+                if ($options['allow_empty_items']) {
+                    $this->assertNull($res);
+                    return;
+                }
+            }        
         }
+
+        $this->assertInstanceOf('\Knp\Menu\MenuItem', $res);
     }
 }
