@@ -23,7 +23,7 @@
     },
     "require-dev": {
         "symfony-cmf/testing": "1.0.*",
-        "symfony/monolog-bundle": "2.2.*",
+        "symfony/monolog-bundle": "~2.2",
         "sonata-project/doctrine-phpcr-admin-bundle": "1.0.*"
     },
     "suggest": {
