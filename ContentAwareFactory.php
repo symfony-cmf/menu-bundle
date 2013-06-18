@@ -21,6 +21,9 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowCheckerInterfac
  * This factory builds menu items from the menu nodes and builds urls based on
  * the content these menu nodes stand for.
  *
+ * Using the allowEmptyItems option you can control whether menu nodes for
+ * which no URL is found should still create menu entries or be skipped.
+ *
  * The createItem method uses a voting process to decide whether the menu item
  * is the current item.
  */
@@ -49,6 +52,9 @@ class ContentAwareFactory extends RouterAwareFactory
     private $publishChecker;
 
     /**
+     * Whether to return null or a MenuItem without any URL if no URL can be
+     * found for a MenuNode.
+     *
      * @var boolean
      */
     private $allowEmptyItems;
@@ -73,9 +79,15 @@ class ContentAwareFactory extends RouterAwareFactory
         $this->logger = $logger;
     }
 
-    public function setAllowEmptyItems($boolean)
+    /**
+     * Whether to return a MenuItem without an URL or null when a MenuNode has
+     * no URL that can be found.
+     *
+     * @param boolean $allowEmptyItems
+     */
+    public function setAllowEmptyItems($allowEmptyItems)
     {
-        $this->allowEmptyItems = $boolean;
+        $this->allowEmptyItems = $allowEmptyItems;
     }
 
     /**
@@ -106,7 +118,9 @@ class ContentAwareFactory extends RouterAwareFactory
      *
      * @param NodeInterface $node
      *
-     * @return MenuItem
+     * @return MenuItem|null if allowEmptyItems is false and this node has
+     *     neither URL nor route nor a content that has a route, this method
+     *     returns null.
      */
     public function createFromNode(NodeInterface $node)
     {
