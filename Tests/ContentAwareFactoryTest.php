@@ -3,6 +3,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests;
 use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 {
@@ -97,5 +98,66 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 
         $res = $this->factory->createFromNode($this->node1);
         $this->assertInstanceOf('Knp\Menu\MenuItem', $res);
+    }
+
+    public function provideCreateItem()
+    {
+        return array(
+            array(array(
+                'allow_empty_items' => false,
+
+                'has_content_route' => true,
+                'content_found' => false,
+            )),
+
+            array(array(
+                'allow_empty_items' => true,
+
+                'has_content_route' => true,
+                'content_found' => false,
+            )),
+
+            array(array(
+                'has_content_route' => true,
+                'content_found' => true,
+            )),
+        );
+    }
+
+    /**
+     * @dataProvider provideCreateItem
+     */
+    public function testCreateItem($options)
+    {
+        $options = array_merge(array(
+            'allow_empty_items' => false,
+
+            'has_content_route' => false,
+            'content_found' => false,
+        ));
+
+        $content = new \stdClass;
+
+        if ($options['has_content_route']) {
+            if (!$options['content_found']) {
+                $this->contentUrlGenerator->expects($this->once())
+                    ->method('generate')
+                    ->will($this->throwException(new RouteNotFoundException('test')));
+            }
+        }
+
+        $this->factory->setAllowEmptyItems($options['allow_empty_items']);
+        $res = $this->factory->createItem('foobar', array());
+
+        if (true === $options['has_content_route']) {
+            if (false === $options['content_found']) {
+                if ($options['allow_empty_items']) {
+                    $this->assertNull($res);
+                    return;
+                }
+            }        
+        }
+
+        $this->assertInstanceOf('\Knp\Menu\MenuItem', $res);
     }
 }
