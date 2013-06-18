@@ -24,7 +24,7 @@ class MultilangMenuNodeTest extends MenuNodeTest
         $this->dm->flush();
         $this->dm->clear();
 
-        $menuNode = $this->dm->find(null, '/test/test-node');
+        $menuNode = $this->dm->findTranslation(null, '/test/test-node', 'fr');
         $this->assertEquals('fr', $menuNode->getLocale());
     }
 }
