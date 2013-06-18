@@ -26,7 +26,7 @@
     </filter>
 
     <php>
-        <server name="KERNEL_DIR" value="Tests/Functional/App" />
+        <server name="KERNEL_DIR" value="Tests/Resources/app" />
     </php>
 
 </phpunit>
