@@ -44,8 +44,8 @@ class MenuNodeTest extends BaseTestCase
             'weakContent' => $this->weakContent,
             'hardContent' => $this->hardContent,
             'publishable' => false,
-            'publushStartDate' => new \DateTime('2013-06-18'),
-            'publushEndDate' => new \DateTime('2013-06-18'),
+            'publishStartDate' => new \DateTime('2013-06-18'),
+            'publishEndDate' => new \DateTime('2013-06-18'),
             'attributes' => array(
                 'attr_foobar_1' => 'barfoo',
                 'attr_foobar_2' => 'barfoo',
@@ -111,5 +111,14 @@ class MenuNodeTest extends BaseTestCase
 
         // test children
         $this->assertCount(1, $menuNode->getChildren());
+
+        // test publish start and end
+        $publishStartDate = $data['publishStartDate'];
+        $publishEndDate = $data['publishEndDate'];
+
+        $this->assertInstanceOf('\DateTime', $publishStartDate);
+        $this->assertInstanceOf('\DateTime', $publishEndDate);
+        $this->assertEquals($data['publishStartDate']->format('Y-m-d'), $publishStartDate->format('Y-m-d'));
+        $this->assertEquals($data['publishEndDate']->format('Y-m-d'), $publishEndDate->format('Y-m-d'));
     }
 }
