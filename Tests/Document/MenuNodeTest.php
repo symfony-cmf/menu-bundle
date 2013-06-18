@@ -78,7 +78,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->assertNull($n->getPublishStartDate());
         $this->assertNull($n->getPublishEndDate());
 
-        $n->setIsPublishable(false);
+        $n->setPublishable(false);
         $n->setPublishStartDate($startDate);
         $n->setPublishEndDate($endDate);
 
