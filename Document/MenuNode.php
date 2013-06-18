@@ -92,17 +92,17 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $routeParameters = array();
 
     /**
-     * @PHPCRODM\Boolean()
+     * @var boolean
      */
     protected $publishable = true;
 
     /**
-     * @PHPCRODM\Date()
+     * @var \DateTime
      */
     protected $publishStartDate;
 
     /**
-     * @PHPCRODM\Date()
+     * @var \DateTime
      */
     protected $publishEndDate;
 

@@ -43,6 +43,9 @@ class MenuNodeTest extends BaseTestCase
             'route' => 'foo_route',
             'weakContent' => $this->weakContent,
             'hardContent' => $this->hardContent,
+            'publishable' => false,
+            'publushStartDate' => new \DateTime('2013-06-18'),
+            'publushEndDate' => new \DateTime('2013-06-18'),
             'attributes' => array(
                 'attr_foobar_1' => 'barfoo',
                 'attr_foobar_2' => 'barfoo',
