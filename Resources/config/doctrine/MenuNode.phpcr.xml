@@ -24,6 +24,10 @@
 
         <field name="weak" type="boolean"/>
 
+        <field name="publishable" type="boolean"/>
+        <field name="publishStartDate" type="date"/>
+        <field name="publishEndDate" type="date"/>
+
         <field name="attributes" type="string" assoc=""/>
         <field name="childrenAttributes" type="string" assoc=""/>
         <field name="extras" type="string" multivalue="true" assoc=""/>
