@@ -94,7 +94,7 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     /**
      * @PHPCRODM\Boolean()
      */
-    protected $isPublishable = true;
+    protected $publishable = true;
 
     /**
      * @PHPCRODM\Date()
@@ -523,12 +523,12 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
 
     public function isPublishable()
     {
-        return $this->isPublishable;
+        return $this->publishable;
     }
 
-    public function setIsPublishable($isPublishable)
+    public function setPublishable($publishable)
     {
-        $this->isPublishable = $isPublishable;
+        $this->publishable = $publishable;
     }
 
     public function getPublishStartDate()
