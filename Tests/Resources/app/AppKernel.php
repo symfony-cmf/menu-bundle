@@ -12,7 +12,6 @@ class AppKernel extends TestKernel
         ));
 
         $this->addBundles(array(
-            new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
         ));
