@@ -35,6 +35,11 @@ class ContentAwareFactory extends RouterAwareFactory
     protected $contentRouter;
 
     /**
+     * Valid link types values, e.g. route, uri, content
+     */
+    protected $validLinkTypes = array();
+
+    /**
      * List of priority => array of VoterInterface
      *
      * @var array
@@ -77,6 +82,7 @@ class ContentAwareFactory extends RouterAwareFactory
         $this->contentRouter = $contentRouter;
         $this->publishChecker = $publishChecker;
         $this->logger = $logger;
+        $this->validLinkTypes = array('route', 'uri', 'content');
     }
 
     /**
@@ -124,7 +130,7 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     public function createFromNode(NodeInterface $node)
     {
-        $item = $this->createItem($node->getName(), $node->getOptions(), $node);
+        $item = $this->createItem($node->getName(), $node->getOptions());
 
         if (empty($item)) {
             return null;
@@ -153,12 +159,10 @@ class ContentAwareFactory extends RouterAwareFactory
      * @param string        $name    the menu item name
      * @param array         $options options for the menu item, we care about
      *                               'content'
-     * @param NodeInterface $node    optional node this item is created from,
-     *                               passed to the voters.
      *
      * @return MenuItem|null returns null if no route can be built for this menu item
      */
-    public function createItem($name, array $options = array(), NodeInterface $node = null)
+    public function createItem($name, array $options = array())
     {
         $options = array_merge(array(
             'content' => null,
@@ -166,32 +170,85 @@ class ContentAwareFactory extends RouterAwareFactory
             'routeAbsolute' => false,
             'uri' => null,
             'route' => null,
+            'linkType' => null,
         ), $options);
 
-        if (empty($options['uri']) && empty($options['route'])) {
-            try {
-                $options['uri'] = $this->contentRouter->generate(
-                    $options['content'],
-                    $options['routeParameters'],
-                    $options['routeAbsolute']
-                );
-            } catch (RouteNotFoundException $e) {
-                if (!$this->allowEmptyItems) {
-                    return null;
+        if (null === $options['linkType']) {
+            $options['linkType'] = $this->determineLinkType($options);
+        }
+
+        $this->validateLinkType($options['linkType']);
+
+        switch ($options['linkType']) {
+            case 'content':
+                try {
+                    $options['uri'] = $this->contentRouter->generate(
+                        $options['content'], 
+                        $options['routeParameters'], 
+                        $options['routeAbsolute']
+                    );
+                } catch (RouteNotFoundException $e) {
+                    if (!$this->allowEmptyItems) {
+                        return null;
+                    }
                 }
-            }
+            case 'uri':
+                unset($options['route']);
+                break;
+            case 'route':
+                unset($options['uri']);
+                break;
         }
 
         $item = parent::createItem($name, $options);
         $item->setExtra('content', $options['content']);
 
         $current = $this->isCurrentItem($item);
+
         if ($current) {
             $item->setCurrent(true);
         }
 
         return $item;
     }
+
+    /**
+     * If linkType not specified, we can determine it from
+     * existing options
+     */
+    protected function determineLinkType($options)
+    {
+        if (!empty($options['uri'])) {
+            return 'uri';
+        }
+
+        if (!empty($options['route'])) {
+            return 'route';
+        }
+
+        if (!empty($options['content'])) {
+            return 'content';
+        }
+    }
+
+    /**
+     * Ensure that we have valid link types
+     */
+    protected function validateLinkType($linkType)
+    {
+        if (!$linkType) {
+            return 'uri';
+        }
+
+        if (!in_array($linkType, $this->validLinkTypes)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Invalid link type "%s". Valid link types are: "%s"',
+                $linkType,
+                implode(',', $this->validLinkTypes)
+            ));
+        }
+    }
+
 
     /**
      * Cycle through all voters. If any votes true, this is the current item. If

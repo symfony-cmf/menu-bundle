@@ -61,6 +61,12 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $route;
 
     /**
+     * Enum, values determined by ContentAwareFactory
+     * @var string
+     */
+    protected $linkType;
+
+    /**
      * @var mixed
      */
     protected $weakContent;
@@ -758,5 +764,15 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     public function setPublishEndDate(\DateTime $date = null)
     {
         $this->publishEndDate = $date;
+    }
+
+    public function getLinkType() 
+    {
+        return $this->linkType;
+    }
+    
+    public function setLinkType($linkType)
+    {
+        $this->linkType = $linkType;
     }
 }
