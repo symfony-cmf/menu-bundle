@@ -15,18 +15,26 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RequestContentIdentityVoter implements VoterInterface
 {
+    /**
+     * @var string The key to look up the content in the request attributes
+     */
     private $requestKey;
+
+    /**
+     * @var Request|null
+     */
     private $request;
 
     /**
      * @param string $requestKey The key to look up the content in the request
+     *      attributes.
      */
     public function __construct($requestKey)
     {
         $this->requestKey = $requestKey;
     }
 
-    public function setRequest(Request $request)
+    public function setRequest(Request $request = null)
     {
         $this->request = $request;
     }
@@ -36,6 +44,10 @@ class RequestContentIdentityVoter implements VoterInterface
      */
     public function matchItem(ItemInterface $item = null)
     {
+        if (! $this->request) {
+            return null;
+        }
+
         $options = $item->getAttributes();
 
         if ($this->request->attributes->has($this->requestKey)

@@ -17,8 +17,19 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RequestParentContentIdentityVoter implements VoterInterface
 {
+    /**
+     * @var string The key to look up the content in the request attributes
+     */
     private $requestKey;
+
+    /**
+     * @var string Class for content having a getParent method
+     */
     private $childClass;
+
+    /**
+     * @var Request|null
+     */
     private $request;
 
     /**
@@ -34,7 +45,7 @@ class RequestParentContentIdentityVoter implements VoterInterface
         $this->childClass = $childClass;
     }
 
-    public function setRequest(Request $request)
+    public function setRequest(Request $request = null)
     {
         $this->request = $request;
     }
@@ -44,6 +55,10 @@ class RequestParentContentIdentityVoter implements VoterInterface
      */
     public function matchItem(ItemInterface $item = null)
     {
+        if (! $this->request) {
+            return null;
+        }
+
         $options = $item->getAttributes();
 
         if ($this->request->attributes->has($this->requestKey)

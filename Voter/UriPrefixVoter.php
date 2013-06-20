@@ -19,9 +19,12 @@ use Knp\Menu\ItemInterface;
  */
 class UriPrefixVoter implements VoterInterface
 {
+    /**
+     * @var Request|null
+     */
     private $request;
 
-    public function setRequest(Request $request)
+    public function setRequest(Request $request = null)
     {
         $this->request = $request;
     }
@@ -31,6 +34,10 @@ class UriPrefixVoter implements VoterInterface
      */
     public function matchItem(ItemInterface $item)
     {
+        if (! $this->request) {
+            return null;
+        }
+
         $options = $item->getAttributes();
         if ($options['content'] instanceof Route && $options['content']->hasOption('currentUriPrefix')) {
             $currentUriPrefix = $options['content']->getOption('currentUriPrefix');
