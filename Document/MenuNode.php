@@ -66,19 +66,34 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $weak = true;
 
     /**
+     * Attributes to add to the individual menu element
      * @var array
      */
     protected $attributes = array();
 
     /**
+     * Attributre to add to the children list element
      * @var array
      */
     protected $childrenAttributes = array();
 
     /**
-     * @var array
+     * Child menu nodes
+     * @var MenuNode[]
      */
     protected $children = array();
+
+    /**
+     * Attributes to add to items link
+     * @var array
+     */
+    protected $linkAttributes = array();
+
+    /**
+     * Attributes to add to the items label
+     * @var array
+     */
+    protected $labelAttributes = array();
 
     /**
      * Hashmap for extra stuff associated to the node
@@ -87,24 +102,45 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $extras;
 
     /**
+     * Parameters to use when generating the route
+     * (for use with the "route" option)
      * @var array
      */
     protected $routeParameters = array();
 
     /**
-     * @var boolean
+     * {@inheritDoc}
      */
     protected $publishable = true;
 
     /**
-     * @var \DateTime
+     * {@inheritDoc}
      */
     protected $publishStartDate;
 
     /**
-     * @var \DateTime
+     * {@inheritDoc}
      */
     protected $publishEndDate;
+
+    /**
+     * Set to false to not render
+     * @var boolean
+     */
+    protected $display = true;
+
+    /**
+     * Set to false to not render the children
+     * @var boolean
+     */
+    protected $displayChildren = true;
+
+    /**
+     * Generate an absolute route
+     * (to be used with "route" option)
+     * @var boolean
+     */
+    protected $routeAbsolute = false;
 
     public function __construct($name = null)
     {
