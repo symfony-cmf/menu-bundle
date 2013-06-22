@@ -67,12 +67,16 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
 
     /**
      * Attributes to add to the individual menu element
+     * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
+     *
      * @var array
      */
     protected $attributes = array();
 
     /**
      * Attribute to add to the children list element
+     * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
+     *
      * @var array
      */
     protected $childrenAttributes = array();
@@ -85,12 +89,16 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
 
     /**
      * Attributes to add to items link
+     * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
+     *
      * @var array
      */
     protected $linkAttributes = array();
 
     /**
      * Attributes to add to the items label
+     * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
+     *
      * @var array
      */
     protected $labelAttributes = array();
@@ -502,14 +510,14 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
             'label' => $this->getLabel(),
             'attributes' => $this->getAttributes(),
             'childrenAttributes' => $this->getChildrenAttributes(),
-            'display' => true,
-            'displayChildren' => true,
+            'display' => $this->display,
+            'displayChildren' => $this->displayChildren,
             'content' => $this->getContent(),
             'routeParameters' => $this->getRouteParameters(),
-            // TODO provide the following information
-            'routeAbsolute' => false,
-            'linkAttributes' => array(),
-            'labelAttributes' => array(),
+            'routeAbsolute' => $this->routeAbsolute,
+            'linkAttributes' => $this->linkAttributes,
+            'labelAttributes' => $this->labelAttributes,
+
         );
     }
 
@@ -585,5 +593,60 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     public function setPublishEndDate(\DateTime $date = null)
     {
         $this->publishEndDate = $date;
+    }
+
+    public function getLinkAttributes() 
+    {
+        return $this->linkAttributes;
+    }
+    
+    public function setLinkAttributes($linkAttributes)
+    {
+        $this->linkAttributes = $linkAttributes;
+        return $this;
+    }
+
+    public function getLabelAttributes() 
+    {
+        return $this->labelAttributes;
+    }
+    
+    public function setLabelAttributes($labelAttributes)
+    {
+        $this->labelAttributes = $labelAttributes;
+        return $this;
+    }
+
+    public function getDisplay() 
+    {
+        return $this->display;
+    }
+    
+    public function setDisplay($display)
+    {
+        $this->display = $display;
+        return $this;
+    }
+
+    public function getDisplayChildren() 
+    {
+        return $this->displayChildren;
+    }
+    
+    public function setDisplayChildren($displayChildren)
+    {
+        $this->displayChildren = $displayChildren;
+        return $this;
+    }
+
+    public function getRouteAbsolute() 
+    {
+        return $this->routeAbsolute;
+    }
+    
+    public function setRouteAbsolute($routeAbsolute)
+    {
+        $this->routeAbsolute = $routeAbsolute;
+        return $this;
     }
 }
