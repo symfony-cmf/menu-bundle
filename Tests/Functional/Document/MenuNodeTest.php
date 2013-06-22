@@ -54,6 +54,14 @@ class MenuNodeTest extends BaseTestCase
                 'child_foobar_1' => 'barfoo',
                 'child_foobar_2' => 'barfoo',
             ),
+            'linkAttributes' => array(
+                'link_foobar_1' => 'barfoo',
+                'link_foobar_2' => 'barfoo',
+            ),
+            'labelAttributes' => array(
+                'label_foobar_1' => 'barfoo',
+                'label_foobar_2' => 'barfoo',
+            ),
             'extras' => array(
                 'extra_foobar_1' => 'barfoo',
                 'extra_foobar_2' => 'barfoo',
@@ -62,6 +70,9 @@ class MenuNodeTest extends BaseTestCase
                 'route_param_foobar_1' => 'barfoo',
                 'route_param_foobar_2' => 'barfoo',
             ),
+            'routeAbsolute' => true,
+            'display' => false,
+            'displayChildren' => false,
         );
 
         $menuNode = $this->getNewInstance();
@@ -91,7 +102,7 @@ class MenuNodeTest extends BaseTestCase
             $prop->setAccessible(true);
             $v = $prop->getValue($menuNode);
 
-            if (is_scalar($value)) {
+            if (!is_object($value)) {
                 $this->assertEquals($value, $v);
             }
         }
