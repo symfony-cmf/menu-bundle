@@ -72,7 +72,7 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $attributes = array();
 
     /**
-     * Attributre to add to the children list element
+     * Attribute to add to the children list element
      * @var array
      */
     protected $childrenAttributes = array();
@@ -109,17 +109,17 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $routeParameters = array();
 
     /**
-     * {@inheritDoc}
+     * @var boolean
      */
     protected $publishable = true;
 
     /**
-     * {@inheritDoc}
+     * @var \DateTime
      */
     protected $publishStartDate;
 
     /**
-     * {@inheritDoc}
+     * @var \DateTime
      */
     protected $publishEndDate;
 
