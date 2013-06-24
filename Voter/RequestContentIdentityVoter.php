@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * This voter compares whether a key in the request is identical to the content
- * entry in the options array.
+ * entry in the menu item extras.
  *
  * This voter is NOT enabled by default, as usually this is already covered
  * by the core menu bundle looking at request URLs.
@@ -48,12 +48,11 @@ class RequestContentIdentityVoter implements VoterInterface
             return null;
         }
 
-        $options = $item->getAttributes();
+        $content = $item->getExtra('content');
 
-        if ($this->request->attributes->has($this->requestKey)
-            && isset($options['content'])
-            && null !== $options['content']
-            && $this->request->attributes->get($this->requestKey) === $options['content']
+        if (null !== $content
+            && $this->request->attributes->has($this->requestKey)
+            && $this->request->attributes->get($this->requestKey) === $content
         ) {
             return true;
         }

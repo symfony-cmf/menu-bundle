@@ -67,8 +67,8 @@ class ContentAwareFactory extends RouterAwareFactory
      *      content is set
      */
     public function __construct(
-        UrlGeneratorInterface $generator, 
-        UrlGeneratorInterface $contentRouter, 
+        UrlGeneratorInterface $generator,
+        UrlGeneratorInterface $contentRouter,
         PublishWorkflowCheckerInterface $publishChecker,
         LoggerInterface $logger
     )
@@ -171,8 +171,8 @@ class ContentAwareFactory extends RouterAwareFactory
         if (empty($options['uri']) && empty($options['route'])) {
             try {
                 $options['uri'] = $this->contentRouter->generate(
-                    $options['content'], 
-                    $options['routeParameters'], 
+                    $options['content'],
+                    $options['routeParameters'],
                     $options['routeAbsolute']
                 );
             } catch (RouteNotFoundException $e) {
@@ -183,7 +183,7 @@ class ContentAwareFactory extends RouterAwareFactory
         }
 
         $item = parent::createItem($name, $options);
-        $item->setAttribute('content', $options['content']);
+        $item->setExtra('content', $options['content']);
 
         $current = $this->isCurrentItem($item);
         if ($current) {
