@@ -46,8 +46,19 @@ class MenuNodeAdmin extends Admin
 
         if (null === $this->getParentFieldDescription()) {
             $formMapper
-                ->with('form.group_general')
+                ->with('form.group_target', array(
+                    'template' => 'CmfMenuBundle:Admin:menu_node_target_group.html.twig',
+                ))
+                ->add('linkType', 'choice', array(
+                    'choices' => array(
+                        'content' => 'content',
+                        'route' => 'route',
+                        'uri' => 'uri',
+                    )
+                ))
+                ->add('weak', 'checkbox', array('required' => false))
                 ->add('route', 'text', array('required' => false))
+                ->add('routeParameters', 'sonata_type_immutable_array', array('required' => false))
                 ->add('uri', 'text', array('required' => false))
                 ->add(
                     'content',
