@@ -18,14 +18,20 @@
 
             <div id="cmf_menu_route" class="cmf_menu_target_field">
                 {{ form_row(form.route) }}
-                {{ form_row(form.routeParameters) }}
             </div>
         </div>
 
         <script type="text/javascript">
 $(document).ready(function () {
+    var linkTypeEl = $('#{{ form.vars.name }}_{{ form.linkType.vars.name }}');
 
-    $('#{{ form.vars.name }}_{{ form.linkType.vars.name }}').bind('change', function () {
+    cmf_menu_show_group(linkTypeEl.val());
+
+    linkTypeEl.bind('change', function () {
+        cmf_menu_show_group($(this).val());
+    });
+
+    function cmf_menu_show_group(selectedName) {
         hideFunc = function (name) {
             $('#cmf_menu_' + name).hide();
         }
@@ -36,8 +42,8 @@ $(document).ready(function () {
         hideFunc('content');
         hideFunc('uri');
         hideFunc('route');
-        showFunc($(this).val());
-    });
+        showFunc(selectedName);
+    }
 });
         </script>
     </fieldset>

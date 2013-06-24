@@ -58,7 +58,6 @@ class MenuNodeAdmin extends Admin
                 ))
                 ->add('weak', 'checkbox', array('required' => false))
                 ->add('route', 'text', array('required' => false))
-                ->add('routeParameters', 'sonata_type_immutable_array', array('required' => false))
                 ->add('uri', 'text', array('required' => false))
                 ->add(
                     'content',
