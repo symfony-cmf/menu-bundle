@@ -14,26 +14,36 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
 class MenuNode implements NodeInterface, PublishWorkflowInterface
 {
     /**
-     * Id of this menu node
+     * Id of this menu node.
+     *
      * @var string
      */
     protected $id;
 
     /**
-     * Parent node
+     * Parent node.
+     *
      * @var mixed
      */
     protected $parent;
 
     /**
-     * Node name
+     * Node name.
+     *
      * @var string
      */
     protected $name;
 
+    /**
+     * Child menu nodes
+     *
+     * @var MenuNode[]
+     */
+    protected $children = array();
 
     /**
-     * Menu label
+     * Menu label.
+     *
      * @var string
      */
     protected $label = '';
@@ -44,6 +54,8 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $uri;
 
     /**
+     * The name of the route to generate.
+     *
      * @var string
      */
     protected $route;
@@ -59,14 +71,15 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $hardContent;
 
     /**
-     * If we should use the weak or the strong
-     * referened content.
+     * If we should use the weak or the strong referenced content.
+     *
      * @var boolean
      */
     protected $weak = true;
 
     /**
-     * Attributes to add to the individual menu element
+     * HTML attributes to add to the individual menu element.
+     *
      * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
      *
      * @var array
@@ -74,7 +87,8 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $attributes = array();
 
     /**
-     * Attribute to add to the children list element
+     * HTML attributes to add to the children list element.
+     *
      * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
      *
      * @var array
@@ -82,13 +96,8 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $childrenAttributes = array();
 
     /**
-     * Child menu nodes
-     * @var MenuNode[]
-     */
-    protected $children = array();
-
-    /**
-     * Attributes to add to items link
+     * HTML attributes to add to items link.
+     *
      * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
      *
      * @var array
@@ -96,7 +105,8 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $linkAttributes = array();
 
     /**
-     * Attributes to add to the items label
+     * HTML attributes to add to the items label.
+     *
      * e.g. array('class' => 'foobar', 'style' => 'bar: foo')
      *
      * @var array
@@ -104,17 +114,43 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $labelAttributes = array();
 
     /**
-     * Hashmap for extra stuff associated to the node
+     * Hashmap for extra stuff associated to the node.
+     *
      * @var array
      */
     protected $extras;
 
     /**
-     * Parameters to use when generating the route
-     * (for use with the "route" option)
+     * Parameters to use when generating the route.
+     *
+     * Used with the "route" option.
+     *
      * @var array
      */
     protected $routeParameters = array();
+
+    /**
+     * Set to false to not render
+     *
+     * @var boolean
+     */
+    protected $display = true;
+
+    /**
+     * Set to false to not render the children.
+     *
+     * @var boolean
+     */
+    protected $displayChildren = true;
+
+    /**
+     * Generate an absolute route
+     *
+     * To be used with the "content" or "route" option.
+     *
+     * @var boolean
+     */
+    protected $routeAbsolute = false;
 
     /**
      * @var boolean
@@ -130,25 +166,6 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
      * @var \DateTime
      */
     protected $publishEndDate;
-
-    /**
-     * Set to false to not render
-     * @var boolean
-     */
-    protected $display = true;
-
-    /**
-     * Set to false to not render the children
-     * @var boolean
-     */
-    protected $displayChildren = true;
-
-    /**
-     * Generate an absolute route
-     * (to be used with "route" option)
-     * @var boolean
-     */
-    protected $routeAbsolute = false;
 
     public function __construct($name = null)
     {
@@ -332,7 +349,8 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     /**
      * Set the content document associated with this menu node
      *
-     * NOTE: Content documents must be mapped by PHPCR-ODM so that it can be persisted.
+     * NOTE: The content document must be mapped by PHPCR-ODM so that it can be
+     * persisted.
      *
      * @param object $content
      *
@@ -360,7 +378,10 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     }
 
     /**
-     * Specify if the content should be referenced weakly.
+     * Specify if the content should be referenced weakly or strongly.
+     *
+     * If there is existing referenced content, it is moved to become weak
+     * resp. hard referenced.
      *
      * @param $weak boolean
      *
@@ -407,10 +428,10 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     /**
      * Return the given attribute, optionally specifying a default value
      *
-     * @param  string $name     The name of the attribute to return
-     * @param  mixed  $default  The value to return if the attribute doesn't exist
+     * @param string $name     The name of the attribute to return
+     * @param string $default  The value to return if the attribute doesn't exist
      *
-     * @return mixed
+     * @return string
      */
     public function getAttribute($name, $default = null)
     {
@@ -424,8 +445,8 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     /**
      * Set the named attribute
      *
-     * @param $name string - attribute name
-     * @param $value mixed - attribute value
+     * @param string $name  attribute name
+     * @param string $value attribute value
      *
      * @return MenuNode - this instance
      */
@@ -449,7 +470,7 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     /**
      * Set the children attributes
      *
-     * @param $attributes array
+     * @param array $attributes
      *
      * @return MenuNode - this instance
      */
@@ -462,7 +483,7 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
 
     /**
      * Get all child menu nodes of this menu node. This will filter out all
-     * non-NodeInterface nodes.
+     * non-NodeInterface children.
      *
      * @return MenuNode[]
      */
@@ -480,7 +501,22 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     }
 
     /**
-     * Gets the route parameters
+     * Add a child menu node, automatically setting the parent node.
+     *
+     * @param MenuNode $child
+     *
+     * @return MenuNode - The newly added child node.
+     */
+    public function addChild(MenuNode $child)
+    {
+        $child->setParent($this);
+        $this->children[] = $child;
+
+        return $child;
+    }
+
+    /**
+     * Gets the route parameters.
      *
      * @return array
      */
@@ -490,13 +526,161 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     }
 
     /**
-     * Sets the route parameters
+     * Sets the route parameters.
      *
-     * @param array the parameters
+     * @param array $routeParameters
+     *
+     * @return MenuNode - this instance
      */
     public function setRouteParameters($routeParameters)
     {
         $this->routeParameters = $routeParameters;
+
+        return $this;
+    }
+
+    /**
+     * Get extra information associated with this node.
+     *
+     * @return array
+     */
+    public function getExtras()
+    {
+        return $this->extras;
+    }
+
+    /**
+     * Set extra information associated with this node.
+     *
+     * @param array $extras
+     *
+     * @return MenuNode - this instance
+     */
+    public function setExtras(array $extras)
+    {
+        $this->extras = $extras;
+
+        return $this;
+    }
+
+    /**
+     * Get the link HTML attributes.
+     *
+     * @return array
+     */
+    public function getLinkAttributes()
+    {
+        return $this->linkAttributes;
+    }
+
+    /**
+     * Set the link HTML attributes as associative array.
+     *
+     * @param array $linkAttributes
+     *
+     * @return MenuNode - this instance
+     */
+    public function setLinkAttributes($linkAttributes)
+    {
+        $this->linkAttributes = $linkAttributes;
+
+        return $this;
+    }
+
+    /**
+     * Get the label HTML attributes.
+     *
+     * @return array
+     */
+    public function getLabelAttributes()
+    {
+        return $this->labelAttributes;
+    }
+
+    /**
+     * Set the label HTML attributes as associative array.
+     *
+     * @param array $labelAttributes
+     *
+     * @return MenuNode - this instance
+     */
+    public function setLabelAttributes($labelAttributes)
+    {
+        $this->labelAttributes = $labelAttributes;
+        return $this;
+    }
+
+    /**
+     * Whether to display this menu node.
+     *
+     * @return boolean
+     */
+    public function getDisplay()
+    {
+        return $this->display;
+    }
+
+    /**
+     * Set whether to display this menu node.
+     *
+     * @param boolean $display
+     *
+     * @return MenuNode - this instance
+     */
+    public function setDisplay($display)
+    {
+        $this->display = $display;
+
+        return $this;
+    }
+
+    /**
+     * Whether to display the children of this menu node.
+     *
+     * @return boolean
+     */
+    public function getDisplayChildren()
+    {
+        return $this->displayChildren;
+    }
+
+    /**
+     * Set whether to display the children of this menu node.
+     *
+     * @param boolean $displayChildren
+     *
+     * @return MenuNode - this instance
+     */
+    public function setDisplayChildren($displayChildren)
+    {
+        $this->displayChildren = $displayChildren;
+
+        return $this;
+    }
+
+    /**
+     * Whether to generate absolute links for route or content.
+     *
+     * @return boolean
+     */
+    public function getRouteAbsolute()
+    {
+        return $this->routeAbsolute;
+    }
+
+    /**
+     * Set whether to generate absolute links when generating from a route
+     * or the content.
+     *
+     * @param boolean $routeAbsolute
+     *
+     * @return MenuNode - this instance
+     */
+    public function setRouteAbsolute($routeAbsolute)
+    {
+        $this->routeAbsolute = $routeAbsolute;
+
+        return $this;
     }
 
     /**
@@ -521,132 +705,58 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
         );
     }
 
-    /**
-     * Get extra attributes
-     *
-     * @return array
-     */
-    public function getExtras()
-    {
-        return $this->extras;
-    }
-
-    /**
-     * Set the extra attributes
-     *
-     * @param $extras array
-     *
-     * @return MenuNode - this instance
-     */
-    public function setExtras(array $extras)
-    {
-        $this->extras = $extras;
-
-        return $this;
-    }
-
-    /**
-     * Add a child menu node, automatically setting the parent node.
-     *
-     * @param MenuNode - Menu node to add
-     *
-     * @return MenuNode - The newly added child node.
-     */
-    public function addChild(MenuNode $child)
-    {
-        $child->setParent($this);
-        $this->children[] = $child;
-
-        return $child;
-    }
-
     public function __toString()
     {
-        return $this->getLabel() ? : '(no label set)';
+        return $this->getLabel() ? (string) $this->getLabel() : '(no label set)';
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function isPublishable()
     {
         return $this->publishable;
     }
 
+    /**
+     * Set the publishable workflow flag.
+     *
+     * @param boolean $publishable
+     */
     public function setPublishable($publishable)
     {
         $this->publishable = $publishable;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getPublishStartDate()
     {
         return $this->publishStartDate;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setPublishStartDate(\DateTime $date = null)
     {
         $this->publishStartDate = $date;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getPublishEndDate()
     {
         return $this->publishEndDate;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setPublishEndDate(\DateTime $date = null)
     {
         $this->publishEndDate = $date;
-    }
-
-    public function getLinkAttributes() 
-    {
-        return $this->linkAttributes;
-    }
-    
-    public function setLinkAttributes($linkAttributes)
-    {
-        $this->linkAttributes = $linkAttributes;
-        return $this;
-    }
-
-    public function getLabelAttributes() 
-    {
-        return $this->labelAttributes;
-    }
-    
-    public function setLabelAttributes($labelAttributes)
-    {
-        $this->labelAttributes = $labelAttributes;
-        return $this;
-    }
-
-    public function getDisplay() 
-    {
-        return $this->display;
-    }
-    
-    public function setDisplay($display)
-    {
-        $this->display = $display;
-        return $this;
-    }
-
-    public function getDisplayChildren() 
-    {
-        return $this->displayChildren;
-    }
-    
-    public function setDisplayChildren($displayChildren)
-    {
-        $this->displayChildren = $displayChildren;
-        return $this;
-    }
-
-    public function getRouteAbsolute() 
-    {
-        return $this->routeAbsolute;
-    }
-    
-    public function setRouteAbsolute($routeAbsolute)
-    {
-        $this->routeAbsolute = $routeAbsolute;
-        return $this;
     }
 }
