@@ -42,7 +42,14 @@ $(document).ready(function () {
         hideFunc('content');
         hideFunc('uri');
         hideFunc('route');
-        showFunc(selectedName);
+
+        if (!selectedName) {
+            showFunc('content');
+            showFunc('uri');
+            showFunc('route');
+        } else {
+            showFunc(selectedName);
+        }
     }
 });
         </script>

@@ -10,4 +10,11 @@ class MenuNodeAdminTest extends BaseTestCase
     {
         $this->markTestIncomplete();
     }
+
+    public function testEdit()
+    {
+        $crawler = $this->client->request('GET', '/admin/bundle/menu/menunode/test/testnode/edit');
+        $res = $this->client->getResponse();
+        $this->assertEquals(200, $res->getStatusCode());
+    }
 }

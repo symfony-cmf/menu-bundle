@@ -37,7 +37,7 @@ class ContentAwareFactory extends RouterAwareFactory
     /**
      * Valid link types values, e.g. route, uri, content
      */
-    protected $validLinkTypes = array();
+    protected $linkTypes = array();
 
     /**
      * List of priority => array of VoterInterface
@@ -82,7 +82,18 @@ class ContentAwareFactory extends RouterAwareFactory
         $this->contentRouter = $contentRouter;
         $this->publishChecker = $publishChecker;
         $this->logger = $logger;
-        $this->validLinkTypes = array('route', 'uri', 'content');
+        $this->linkTypes = array('route', 'uri', 'content');
+    }
+
+    /**
+     * Return the linkTypes handled by this factory.
+     * e.g. array('uri', 'route', 'content').
+     *
+     * @return array
+     */
+    public function getLinkTypes()
+    {
+        return $this->linkTypes;
     }
 
     /**
@@ -155,6 +166,9 @@ class ContentAwareFactory extends RouterAwareFactory
     /**
      * Create a MenuItem. This triggers the voters to decide if its the current
      * item.
+     *
+     * You can add custom link types by overwriting this method and calling the
+     * parent - setting the URI option and the linkType to "uri".
      *
      * @param string        $name    the menu item name
      * @param array         $options options for the menu item, we care about
@@ -240,11 +254,11 @@ class ContentAwareFactory extends RouterAwareFactory
             return 'uri';
         }
 
-        if (!in_array($linkType, $this->validLinkTypes)) {
+        if (!in_array($linkType, $this->linkTypes)) {
             throw new \InvalidArgumentException(sprintf(
                 'Invalid link type "%s". Valid link types are: "%s"',
                 $linkType,
-                implode(',', $this->validLinkTypes)
+                implode(',', $this->linkTypes)
             ));
         }
     }

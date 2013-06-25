@@ -9,12 +9,14 @@ use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Menu\ItemInterface as MenuItemInterface;
+use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 
 class MenuNodeAdmin extends Admin
 {
     protected $translationDomain = 'CmfMenuBundle';
     protected $contentRoot;
     protected $menuRoot;
+    protected $contentAwareFactory;
 
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -50,11 +52,11 @@ class MenuNodeAdmin extends Admin
                     'template' => 'CmfMenuBundle:Admin:menu_node_target_group.html.twig',
                 ))
                 ->add('linkType', 'choice', array(
-                    'choices' => array(
-                        'content' => 'content',
-                        'route' => 'route',
-                        'uri' => 'uri',
-                    )
+                    'choices' => array_combine(
+                        $this->contentAwareFactory->getLinkTypes(),
+                        $this->contentAwareFactory->getLinkTypes()
+                    ),
+                    'empty_value' => 'auto',
                 ))
                 ->add('weak', 'checkbox', array('required' => false))
                 ->add('route', 'text', array('required' => false))
@@ -99,6 +101,11 @@ class MenuNodeAdmin extends Admin
     public function getExportFormats()
     {
         return array();
+    }
+
+    public function setContentAwareFactory(ContentAwareFactory $contentAwareFactory)
+    {
+        $this->contentAwareFactory = $contentAwareFactory;
     }
 
     public function setContentRoot($contentRoot)
