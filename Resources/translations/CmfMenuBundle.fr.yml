@@ -1,13 +1,23 @@
 dashboard:
     group_menu: Menu
+    label_menu: Menus
+    label_multilang_menu: Menus multilingue
     label_menu_node: Elément de menu
     label_multilang_menu_node: Elément de menu multilingue
 
 breadcrumb:
+    link_menu_list: Menus
+    link_menu_create: Créer
+    link_menu_edit: Editer
+    link_menu_delete: Supprimer
     link_menu_node_list: Eléments de menu
     link_menu_node_create: Créer
     link_menu_node_edit: Éditer
     link_menu_node_delete: Supprimer
+    link_multilang_menu_list: Menus multilingue
+    link_multilang_menu_create: Créer
+    link_multilang_menu_edit: Editer
+    link_multilang_menu_delete: Supprimer
     link_multilang_menu_node_list: Eléments de menu multilingues
     link_multilang_menu_node_create: Créer
     link_multilang_menu_node_edit: Éditer
@@ -22,7 +32,11 @@ list:
     label_locales: Langues
 
 form:
-    group_general: Général
+    group_general: Générale
+    group_menu: Menu
+    group_items: Éléments
+    group_root: Racine de menu
+    label_children: Éléments
     label_locale: Langue
     label_parent: Parent
     label_name: Nom
@@ -30,3 +44,6 @@ form:
     label_uri: URI
     label_route: Route
     label_content: Contenu
+
+help:
+    items_help: Cliquez sur un élément pour le modifier

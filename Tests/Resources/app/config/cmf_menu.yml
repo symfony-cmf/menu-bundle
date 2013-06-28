@@ -1,3 +1,3 @@
 cmf_menu:
     use_sonata_admin: true
-    menu_basepath: /cms/menu
+    menu_basepath: /test/test-menu

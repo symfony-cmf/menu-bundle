@@ -17,7 +17,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('menu_basepath')->defaultValue('/cms/menu')->end()
                 ->scalarNode('document_manager_name')->defaultValue('default')->end()
                 ->scalarNode('admin_class')->defaultNull()->end()
-                ->scalarNode('document_class')->defaultNull()->end()
+                ->scalarNode('menu_document_class')->defaultNull()->end()
+                ->scalarNode('node_document_class')->defaultNull()->end()
 
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
 
@@ -47,7 +48,8 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue('auto')
                         ->end()
                         ->scalarNode('admin_class')->defaultNull()->end()
-                        ->scalarNode('document_class')->defaultNull()->end()
+                        ->scalarNode('menu_document_class')->defaultNull()->end()
+                        ->scalarNode('node_document_class')->defaultNull()->end()
                         ->arrayNode('locales')
                             ->isRequired()
                             ->requiresAtLeastOneElement()

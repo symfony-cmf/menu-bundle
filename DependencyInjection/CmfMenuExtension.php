@@ -17,7 +17,25 @@ class CmfMenuExtension extends Extension
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader(
+            $container, 
+            new FileLocator(__DIR__.'/../Resources/config')
+        );
+
+        $keys = array(
+            'menu_document_class',
+            'node_document_class',
+            'menu_basepath',
+            'document_manager_name',
+        );
+
+        foreach ($keys as $key) {
+            $container->setParameter(
+                $this->getAlias() . '.'. $key, 
+                $config[$key]
+            );
+        }
+
         $loader->load('phpcr-menu.xml');
 
         $this->loadVoters($config, $container);
@@ -30,15 +48,15 @@ class CmfMenuExtension extends Extension
             if ($config['multilang']['use_sonata_admin']) {
                 $this->loadSonataAdmin($config['multilang'], $loader, $container, 'multilang.');
             }
+
             if (isset($config['multilang']['document_class'])) {
                 $container->setParameter($this->getAlias() . '.multilang.document_class', $config['multilang']['document_class']);
             }
 
-            $container->setParameter($this->getAlias() . '.multilang.locales', $config['multilang']['locales']);
-        }
-
-        if (isset($config['document_class'])) {
-            $container->setParameter($this->getAlias() . '.document_class', $config['document_class']);
+            $container->setParameter(
+                $this->getAlias() . '.multilang.locales', 
+                $config['multilang']['locales']
+            );
         }
 
         $container->setParameter($this->getAlias() . '.menu_basepath', $config['menu_basepath']);
@@ -49,6 +67,7 @@ class CmfMenuExtension extends Extension
         $factory->replaceArgument(1, new Reference($config['content_url_generator']));
 
         $contentBasepath = $config['content_basepath'];
+
         if (null === $contentBasepath) {
             if ($container->hasParameter('cmf_core.content_basepath')) {
                 $contentBasepath = $container->getParameter('cmf_core.content_basepath');
@@ -56,6 +75,7 @@ class CmfMenuExtension extends Extension
                 $contentBasepath = '/cms/content';
             }
         }
+
         $container->setParameter($this->getAlias() . '.content_basepath', $contentBasepath);
     }
 
