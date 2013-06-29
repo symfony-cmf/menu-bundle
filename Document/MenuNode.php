@@ -3,7 +3,6 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
 use Knp\Menu\NodeInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
 
 /**
  * This class represents a menu node for the cmf.
@@ -11,7 +10,7 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
  * @author Uwe Jäger <uwej711@googlemail.com>
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class MenuNode implements NodeInterface, PublishWorkflowInterface
+class MenuNode implements NodeInterface
 {
     /**
      * Id of this menu node.
@@ -151,21 +150,6 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
      * @var boolean
      */
     protected $routeAbsolute = false;
-
-    /**
-     * @var boolean
-     */
-    protected $publishable = true;
-
-    /**
-     * @var \DateTime
-     */
-    protected $publishStartDate;
-
-    /**
-     * @var \DateTime
-     */
-    protected $publishEndDate;
 
     public function __construct($name = null)
     {
@@ -708,55 +692,5 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     public function __toString()
     {
         return $this->getLabel() ? (string) $this->getLabel() : '(no label set)';
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function isPublishable()
-    {
-        return $this->publishable;
-    }
-
-    /**
-     * Set the publishable workflow flag.
-     *
-     * @param boolean $publishable
-     */
-    public function setPublishable($publishable)
-    {
-        $this->publishable = $publishable;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getPublishStartDate()
-    {
-        return $this->publishStartDate;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setPublishStartDate(\DateTime $date = null)
-    {
-        $this->publishStartDate = $date;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getPublishEndDate()
-    {
-        return $this->publishEndDate;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setPublishEndDate(\DateTime $date = null)
-    {
-        $this->publishEndDate = $date;
     }
 }

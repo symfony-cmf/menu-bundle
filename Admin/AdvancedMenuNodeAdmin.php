@@ -4,15 +4,16 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Cmf\Bundle\MenuBundle\Document\AdvancedMenuNode;
 
-class MultilangMenuAdmin extends MenuAdmin
+class AdvancedMenuNodeAdmin extends MenuNodeAdmin
 {
     /**
      * Those two properties are needed to make it possible
      * to have 2 Admin classes for the same Document / Entity
      */
-    protected $baseRouteName = 'admin_bundle_menu_multilangmenu_list';
-    protected $baseRoutePattern = 'bundle/menu/multilangmenu';
+    protected $baseRouteName = 'admin_bundle_menu_advancedmenunode_list';
+    protected $baseRoutePattern = 'bundle/menu/advancedmenunode';
 
     /**
      * @var array
@@ -43,7 +44,7 @@ class MultilangMenuAdmin extends MenuAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('form.group_menu')
+            ->with('form.group_general')
                 ->add('locale', 'choice', array(
                     'choices' => array_combine($this->locales, $this->locales),
                     'empty_value' => '',
@@ -56,6 +57,7 @@ class MultilangMenuAdmin extends MenuAdmin
 
     public function getNewInstance()
     {
+        /** @var $new AdvancedMenuNode */
         $new = parent::getNewInstance();
 
         if ($this->hasRequest()) {

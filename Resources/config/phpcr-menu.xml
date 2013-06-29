@@ -11,8 +11,8 @@
         <parameter key="cmf_menu.factory_class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
         <parameter key="cmf_menu.menu_document_class">Symfony\Cmf\Bundle\MenuBundle\Document\Menu</parameter>
         <parameter key="cmf_menu.node_document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode</parameter>
-        <parameter key="cmf_menu.multilang.menu_document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenu</parameter>
-        <parameter key="cmf_menu.multilang.node_document_class">Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode</parameter>
+        <parameter key="cmf_menu.advanced.menu_document_class">Symfony\Cmf\Bundle\MenuBundle\Document\AdvancedMenu</parameter>
+        <parameter key="cmf_menu.advanced.node_document_class">Symfony\Cmf\Bundle\MenuBundle\Document\AdvancedMenuNode</parameter>
     </parameters>
 
     <services>

@@ -2,8 +2,8 @@ dashboard:
     group_menu: Menü
     label_menu: Menüs
     label_menu_node: Menüeintrag
-    label_multilang_menu: Mehrsprachige menus
-    label_multilang_menu_node: Mehrsprachiger Menüeintrag
+    label_advanced_menu: Mehrsprachige menus
+    label_advanced_menu_node: Mehrsprachiger Menüeintrag
 
 breadcrumb:
     link_menu_list: Menus
@@ -14,14 +14,14 @@ breadcrumb:
     link_menu_node_create: Erstellen
     link_menu_node_edit: Bearbeiten
     link_menu_node_delete: Löschen
-    link_multilang_menu_list: Multilingual menus
-    link_multilang_menu_create: Erstellen
-    link_multilang_menu_edit: Bearbieten
-    link_multilang_menu_delete: Löschen
-    link_multilang_menu_node_list: Mehrsprachige Menüknoten
-    link_multilang_menu_node_create: Erstellen
-    link_multilang_menu_node_edit: Bearbeiten
-    link_multilang_menu_node_delete: Löschen
+    link_advanced_menu_list: Multilingual menus
+    link_advanced_menu_create: Erstellen
+    link_advanced_menu_edit: Bearbieten
+    link_advanced_menu_delete: Löschen
+    link_advanced_menu_node_list: Mehrsprachige Menüknoten
+    link_advanced_menu_node_create: Erstellen
+    link_advanced_menu_node_edit: Bearbeiten
+    link_advanced_menu_node_delete: Löschen
 
 list:
     label_id: Id

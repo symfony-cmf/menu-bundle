@@ -1,9 +1,9 @@
 dashboard:
     group_menu: Menu
     label_menu: Menus
-    label_multilang_menu: Multilingual menus
+    label_advanced_menu: Multilingual menus
     label_menu_node: Menu node
-    label_multilang_menu_node: Multilingual menu node
+    label_advanced_menu_node: Multilingual menu node
 
 breadcrumb:
     link_menu_list: Menus
@@ -14,14 +14,14 @@ breadcrumb:
     link_menu_node_create: Create
     link_menu_node_edit: Edit
     link_menu_node_delete: Delete
-    link_multilang_menu_list: Multilingual menus
-    link_multilang_menu_create: Create
-    link_multilang_menu_edit: Edit
-    link_multilang_menu_delete: Delete
-    link_multilang_menu_node_list: Multilingual menu nodes
-    link_multilang_menu_node_create: Create
-    link_multilang_menu_node_edit: Edit
-    link_multilang_menu_node_delete: Delete
+    link_advanced_menu_list: Multilingual menus
+    link_advanced_menu_create: Create
+    link_advanced_menu_edit: Edit
+    link_advanced_menu_delete: Delete
+    link_advanced_menu_node_list: Multilingual menu nodes
+    link_advanced_menu_node_create: Create
+    link_advanced_menu_node_edit: Edit
+    link_advanced_menu_node_delete: Delete
 
 list:
     label_id: Id

@@ -24,9 +24,6 @@
 
         <field name="weak" type="boolean"/>
 
-        <field name="publishable" type="boolean"/>
-        <field name="publishStartDate" type="date"/>
-        <field name="publishEndDate" type="date"/>
         <field name="routeAbsolute" type="boolean"/>
         <field name="display" type="boolean"/>
         <field name="displayChildren" type="boolean"/>
