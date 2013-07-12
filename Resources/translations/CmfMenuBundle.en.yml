@@ -35,17 +35,20 @@ form:
     group_general: General
     group_items: Items
     label_children: Items
+    group_target: Target
     label_locale: Locale
     label_parent: Parent
     label_name: Name
     label_label: Label
     label_uri: URI
     label_route: Route
+    label_parameters: Route parameters
     label_content: Content
     label_publishable: Publishable
     label_publish_start_date: Publish from
     label_publish_end_date: Publish until
-
+    label_link_type: Link type
+    label_weak: Weak association
 
 help:
     items_help: Click on item to edit, right click to create new items.

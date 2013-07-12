@@ -29,7 +29,8 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
             ->setLabelAttributes(array('label' => 'lebal'))
             ->setDisplay(false)
             ->setDisplayChildren(false)
-            ->setRouteAbsolute(true);
+            ->setRouteAbsolute(true)
+            ->setLinkType('linktype');
     }
 
     public function testGetters()
@@ -55,6 +56,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->assertFalse($this->node->getDisplay());
         $this->assertFalse($this->node->getDisplayChildren());
         $this->assertTrue($this->node->getRouteAbsolute());
+        $this->assertEquals('linktype', $this->node->getLinkType());
     }
 
     public function testAddChild()

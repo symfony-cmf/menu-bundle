@@ -34,6 +34,8 @@ list:
 form:
     group_general: Générale
     group_items: Éléments
+    group_general: Général
+    group_target: Cible
     label_children: Éléments
     label_locale: Langue
     label_parent: Parent
@@ -41,10 +43,13 @@ form:
     label_label: Label
     label_uri: URI
     label_route: Route
+    label_route_parameters: Parametres de route
     label_content: Contenu
     label_publishable: Publiable
     label_publish_start_date: Publier à partir de
-    label_publish_end_date: Publish jusqu'à
+    label_publish_end_date: Publilier jusqu'à
+    label_link_type: Type de lien
+    label_weak: Association faible
 
 help:
     items_help: Cliquez sur un élément pour le modifier, cliquez avec la touche droite pour ajouter des éléments.

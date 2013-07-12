@@ -8,9 +8,11 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 
 class MenuAdmin extends Admin
 {
+    protected $contentAwareFactory;
     protected $translationDomain = 'CmfMenuBundle';
     protected $contentRoot;
     protected $menuRoot;
@@ -119,6 +121,11 @@ class MenuAdmin extends Admin
     public function setContentTreeBlock($contentTreeBlock)
     {
         $this->contentTreeBlock = $contentTreeBlock;
+    }
+
+    public function setContentAwareFactory(ContentAwareFactory $contentAwareFactory)
+    {
+        $this->contentAwareFactory = $contentAwareFactory;
     }
 
     /**
