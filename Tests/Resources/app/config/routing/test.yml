@@ -1,0 +1,19 @@
+test_index:
+    pattern: /
+    defaults:
+        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::indexAction
+
+render_test:
+    pattern: /render-test
+    defaults:
+        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::renderAction
+
+link_test_route:
+    pattern: /link_test_route
+    defaults:
+        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::linkTestRouteAction
+
+link_test_route_with_params:
+    pattern: /link_test_route/hello/{bar}/{foo}
+    defaults:
+        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::linkTestRouteAction
