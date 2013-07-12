@@ -44,18 +44,18 @@ class CmfMenuExtension extends Extension
             $this->loadSonataAdmin($config, $loader, $container);
         }
 
-        if (isset($config['multilang'])) {
-            if ($config['multilang']['use_sonata_admin']) {
-                $this->loadSonataAdmin($config['multilang'], $loader, $container, 'multilang.');
+        if (isset($config['advanced'])) {
+            if ($config['advanced']['use_sonata_admin']) {
+                $this->loadSonataAdmin($config['advanced'], $loader, $container, 'advanced.');
             }
 
-            if (isset($config['multilang']['document_class'])) {
-                $container->setParameter($this->getAlias() . '.multilang.document_class', $config['multilang']['document_class']);
+            if (isset($config['advanced']['document_class'])) {
+                $container->setParameter($this->getAlias() . '.advanced.document_class', $config['advanced']['document_class']);
             }
 
             $container->setParameter(
-                $this->getAlias() . '.multilang.locales', 
-                $config['multilang']['locales']
+                $this->getAlias() . '.advanced.locales', 
+                $config['advanced']['locales']
             );
         }
 

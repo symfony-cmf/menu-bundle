@@ -9,6 +9,6 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class MultilangMenu extends MultilangMenuNode
+class AdvancedMenu extends MultilangMenuNode
 {
 }

@@ -71,31 +71,6 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->assertSame($c2, $ret);
     }
 
-    public function testPublishWorkflowInterface()
-    {
-        $startDate = new \DateTime('2013-01-01');
-        $endDate = new \DateTime('2013-02-01');
-
-        $n = new MenuNode;
-
-        $this->assertInstanceOf(
-            'Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface', 
-            $n
-        );
-
-        // test defaults
-        $this->assertTrue($n->isPublishable());
-        $this->assertNull($n->getPublishStartDate());
-        $this->assertNull($n->getPublishEndDate());
-
-        $n->setPublishable(false);
-        $n->setPublishStartDate($startDate);
-        $n->setPublishEndDate($endDate);
-
-        $this->assertSame($startDate, $n->getPublishStartDate());
-        $this->assertSame($endDate, $n->getPublishEndDate());
-    }
-
     /**
      * @depends testGetters
      */

@@ -1,0 +1,21 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/phpcr/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <document
+        name="Symfony\Cmf\Bundle\MenuBundle\Document\AdvancedMenuNode"
+        translator="attribute"
+        >
+
+        <locale name="locale"/>
+
+        <field name="label" type="string" translated="true"/>
+        <field name="uri" type="string" translated="true"/>
+
+        <field name="publishable" type="boolean"/>
+        <field name="publishStartDate" type="date"/>
+        <field name="publishEndDate" type="date"/>
+    </document>
+
+</doctrine-mapping>
+
+
