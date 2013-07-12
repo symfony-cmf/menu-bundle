@@ -153,7 +153,7 @@ class MenuNodeAdmin extends MenuAdmin
         $menuDoc = $this->getMenuForSubject($this->getSubject());
         $pool = $this->getConfigurationPool();
         $menuAdmin = $pool->getAdminByClass(
-            'Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenu'
+            $class = get_class($this->getSubject())
         );
         $menuAdmin->setSubject($menuDoc);
         $menuEditNode = $menuAdmin->buildBreadcrumbs($action, $menu);
