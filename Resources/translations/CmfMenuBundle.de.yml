@@ -44,6 +44,9 @@ form:
     label_uri: URI
     label_route: Route
     label_content: Inhalt
+    label_publishable: Veröffentlichbare
+    label_publish_start_date: Veröffentlichen von
+    label_publish_end_date: Veröffentlichen bis
 
 help:
     items_help: Klicken Sie auf ein Element, um es zu bearbeiten

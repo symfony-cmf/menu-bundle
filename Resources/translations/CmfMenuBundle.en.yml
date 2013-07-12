@@ -10,7 +10,7 @@ breadcrumb:
     link_menu_create: Create
     link_menu_edit: Edit
     link_menu_delete: Delete
-    link_menu_node_list: Menus nodes
+    link_menu_node_list: Menu nodes
     link_menu_node_create: Create
     link_menu_node_edit: Edit
     link_menu_node_delete: Delete
@@ -44,6 +44,10 @@ form:
     label_uri: URI
     label_route: Route
     label_content: Content
+    label_publishable: Publishable
+    label_publish_start_date: Publish from
+    label_publish_end_date: Publish until
+
 
 help:
     items_help: Expand and click and item to edit, right click to create a new item.
