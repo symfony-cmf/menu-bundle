@@ -9,13 +9,11 @@ use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Menu\ItemInterface as MenuItemInterface;
+use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
+use Doctrine\Common\Util\ClassUtils;
 
-class MenuNodeAdmin extends Admin
+class MenuNodeAdmin extends MenuAdmin
 {
-    protected $translationDomain = 'CmfMenuBundle';
-    protected $contentRoot;
-    protected $menuRoot;
-
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -46,7 +44,22 @@ class MenuNodeAdmin extends Admin
 
         if (null === $this->getParentFieldDescription()) {
             $formMapper
-                ->with('form.group_general')
+                ->with('form.group_target', array(
+                    'template' => 'CmfMenuBundle:Admin:menu_node_target_group.html.twig',
+                ))
+                ->add('linkType', 'choice_field_mask', array(
+                    'choices' => array_combine(
+                        $this->contentAwareFactory->getLinkTypes(),
+                        $this->contentAwareFactory->getLinkTypes()
+                    ),
+                    'map' => array(
+                        'route' => array('route'),
+                        'uri' => array('uri'),
+                        'content' => array('content', 'doctrine_phpcr_odm_tree', 'weak'),
+                    ),
+                    'empty_value' => 'auto',
+                ))
+                ->add('weak', 'checkbox', array('required' => false))
                 ->add('route', 'text', array('required' => false))
                 ->add('uri', 'text', array('required' => false))
                 ->add(
@@ -141,7 +154,7 @@ class MenuNodeAdmin extends Admin
         $menuDoc = $this->getMenuForSubject($this->getSubject());
         $pool = $this->getConfigurationPool();
         $menuAdmin = $pool->getAdminByClass(
-            'Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenu'
+            ClassUtils::getClass($menuDoc)
         );
         $menuAdmin->setSubject($menuDoc);
         $menuEditNode = $menuAdmin->buildBreadcrumbs($action, $menu);

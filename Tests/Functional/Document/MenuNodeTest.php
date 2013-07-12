@@ -41,6 +41,7 @@ class MenuNodeTest extends BaseTestCase
             'label' => 'label_foobar',
             'uri' => 'http://www.example.com/foo',
             'route' => 'foo_route',
+            'linkType' => 'route',
             'weakContent' => $this->weakContent,
             'hardContent' => $this->hardContent,
             'publishable' => false,
