@@ -11,13 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 
-class MenuNodeAdmin extends Admin
+class MenuNodeAdmin extends MenuAdmin
 {
-    protected $translationDomain = 'CmfMenuBundle';
-    protected $contentRoot;
-    protected $menuRoot;
-    protected $contentAwareFactory;
-
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -51,10 +46,15 @@ class MenuNodeAdmin extends Admin
                 ->with('form.group_target', array(
                     'template' => 'CmfMenuBundle:Admin:menu_node_target_group.html.twig',
                 ))
-                ->add('linkType', 'choice', array(
+                ->add('linkType', 'choice_field_mask', array(
                     'choices' => array_combine(
                         $this->contentAwareFactory->getLinkTypes(),
                         $this->contentAwareFactory->getLinkTypes()
+                    ),
+                    'map' => array(
+                        'route' => array('route'),
+                        'uri' => array('uri'),
+                        'content' => array('content', 'doctrine_phpcr_odm_tree', 'weak'),
                     ),
                     'empty_value' => 'auto',
                 ))
@@ -101,11 +101,6 @@ class MenuNodeAdmin extends Admin
     public function getExportFormats()
     {
         return array();
-    }
-
-    public function setContentAwareFactory(ContentAwareFactory $contentAwareFactory)
-    {
-        $this->contentAwareFactory = $contentAwareFactory;
     }
 
     public function setContentRoot($contentRoot)

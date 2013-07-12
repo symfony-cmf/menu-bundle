@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit;
 use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -103,47 +103,6 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
     public function provideCreateItem()
     {
         return array(
-            array(array(
-                'allow_empty_items' => false,
-                'has_content_route' => true,
-                'content_found' => false,
-            )),
-
-            array(array(
-                'allow_empty_items' => true,
-                'has_content_route' => true,
-                'content_found' => false,
-            )),
-
-            array(array(
-                'allow_empty_items' => true,
-
-                'has_content_route' => true,
-                'content_found' => false,
-            )),
-
-            array(array(
-                'has_content_route' => true,
-                'content_found' => true,
-            )),
-
-            // invalid link type
-            array('test', array(
-                'linkType' => 'invalid',
-            )),
-
-            // linkType == '' translates as URI
-            array('test', array(
-                'uri' => 'foobar',
-                'linkType' => '',
-            )),
-
-            // URI is used when link type is URI
-            array('test', array(
-                'uri' => 'foobar',
-                'linkType' => 'uri',
-            )),
-
             // route is used when type is route
             array('test', array(
                 'uri' => 'foobar',
