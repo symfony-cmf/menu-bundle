@@ -10,6 +10,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
+use Doctrine\Common\Util\ClassUtils;
 
 class MenuNodeAdmin extends MenuAdmin
 {
@@ -153,7 +154,7 @@ class MenuNodeAdmin extends MenuAdmin
         $menuDoc = $this->getMenuForSubject($this->getSubject());
         $pool = $this->getConfigurationPool();
         $menuAdmin = $pool->getAdminByClass(
-            $class = get_class($this->getSubject())
+            ClassUtils::getClass($menuDoc)
         );
         $menuAdmin->setSubject($menuDoc);
         $menuEditNode = $menuAdmin->buildBreadcrumbs($action, $menu);
