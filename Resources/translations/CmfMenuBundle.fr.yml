@@ -49,4 +49,4 @@ form:
     label_publish_end_date: Publish jusqu'à
 
 help:
-    items_help: Cliquez sur un élément pour le modifier
+    items_help: Cliquez sur un élément pour le modifier, cliquez avec la touche droite pour ajouter des éléments.
