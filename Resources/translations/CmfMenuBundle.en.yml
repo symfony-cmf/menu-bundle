@@ -33,9 +33,7 @@ list:
 
 form:
     group_general: General
-    group_menu: Menu
     group_items: Items
-    group_root: Menu root node
     label_children: Items
     label_locale: Locale
     label_parent: Parent

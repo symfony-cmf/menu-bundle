@@ -43,7 +43,7 @@ class MultilangMenuAdmin extends MenuAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('form.group_menu')
+            ->with('form.group_general')
                 ->add('locale', 'choice', array(
                     'choices' => array_combine($this->locales, $this->locales),
                     'empty_value' => '',
