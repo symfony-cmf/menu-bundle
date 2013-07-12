@@ -27,7 +27,7 @@ class MenuAdminTest extends BaseTestCase
         $crawler = $this->client->request('GET', '/admin/bundle/menu/menu/test/test-menu/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
-        $this->assertCount(1, $crawler->filter('html:contains("test-menu")'));
+        $this->assertCount(1, $crawler->filter('input[value="test-menu"]'));
     }
 
     public function testMenuCreate()

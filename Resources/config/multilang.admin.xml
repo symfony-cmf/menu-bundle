@@ -36,6 +36,10 @@
                 <argument>%cmf_menu.menu_basepath%</argument>
             </call>
 
+            <call method="setContentAwareFactory">
+                <argument type="service" id="cmf_menu.factory"/>>
+            </call>
+
         </service>
 
         <service id="cmf_menu.multilang.node_admin" class="%cmf_menu.multilang.node_admin_class%">
@@ -62,6 +66,10 @@
 
             <call method="setMenuRoot">
                 <argument>%cmf_menu.menu_basepath%</argument>
+            </call>
+
+            <call method="setContentAwareFactory">
+                <argument type="service" id="cmf_menu.factory"/>>
             </call>
 
         </service>

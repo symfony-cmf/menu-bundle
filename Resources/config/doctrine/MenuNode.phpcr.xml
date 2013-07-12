@@ -18,6 +18,8 @@
         <field name="label" type="string"/>
         <field name="uri" type="string"/>
         <field name="route" type="string"/>
+        <field name="linkType" type="string"/>
+
 
         <reference-one name="weakContent" strategy="WEAK"/>
         <reference-one name="hardContent" strategy="HARD"/>

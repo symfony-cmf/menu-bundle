@@ -17,7 +17,9 @@ Changelog
                   admin.
                   Also don't forget to add the new Menu and MultilangMenu to the
                   mapping of the document_tree valid children.
-
+* **2013-06-25**: Added "linkType" property. Menu nodes can now optionally
+                  define which type of link should be used - e.g. route,
+                  content or uri.
 * **2013-06-21**: Added the missing options from knp-menu to the MenuNode
 * **2013-06-12**: [Document] Renamed "strongContent" to "hardContent" to better
                   reflect the PHPCR terminology

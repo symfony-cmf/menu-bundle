@@ -61,6 +61,12 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     protected $route;
 
     /**
+     * Enum, values determined by ContentAwareFactory
+     * @var string
+     */
+    protected $linkType;
+
+    /**
      * @var mixed
      */
     protected $weakContent;
@@ -758,5 +764,33 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
     public function setPublishEndDate(\DateTime $date = null)
     {
         $this->publishEndDate = $date;
+    }
+
+    /**
+     * Get the link type
+     *
+     * The link type is used to explicitly determine which of the uri, route 
+     * and content fields are used to determine the link which will bre 
+     * rendered for the menu item. If it is empty this will be determined 
+     * automatically.
+     *
+     * @return string
+     */
+    public function getLinkType() 
+    {
+        return $this->linkType;
+    }
+
+    /**
+     * @see getLinkType
+     * @see ContentAwareFactory::$validLinkTypes
+     *
+     * Valid link types are defined in ContenentAwareFactory
+     *
+     * @param $linkType string - one of uri, route or content
+     */
+    public function setLinkType($linkType)
+    {
+        $this->linkType = $linkType;
     }
 }
