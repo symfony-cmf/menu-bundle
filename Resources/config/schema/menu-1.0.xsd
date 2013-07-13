@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns="http://cmf.symfony.com/schema/dic/menu"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://cmf.symfony.com/schema/dic/menu"
+    elementFormDefault="qualified">
+
+    <xsd:element name="config" type="config" />
+
+    <xsd:complexType name="config">
+        <xsd:sequence>
+            <xsd:element name="voter" type="voter" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="multilang" type="multilang" minOccurs="0" />
+        </xsd:sequence>
+
+        <xsd:attribute name="menu-basepath" type="xsd:string" />
+        <xsd:attribute name="document-manager-name" type="xsd:string" />
+        <xsd:attribute name="admin-class" type="xsd:string" />
+        <xsd:attribute name="menu-document-class" type="xsd:string" />
+        <xsd:attribute name="node-document-class" type="xsd:string" />
+        <xsd:attribute name="content-url-generator" type="xsd:string" />
+        <xsd:attribute name="content-basepath" type="xsd:string" />
+        <xsd:attribute name="allow-empty-items" type="xsd:string" />
+        <xsd:attribute name="use-sonata-admin" type="use_sonata_admin" />
+    </xsd:complexType>
+
+    <xsd:complexType name="voter">
+        <xsd:sequence>
+            <xsd:element name="content-identity" type="content_identity" minOccurs="0" />
+        </xsd:sequence>
+
+        <xsd:attribute name="uri-prefix" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="content_identity">
+        <xsd:attribute name="content-key" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="multilang">
+        <xsd:sequence>
+            <xsd:element name="locale" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
+        </xsd:sequence>
+
+        <xsd:attribute name="use-sonata-admin" type="use_sonata_admin" />
+        <xsd:attribute name="admin-class" type="xsd:string" />
+        <xsd:attribute name="menu-document-class" type="xsd:string" />
+        <xsd:attribute name="node-document-class" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:simpleType name="use_sonata_admin">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="true" />
+            <xsd:enumeration value="false" />
+            <xsd:enumeration value="auto" />
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
