@@ -7,16 +7,26 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 {
+    private $urlGenerator;
+    private $contentUrlGenerator;
+    private $securityContext;
+    private $logger;
+
+    private $node1;
+    private $node2;
+    private $node3;
+    private $content;
+
     public function setUp()
     {
-        $this->pwfc = $this->getMock(
-            'Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowCheckerInterface'
-        );
         $this->urlGenerator = $this->getMock(
             'Symfony\Component\Routing\Generator\UrlGeneratorInterface'
         );
         $this->contentUrlGenerator = $this->getMock(
             'Symfony\Component\Routing\Generator\UrlGeneratorInterface'
+        );
+        $this->securityContext = $this->getMock(
+            'Symfony\Component\Security\Core\SecurityContext'
         );
         $this->logger = $this->getMock(
             'Psr\Log\LoggerInterface'
@@ -25,7 +35,7 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
         $this->factory = new ContentAwareFactory(
             $this->urlGenerator,
             $this->contentUrlGenerator,
-            $this->pwfc,
+            $this->securityContext,
             $this->logger,
             false // refactore this empty items option
         );
@@ -77,9 +87,10 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
             ->method('getChildren')
             ->will($this->returnValue(array()));
 
-        $mock = $this->pwfc->expects($this->at(0))
-            ->method('checkIsPublished')
-            ->with($this->node2);
+        $mock = $this->securityContext->expects($this->at(0))
+            ->method('isGranted')
+            ->with(array('VIEW', $this->node2))
+        ;
 
         if ($options['node2_is_published']) {
             $mock->will($this->returnValue(true));
@@ -92,9 +103,10 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
             $mock->will($this->returnValue(false));
         }
 
-        $this->pwfc->expects($this->at(1))
-            ->method('checkIsPublished')
-            ->with($this->node3);
+        $this->securityContext->expects($this->at(1))
+            ->method('isGranted')
+            ->with(array('VIEW', $this->node3))
+        ;
 
         $res = $this->factory->createFromNode($this->node1);
         $this->assertInstanceOf('Knp\Menu\MenuItem', $res);
@@ -155,7 +167,7 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
                     $this->assertNull($res);
                     return;
                 }
-            }        
+            }
         }
 
         $this->assertInstanceOf('\Knp\Menu\MenuItem', $res);
