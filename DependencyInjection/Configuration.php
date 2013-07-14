@@ -41,7 +41,9 @@ class Configuration implements ConfigurationInterface
                     ->values(array(true, false, 'auto'))
                     ->defaultValue('auto')
                 ->end()
+
                 ->arrayNode('multilang')
+                    ->fixXmlConfig('locale')
                     ->children()
                         ->enumNode('use_sonata_admin')
                             ->values(array(true, false, 'auto'))
