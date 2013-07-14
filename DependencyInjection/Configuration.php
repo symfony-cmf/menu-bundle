@@ -17,7 +17,8 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('menu_basepath')->defaultValue('/cms/menu')->end()
                 ->scalarNode('document_manager_name')->defaultValue('default')->end()
                 ->scalarNode('admin_class')->defaultNull()->end()
-                ->scalarNode('document_class')->defaultNull()->end()
+                ->scalarNode('menu_document_class')->defaultNull()->end()
+                ->scalarNode('node_document_class')->defaultNull()->end()
 
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
 
@@ -40,14 +41,17 @@ class Configuration implements ConfigurationInterface
                     ->values(array(true, false, 'auto'))
                     ->defaultValue('auto')
                 ->end()
+
                 ->arrayNode('multilang')
+                    ->fixXmlConfig('locale')
                     ->children()
                         ->enumNode('use_sonata_admin')
                             ->values(array(true, false, 'auto'))
                             ->defaultValue('auto')
                         ->end()
                         ->scalarNode('admin_class')->defaultNull()->end()
-                        ->scalarNode('document_class')->defaultNull()->end()
+                        ->scalarNode('menu_document_class')->defaultNull()->end()
+                        ->scalarNode('node_document_class')->defaultNull()->end()
                         ->arrayNode('locales')
                             ->isRequired()
                             ->requiresAtLeastOneElement()

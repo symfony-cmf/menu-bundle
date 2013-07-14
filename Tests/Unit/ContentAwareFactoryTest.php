@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit;
 use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -115,23 +115,34 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
     public function provideCreateItem()
     {
         return array(
-            array(array(
-                'allow_empty_items' => false,
-
-                'has_content_route' => true,
-                'content_found' => false,
+            // route is used when type is route
+            array('test', array(
+                'uri' => 'foobar',
+                'route' => 'testroute',
+                'linkType' => 'route',
             )),
 
-            array(array(
-                'allow_empty_items' => true,
-
-                'has_content_route' => true,
-                'content_found' => false,
+            // route is used when linkType ommitted and URI
+            // not set.
+            array('test', array(
+                'route' => 'testroute',
             )),
 
-            array(array(
-                'has_content_route' => true,
-                'content_found' => true,
+            // content is used when linkType ommitted and URI
+            // and route not set.
+            array('test', array(
+            ), array(
+                'provideContent' => true,
+            )),
+
+            // content is used when linkType ommitted and URI
+            // and route not set.
+            array('test', array(
+                'uri' => 'foobar',
+                'route' => 'barfoo',
+                'linkType' => 'content',
+            ), array(
+                'provideContent' => true,
             )),
         );
     }
@@ -139,37 +150,88 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
     /**
      * @dataProvider provideCreateItem
      */
-    public function testCreateItem($options)
+    public function testCreateItem($name, $options, $testOptions = array())
     {
         $options = array_merge(array(
-            'allow_empty_items' => false,
+            'content' => null,
+            'routeParameters' => array(),
+            'routeAbsolute' => false,
+            'uri' => null,
+            'route' => null,
+            'linkType' => null,
+        ), $options);
 
-            'has_content_route' => false,
-            'content_found' => false,
-        ));
+        $testOptions = array_merge(array(
+            'allowEmptyItems' => false,
+            'provideContent' => false,
+        ), $testOptions);
 
-        $content = new \stdClass;
-
-        if ($options['has_content_route']) {
-            if (!$options['content_found']) {
-                $this->contentUrlGenerator->expects($this->once())
-                    ->method('generate')
-                    ->will($this->throwException(new RouteNotFoundException('test')));
-            }
+        if (true === $testOptions['allowEmptyItems']) {
+            $this->factory->setAllowEmptyItems(true);
         }
 
-        $this->factory->setAllowEmptyItems($options['allow_empty_items']);
-        $res = $this->factory->createItem('foobar', array());
-
-        if (true === $options['has_content_route']) {
-            if (false === $options['content_found']) {
-                if ($options['allow_empty_items']) {
-                    $this->assertNull($res);
-                    return;
-                }
-            }
+        if (true === $testOptions['provideContent']) {
+            $options['content'] = $this->content;
         }
 
-        $this->assertInstanceOf('\Knp\Menu\MenuItem', $res);
+        $this->prepareCreateItemTests($name, $options);
+
+        $item = $this->factory->createItem($name, $options);
+
+        if (in_array($options['linkType'], array('uri', ''))) {
+            $this->assertEquals($options['uri'], $item->getUri());
+        }
+
+        $this->assertEquals($name, $item->getName());
+    }
+
+    protected function prepareCreateItemTests($name, $options)
+    {
+        if (
+            is_null($options['uri']) &&
+            is_null($options['route']) &&
+            is_null($options['content']) &&
+            !in_array($options['linkType'], array(
+                'route',
+                'uri',
+                'content',
+                ''
+            ))
+        ) {
+            $this->setExpectedException('\InvalidArgumentException');
+        }
+
+        if ($options['linkType'] == 'route') {
+            $this->urlGenerator->expects($this->once())
+                ->method('generate')
+                ->with($options['route'], $options['routeParameters'], $options['routeAbsolute']);
+        }
+
+        if (
+            null == $options['linkType'] &&
+            empty($options['uri']) &&
+            !empty($options['route'])
+        ) {
+            $this->urlGenerator->expects($this->once())
+                ->method('generate')
+                ->with($options['route'], $options['routeParameters'], $options['routeAbsolute']);
+        }
+
+        if ($options['linkType'] == 'content') {
+            $this->contentUrlGenerator->expects($this->once())
+                ->method('generate')
+                ->with($options['content'], $options['routeParameters'], $options['routeAbsolute']);
+        }
+
+        if (
+            null === $options['linkType'] &&
+            empty($options['uri']) &&
+            empty($options['route']) &&
+            !empty($options['content'])
+        ) {
+            $this->contentUrlGenerator->expects($this->once())
+                ->method('generate')
+                ->with($options['content'], $options['routeParameters'], $options['routeAbsolute']);
+        }
     }
 }

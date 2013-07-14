@@ -1,13 +1,23 @@
 dashboard:
     group_menu: Menü
+    label_menu: Menüs
     label_menu_node: Menüeintrag
+    label_multilang_menu: Mehrsprachige menus
     label_multilang_menu_node: Mehrsprachiger Menüeintrag
 
 breadcrumb:
+    link_menu_list: Menus
+    link_menu_create: Erstellen
+    link_menu_edit: Bearbeiten
+    link_menu_delete: Löschen
     link_menu_node_list: Menüeintrag
     link_menu_node_create: Erstellen
     link_menu_node_edit: Bearbeiten
     link_menu_node_delete: Löschen
+    link_multilang_menu_list: Multilingual menus
+    link_multilang_menu_create: Erstellen
+    link_multilang_menu_edit: Bearbieten
+    link_multilang_menu_delete: Löschen
     link_multilang_menu_node_list: Mehrsprachige Menüknoten
     link_multilang_menu_node_create: Erstellen
     link_multilang_menu_node_edit: Bearbeiten
@@ -23,6 +33,10 @@ list:
 
 form:
     group_general: Allgemein
+    group_menu: Menü
+    group_items: Einträge
+    group_root: Menü Wurzel
+    label_children: Einträge
     label_locale: Sprache
     label_parent: Übergeordnet
     label_name: Name
@@ -30,3 +44,9 @@ form:
     label_uri: URI
     label_route: Route
     label_content: Inhalt
+    label_publishable: Veröffentlichbar
+    label_publish_start_date: Veröffentlichen von
+    label_publish_end_date: Veröffentlichen bis
+
+help:
+    items_help: Klicken Sie auf ein Element, um es zu bearbeiten. Rechtsklick um Einträge hinzuzufügen.

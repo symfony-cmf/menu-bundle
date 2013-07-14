@@ -16,9 +16,13 @@ class MenuNodeAdminTest extends BaseTestCase
 
     public function testDashboard()
     {
-        $crawler = $this->client->request('GET', '/admin/dashboard');
+        $this->markTestIncomplete();
+    }
+
+    public function testEdit()
+    {
+        $crawler = $this->client->request('GET', '/admin/bundle/menu/menunode/test/test-menu/item1/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
-        $this->assertCount(1, $crawler->filter('html:contains("dashboard.label_menu_node")'));
     }
 }

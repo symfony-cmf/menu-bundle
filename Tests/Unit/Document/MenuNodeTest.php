@@ -24,7 +24,13 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
             ->setWeak(false)
             ->setAttributes(array('foo' => 'bar'))
             ->setChildrenAttributes(array('bar' => 'foo'))
-            ->setExtras(array('far' => 'boo'));
+            ->setExtras(array('far' => 'boo'))
+            ->setLinkAttributes(array('link' => 'knil'))
+            ->setLabelAttributes(array('label' => 'lebal'))
+            ->setDisplay(false)
+            ->setDisplayChildren(false)
+            ->setRouteAbsolute(true)
+            ->setLinkType('linktype');
     }
 
     public function testGetters()
@@ -45,6 +51,12 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->node->setPosition($this->parentNode, 'FOOO');
         $this->assertSame($this->parentNode, $this->node->getParent());
         $this->assertEquals('FOOO', $this->node->getName());
+        $this->assertEquals(array('link' => 'knil'), $this->node->getLinkAttributes());
+        $this->assertEquals(array('label' => 'lebal'), $this->node->getLabelAttributes());
+        $this->assertFalse($this->node->getDisplay());
+        $this->assertFalse($this->node->getDisplayChildren());
+        $this->assertTrue($this->node->getRouteAbsolute());
+        $this->assertEquals('linktype', $this->node->getLinkType());
     }
 
     public function testAddChild()
@@ -84,5 +96,26 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
 
         $this->assertSame($startDate, $n->getPublishStartDate());
         $this->assertSame($endDate, $n->getPublishEndDate());
+    }
+
+    /**
+     * @depends testGetters
+     */
+    public function testGetOptions()
+    {
+        $this->assertEquals(array(
+            'uri' => $this->node->getUri(),
+            'route' => $this->node->getRoute(),
+            'label' => $this->node->getLabel(),
+            'attributes' => $this->node->getAttributes(),
+            'childrenAttributes' => $this->node->getChildrenAttributes(),
+            'display' => $this->node->getDisplay(),
+            'displayChildren' => $this->node->getDisplayChildren(),
+            'content' => $this->node->getContent(),
+            'routeParameters' => $this->node->getRouteParameters(),
+            'routeAbsolute' => $this->node->getRouteAbsolute(),
+            'linkAttributes' => $this->node->getLinkAttributes(),
+            'labelAttributes' => $this->node->getLabelAttributes(),
+        ), $this->node->getOptions());
     }
 }
