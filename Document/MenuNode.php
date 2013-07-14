@@ -3,7 +3,10 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Document;
 
 use Knp\Menu\NodeInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
 
 /**
  * This class represents a menu node for the cmf.
@@ -11,7 +14,11 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface;
  * @author Uwe Jäger <uwej711@googlemail.com>
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class MenuNode implements NodeInterface, PublishWorkflowInterface
+class MenuNode implements NodeInterface,
+                            PublishableInterface,
+                            PublishableWriteInterface,
+                            PublishTimePeriodInterface,
+                            PublishTimePeriodWriteInterface
 {
     /**
      * Id of this menu node.
