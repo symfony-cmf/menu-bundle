@@ -33,11 +33,8 @@ list:
 
 form:
     group_general: Générale
-    group_menu: Menu
     group_items: Éléments
-    group_root: Racine de menu
     group_general: Général
-    group_target: Cible
     label_children: Éléments
     label_locale: Langue
     label_parent: Parent

@@ -31,25 +31,38 @@ class MenuAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('form.group_menu')
-            ->add(
-                'name',
-                'text',
-                ($this->hasSubject() && null !== $this->getSubject()->getId()) ? array('attr' => array('readonly' => 'readonly')) : array())
+            ->with('form.group_general')
             ->add(
                 'parent',
                 'doctrine_phpcr_odm_tree',
                 array(
                     'root_node' => $this->root,
-                    'choice_list' => array(), 
+                    'choice_list' => array(),
                     'select_root_node' => true
                 )
             )
-            ->end()
-        ;
-
-        $formMapper->with('form.group_root')
+            ->add(
+                'name',
+                'text',
+                ($this->hasSubject() && null !== $this->getSubject()->getId()) ? array('attr' => array('readonly' => 'readonly')) : array()
+            )
             ->add('label', 'text')
+
+            ->with('form.group_general', array(
+                'template' => 'CmfMenuBundle:Admin:menu_node_target_group.html.twig',
+            ))
+            ->add('linkType', 'choice_field_mask', array(
+                'choices' => array_combine(
+                    $this->contentAwareFactory->getLinkTypes(),
+                    $this->contentAwareFactory->getLinkTypes()
+                ),
+                'map' => array(
+                    'route' => array('route'),
+                    'uri' => array('uri'),
+                    'content' => array('content', 'doctrine_phpcr_odm_tree', 'weak'),
+                ),
+                'empty_value' => 'auto',
+            ))
             ->add('route', 'text', array('required' => false))
             ->add('uri', 'text', array('required' => false))
             ->add(
