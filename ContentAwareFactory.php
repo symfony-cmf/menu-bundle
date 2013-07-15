@@ -58,6 +58,13 @@ class ContentAwareFactory extends RouterAwareFactory
     private $securityContext;
 
     /**
+     * The permission to check for when doing the publish workflow check.
+     *
+     * @var string
+     */
+    private $publishWorkflowPermission = PublishWorkflowChecker::VIEW_ATTRIBUTE;
+
+    /**
      * Whether to return null or a MenuItem without any URL if no URL can be
      * found for a MenuNode.
      *
@@ -66,16 +73,17 @@ class ContentAwareFactory extends RouterAwareFactory
     private $allowEmptyItems;
 
     /**
-     * @param ContainerInterface $container to fetch the request in order to determine
-     *      whether this is the current menu item
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
+     * @param SecurityContextInterface $securityContext the publish workflow
+     *      checker to check if menu items are published.
+     * @param LoggerInterface       $logger
      */
     public function __construct(
         UrlGeneratorInterface $generator,
         UrlGeneratorInterface $contentRouter,
-        SecurityContextInterface $securityContext = null,
+        SecurityContextInterface $securityContext,
         LoggerInterface $logger
     )
     {
@@ -106,6 +114,17 @@ class ContentAwareFactory extends RouterAwareFactory
     public function setAllowEmptyItems($allowEmptyItems)
     {
         $this->allowEmptyItems = $allowEmptyItems;
+    }
+
+    /**
+     * What attribute to use in the publish workflow check. This typically
+     * is VIEW or VIEW_ANONYMOUS.
+     *
+     * @param string $attribute
+     */
+    public function setPublishWorkflowPermission($attribute)
+    {
+        $this->publishWorkflowPermission = $attribute;
     }
 
     /**
@@ -149,9 +168,7 @@ class ContentAwareFactory extends RouterAwareFactory
         }
 
         foreach ($node->getChildren() as $childNode) {
-            if ($this->securityContext
-                && ! $this->securityContext->isGranted(PublishWorkflowChecker::VIEW_ATTRIBUTE, $childNode)
-            ) {
+            if (!$this->securityContext->isGranted($this->publishWorkflowPermission, $childNode)) {
                 continue;
             }
 
