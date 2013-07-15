@@ -73,7 +73,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->assertSame($c2, $ret);
     }
 
-    public function testPublishWorkflowInterface()
+    public function testPublishTimePeriodInterface()
     {
         $startDate = new \DateTime('2013-01-01');
         $endDate = new \DateTime('2013-02-01');
@@ -81,7 +81,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $n = new MenuNode;
 
         $this->assertInstanceOf(
-            'Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowInterface', 
+            'Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface',
             $n
         );
 
