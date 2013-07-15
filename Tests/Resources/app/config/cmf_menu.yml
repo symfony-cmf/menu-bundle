@@ -1,3 +1,7 @@
+cmf_core:
+    publish_workflow:
+        enabled: false
+
 cmf_menu:
     use_sonata_admin: true
     menu_basepath: /test

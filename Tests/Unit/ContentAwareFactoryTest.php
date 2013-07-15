@@ -26,7 +26,7 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
             'Symfony\Component\Routing\Generator\UrlGeneratorInterface'
         );
         $this->securityContext = $this->getMock(
-            'Symfony\Component\Security\Core\SecurityContext'
+            'Symfony\Component\Security\Core\SecurityContextInterface'
         );
         $this->logger = $this->getMock(
             'Psr\Log\LoggerInterface'
@@ -89,7 +89,7 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 
         $mock = $this->securityContext->expects($this->at(0))
             ->method('isGranted')
-            ->with(array('VIEW', $this->node2))
+            ->with('VIEW', $this->node2)
         ;
 
         if ($options['node2_is_published']) {
@@ -105,7 +105,8 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 
         $this->securityContext->expects($this->at(1))
             ->method('isGranted')
-            ->with(array('VIEW', $this->node3))
+            ->with('VIEW', $this->node3)
+            ->will($this->returnValue(true))
         ;
 
         $res = $this->factory->createFromNode($this->node1);
