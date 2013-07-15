@@ -707,7 +707,7 @@ class MenuNode implements NodeInterface, PublishWorkflowInterface
             'routeAbsolute' => $this->routeAbsolute,
             'linkAttributes' => $this->linkAttributes,
             'labelAttributes' => $this->labelAttributes,
-
+            'linkType' => $this->linkType
         );
     }
 
