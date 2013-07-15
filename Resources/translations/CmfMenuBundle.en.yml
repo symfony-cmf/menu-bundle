@@ -35,7 +35,6 @@ form:
     group_general: General
     group_items: Items
     label_children: Items
-    group_target: Target
     label_locale: Locale
     label_parent: Parent
     label_name: Name

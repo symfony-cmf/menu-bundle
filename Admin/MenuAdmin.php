@@ -47,6 +47,22 @@ class MenuAdmin extends Admin
                 ($this->hasSubject() && null !== $this->getSubject()->getId()) ? array('attr' => array('readonly' => 'readonly')) : array()
             )
             ->add('label', 'text')
+
+            ->with('form.group_general', array(
+                'template' => 'CmfMenuBundle:Admin:menu_node_target_group.html.twig',
+            ))
+            ->add('linkType', 'choice_field_mask', array(
+                'choices' => array_combine(
+                    $this->contentAwareFactory->getLinkTypes(),
+                    $this->contentAwareFactory->getLinkTypes()
+                ),
+                'map' => array(
+                    'route' => array('route'),
+                    'uri' => array('uri'),
+                    'content' => array('content', 'doctrine_phpcr_odm_tree', 'weak'),
+                ),
+                'empty_value' => 'auto',
+            ))
             ->add('route', 'text', array('required' => false))
             ->add('uri', 'text', array('required' => false))
             ->add(
