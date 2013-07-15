@@ -44,7 +44,7 @@ class MenuNodeAdmin extends MenuAdmin
 
         if (null === $this->getParentFieldDescription()) {
             $formMapper
-                ->with('form.group_target', array(
+                ->with('form.group_general', array(
                     'template' => 'CmfMenuBundle:Admin:menu_node_target_group.html.twig',
                 ))
                 ->add('linkType', 'choice_field_mask', array(
