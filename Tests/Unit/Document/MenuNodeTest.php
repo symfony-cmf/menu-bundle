@@ -116,6 +116,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
             'routeAbsolute' => $this->node->getRouteAbsolute(),
             'linkAttributes' => $this->node->getLinkAttributes(),
             'labelAttributes' => $this->node->getLabelAttributes(),
+            'linkType' => $this->node->getLinkType(),
         ), $this->node->getOptions());
     }
 }
