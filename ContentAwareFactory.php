@@ -11,11 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
 
 use Psr\Log\LoggerInterface;
 
 use Symfony\Cmf\Bundle\MenuBundle\Voter\VoterInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowCheckerInterface;
 
 /**
  * This factory builds menu items from the menu nodes and builds urls based on
@@ -52,9 +53,16 @@ class ContentAwareFactory extends RouterAwareFactory
     private $logger;
 
     /**
-     * @var PublishWorkflowCheckerInterface
+     * @var SecurityContextInterface
      */
-    private $publishChecker;
+    private $securityContext;
+
+    /**
+     * The permission to check for when doing the publish workflow check.
+     *
+     * @var string
+     */
+    private $publishWorkflowPermission = PublishWorkflowChecker::VIEW_ATTRIBUTE;
 
     /**
      * Whether to return null or a MenuItem without any URL if no URL can be
@@ -65,22 +73,23 @@ class ContentAwareFactory extends RouterAwareFactory
     private $allowEmptyItems;
 
     /**
-     * @param ContainerInterface $container to fetch the request in order to determine
-     *      whether this is the current menu item
      * @param UrlGeneratorInterface $generator for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
+     * @param SecurityContextInterface $securityContext the publish workflow
+     *      checker to check if menu items are published.
+     * @param LoggerInterface       $logger
      */
     public function __construct(
         UrlGeneratorInterface $generator,
         UrlGeneratorInterface $contentRouter,
-        PublishWorkflowCheckerInterface $publishChecker,
+        SecurityContextInterface $securityContext,
         LoggerInterface $logger
     )
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
-        $this->publishChecker = $publishChecker;
+        $this->securityContext = $securityContext;
         $this->logger = $logger;
         $this->linkTypes = array('route', 'uri', 'content');
     }
@@ -105,6 +114,17 @@ class ContentAwareFactory extends RouterAwareFactory
     public function setAllowEmptyItems($allowEmptyItems)
     {
         $this->allowEmptyItems = $allowEmptyItems;
+    }
+
+    /**
+     * What attribute to use in the publish workflow check. This typically
+     * is VIEW or VIEW_ANONYMOUS.
+     *
+     * @param string $attribute
+     */
+    public function setPublishWorkflowPermission($attribute)
+    {
+        $this->publishWorkflowPermission = $attribute;
     }
 
     /**
@@ -148,7 +168,7 @@ class ContentAwareFactory extends RouterAwareFactory
         }
 
         foreach ($node->getChildren() as $childNode) {
-            if (false === $this->publishChecker->checkIsPublished($childNode)) {
+            if (!$this->securityContext->isGranted($this->publishWorkflowPermission, $childNode)) {
                 continue;
             }
 
@@ -197,8 +217,8 @@ class ContentAwareFactory extends RouterAwareFactory
             case 'content':
                 try {
                     $options['uri'] = $this->contentRouter->generate(
-                        $options['content'], 
-                        $options['routeParameters'], 
+                        $options['content'],
+                        $options['routeParameters'],
                         $options['routeAbsolute']
                     );
                 } catch (RouteNotFoundException $e) {
