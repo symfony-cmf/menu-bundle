@@ -4,13 +4,13 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode;
 
 class MultilangMenuNodeAdmin extends MenuNodeAdmin
 {
     /**
      * Those two properties are needed to make it possible
-     * to have 2 Admin classes for the same Document / Entity
+     * to have 2 Admin classes for the same Model / Entity
      */
     protected $baseRouteName = 'admin_bundle_menu_multilangmenunode_list';
     protected $baseRoutePattern = 'bundle/menu/multilangmenunode';

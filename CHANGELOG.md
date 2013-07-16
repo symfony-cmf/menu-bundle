@@ -1,6 +1,11 @@
 Changelog
 =========
 
+* **2013-07-16**: [Model] Adopted persistance standard model, see: http://symfony.com/doc/master/cmf/contributing/bundles.html#Persistence
+
+1.1.0-beta2
+-----------
+
 * **2013-06-26**: Introduced "Menu" nodes to act as root menu nodes and updated
                   admin interface to reflect this. Migrate each of your root
                   menu nodes as follows:

@@ -21,7 +21,7 @@ class PHPCRMenuProvider implements MenuProviderInterface
     protected $factory = null;
 
     /**
-     * @var \Doctrine\ODM\PHPCR\DocumentManager
+     * @var \Doctrine\ODM\PHPCR\ModelManager
      */
     protected $dm;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Document;
+namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
 /**
  * This class represents a multilanguage menu node for the cmf.
