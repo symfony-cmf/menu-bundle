@@ -1,11 +1,11 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Admin\Document;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Admin\Model;
 
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
-use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Symfony\Cmf\Component\Testing\Document\Content;
-use Doctrine\ODM\PHPCR\Document\Generic;
+use Doctrine\ODM\PHPCR\Model\Generic;
 
 class MenuNodeTest extends BaseTestCase
 {
