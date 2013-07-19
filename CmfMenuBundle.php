@@ -14,13 +14,15 @@ class CmfMenuBundle extends Bundle
     {
         parent::build($container);
         $container->addCompilerPass(new AddVotersPass());
-        $container->addCompilerPass(
-            DoctrinePhpcrMappingsPass::createXmlMappingDriver(
-                array(
-                    realpath(__DIR__ . '/Resources/config/doctrine-model') => 'Symfony\Cmf\Bundle\MenuBundle\Model',
-                ),
-                array('cmf_routing.manager_name')
-            )
-        );
+        if (class_exists('Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass')) {
+            $container->addCompilerPass(
+                DoctrinePhpcrMappingsPass::createXmlMappingDriver(
+                    array(
+                        realpath(__DIR__ . '/Resources/config/doctrine-model') => 'Symfony\Cmf\Bundle\MenuBundle\Model',
+                    ),
+                    array('cmf_menu.document_manager_name')
+                )
+            );
+        }
     }
 }
