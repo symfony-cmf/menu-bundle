@@ -1,11 +1,11 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Admin\Document;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Admin\Model;
 
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
-use Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode;
 use Symfony\Cmf\Component\Testing\Document\Content;
-use Doctrine\ODM\PHPCR\Document\Generic;
+use Doctrine\ODM\PHPCR\Model\Generic;
 
 class MultilangMenuNodeTest extends MenuNodeTest
 {

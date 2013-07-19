@@ -1,7 +1,7 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Document;
-use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Model;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 
 class MenuNodeTest extends \PHPUnit_Framework_Testcase
 {

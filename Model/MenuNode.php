@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Document;
+namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
 use Knp\Menu\NodeInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;

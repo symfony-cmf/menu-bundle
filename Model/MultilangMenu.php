@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Document;
+namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 

@@ -6,7 +6,7 @@
     >
 
     <document
-        name="Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode"
+        name="Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode"
         >
 
         <id name="id">

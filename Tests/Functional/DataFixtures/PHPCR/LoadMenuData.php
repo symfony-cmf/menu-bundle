@@ -5,8 +5,8 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\DataFixtures\PHPCR;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
-use Symfony\Cmf\Bundle\MenuBundle\Document\Menu;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Model\Menu;
 
 class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 {
