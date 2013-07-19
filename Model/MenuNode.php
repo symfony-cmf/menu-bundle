@@ -70,19 +70,7 @@ class MenuNode implements NodeInterface, PublishTimePeriodWriteInterface, Publis
     /**
      * @var mixed
      */
-    protected $weakContent;
-
-    /**
-     * @var mixed
-     */
-    protected $hardContent;
-
-    /**
-     * If we should use the weak or the strong referenced content.
-     *
-     * @var boolean
-     */
-    protected $weak = true;
+    protected $content;
 
     /**
      * HTML attributes to add to the individual menu element.
@@ -346,11 +334,7 @@ class MenuNode implements NodeInterface, PublishTimePeriodWriteInterface, Publis
      */
     public function getContent()
     {
-        if ($this->weak) {
-            return $this->weakContent;
-        }
-
-        return $this->hardContent;
+        return $this->content;
     }
 
     /**
@@ -365,46 +349,7 @@ class MenuNode implements NodeInterface, PublishTimePeriodWriteInterface, Publis
      */
     public function setContent($content)
     {
-        if ($this->weak) {
-            $this->weakContent = $content;
-        } else {
-            $this->hardContent = $content;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Return true if this the content is referenced weakly.
-     *
-     * @return boolean
-     */
-    public function getWeak()
-    {
-        return $this->weak;
-    }
-
-    /**
-     * Specify if the content should be referenced weakly or strongly.
-     *
-     * If there is existing referenced content, it is moved to become weak
-     * resp. hard referenced.
-     *
-     * @param $weak boolean
-     *
-     * @return MenuNode - this instance
-     */
-    public function setWeak($weak)
-    {
-        if ($this->weak && !$weak) {
-            $this->hardContent = $this->weakContent;
-            $this->weakContent = null;
-        } elseif (!$this->weak && $weak) {
-            $this->weakContent = $this->hardContent;
-            $this->hardContent = null;
-        }
-        $this->weak = $weak;
-
+        $this->content = $content;
         return $this;
     }
 

@@ -42,8 +42,7 @@ class MenuNodeTest extends BaseTestCase
             'uri' => 'http://www.example.com/foo',
             'route' => 'foo_route',
             'linkType' => 'route',
-            'weakContent' => $this->weakContent,
-            'hardContent' => $this->hardContent,
+            'content' => $this->weakContent,
             'publishable' => false,
             'publishStartDate' => new \DateTime('2013-06-18'),
             'publishEndDate' => new \DateTime('2013-06-18'),
@@ -109,16 +108,9 @@ class MenuNodeTest extends BaseTestCase
         }
 
         // test objects
-        $prop = $refl->getProperty('weakContent');
+        $prop = $refl->getProperty('content');
         $prop->setAccessible(true);
         $content = $prop->getValue($menuNode);
-        $this->assertEquals('fake_weak_content', $content->getName());
-
-        $prop = $refl->getProperty('hardContent');
-        $prop->setAccessible(true);
-        $content = $prop->getValue($menuNode);
-        $menuNode = $this->dm->find(null, '/test/test-node');
-        $content = $menuNode->getContent();
         $this->assertEquals('fake_weak_content', $content->getName());
 
         // test children

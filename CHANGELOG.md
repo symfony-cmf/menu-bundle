@@ -1,6 +1,7 @@
 Changelog
 =========
 
+* **2013-07-24**: Removed choice of weak/strong content reference. Standard is now weak.
 * **2013-07-16**: [Model] Adopted persistance standard model, see: http://symfony.com/doc/master/cmf/contributing/bundles.html#Persistence.
 
   To migrate adapt the following script. Run it once for each document class, replacing <documentClass> with `MenuNode`, `Menu`, `MultilangMenu` and `MultilangMenuNode` respectively:

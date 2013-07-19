@@ -21,7 +21,6 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
             ->setUri('http://www.example.com')
             ->setRoute('test_route')
             ->setContent($this->content)
-            ->setWeak(false)
             ->setAttributes(array('foo' => 'bar'))
             ->setChildrenAttributes(array('bar' => 'foo'))
             ->setExtras(array('far' => 'boo'))
@@ -41,7 +40,6 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->assertEquals('http://www.example.com', $this->node->getUri());
         $this->assertEquals('test_route', $this->node->getRoute());
         $this->assertSame($this->content, $this->node->getContent());
-        $this->assertFalse($this->node->getWeak());
         $this->assertEquals(array('foo' => 'bar'), $this->node->getAttributes());
         $this->assertEquals('bar', $this->node->getAttribute('foo'));
         $this->assertEquals(array('bar' => 'foo'), $this->node->getChildrenAttributes());
