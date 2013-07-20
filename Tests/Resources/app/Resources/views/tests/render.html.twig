@@ -1,0 +1,13 @@
+{% extends "::layout.html.twig" %}
+{% block content %}
+<h2>Render Menus</h2>
+<h3>Automatically determining link type</h3>
+<p>The following menu nodes do not have <code>$linkType</code> set, the
+type of link is determined by what is set.</p>
+<code>{{ '{{ knp_menu_render(\'test-menu\') }}' }}</code>
+{{ knp_menu_render('test-menu') }}
+<h3>Explicitly setting linkType</h3>
+<p>The node below has been explictly set to use the "route" linkType.</p>
+<code>{{ '{{ knp_menu_render(\'another-menu\') }}' }}</code>
+{{ knp_menu_render('another-menu') }}
+{% endblock %}
