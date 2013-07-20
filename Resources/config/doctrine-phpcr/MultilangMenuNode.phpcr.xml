@@ -1,3 +1,4 @@
+
 <doctrine-mapping
     xmlns="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -5,9 +6,10 @@
     https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd"
     >
 
-    <mapped-superclass
-        name="Symfony\Cmf\Bundle\MenuBundle\Model\Menu"
+    <document
+        name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode"
         >
-    </mapped-superclass>
+    </document>
 
 </doctrine-mapping>
+

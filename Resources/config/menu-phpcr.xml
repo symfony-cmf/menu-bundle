@@ -9,10 +9,10 @@
         <parameter key="cmf_menu.current_item_voter.content_identity_class">Symfony\Cmf\Bundle\MenuBundle\Voter\RequestContentIdentityVoter</parameter>
         <parameter key="cmf_menu.provider_class">Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider</parameter>
         <parameter key="cmf_menu.factory_class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
-        <parameter key="cmf_menu.menu_document_class">Symfony\Cmf\Bundle\MenuBundle\Model\Menu</parameter>
-        <parameter key="cmf_menu.node_document_class">Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode</parameter>
-        <parameter key="cmf_menu.multilang.menu_document_class">Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenu</parameter>
-        <parameter key="cmf_menu.multilang.node_document_class">Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode</parameter>
+        <parameter key="cmf_menu.menu_document_class">Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu</parameter>
+        <parameter key="cmf_menu.node_document_class">Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode</parameter>
+        <parameter key="cmf_menu.multilang.menu_document_class">Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenu</parameter>
+        <parameter key="cmf_menu.multilang.node_document_class">Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode</parameter>
     </parameters>
 
     <services>

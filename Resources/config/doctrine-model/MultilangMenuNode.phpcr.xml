@@ -1,7 +1,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/phpcr/doctrine-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <document
+    <mapped-superclass
         name="Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode"
         translator="attribute"
         >
@@ -10,7 +10,7 @@
 
         <field name="label" type="string" translated="true"/>
         <field name="uri" type="string" translated="true"/>
-    </document>
+    </mapped-superclass>
 
 </doctrine-mapping>
 

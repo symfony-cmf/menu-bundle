@@ -1,7 +1,7 @@
 <?php
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Model;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 
 class MenuNodeTest extends \PHPUnit_Framework_Testcase
 {

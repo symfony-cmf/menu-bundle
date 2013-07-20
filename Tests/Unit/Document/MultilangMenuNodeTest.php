@@ -1,7 +1,7 @@
 <?php
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Model;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode;
 
 class MultilangMenuNodeTest extends \PHPUnit_Framework_Testcase
 {

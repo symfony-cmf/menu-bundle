@@ -12,22 +12,22 @@ sonata_doctrine_phpcr_admin:
         Doctrine\ODM\PHPCR\Model\Generic:
             valid_children:
                 - all
-        Symfony\Cmf\Bundle\MenuBundle\Model\Menu:
+        Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu:
             valid_children:
-                - Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode
-                - Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode
-        Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenu:
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode
+        Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenu:
             valid_children:
-                - Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode
-                - Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode
-        Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode:
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode
+        Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode:
             valid_children:
-                - Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode
-                - Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode
-        Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode:
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode
+        Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode:
             valid_children:
-                - Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode
-                - Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode
 
 fos_js_routing:
     routes_to_expose:

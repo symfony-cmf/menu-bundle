@@ -16,7 +16,7 @@ class MenuNodeAdminTest extends BaseTestCase
 
     public function testEdit()
     {
-        $crawler = $this->client->request('GET', '/admin/bundle/menu/menunode/test/menus/test-menu/item-1/edit');
+        $crawler = $this->client->request('GET', '/admin/cmf/menu/menunode/test/test-menu/item1/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
     }

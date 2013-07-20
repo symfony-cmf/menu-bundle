@@ -19,6 +19,7 @@ class CmfMenuBundle extends Bundle
                 DoctrinePhpcrMappingsPass::createXmlMappingDriver(
                     array(
                         realpath(__DIR__ . '/Resources/config/doctrine-model') => 'Symfony\Cmf\Bundle\MenuBundle\Model',
+                        realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr',
                     ),
                     array('cmf_menu.document_manager_name')
                 )
