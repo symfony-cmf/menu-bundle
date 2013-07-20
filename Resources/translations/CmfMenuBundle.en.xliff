@@ -1,182 +1,182 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" target-language="en" datatype="plaintext" original="CmfMenuBundle.en.xliff">
     <body>
-      <trans-unit id="dashboard_group_menu">
-        <source>dashboard_group_menu</source>
-        <target><![CDATA[ Menu]]></target>
+      <trans-unit id="dashboard.group_menu">
+        <source>dashboard.group_menu</source>
+        <target>Menu</target>
       </trans-unit>
-      <trans-unit id="dashboard_label_menu">
-        <source>dashboard_label_menu</source>
-        <target><![CDATA[ Menus]]></target>
+      <trans-unit id="dashboard.label_menu">
+        <source>dashboard.label_menu</source>
+        <target>Menus</target>
       </trans-unit>
-      <trans-unit id="dashboard_label_multilang_menu">
-        <source>dashboard_label_multilang_menu</source>
-        <target><![CDATA[ Multilingual menus]]></target>
+      <trans-unit id="dashboard.label_multilang_menu">
+        <source>dashboard.label_multilang_menu</source>
+        <target>Multilingual menus</target>
       </trans-unit>
-      <trans-unit id="dashboard_label_menu_node">
-        <source>dashboard_label_menu_node</source>
-        <target><![CDATA[ Menu node]]></target>
+      <trans-unit id="dashboard.label_menu_node">
+        <source>dashboard.label_menu_node</source>
+        <target>Menu node</target>
       </trans-unit>
-      <trans-unit id="dashboard_label_multilang_menu_node">
-        <source>dashboard_label_multilang_menu_node</source>
-        <target><![CDATA[ Multilingual menu node]]></target>
+      <trans-unit id="dashboard.label_multilang_menu_node">
+        <source>dashboard.label_multilang_menu_node</source>
+        <target>Multilingual menu node</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_menu_list">
-        <source>breadcrumb_link_menu_list</source>
-        <target><![CDATA[ Menus]]></target>
+      <trans-unit id="breadcrumb.link_menu_list">
+        <source>breadcrumb.link_menu_list</source>
+        <target>Menus</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_menu_create">
-        <source>breadcrumb_link_menu_create</source>
-        <target><![CDATA[ Create]]></target>
+      <trans-unit id="breadcrumb.link_menu_create">
+        <source>breadcrumb.link_menu_create</source>
+        <target>Create</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_menu_edit">
-        <source>breadcrumb_link_menu_edit</source>
-        <target><![CDATA[ Edit]]></target>
+      <trans-unit id="breadcrumb.link_menu_edit">
+        <source>breadcrumb.link_menu_edit</source>
+        <target>Edit</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_menu_delete">
-        <source>breadcrumb_link_menu_delete</source>
-        <target><![CDATA[ Delete]]></target>
+      <trans-unit id="breadcrumb.link_menu_delete">
+        <source>breadcrumb.link_menu_delete</source>
+        <target>Delete</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_menu_node_list">
-        <source>breadcrumb_link_menu_node_list</source>
-        <target><![CDATA[ Menu nodes]]></target>
+      <trans-unit id="breadcrumb.link_menu_node_list">
+        <source>breadcrumb.link_menu_node_list</source>
+        <target>Menu nodes</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_menu_node_create">
-        <source>breadcrumb_link_menu_node_create</source>
-        <target><![CDATA[ Create]]></target>
+      <trans-unit id="breadcrumb.link_menu_node_create">
+        <source>breadcrumb.link_menu_node_create</source>
+        <target>Create</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_menu_node_edit">
-        <source>breadcrumb_link_menu_node_edit</source>
-        <target><![CDATA[ Edit]]></target>
+      <trans-unit id="breadcrumb.link_menu_node_edit">
+        <source>breadcrumb.link_menu_node_edit</source>
+        <target>Edit</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_menu_node_delete">
-        <source>breadcrumb_link_menu_node_delete</source>
-        <target><![CDATA[ Delete]]></target>
+      <trans-unit id="breadcrumb.link_menu_node_delete">
+        <source>breadcrumb.link_menu_node_delete</source>
+        <target>Delete</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_multilang_menu_list">
-        <source>breadcrumb_link_multilang_menu_list</source>
-        <target><![CDATA[ Multilingual menus]]></target>
+      <trans-unit id="breadcrumb.link_multilang_menu_list">
+        <source>breadcrumb.link_multilang_menu_list</source>
+        <target>Multilingual menus</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_multilang_menu_create">
-        <source>breadcrumb_link_multilang_menu_create</source>
-        <target><![CDATA[ Create]]></target>
+      <trans-unit id="breadcrumb.link_multilang_menu_create">
+        <source>breadcrumb.link_multilang_menu_create</source>
+        <target>Create</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_multilang_menu_edit">
-        <source>breadcrumb_link_multilang_menu_edit</source>
-        <target><![CDATA[ Edit]]></target>
+      <trans-unit id="breadcrumb.link_multilang_menu_edit">
+        <source>breadcrumb.link_multilang_menu_edit</source>
+        <target>Edit</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_multilang_menu_delete">
-        <source>breadcrumb_link_multilang_menu_delete</source>
-        <target><![CDATA[ Delete]]></target>
+      <trans-unit id="breadcrumb.link_multilang_menu_delete">
+        <source>breadcrumb.link_multilang_menu_delete</source>
+        <target>Delete</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_multilang_menu_node_list">
-        <source>breadcrumb_link_multilang_menu_node_list</source>
-        <target><![CDATA[ Multilingual menu nodes]]></target>
+      <trans-unit id="breadcrumb.link_multilang_menu_node_list">
+        <source>breadcrumb.link_multilang_menu_node_list</source>
+        <target>Multilingual menu nodes</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_multilang_menu_node_create">
-        <source>breadcrumb_link_multilang_menu_node_create</source>
-        <target><![CDATA[ Create]]></target>
+      <trans-unit id="breadcrumb.link_multilang_menu_node_create">
+        <source>breadcrumb.link_multilang_menu_node_create</source>
+        <target>Create</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_multilang_menu_node_edit">
-        <source>breadcrumb_link_multilang_menu_node_edit</source>
-        <target><![CDATA[ Edit]]></target>
+      <trans-unit id="breadcrumb.link_multilang_menu_node_edit">
+        <source>breadcrumb.link_multilang_menu_node_edit</source>
+        <target>Edit</target>
       </trans-unit>
-      <trans-unit id="breadcrumb_link_multilang_menu_node_delete">
-        <source>breadcrumb_link_multilang_menu_node_delete</source>
-        <target><![CDATA[ Delete]]></target>
+      <trans-unit id="breadcrumb.link_multilang_menu_node_delete">
+        <source>breadcrumb.link_multilang_menu_node_delete</source>
+        <target>Delete</target>
       </trans-unit>
-      <trans-unit id="list_label_id">
-        <source>list_label_id</source>
-        <target><![CDATA[ Id]]></target>
+      <trans-unit id="list.label_id">
+        <source>list.label_id</source>
+        <target>Id</target>
       </trans-unit>
-      <trans-unit id="list_label_name">
-        <source>list_label_name</source>
-        <target><![CDATA[ Name]]></target>
+      <trans-unit id="list.label_name">
+        <source>list.label_name</source>
+        <target>Name</target>
       </trans-unit>
-      <trans-unit id="list_label_label">
-        <source>list_label_label</source>
-        <target><![CDATA[ Label]]></target>
+      <trans-unit id="list.label_label">
+        <source>list.label_label</source>
+        <target>Label</target>
       </trans-unit>
-      <trans-unit id="list_label_uri">
-        <source>list_label_uri</source>
-        <target><![CDATA[ URI]]></target>
+      <trans-unit id="list.label_uri">
+        <source>list.label_uri</source>
+        <target>URI</target>
       </trans-unit>
-      <trans-unit id="list_label_route">
-        <source>list_label_route</source>
-        <target><![CDATA[ Route]]></target>
+      <trans-unit id="list.label_route">
+        <source>list.label_route</source>
+        <target>Route</target>
       </trans-unit>
-      <trans-unit id="list_label_locales">
-        <source>list_label_locales</source>
-        <target><![CDATA[ Locales]]></target>
+      <trans-unit id="list.label_locales">
+        <source>list.label_locales</source>
+        <target>Locales</target>
       </trans-unit>
-      <trans-unit id="form_group_general">
-        <source>form_group_general</source>
-        <target><![CDATA[ General]]></target>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
+        <target>General</target>
       </trans-unit>
-      <trans-unit id="form_group_items">
-        <source>form_group_items</source>
-        <target><![CDATA[ Items]]></target>
+      <trans-unit id="form.group_items">
+        <source>form.group_items</source>
+        <target>Items</target>
       </trans-unit>
-      <trans-unit id="form_label_children">
-        <source>form_label_children</source>
-        <target><![CDATA[ Items]]></target>
+      <trans-unit id="form.label_children">
+        <source>form.label_children</source>
+        <target>Items</target>
       </trans-unit>
-      <trans-unit id="form_label_locale">
-        <source>form_label_locale</source>
-        <target><![CDATA[ Locale]]></target>
+      <trans-unit id="form.label_locale">
+        <source>form.label_locale</source>
+        <target>Locale</target>
       </trans-unit>
-      <trans-unit id="form_label_parent">
-        <source>form_label_parent</source>
-        <target><![CDATA[ Parent]]></target>
+      <trans-unit id="form.label_parent">
+        <source>form.label_parent</source>
+        <target>Parent</target>
       </trans-unit>
-      <trans-unit id="form_label_name">
-        <source>form_label_name</source>
-        <target><![CDATA[ Name]]></target>
+      <trans-unit id="form.label_name">
+        <source>form.label_name</source>
+        <target>Name</target>
       </trans-unit>
-      <trans-unit id="form_label_label">
-        <source>form_label_label</source>
-        <target><![CDATA[ Label]]></target>
+      <trans-unit id="form.label_label">
+        <source>form.label_label</source>
+        <target>Label</target>
       </trans-unit>
-      <trans-unit id="form_label_uri">
-        <source>form_label_uri</source>
-        <target><![CDATA[ URI]]></target>
+      <trans-unit id="form.label_uri">
+        <source>form.label_uri</source>
+        <target>URI</target>
       </trans-unit>
-      <trans-unit id="form_label_route">
-        <source>form_label_route</source>
-        <target><![CDATA[ Route]]></target>
+      <trans-unit id="form.label_route">
+        <source>form.label_route</source>
+        <target>Route</target>
       </trans-unit>
-      <trans-unit id="form_label_parameters">
-        <source>form_label_parameters</source>
-        <target><![CDATA[ Route parameters]]></target>
+      <trans-unit id="form.label_parameters">
+        <source>form.label_parameters</source>
+        <target>Route parameters</target>
       </trans-unit>
-      <trans-unit id="form_label_content">
-        <source>form_label_content</source>
-        <target><![CDATA[ Content]]></target>
+      <trans-unit id="form.label_content">
+        <source>form.label_content</source>
+        <target>Content</target>
       </trans-unit>
-      <trans-unit id="form_label_publishable">
-        <source>form_label_publishable</source>
-        <target><![CDATA[ Publishable]]></target>
+      <trans-unit id="form.label_publishable">
+        <source>form.label_publishable</source>
+        <target>Publishable</target>
       </trans-unit>
-      <trans-unit id="form_label_publish_start_date">
-        <source>form_label_publish_start_date</source>
-        <target><![CDATA[ Publish from]]></target>
+      <trans-unit id="form.label_publish_start_date">
+        <source>form.label_publish_start_date</source>
+        <target>Publish from</target>
       </trans-unit>
-      <trans-unit id="form_label_publish_end_date">
-        <source>form_label_publish_end_date</source>
-        <target><![CDATA[ Publish until]]></target>
+      <trans-unit id="form.label_publish_end_date">
+        <source>form.label_publish_end_date</source>
+        <target>Publish until</target>
       </trans-unit>
-      <trans-unit id="form_label_link_type">
-        <source>form_label_link_type</source>
-        <target><![CDATA[ Link type]]></target>
+      <trans-unit id="form.label_link_type">
+        <source>form.label_link_type</source>
+        <target>Link type</target>
       </trans-unit>
-      <trans-unit id="form_label_weak">
-        <source>form_label_weak</source>
-        <target><![CDATA[ Weak association]]></target>
+      <trans-unit id="form.label_weak">
+        <source>form.label_weak</source>
+        <target>Weak association</target>
       </trans-unit>
-      <trans-unit id="help_items_help">
-        <source>help_items_help</source>
-        <target><![CDATA[ Click on item to edit, right click to create new items.]]></target>
+      <trans-unit id="help.items_help">
+        <source>help.items_help</source>
+        <target>Click on item to edit, right click to create new items.</target>
       </trans-unit>
     </body>
   </file>
