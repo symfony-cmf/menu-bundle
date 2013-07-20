@@ -36,7 +36,7 @@ class CmfMenuExtension extends Extension
             );
         }
 
-        $loader->load('phpcr-menu.xml');
+        $loader->load('menu-phpcr.xml');
 
         $this->loadVoters($config, $container);
 
@@ -46,7 +46,7 @@ class CmfMenuExtension extends Extension
 
         if (isset($config['multilang'])) {
             if ($config['multilang']['use_sonata_admin']) {
-                $this->loadSonataAdmin($config['multilang'], $loader, $container, 'multilang.');
+                $this->loadSonataAdmin($config['multilang'], $loader, $container, '-multilang');
             }
 
             if (isset($config['multilang']['document_class'])) {
@@ -111,7 +111,7 @@ class CmfMenuExtension extends Extension
             $container->setParameter($this->getAlias() . $prefix. '.admin_class', $config['admin_class']);
         }
 
-        $loader->load($prefix.'admin.xml');
+        $loader->load('admin'.$prefix.'.xml');
     }
 
     /**
