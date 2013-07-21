@@ -2,10 +2,17 @@
 
 This is part of the Symfony Cmf: <http://cmf.symfony.com/>
 
+## Development
+
+This bundle has a built-in test application:
+
+    $ php vendor/symfony-cmf/testing/bin/server
+
+You can then access the testing application at `http://localhost:8000`
 
 ## Documentation
-<http://symfony.com/doc/master/cmf/bundles/menu.html>
 
+<http://symfony.com/doc/master/cmf/bundles/menu.html>
 
 ## Installation
 

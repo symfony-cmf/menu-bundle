@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Admin\MenuNodeAdminTest;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\WebTest\Admin\MenuNodeAdminTest;
 
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 
@@ -9,7 +9,7 @@ class MenuAdminTest extends BaseTestCase
     public function setUp()
     {
         $this->db('PHPCR')->loadFixtures(array(
-            'Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\DataFixtures\PHPCR\LoadMenuData',
+            'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR\LoadMenuData',
         ));
         $this->client = $this->createClient();
     }
@@ -24,7 +24,7 @@ class MenuAdminTest extends BaseTestCase
 
     public function testMenuEdit()
     {
-        $crawler = $this->client->request('GET', '/admin/bundle/menu/menu/test/test-menu/edit');
+        $crawler = $this->client->request('GET', '/admin/bundle/menu/menu/test/menus/test-menu/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
         $this->assertCount(1, $crawler->filter('input[value="test-menu"]'));

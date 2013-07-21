@@ -4,7 +4,7 @@ cmf_core:
 
 cmf_menu:
     use_sonata_admin: true
-    menu_basepath: /test
+    menu_basepath: /test/menus
 
 sonata_doctrine_phpcr_admin:
     document_tree_defaults: [locale]

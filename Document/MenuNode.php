@@ -708,7 +708,7 @@ class MenuNode implements NodeInterface, PublishTimePeriodWriteInterface, Publis
             'routeAbsolute' => $this->routeAbsolute,
             'linkAttributes' => $this->linkAttributes,
             'labelAttributes' => $this->labelAttributes,
-            'linkType' => $this->linkType
+            'linkType' => $this->linkType,
         );
     }
 
