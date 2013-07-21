@@ -24,7 +24,7 @@ class MenuAdminTest extends BaseTestCase
 
     public function testMenuEdit()
     {
-        $crawler = $this->client->request('GET', '/admin/cmf/menu/menu/test/test-menu/edit');
+        $crawler = $this->client->request('GET', '/admin/cmf/menu/menu/test/menus/test-menu/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
         $this->assertCount(1, $crawler->filter('input[value="test-menu"]'));
