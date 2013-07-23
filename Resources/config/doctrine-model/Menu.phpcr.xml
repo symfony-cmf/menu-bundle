@@ -5,9 +5,9 @@
     https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd"
     >
 
-    <document
-        name="Symfony\Cmf\Bundle\MenuBundle\Document\Menu"
+    <mapped-superclass
+        name="Symfony\Cmf\Bundle\MenuBundle\Model\Menu"
         >
-    </document>
+    </mapped-superclass>
 
 </doctrine-mapping>

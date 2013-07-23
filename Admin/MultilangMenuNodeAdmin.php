@@ -4,7 +4,6 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode;
 
 class MultilangMenuNodeAdmin extends MenuNodeAdmin
 {

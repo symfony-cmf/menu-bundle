@@ -12,27 +12,27 @@ sonata_doctrine_phpcr_admin:
         Doctrine\ODM\PHPCR\Document\Generic:
             valid_children:
                 - all
-        Symfony\Cmf\Bundle\MenuBundle\Document\Menu:
+        Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu:
             valid_children:
-                - Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode
-                - Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode
-        Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenu:
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode
+        Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenu:
             valid_children:
-                - Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode
-                - Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode
-        Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode:
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode
+        Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode:
             valid_children:
-                - Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode
-                - Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode
-        Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode:
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode
+        Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode:
             valid_children:
-                - Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode
-                - Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode
+                - Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode
 
 fos_js_routing:
     routes_to_expose:
-        - admin_bundle_menu_menu_*
-        - admin_bundle_menu_multilangmenu_*
-        - admin_bundle_menu_menunode_*
-        - admin_bundle_menu_multilangmenunode_*
+        - admin_cmf_menu_menu_*
+        - admin_cmf_menu_multilangmenu_*
+        - admin_cmf_menu_menunode_*
+        - admin_cmf_menu_multilangmenunode_*
         - sonata.admin.doctrine_phpcr.phpcrodm_children

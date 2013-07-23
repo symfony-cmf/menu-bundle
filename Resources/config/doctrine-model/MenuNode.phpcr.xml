@@ -5,8 +5,8 @@
     https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd"
     >
 
-    <document
-        name="Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode"
+    <mapped-superclass
+        name="Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode"
         >
 
         <id name="id">
@@ -41,6 +41,6 @@
         <field name="labelAttributes" type="string" assoc=""/>
 
         <children name="children"/>
-    </document>
+    </mapped-superclass>
 
 </doctrine-mapping>
