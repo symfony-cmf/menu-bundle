@@ -16,6 +16,9 @@ class MenuAdmin extends Admin
     protected $contentRoot;
     protected $menuRoot;
 
+    protected $baseRouteName = 'cmf_menu';
+    protected $baseRoutePattern = '/cmf/menu/menu';
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper

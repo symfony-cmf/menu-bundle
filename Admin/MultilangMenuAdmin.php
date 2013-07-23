@@ -9,10 +9,10 @@ class MultilangMenuAdmin extends MenuAdmin
 {
     /**
      * Those two properties are needed to make it possible
-     * to have 2 Admin classes for the same Model / Entity
+     * to have 2 Admin classes for the same Model
      */
-    protected $baseRouteName = 'admin_bundle_menu_multilangmenu_list';
-    protected $baseRoutePattern = 'bundle/menu/multilangmenu';
+    protected $baseRouteName = 'admin_cmf_menu_multilangmenu_list';
+    protected $baseRoutePattern = 'cmf/menu/multilangmenu';
 
     /**
      * @var array

@@ -14,6 +14,9 @@ use Doctrine\Common\Util\ClassUtils;
 
 class MenuNodeAdmin extends MenuAdmin
 {
+    protected $baseRouteName = 'cmf_menu_menunode';
+    protected $baseRoutePattern = '/cmf/menu/menunode';
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper

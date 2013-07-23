@@ -1,9 +1,15 @@
 Changelog
 =========
 
-* **2013-07-16**: [Model] Adopted persistance standard model, see: http://symfony.com/doc/master/cmf/contributing/bundles.html#Persistence
+* **2013-07-16**: [Model] Adopted persistance standard model, see: http://symfony.com/doc/master/cmf/contributing/bundles.html#Persistence.
 
-1.1.0-beta2
+  To migrate adapt the following script. Run it once for each document class, replacing <documentClass> with `MenuNode`, `Menu`, `MultilangMenu` and `MultilangMenuNode` respectively:
+
+    $ php app/console doctrine:phpcr:nodes:update \
+        --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = \"Symfony\\Cmf\\Bundle\\MenuBundle\\Document\\<documentClass>\"" \
+        --set-prop=phpcr:class="Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\<documentClass>"
+
+1.0.0-beta2
 -----------
 
 * **2013-06-26**: Introduced "Menu" nodes to act as root menu nodes and updated
