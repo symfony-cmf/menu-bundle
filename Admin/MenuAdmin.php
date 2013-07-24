@@ -6,7 +6,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
-use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 
@@ -16,6 +15,9 @@ class MenuAdmin extends Admin
     protected $translationDomain = 'CmfMenuBundle';
     protected $contentRoot;
     protected $menuRoot;
+
+    protected $baseRouteName = 'cmf_menu';
+    protected $baseRoutePattern = '/cmf/menu/menu';
 
     protected function configureListFields(ListMapper $listMapper)
     {

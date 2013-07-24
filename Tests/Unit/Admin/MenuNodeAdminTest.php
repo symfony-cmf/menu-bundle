@@ -9,7 +9,7 @@ class MenuNodeAdminTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->admin = new MenuNodeAdmin('code', 'Class', 'SomeController', array('en'));
-        $this->menuNode = $this->getMock('Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode');
+        $this->menuNode = $this->getMock('Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode');
         $this->modelManager = $this->getMock('Sonata\AdminBundle\Model\ModelManagerInterface');
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit;
-use Symfony\Cmf\Bundle\MenuBundle\Document\MenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 

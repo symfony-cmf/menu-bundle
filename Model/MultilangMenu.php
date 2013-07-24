@@ -1,8 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Document;
-
-use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
+namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
 /**
  * This class represents a multi-lang menu

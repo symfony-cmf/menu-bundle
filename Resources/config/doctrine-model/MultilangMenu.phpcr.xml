@@ -1,11 +1,11 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/phpcr/doctrine-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <document
-        name="Symfony\Cmf\Bundle\MenuBundle\Document\MultilangMenu"
+    <mapped-superclass
+        name="Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenu"
         translator="attribute"
         >
-    </document>
+    </mapped-superclass>
 
 </doctrine-mapping>
 

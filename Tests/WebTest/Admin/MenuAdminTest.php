@@ -16,7 +16,7 @@ class MenuAdminTest extends BaseTestCase
 
     public function testMenuList()
     {
-        $crawler = $this->client->request('GET', '/admin/bundle/menu/menu/list');
+        $crawler = $this->client->request('GET', '/admin/cmf/menu/menu/list');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
         $this->assertCount(1, $crawler->filter('html:contains("test-menu")'));
@@ -24,7 +24,7 @@ class MenuAdminTest extends BaseTestCase
 
     public function testMenuEdit()
     {
-        $crawler = $this->client->request('GET', '/admin/bundle/menu/menu/test/menus/test-menu/edit');
+        $crawler = $this->client->request('GET', '/admin/cmf/menu/menu/test/menus/test-menu/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
         $this->assertCount(1, $crawler->filter('input[value="test-menu"]'));
@@ -32,8 +32,24 @@ class MenuAdminTest extends BaseTestCase
 
     public function testMenuCreate()
     {
-        $crawler = $this->client->request('GET', '/admin/bundle/menu/menu/create');
+        $crawler = $this->client->request('GET', '/admin/cmf/menu/menu/create');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
+
+        $button = $crawler->selectButton('Create');
+        $form = $button->form();
+        $node = $form->getFormNode();
+        $actionUrl = $node->getAttribute('action');
+        $uniqId = substr(strchr($actionUrl, '='), 1);
+
+        $form[$uniqId.'[parent]'] = '/test/menus';
+        $form[$uniqId.'[name]'] = 'foo-test';
+        $form[$uniqId.'[label]'] = 'Foo Test';
+
+        $this->client->submit($form);
+        $res = $this->client->getResponse();
+
+        // If we have a 302 redirect, then all is well
+        $this->assertEquals(302, $res->getStatusCode());
     }
 }
