@@ -20,7 +20,7 @@
         <field name="route" type="string"/>
         <field name="linkType" type="string"/>
 
-        <reference-one name="content"/>
+        <reference-one name="content" property="menuContent"/>
 
         <field name="publishable" type="boolean"/>
         <field name="publishStartDate" type="date"/>
