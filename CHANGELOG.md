@@ -6,7 +6,7 @@ Changelog
 
        $ php app/console doctrine:phpcr:nodes:update \                   
            --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Document\\MenuNode' OR [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Document\\MultilangMenuNode'" \
-           --apply-closure="if (\!\$node->hasProperty('weakContent') && \!\$node->hasProperty('strongContent')) { return; }; \$node->setProperty('content', \$node->getProperty('weak')->getValue() == 1 ? \$node->getProperty('weakContent') : \$node->getWeakProperty('hardContent'));"
+           --apply-closure="if (\!\$node->hasProperty('weakContent') && \!\$node->hasProperty('strongContent')) { return; }; \$node->setProperty('menuContent', \$node->getProperty('weak')->getValue() == 1 ? \$node->getProperty('weakContent') : \$node->getWeakProperty('hardContent'));"
 * **2013-07-16**: [Model] Adopted persistance standard model, see: http://symfony.com/doc/master/cmf/contributing/bundles.html#Persistence.
 
   To migrate adapt the following script. Run it once for each document class, replacing <documentClass> with `MenuNode`, `Menu`, `MultilangMenu` and `MultilangMenuNode` respectively:
