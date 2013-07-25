@@ -58,11 +58,10 @@ class MenuNodeAdmin extends MenuAdmin
                     'map' => array(
                         'route' => array('route'),
                         'uri' => array('uri'),
-                        'content' => array('content', 'doctrine_phpcr_odm_tree', 'weak'),
+                        'content' => array('content', 'doctrine_phpcr_odm_tree'),
                     ),
                     'empty_value' => 'auto',
                 ))
-                ->add('weak', 'checkbox', array('required' => false))
                 ->add('route', 'text', array('required' => false))
                 ->add('uri', 'text', array('required' => false))
                 ->add(
