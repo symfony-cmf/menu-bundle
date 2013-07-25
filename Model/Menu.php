@@ -3,11 +3,11 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
 /**
- * This class represents a menu
+ * The Menu class represents the root node of a menu
+ * hierarchy.
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
 class Menu extends MenuNode
 {
 }
-

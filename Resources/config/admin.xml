@@ -19,9 +19,11 @@
                 label="dashboard.label_menu" 
                 label_translator_strategy="sonata.admin.label.strategy.underscore" 
                 />
+
             <argument/>
             <argument>%cmf_menu.menu_document_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
+            <argument>%cmf_menu.multilang.locales%</argument>
 
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
@@ -53,6 +55,7 @@
             <argument/>
             <argument>%cmf_menu.node_document_class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
+            <argument>%cmf_menu.multilang.locales%</argument>
 
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
@@ -71,6 +74,7 @@
             </call>
 
         </service>
+
     </services>
 
 </container>

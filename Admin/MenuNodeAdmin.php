@@ -17,6 +17,21 @@ class MenuNodeAdmin extends MenuAdmin
     protected $baseRouteName = 'cmf_menu_menunode';
     protected $baseRoutePattern = '/cmf/menu/menunode';
 
+    protected $locales;
+
+    /**
+     * @param string $code
+     * @param string $class
+     * @param string $baseControllerName
+     * @param array  $locales
+     */
+    public function __construct($code, $class, $baseControllerName, $locales)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+
+        $this->locales = $locales;
+    }
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -25,55 +40,82 @@ class MenuNodeAdmin extends MenuAdmin
             ->add('label', 'text')
             ->add('uri', 'text')
             ->add('route', 'text')
+            ;
+
+        $listMapper
+            ->add('locales', 'choice', array(
+                'template' => 'SonataDoctrinePHPCRAdminBundle:CRUD:locales.html.twig'
+            ))
         ;
+    }
+
+    protected function isSubjectNotNew()
+    {
+        return $this->hasSubject() && null !== $this->getSubject()->getId();
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+
         $formMapper
             ->with('form.group_general')
-            ->add(
-                'parent',
-                'doctrine_phpcr_odm_tree',
-                array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true)
-            )
-            ->add(
-                'name',
-                'text',
-                ($this->hasSubject() && null !== $this->getSubject()->getId()) ? array('attr' => array('readonly' => 'readonly')) : array())
-            ->add('label', 'text')
+                ->add(
+                    'parent',
+                    'doctrine_phpcr_odm_tree',
+                    array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true)
+                )
+                ->add('name', 'text',
+                    $this->isSubjectNotNew() ? array(
+                        'attr' => array('readonly' => 'readonly')
+                    ) : array()
+                )
+                ->add('label', 'text')
             ->end()
         ;
 
+        // what does this line do? @elHorner?
         if (null === $this->getParentFieldDescription()) {
+
+            // Add the choice for the node links "target"
             $formMapper
-                ->with('form.group_general', array(
-                    'template' => 'CmfMenuBundle:Admin:menu_node_target_group.html.twig',
-                ))
-                ->add('linkType', 'choice_field_mask', array(
-                    'choices' => array_combine(
-                        $this->contentAwareFactory->getLinkTypes(),
-                        $this->contentAwareFactory->getLinkTypes()
-                    ),
-                    'map' => array(
-                        'route' => array('route'),
-                        'uri' => array('uri'),
-                        'content' => array('content', 'doctrine_phpcr_odm_tree'),
-                    ),
-                    'empty_value' => 'auto',
-                ))
-                ->add('route', 'text', array('required' => false))
-                ->add('uri', 'text', array('required' => false))
-                ->add(
-                    'content',
-                    'doctrine_phpcr_odm_tree',
-                    array('root_node' => $this->contentRoot, 'choice_list' => array(), 'required' => false)
-                )
+                ->with('form.group_general')
+                    ->add('linkType', 'choice_field_mask', array(
+                        'choices' => array_combine(
+                            $this->contentAwareFactory->getLinkTypes(),
+                            $this->contentAwareFactory->getLinkTypes()
+                        ),
+                        'map' => array(
+                            'route' => array('route'),
+                            'uri' => array('uri'),
+                            'content' => array('content', 'doctrine_phpcr_odm_tree'),
+                        ),
+                        'empty_value' => 'auto',
+                    ))
+                    ->add('route', 'text', array('required' => false))
+                    ->add('uri', 'text', array('required' => false))
+                    ->add('content', 'doctrine_phpcr_odm_tree',
+                        array(
+                            'root_node' => $this->contentRoot, 
+                            'choice_list' => array(), 
+                            'required' => false
+                        )
+                    )
                 ->end()
             ;
         }
+
+        // Add locale
+        $formMapper
+            ->with('form.group_general')
+                ->add('locale', 'choice', array(
+                    'choices' => array_combine($this->locales, $this->locales),
+                    'empty_value' => '',
+                ))
+            ->end()
+        ;
     }
 
+    // is it worth configuring this.. is it ever used?
     protected function configureShowField(ShowMapper $showMapper)
     {
         $showMapper
@@ -92,12 +134,25 @@ class MenuNodeAdmin extends MenuAdmin
     {
         /** @var $new MenuNode */
         $new = parent::getNewInstance();
+
         if ($this->hasRequest()) {
+
+            // Set the parent
             $parentId = $this->getRequest()->query->get('parent');
+
             if (null !== $parentId) {
                 $new->setParent($this->getModelManager()->find(null, $parentId));
             }
+
+            // Set the locale
+            $currentLocale = $this->getRequest()->attributes->get('_locale');
+
+            if (in_array($currentLocale, $this->locales)) {
+                $meta = $this->getModelManager()->getMetadata(get_class($new));
+                $meta->setFieldValue($new, $meta->localeMapping, $currentLocale);
+            }
         }
+
         return $new;
     }
 
@@ -131,8 +186,7 @@ class MenuNodeAdmin extends MenuAdmin
     public function getBlocks($position)
     {
         if ('left' == $position) {
-            $selected = ($this->hasSubject() && $this->getSubject()->getId()) ? $this->getSubject()->getId(
-            ) : ($this->hasRequest() ? $this->getRequest()->query->get('parent') : null);
+            $selected = $this->isSubjectNotNew() ? $this->getSubject()->getId() : ($this->hasRequest() ? $this->getRequest()->query->get('parent') : null);
             return array(
                 array(
                     'type' => 'sonata_admin_doctrine_phpcr.tree_block',
