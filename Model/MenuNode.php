@@ -2,6 +2,9 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
+
 /**
  * This is the standard CMF MenuNode implementation
  *

@@ -2,8 +2,8 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr;
 
-use Symfony\Cmf\Bundle\MenuBundle\Model\MultilangMenuNode as BaseMultilangMenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeBase as BaseMenuNodeBase;
 
-class MultilangMenuNode extends BaseMultilangMenuNode
+class MenuNodeBase extends BaseMenuNodeBase
 {
 }

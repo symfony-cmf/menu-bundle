@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Admin\Model;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Doctrine\Phpcr;
 
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
@@ -15,23 +15,13 @@ class MenuNodeTest extends BaseTestCase
         $this->dm = $this->db('PHPCR')->getOm();
         $this->baseNode = $this->dm->find(null, '/test');
 
-        $this->weakContent = new Content;
-        $this->weakContent->setParent($this->baseNode);
-        $this->weakContent->setName('fake_weak_content');
-        $this->dm->persist($this->weakContent);
-
-        $this->hardContent = new Content;
-        $this->hardContent->setParent($this->baseNode);
-        $this->hardContent->setName('fake_hard_content');
-        $this->dm->persist($this->hardContent);
+        $this->content = new Content;
+        $this->content->setParent($this->baseNode);
+        $this->content->setName('fake_weak_content');
+        $this->dm->persist($this->content);
 
         $this->child1 = new MenuNode;
         $this->child1->setName('child1');
-    }
-
-    protected function getNewInstance()
-    {
-        return new MenuNode;
     }
 
     public function testMenuNode()
@@ -42,7 +32,7 @@ class MenuNodeTest extends BaseTestCase
             'uri' => 'http://www.example.com/foo',
             'route' => 'foo_route',
             'linkType' => 'route',
-            'content' => $this->weakContent,
+            'content' => $this->content,
             'publishable' => false,
             'publishStartDate' => new \DateTime('2013-06-18'),
             'publishEndDate' => new \DateTime('2013-06-18'),
@@ -75,7 +65,7 @@ class MenuNodeTest extends BaseTestCase
             'displayChildren' => false,
         );
 
-        $menuNode = $this->getNewInstance();
+        $menuNode = new MenuNode;
         $refl = new \ReflectionClass($menuNode);
 
         $menuNode->setParent($this->baseNode);
@@ -124,5 +114,15 @@ class MenuNodeTest extends BaseTestCase
         $this->assertInstanceOf('\DateTime', $publishEndDate);
         $this->assertEquals($data['publishStartDate']->format('Y-m-d'), $publishStartDate->format('Y-m-d'));
         $this->assertEquals($data['publishEndDate']->format('Y-m-d'), $publishEndDate->format('Y-m-d'));
+
+
+        // test multi-lang
+        $menuNode->setLocale('fr');
+        $this->dm->persist($menuNode);
+        $this->dm->flush();
+        $this->dm->clear();
+
+        $menuNode = $this->dm->findTranslation(null, '/test/test-node', 'fr');
+        $this->assertEquals('fr', $menuNode->getLocale());
     }
 }

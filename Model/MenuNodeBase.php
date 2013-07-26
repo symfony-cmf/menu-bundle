@@ -12,7 +12,7 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterfac
  * @author Uwe Jäger <uwej711@googlemail.com>
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class MenuNode implements NodeInterface
+class MenuNodeBase implements NodeInterface
 {
     /**
      * Id of this menu node.

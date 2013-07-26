@@ -2,10 +2,11 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
+use Symfony\Cmf\Bundle\MenuBundle\Admin\MenuNodeAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class MenuAdmin extends MenuNodeAdmin
+class MenuAdmin extends MenuNodeCommon
 {
     protected $baseRouteName = 'cmf_menu';
     protected $baseRoutePattern = '/cmf/menu/menu';

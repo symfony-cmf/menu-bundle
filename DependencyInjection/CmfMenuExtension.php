@@ -94,10 +94,24 @@ class CmfMenuExtension extends Extension
         }
 
         if (isset($config['admin_class'])) {
-            $container->setParameter($this->getAlias() . $prefix. '.admin_class', $config['admin_class']);
+            $container->setParameter(
+                $this->getAlias() . $prefix. '.admin_class', 
+                $config['admin_class']
+            );
         }
 
         $loader->load('admin'.$prefix.'.xml');
+
+        $locales = array();
+
+        if (isset($config['multilang'])) {
+            $locales = $config['multilang']['locales'];
+        }
+
+        $container->setParameter(
+            $this->getAlias() . $prefix . '.multilang.locales',
+            $locales
+        );
     }
 
     /**
