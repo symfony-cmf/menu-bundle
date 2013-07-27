@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Model;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Model;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 
 class MenuNodeTest extends \PHPUnit_Framework_Testcase
@@ -69,6 +69,13 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->assertCount(2, $children);
         $this->assertSame($m, $children[0]->getParent());
         $this->assertSame($c2, $ret);
+    }
+
+    public function testMultilang()
+    {
+        $n = new MenuNode;
+        $n->setLocale('fr');
+        $this->assertEquals('fr', $n->getLocale());
     }
 
     public function testPublishTimePeriodInterface()

@@ -4,15 +4,13 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\PhpcrMenu\Node">
+    <class name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode">
         <constraint name="Doctrine\Bundle\PHPCRBundle\Validator\Constraints\ValidPhpcrOdm" />
 
         <property name="label">
             <constraint name="NotBlank"/>
         </property>
-    </class>
 
-    <class name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MultilangMenuNode">
         <property name="locale">
             <constraint name="NotBlank"/>
             <constraint name="Locale"/>

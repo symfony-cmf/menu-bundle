@@ -40,11 +40,6 @@
         <xsd:sequence>
             <xsd:element name="locale" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
         </xsd:sequence>
-
-        <xsd:attribute name="use-sonata-admin" type="use_sonata_admin" />
-        <xsd:attribute name="admin-class" type="xsd:string" />
-        <xsd:attribute name="menu-document-class" type="xsd:string" />
-        <xsd:attribute name="node-document-class" type="xsd:string" />
     </xsd:complexType>
 
     <xsd:simpleType name="use_sonata_admin">
