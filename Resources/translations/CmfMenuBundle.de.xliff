@@ -126,6 +126,14 @@
         <source>help.items_help</source>
         <target>Klicken Sie auf ein Element, um es zu bearbeiten. Rechtsklick um Einträge hinzuzufügen.</target>
       </trans-unit>
+      <trans-unit id="form.group_menus">
+        <source>form.group_menus</source>
+        <target>Menü</target>
+      </trans-unit>
+     <trans-unit id="form.label_menus">
+        <source>form.label_menus</source>
+        <target>Menü</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -142,6 +142,14 @@
         <source>help.items_help</source>
         <target>Cliquez sur un élément pour le modifier, cliquez avec la touche droite pour ajouter des éléments.</target>
       </trans-unit>
+      <trans-unit id="form.group_menus">
+        <source>form.group_menus</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.label_menus">
+        <source>form.label_menus</source>
+        <target>Menu</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
