@@ -7,7 +7,8 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
 
 /**
- * This class represents a menu node for the cmf.
+ * This is a persistable implementation of the KnpMenu
+ * NodeInterface.
  *
  * @author Uwe Jäger <uwej711@googlemail.com>
  * @author Daniel Leech <daniel@dantleech.com>

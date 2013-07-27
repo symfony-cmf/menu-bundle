@@ -8,10 +8,16 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
 /**
  * This is the standard CMF MenuNode implementation
  *
- * - Multi-lingual
- * - Publish workflow interface
- * - Content aware
+ * Menu bundle specific additions:
  *
+ * - Link type: Ability to explicitly specify the type of link
+ * - Content aware: Either a route of document implementing 
+ *     RouteAware can be used to determine the link.
+ *
+ * Standard CMF features:
+ *
+ * - Translatable
+ * - Publish Workflow
  */
 class MenuNode extends MenuNodeBase implements
     PublishTimePeriodWriteInterface, 

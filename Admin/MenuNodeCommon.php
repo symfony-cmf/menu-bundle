@@ -71,7 +71,6 @@ class MenuNodeCommon extends Admin
             ->end()
         ;
 
-        // what does this line do? @elHorner?
         if (null === $this->getParentFieldDescription()) {
 
             // Add the choice for the node links "target"
@@ -113,7 +112,6 @@ class MenuNodeCommon extends Admin
         ;
     }
 
-    // is it worth configuring this.. is it ever used?
     protected function configureShowField(ShowMapper $showMapper)
     {
         $showMapper

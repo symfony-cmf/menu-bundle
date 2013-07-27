@@ -3,7 +3,6 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
 use Symfony\Cmf\Bundle\MenuBundle\Admin\MenuNodeAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class MenuAdmin extends MenuNodeCommon
