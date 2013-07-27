@@ -32,7 +32,7 @@ class MenuAdminTest extends BaseTestCase
 
     public function testMenuShow()
     {
-        $crawler = $this->client->request('GET', '/admin/cmf/menu/menu/test/menus/test-menu/show');
+        $crawler = $this->client->request('GET', '/admin/cmf/menu/menu/test/menus/test-menu');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
         $this->assertCount(2, $crawler->filter('td:contains("test-menu")'));
