@@ -44,21 +44,6 @@ class CmfMenuExtension extends Extension
             $this->loadSonataAdmin($config, $loader, $container);
         }
 
-        if (isset($config['multilang'])) {
-            if ($config['multilang']['use_sonata_admin']) {
-                $this->loadSonataAdmin($config['multilang'], $loader, $container, '-multilang');
-            }
-
-            if (isset($config['multilang']['document_class'])) {
-                $container->setParameter($this->getAlias() . '.multilang.document_class', $config['multilang']['document_class']);
-            }
-
-            $container->setParameter(
-                $this->getAlias() . '.multilang.locales', 
-                $config['multilang']['locales']
-            );
-        }
-
         $container->setParameter($this->getAlias() . '.menu_basepath', $config['menu_basepath']);
         $container->setParameter($this->getAlias() . '.document_manager_name', $config['document_manager_name']);
         $container->setParameter($this->getAlias() . '.allow_empty_items', $config['allow_empty_items']);
@@ -103,15 +88,30 @@ class CmfMenuExtension extends Extension
     public function loadSonataAdmin($config, XmlFileLoader $loader, ContainerBuilder $container, $prefix = '')
     {
         $bundles = $container->getParameter('kernel.bundles');
+
         if ('auto' === $config['use_sonata_admin'] && !isset($bundles['SonataDoctrinePHPCRAdminBundle'])) {
             return;
         }
 
         if (isset($config['admin_class'])) {
-            $container->setParameter($this->getAlias() . $prefix. '.admin_class', $config['admin_class']);
+            $container->setParameter(
+                $this->getAlias() . $prefix. '.admin_class', 
+                $config['admin_class']
+            );
         }
 
         $loader->load('admin'.$prefix.'.xml');
+
+        $locales = array();
+
+        if (isset($config['multilang'])) {
+            $locales = $config['multilang']['locales'];
+        }
+
+        $container->setParameter(
+            $this->getAlias() . $prefix . '.multilang.locales',
+            $locales
+        );
     }
 
     /**

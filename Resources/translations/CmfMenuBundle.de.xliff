@@ -14,14 +14,6 @@
         <source>dashboard.label_menu_node</source>
         <target>Menüeintrag</target>
       </trans-unit>
-      <trans-unit id="dashboard.label_multilang_menu">
-        <source>dashboard.label_multilang_menu</source>
-        <target>Mehrsprachige Menüs</target>
-      </trans-unit>
-      <trans-unit id="dashboard.label_multilang_menu_node">
-        <source>dashboard.label_multilang_menu_node</source>
-        <target>Mehrsprachiger Menüeintrag</target>
-      </trans-unit>
       <trans-unit id="breadcrumb.link_menu_list">
         <source>breadcrumb.link_menu_list</source>
         <target>Menus</target>
@@ -52,38 +44,6 @@
       </trans-unit>
       <trans-unit id="breadcrumb.link_menu_node_delete">
         <source>breadcrumb.link_menu_node_delete</source>
-        <target>Löschen</target>
-      </trans-unit>
-      <trans-unit id="breadcrumb.link_multilang_menu_list">
-        <source>breadcrumb.link_multilang_menu_list</source>
-        <target>Mehrsprachige Menüs</target>
-      </trans-unit>
-      <trans-unit id="breadcrumb.link_multilang_menu_create">
-        <source>breadcrumb.link_multilang_menu_create</source>
-        <target>Erstellen</target>
-      </trans-unit>
-      <trans-unit id="breadcrumb.link_multilang_menu_edit">
-        <source>breadcrumb.link_multilang_menu_edit</source>
-        <target>Bearbieten</target>
-      </trans-unit>
-      <trans-unit id="breadcrumb.link_multilang_menu_delete">
-        <source>breadcrumb.link_multilang_menu_delete</source>
-        <target>Löschen</target>
-      </trans-unit>
-      <trans-unit id="breadcrumb.link_multilang_menu_node_list">
-        <source>breadcrumb.link_multilang_menu_node_list</source>
-        <target>Mehrsprachige Menüknoten</target>
-      </trans-unit>
-      <trans-unit id="breadcrumb.link_multilang_menu_node_create">
-        <source>breadcrumb.link_multilang_menu_node_create</source>
-        <target>Erstellen</target>
-      </trans-unit>
-      <trans-unit id="breadcrumb.link_multilang_menu_node_edit">
-        <source>breadcrumb.link_multilang_menu_node_edit</source>
-        <target>Bearbeiten</target>
-      </trans-unit>
-      <trans-unit id="breadcrumb.link_multilang_menu_node_delete">
-        <source>breadcrumb.link_multilang_menu_node_delete</source>
         <target>Löschen</target>
       </trans-unit>
       <trans-unit id="list.label_id">

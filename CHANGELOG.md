@@ -1,6 +1,12 @@
 Changelog
 =========
 
+* **2013-07-27**: Removed `MenuCommonAdmin::getBlocks` as not sure what uses it.
+* **2013-07-27**: Refactored all feature structure. Minimal persistable menu is
+ now `Menu[Node]Base`, whereas everything else including **translatable** is
+ in `Menu[Node]`. Consequently we have removed **Multilang** admin and we
+ provide **just one admin class** per document.
+
 * **2013-07-19**: Removed choice of weak/strong content reference. Standard is now weak. Migration
   as follows (you may need to adjust the [phpcr:class] clause to match your implementation):
 

@@ -5,6 +5,10 @@ cmf_core:
 cmf_menu:
     use_sonata_admin: true
     menu_basepath: /test/menus
+    multilang:
+        locales: 
+            - en
+            - fr
 
 sonata_doctrine_phpcr_admin:
     document_tree_defaults: [locale]
