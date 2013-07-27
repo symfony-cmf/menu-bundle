@@ -138,6 +138,14 @@
         <source>help.items_help</source>
         <target>Click on item to edit, right click to create new items.</target>
       </trans-unit>
+      <trans-unit id="form.group_menus">
+         <source>form.group_menus</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.label_menus">
+        <source>form.label_menus</source>
+        <target>Menu</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
