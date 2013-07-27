@@ -12,6 +12,9 @@ use Knp\Menu\ItemInterface as MenuItemInterface;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 use Doctrine\Common\Util\ClassUtils;
 
+/**
+ * Common base admin for Menu and MenuNode 
+ */
 class MenuNodeCommon extends Admin
 {
     protected $contentAwareFactory;
@@ -166,7 +169,6 @@ class MenuNodeCommon extends Admin
     {
         $this->contentAwareFactory = $contentAwareFactory;
     }
-    
 
     public function setContentRoot($contentRoot)
     {
@@ -181,25 +183,5 @@ class MenuNodeCommon extends Admin
     public function setContentTreeBlock($contentTreeBlock)
     {
         $this->contentTreeBlock = $contentTreeBlock;
-    }
-
-    /**
-     * Return the content tree to show at the left, current node (or parent for new ones) selected
-     *
-     * @param string $position
-     *
-     * @return array
-     */
-    public function getBlocks($position)
-    {
-        if ('left' == $position) {
-            $selected = $this->isSubjectNotNew() ? $this->getSubject()->getId() : ($this->hasRequest() ? $this->getRequest()->query->get('parent') : null);
-            return array(
-                array(
-                    'type' => 'sonata_admin_doctrine_phpcr.tree_block',
-                    'settings' => array('selected' => $selected)
-                )
-            );
-        }
     }
 }
