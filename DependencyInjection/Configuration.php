@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
             ->fixXmlConfig('voter')
             ->children()
                 ->scalarNode('menu_basepath')->defaultValue('/cms/menu')->end()
-                ->scalarNode('document_manager_name')->defaultValue('default')->end()
+                ->scalarNode('manager_name')->defaultValue('default')->end()
                 ->scalarNode('admin_class')->defaultNull()->end()
                 ->scalarNode('menu_document_class')->defaultNull()->end()
                 ->scalarNode('node_document_class')->defaultNull()->end()

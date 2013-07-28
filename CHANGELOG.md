@@ -1,6 +1,7 @@
 Changelog
 =========
 
+* **2013-07-28**: [DependencyInjection] Renamed config item `document_manager_name` to `manager_name`
 * **2013-07-27**: Removed `MenuCommonAdmin::getBlocks` as not sure what uses it.
 * **2013-07-27**: Refactored all feature structure. Minimal persistable menu is
  now `Menu[Node]Base`, whereas everything else including **translatable** is
