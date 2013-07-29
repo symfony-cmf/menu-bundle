@@ -19,8 +19,9 @@
             <tag name="knp_menu.provider" />
             <argument type="service" id="service_container"/>
             <argument type="service" id="cmf_menu.factory"/>
-            <argument>%cmf_menu.document_manager_name%</argument>
+            <argument type="service" id="doctrine_phpcr"/>
             <argument>%cmf_menu.menu_basepath%</argument>
+            <call method="setManagerName"><argument>%cmf_menu.manager_name%</argument></call>
         </service>
 
         <service id="cmf_menu.factory" class="%cmf_menu.factory_class%">

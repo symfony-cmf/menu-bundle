@@ -26,7 +26,7 @@ class CmfMenuExtension extends Extension
             'menu_document_class',
             'node_document_class',
             'menu_basepath',
-            'document_manager_name',
+            'manager_name',
         );
 
         foreach ($keys as $key) {
@@ -45,7 +45,7 @@ class CmfMenuExtension extends Extension
         }
 
         $container->setParameter($this->getAlias() . '.menu_basepath', $config['menu_basepath']);
-        $container->setParameter($this->getAlias() . '.document_manager_name', $config['document_manager_name']);
+        $container->setParameter($this->getAlias() . '.manager_name', $config['manager_name']);
         $container->setParameter($this->getAlias() . '.allow_empty_items', $config['allow_empty_items']);
 
         $factory = $container->getDefinition($this->getAlias().'.factory');
