@@ -12,7 +12,7 @@ use Sonata\AdminBundle\Form\FormMapper;
  *
  * @author David Buchmann <mail@davidbu.ch>
  */
-class MenuAwareExtension extends AdminExtension
+class MenuReferenceExtension extends AdminExtension
 {
     /**
      * @var array
