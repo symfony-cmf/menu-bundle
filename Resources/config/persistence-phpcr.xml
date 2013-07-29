@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="cmf_menu.provider.class">Symfony\Cmf\Bundle\MenuBundle\Provider\PHPCRMenuProvider</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="cmf_menu.provider" class="%cmf_menu.provider.class%">
+            <tag name="knp_menu.provider" />
+            <argument type="service" id="service_container"/>
+            <argument type="service" id="cmf_menu.factory"/>
+            <argument>%cmf_menu.persistence.phpcr.manager_name%</argument>
+            <argument>%cmf_menu.persistence.phpcr.menu_basepath%</argument>
+        </service>
+
+        <service id="cmf_menu.initializer" class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
+            <argument type="collection">
+                <argument>%cmf_menu.persistence.phpcr.menu_basepath%</argument>
+            </argument>
+            <tag name="doctrine_phpcr.initializer" />
+        </service>
+
+    </services>
+
+</container>

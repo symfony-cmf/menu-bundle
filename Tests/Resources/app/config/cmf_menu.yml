@@ -3,8 +3,11 @@ cmf_core:
         enabled: false
 
 cmf_menu:
-    use_sonata_admin: true
-    menu_basepath: /test/menus
+    persistence:
+        phpcr:
+            enabled: true
+            use_sonata_admin: true
+            menu_basepath: /test/menus
     multilang:
         locales: 
             - en

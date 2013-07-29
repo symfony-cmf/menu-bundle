@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="cmf_menu.factory.class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="cmf_menu.factory" class="%cmf_menu.factory.class%">
+            <argument type="service" id="router"/>
+            <argument/> <!-- content url generator -->
+            <argument type="service" id="cmf_core.publish_workflow.checker"/>
+            <argument type="service" id="logger"/>
+            <call method="setAllowEmptyItems">
+                <argument>%cmf_menu.allow_empty_items%</argument>
+            </call>
+        </service>
+
+
+    </services>
+
+</container>
