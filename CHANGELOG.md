@@ -1,6 +1,8 @@
 Changelog
 =========
 
+* **2013-07-28**: [DependencyInjection] moved phpcr specific configuration
+  under `persistence.phpcr`.
 * **2013-07-27**: Removed `MenuCommonAdmin::getBlocks` as not sure what uses it.
 * **2013-07-27**: Refactored all feature structure. Minimal persistable menu is
  now `Menu[Node]Base`, whereas everything else including **translatable** is
@@ -10,7 +12,7 @@ Changelog
 * **2013-07-19**: Removed choice of weak/strong content reference. Standard is now weak. Migration
   as follows (you may need to adjust the [phpcr:class] clause to match your implementation):
 
-       $ php app/console doctrine:phpcr:nodes:update \                   
+       $ php app/console doctrine:phpcr:nodes:update \
            --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Document\\MenuNode' OR [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Document\\MultilangMenuNode'" \
            --apply-closure="if (\!\$node->hasProperty('weakContent') && \!\$node->hasProperty('strongContent')) { return; }; \$node->setProperty('menuContent', \$node->getProperty('weak')->getValue() == 1 ? \$node->getProperty('weakContent') : \$node->getWeakProperty('hardContent'));"
 * **2013-07-16**: [Model] Adopted persistance standard model, see: http://symfony.com/doc/master/cmf/contributing/bundles.html#Persistence.
