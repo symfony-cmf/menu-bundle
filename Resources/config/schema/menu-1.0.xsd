@@ -11,17 +11,11 @@
         <xsd:sequence>
             <xsd:element name="voter" type="voter" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="multilang" type="multilang" minOccurs="0" />
+            <xsd:element name="persistence" type="persistence" minOccurs="0"/>
         </xsd:sequence>
 
-        <xsd:attribute name="menu-basepath" type="xsd:string" />
-        <xsd:attribute name="document-manager-name" type="xsd:string" />
-        <xsd:attribute name="admin-class" type="xsd:string" />
-        <xsd:attribute name="menu-document-class" type="xsd:string" />
-        <xsd:attribute name="node-document-class" type="xsd:string" />
-        <xsd:attribute name="content-url-generator" type="xsd:string" />
-        <xsd:attribute name="content-basepath" type="xsd:string" />
         <xsd:attribute name="allow-empty-items" type="xsd:string" />
-        <xsd:attribute name="use-sonata-admin" type="use_sonata_admin" />
+        <xsd:attribute name="content-url-generator" type="xsd:string" />
     </xsd:complexType>
 
     <xsd:complexType name="voter">
@@ -30,6 +24,22 @@
         </xsd:sequence>
 
         <xsd:attribute name="uri-prefix" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="persistence">
+        <xsd:sequence>
+            <xsd:element name="phpcr" type="phpcr" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="phpcr">
+        <xsd:attribute name="menu-basepath" type="xsd:string" />
+        <xsd:attribute name="content-basepath" type="xsd:string" />
+        <xsd:attribute name="manager-name" type="xsd:string" />
+        <xsd:attribute name="admin-class" type="xsd:string" />
+        <xsd:attribute name="menu-document-class" type="xsd:string" />
+        <xsd:attribute name="node-document-class" type="xsd:string" />
+        <xsd:attribute name="use-sonata-admin" type="use_sonata_admin" />
     </xsd:complexType>
 
     <xsd:complexType name="content_identity">
