@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\CoreBundle\Admin\Extension;
+namespace Symfony\Cmf\Bundle\MenuBundle\Admin\Extension;
 
 use Sonata\AdminBundle\Admin\AdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -12,7 +12,7 @@ use Sonata\AdminBundle\Form\FormMapper;
  *
  * @author David Buchmann <mail@davidbu.ch>
  */
-class MenuReferenceExtension extends AdminExtension
+class MenuNodeReferrersExtension extends AdminExtension
 {
     /**
      * @var array
@@ -34,7 +34,7 @@ class MenuReferenceExtension extends AdminExtension
                 'translation_domain' => 'CmfMenuBundle',
             ))
             ->add(
-                'menus',
+                'menuNodes',
                 'sonata_type_collection',
                 array(
                     'by_reference' => false,

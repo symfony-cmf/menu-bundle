@@ -9,7 +9,7 @@
         <parameter key="cmf_menu.persistence.phpcr.node_document.class">Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode</parameter>
         <parameter key="cmf_menu.persistence.phpcr.menu_admin.class">Symfony\Cmf\Bundle\MenuBundle\Admin\MenuAdmin</parameter>
         <parameter key="cmf_menu.persistence.phpcr.node_admin.class">Symfony\Cmf\Bundle\MenuBundle\Admin\MenuNodeAdmin</parameter>
-        <parameter key="cmf_menu.admin_extension.menu_reference.class">Symfony\Cmf\Bundle\MenuBundle\Admin\Extension\MenuReferenceExtension</parameter>
+        <parameter key="cmf_menu.admin_extension.menu_reference.class">Symfony\Cmf\Bundle\MenuBundle\Admin\Extension\MenuNodeReferrersExtension</parameter>
     </parameters>
 
     <services>
@@ -78,7 +78,8 @@
 
         </service>
 
-        <service id="cmf_core.admin_extension.menu_reference" class="%cmf_menu.admin_extension.menu_reference.class%">
+        <service id="cmf_core.admin_extension.menu_node_referrers" class="%cmf_menu.admin_extension.menu_reference.class%">
+            <argument>%cmf_menu.multilang.locales%</argument>
             <tag name="sonata.admin.extension"/>
         </service>
 

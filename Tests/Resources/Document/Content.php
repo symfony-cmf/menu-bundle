@@ -3,13 +3,14 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferenceManyWriteInterface;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersWriteInterface;
 use Knp\Menu\NodeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @PHPCRODM\Document(referenceable=true)
  */
-class Content implements MenuNodeReferenceManyWriteInterface
+class Content implements MenuNodeReferrersWriteInterface
 {
     /**
      * @PHPCRODM\Id()
@@ -29,6 +30,11 @@ class Content implements MenuNodeReferenceManyWriteInterface
      * )
      */
     protected $menuNodes;
+
+    public function __construct()
+    {
+        $this->menuNodes = new ArrayCollection();
+    }
 
     public function getId() 
     {
@@ -57,18 +63,11 @@ class Content implements MenuNodeReferenceManyWriteInterface
 
     public function addMenuNode(NodeInterface $menuNode)
     {
-        $this->menuNodes[] = $menuNode;
+        $this->menuNodes->add($menuNode);
     }
 
-    public function removeMenuNode(NodeInterface $tMenuNode)
+    public function removeMenuNode(NodeInterface $menuNode)
     {
-        $nodes = array();
-        foreach ($this->menuNodes as $i => $menuNode) {
-            if ($menuNode !== $tMenuNode) {
-                $nodes[] = $menuNode;
-            }
-        }
-
-        $this->menuNodes = $nodes;
+        $this->menuNodes->remove($menuNode);
     }
 }

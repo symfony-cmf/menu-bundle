@@ -1,10 +1,10 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\WebTest\Admin;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\WebTest\Admin\Extension;
 
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 
-class MenuNodeAdminTest extends BaseTestCase
+class MenuNodeReferrersExtensionTest extends BaseTestCase
 {
     public function setUp()
     {
@@ -16,8 +16,9 @@ class MenuNodeAdminTest extends BaseTestCase
 
     public function testEdit()
     {
-        $crawler = $this->client->request('GET', '/admin/cmf/menu/menunode/test/menus/test-menu/item-1/edit');
+        $crawler = $this->client->request('GET', '/admin/cmf/menu-test/content/test/content-1/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
     }
 }
+
