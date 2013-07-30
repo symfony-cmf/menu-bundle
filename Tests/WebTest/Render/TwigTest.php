@@ -21,4 +21,3 @@ class TwigTest extends BaseTestCase
         $this->assertEquals(200, $res->getStatusCode());
     }
 }
-

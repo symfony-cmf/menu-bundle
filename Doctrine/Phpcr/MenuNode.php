@@ -7,4 +7,3 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode as BaseMenuNode;
 class MenuNode extends BaseMenuNode
 {
 }
-

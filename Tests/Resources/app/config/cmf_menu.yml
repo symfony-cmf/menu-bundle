@@ -9,7 +9,7 @@ cmf_menu:
             use_sonata_admin: true
             menu_basepath: /test/menus
     multilang:
-        locales: 
+        locales:
             - en
             - fr
 

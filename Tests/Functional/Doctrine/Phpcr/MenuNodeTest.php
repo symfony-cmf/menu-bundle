@@ -5,7 +5,6 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Doctrine\Phpcr;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Component\Testing\Document\Content;
-use Doctrine\ODM\PHPCR\Model\Generic;
 
 class MenuNodeTest extends BaseTestCase
 {
@@ -114,7 +113,6 @@ class MenuNodeTest extends BaseTestCase
         $this->assertInstanceOf('\DateTime', $publishEndDate);
         $this->assertEquals($data['publishStartDate']->format('Y-m-d'), $publishStartDate->format('Y-m-d'));
         $this->assertEquals($data['publishEndDate']->format('Y-m-d'), $publishEndDate->format('Y-m-d'));
-
 
         // test multi-lang
         $menuNode->setLocale('fr');

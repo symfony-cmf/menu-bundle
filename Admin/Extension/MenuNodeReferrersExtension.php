@@ -3,8 +3,6 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin\Extension;
 
 use Sonata\AdminBundle\Admin\AdminExtension;
-use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 /**

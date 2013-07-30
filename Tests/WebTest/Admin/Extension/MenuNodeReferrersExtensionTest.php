@@ -38,4 +38,3 @@ class MenuNodeReferrersExtensionTest extends BaseTestCase
         $this->assertCount(1, $crawler->filter('input[value="Test Value"]'));
     }
 }
-

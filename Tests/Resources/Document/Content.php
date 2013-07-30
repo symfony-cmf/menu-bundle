@@ -26,8 +26,8 @@ class Content implements MenuNodeReferrersWriteInterface, RouteReferrersInterfac
 
     /**
      * @PHPCRODM\Referrers(
-     *     referringDocument="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode", 
-     *     referencedBy="content", 
+     *     referringDocument="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode",
+     *     referencedBy="content",
      *     cascade="persist"
      * )
      */
@@ -38,7 +38,7 @@ class Content implements MenuNodeReferrersWriteInterface, RouteReferrersInterfac
         $this->menuNodes = new ArrayCollection();
     }
 
-    public function getId() 
+    public function getId()
     {
         return $this->id;
     }
@@ -48,7 +48,7 @@ class Content implements MenuNodeReferrersWriteInterface, RouteReferrersInterfac
         $this->id = $id;
     }
 
-    public function getTitle() 
+    public function getTitle()
     {
         return $this->title;
     }

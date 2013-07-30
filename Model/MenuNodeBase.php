@@ -3,8 +3,6 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
 use Knp\Menu\NodeInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
 
 /**
  * This is a persistable implementation of the KnpMenu
@@ -329,8 +327,8 @@ class MenuNodeBase implements NodeInterface
     /**
      * Return the given attribute, optionally specifying a default value
      *
-     * @param string $name     The name of the attribute to return
-     * @param string $default  The value to return if the attribute doesn't exist
+     * @param string $name    The name of the attribute to return
+     * @param string $default The value to return if the attribute doesn't exist
      *
      * @return string
      */
@@ -508,6 +506,7 @@ class MenuNodeBase implements NodeInterface
     public function setLabelAttributes($labelAttributes)
     {
         $this->labelAttributes = $labelAttributes;
+
         return $this;
     }
 

@@ -98,6 +98,7 @@ class MenuNode extends MenuNodeBase implements
     public function setContent($content)
     {
         $this->content = $content;
+
         return $this;
     }
     /**

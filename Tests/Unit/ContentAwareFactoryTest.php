@@ -1,9 +1,7 @@
 <?php
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
 {

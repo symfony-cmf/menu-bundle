@@ -97,8 +97,8 @@ class PHPCRMenuProvider implements MenuProviderInterface
     /**
      * Get a menu node by name
      *
-     * @param  string $name
-     * @param  array  $options
+     * @param  string                    $name
+     * @param  array                     $options
      * @return \Knp\Menu\ItemInterface
      * @throws \InvalidArgumentException
      */
@@ -137,6 +137,7 @@ class PHPCRMenuProvider implements MenuProviderInterface
     public function has($name, array $options = array())
     {
         $menu = $this->getObjectManager()->find(null, $this->menuRoot . '/' . $name);
+
         return $menu instanceof NodeInterface;
     }
 

@@ -7,10 +7,8 @@ use Knp\Menu\ItemInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\MenuItem;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
 
@@ -73,12 +71,12 @@ class ContentAwareFactory extends RouterAwareFactory
     private $allowEmptyItems;
 
     /**
-     * @param UrlGeneratorInterface $generator for the parent class
+     * @param UrlGeneratorInterface $generator     for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
      * @param SecurityContextInterface $securityContext the publish workflow
      *      checker to check if menu items are published.
-     * @param LoggerInterface       $logger
+     * @param LoggerInterface $logger
      */
     public function __construct(
         UrlGeneratorInterface $generator,
@@ -131,7 +129,7 @@ class ContentAwareFactory extends RouterAwareFactory
      * Add a voter to decide on current item.
      *
      * @param VoterInterface $voter
-     * @param int                       $priority High numbers can vote first
+     * @param int            $priority High numbers can vote first
      *
      * @see VoterInterface
      */
@@ -190,8 +188,8 @@ class ContentAwareFactory extends RouterAwareFactory
      * You can add custom link types by overwriting this method and calling the
      * parent - setting the URI option and the linkType to "uri".
      *
-     * @param string        $name    the menu item name
-     * @param array         $options options for the menu item, we care about
+     * @param string $name    the menu item name
+     * @param array  $options options for the menu item, we care about
      *                               'content'
      *
      * @return MenuItem|null returns null if no route can be built for this menu item
@@ -282,7 +280,6 @@ class ContentAwareFactory extends RouterAwareFactory
             ));
         }
     }
-
 
     /**
      * Cycle through all voters. If any votes true, this is the current item. If
