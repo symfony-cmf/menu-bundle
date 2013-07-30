@@ -6,11 +6,13 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersWriteInterface;
 use Knp\Menu\NodeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Routing\Route;
+use Symfony\Cmf\Component\Routing\RouteAwareInterface;
 
 /**
  * @PHPCRODM\Document(referenceable=true)
  */
-class Content implements MenuNodeReferrersWriteInterface
+class Content implements MenuNodeReferrersWriteInterface, RouteAwareInterface
 {
     /**
      * @PHPCRODM\Id()
@@ -69,5 +71,10 @@ class Content implements MenuNodeReferrersWriteInterface
     public function removeMenuNode(NodeInterface $menuNode)
     {
         $this->menuNodes->remove($menuNode);
+    }
+
+    public function getRoutes()
+    {
+        return array(new Route('http://www.example.com/content'));
     }
 }
