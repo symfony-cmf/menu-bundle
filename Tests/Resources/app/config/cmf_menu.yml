@@ -25,7 +25,7 @@ cmf_routing:
 
 sonata_admin:
     extensions:
-        cmf_core.admin_extension.menu_node_referrers:
+        cmf_menu.admin_extension.menu_node_referrers:
             implements:
                 - Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersWriteInterface
 

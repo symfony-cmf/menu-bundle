@@ -78,8 +78,7 @@
 
         </service>
 
-        <service id="cmf_core.admin_extension.menu_node_referrers" class="%cmf_menu.admin_extension.menu_reference.class%">
-            <argument>%cmf_menu.multilang.locales%</argument>
+        <service id="cmf_menu.admin_extension.menu_node_referrers" class="%cmf_menu.admin_extension.menu_reference.class%">
             <tag name="sonata.admin.extension"/>
         </service>
 

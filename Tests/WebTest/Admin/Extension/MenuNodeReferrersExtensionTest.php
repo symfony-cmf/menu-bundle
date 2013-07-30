@@ -19,6 +19,23 @@ class MenuNodeReferrersExtensionTest extends BaseTestCase
         $crawler = $this->client->request('GET', '/admin/cmf/menu-test/content/test/content-1/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
+
+        $button = $crawler->selectButton('Update');
+        $form = $button->form();
+        $node = $form->getFormNode();
+        $actionUrl = $node->getAttribute('action');
+        $uniqId = substr(strchr($actionUrl, '='), 1);
+
+        $form[$uniqId.'[menuNodes][0][label]'] = 'Test Value';
+
+        $crawler = $this->client->submit($form);
+        $res = $this->client->getResponse();
+
+        // If we have a 302 redirect, then all is well
+        $this->assertEquals(302, $res->getStatusCode());
+
+        $crawler = $this->client->request('GET', '/admin/cmf/menu-test/content/test/content-1/edit');
+        $this->assertCount(1, $crawler->filter('input[value="Test Value"]'));
     }
 }
 

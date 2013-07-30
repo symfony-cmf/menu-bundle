@@ -7,12 +7,12 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersWriteInterface;
 use Knp\Menu\NodeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Route;
-use Symfony\Cmf\Component\Routing\RouteAwareInterface;
+use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
 
 /**
  * @PHPCRODM\Document(referenceable=true)
  */
-class Content implements MenuNodeReferrersWriteInterface, RouteAwareInterface
+class Content implements MenuNodeReferrersWriteInterface, RouteReferrersInterface
 {
     /**
      * @PHPCRODM\Id()

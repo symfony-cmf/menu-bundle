@@ -14,19 +14,6 @@ use Sonata\AdminBundle\Form\FormMapper;
  */
 class MenuNodeReferrersExtension extends AdminExtension
 {
-    /**
-     * @var array
-     */
-    protected $locales;
-
-    /**
-     * @param array  $locales
-     */
-    public function __construct($locales)
-    {
-        $this->locales = $locales;
-    }
-
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
