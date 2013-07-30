@@ -14,12 +14,14 @@ class AppKernel extends TestKernel
         $this->addBundles(array(
             new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
+            new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
         ));
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config/config.php');
+        $loader->load(__DIR__.'/config/admin-test.xml');
     }
 
 }

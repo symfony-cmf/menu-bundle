@@ -98,11 +98,14 @@ class CmfMenuExtension extends Extension
             return;
         }
 
-        if (isset($config['admin_class'])) {
-            $container->setParameter(
-                $this->getAlias() . '.persistence.phpcr.admin.class',
-                $config['admin_class']
-            );
+        foreach (array('menu', 'node') as $key) {
+            if (isset($config[$key.'_admin_class'])) {
+                $container->setParameter(
+                    $this->getAlias() . '.persistence.phpcr.'.$key.'_admin.class',
+                    $config[$key.'_admin_class']
+                );
+            }
+
         }
 
         $loader->load('admin.xml');

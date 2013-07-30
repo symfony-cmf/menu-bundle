@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
+use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
 use Doctrine\ODM\PHPCR\Document\Generic;
 
 class LoadMenuData implements FixtureInterface, DependentFixtureInterface
@@ -20,6 +21,10 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
+        $content = new Content;
+        $content->setTitle('Content 1');
+        $content->setId('/test/content-1');
+
         $root = $manager->find(null, '/test');
         $menuRoot = new Generic;
         $menuRoot->setNodename('menus');
@@ -38,12 +43,16 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $menuNode->setName('item-1');
         $manager->persist($menuNode);
 
+        $content->addMenuNode($menuNode);
+
         $menuNode = new MenuNode;
         $menuNode->setParent($menu);
         $menuNode->setLabel('This node has a URI');
         $menuNode->setUri('http://www.example.com');
         $menuNode->setName('item-2');
         $manager->persist($menuNode);
+
+        $content->addMenuNode($menuNode);
 
         $subNode = new MenuNode;
         $subNode->setParent($menuNode);
@@ -93,6 +102,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $menuNode->setName('item-2');
         $manager->persist($menuNode);
 
+        $manager->persist($content);
         $manager->flush();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\WebTest\Admin\MenuNodeAdminTest;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\WebTest\Admin;
 
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 

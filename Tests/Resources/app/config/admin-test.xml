@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="cmf_menu_test.content_admin" class="Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Admin\TestContentAdmin">
+            <tag
+                name="sonata.admin"
+                manager_type="doctrine_phpcr"
+                group="Test"
+                label="Test Content"
+                />
+
+            <argument/>
+            <argument>Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+
+        </service>
+
+    </services>
+
+</container>
+
