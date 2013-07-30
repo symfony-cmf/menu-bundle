@@ -66,10 +66,6 @@
         <source>list.label_route</source>
         <target>Route</target>
       </trans-unit>
-      <trans-unit id="list.label_locales">
-        <source>list.label_locales</source>
-        <target>Langues</target>
-      </trans-unit>
       <trans-unit id="form.group_general">
         <source>form.group_general</source>
         <target>Générale</target>
@@ -81,10 +77,6 @@
       <trans-unit id="form.label_children">
         <source>form.label_children</source>
         <target>Éléments</target>
-      </trans-unit>
-      <trans-unit id="form.label_locale">
-        <source>form.label_locale</source>
-        <target>Langue</target>
       </trans-unit>
       <trans-unit id="form.label_parent">
         <source>form.label_parent</source>
@@ -113,18 +105,6 @@
       <trans-unit id="form.label_content">
         <source>form.label_content</source>
         <target>Contenu</target>
-      </trans-unit>
-      <trans-unit id="form.label_publishable">
-        <source>form.label_publishable</source>
-        <target>Publiable</target>
-      </trans-unit>
-      <trans-unit id="form.label_publish_start_date">
-        <source>form.label_publish_start_date</source>
-        <target>Publier à partir de</target>
-      </trans-unit>
-      <trans-unit id="form.label_publish_end_date">
-        <source>form.label_publish_end_date</source>
-        <target>Publilier jusqu'à</target>
       </trans-unit>
       <trans-unit id="form.label_link_type">
         <source>form.label_link_type</source>
