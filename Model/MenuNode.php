@@ -4,6 +4,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
+use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 
 /**
  * This is the standard CMF MenuNode implementation
@@ -11,7 +12,7 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
  * Menu bundle specific additions:
  *
  * - Link type: Ability to explicitly specify the type of link
- * - Content aware: Either a route of document implementing 
+ * - Content aware: Either a route of document implementing
  *     RouteAware can be used to determine the link.
  *
  * Standard CMF features:
@@ -20,8 +21,9 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
  * - Publish Workflow
  */
 class MenuNode extends MenuNodeBase implements
-    PublishTimePeriodWriteInterface, 
-    PublishableWriteInterface
+    PublishTimePeriodWriteInterface,
+    PublishableWriteInterface,
+    TranslatableInterface
 {
     /**
      * @var string
@@ -164,14 +166,14 @@ class MenuNode extends MenuNodeBase implements
     /**
      * Get the link type
      *
-     * The link type is used to explicitly determine which of the uri, route 
-     * and content fields are used to determine the link which will bre 
-     * rendered for the menu item. If it is empty this will be determined 
+     * The link type is used to explicitly determine which of the uri, route
+     * and content fields are used to determine the link which will bre
+     * rendered for the menu item. If it is empty this will be determined
      * automatically.
      *
      * @return string
      */
-    public function getLinkType() 
+    public function getLinkType()
     {
         return $this->linkType;
     }

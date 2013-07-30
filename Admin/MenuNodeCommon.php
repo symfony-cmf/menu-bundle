@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
+use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Menu\ItemInterface as MenuItemInterface;
@@ -13,27 +14,13 @@ use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 use Doctrine\Common\Util\ClassUtils;
 
 /**
- * Common base admin for Menu and MenuNode 
+ * Common base admin for Menu and MenuNode
  */
 class MenuNodeCommon extends Admin
 {
     protected $contentAwareFactory;
-    protected $locales;
     protected $menuRoot;
     protected $translationDomain = 'CmfMenuBundle';
-
-    /**
-     * @param string $code
-     * @param string $class
-     * @param string $baseControllerName
-     * @param array  $locales
-     */
-    public function __construct($code, $class, $baseControllerName, $locales)
-    {
-        parent::__construct($code, $class, $baseControllerName);
-
-        $this->locales = $locales;
-    }
 
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -44,12 +31,6 @@ class MenuNodeCommon extends Admin
             ->add('uri', 'text')
             ->add('route', 'text')
             ;
-
-        $listMapper
-            ->add('locales', 'choice', array(
-                'template' => 'SonataDoctrinePHPCRAdminBundle:CRUD:locales.html.twig'
-            ))
-        ;
     }
 
     protected function isSubjectNotNew()
@@ -96,24 +77,14 @@ class MenuNodeCommon extends Admin
                     ->add('uri', 'text', array('required' => false))
                     ->add('content', 'doctrine_phpcr_odm_tree',
                         array(
-                            'root_node' => $this->contentRoot, 
-                            'choice_list' => array(), 
+                            'root_node' => $this->contentRoot,
+                            'choice_list' => array(),
                             'required' => false
                         )
                     )
                 ->end()
             ;
         }
-
-        // Add locale
-        $formMapper
-            ->with('form.group_general')
-                ->add('locale', 'choice', array(
-                    'choices' => array_combine($this->locales, $this->locales),
-                    'empty_value' => '',
-                ))
-            ->end()
-        ;
     }
 
     protected function configureShowField(ShowMapper $showMapper)
@@ -143,14 +114,6 @@ class MenuNodeCommon extends Admin
             if (null !== $parentId) {
                 $new->setParent($this->getModelManager()->find(null, $parentId));
             }
-
-            // Set the locale
-            $currentLocale = $this->getRequest()->attributes->get('_locale');
-
-            if (in_array($currentLocale, $this->locales)) {
-                $meta = $this->getModelManager()->getMetadata(get_class($new));
-                $meta->setFieldValue($new, $meta->localeMapping, $currentLocale);
-            }
         }
 
         return $new;
@@ -161,11 +124,11 @@ class MenuNodeCommon extends Admin
         return array();
     }
 
-    public function getContentAwareFactory() 
+    public function getContentAwareFactory()
     {
         return $this->contentAwareFactory;
     }
-    
+
     public function setContentAwareFactory(ContentAwareFactory $contentAwareFactory)
     {
         $this->contentAwareFactory = $contentAwareFactory;
