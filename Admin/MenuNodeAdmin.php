@@ -78,14 +78,14 @@ class MenuNodeAdmin extends MenuNodeCommon
 
         if (count($parts) == 0) {
             throw new \InvalidArgumentException(sprintf(
-                'ID for menu node "%s" is the same as root path "%s" - this is strange.',
-                $id, $rootPath
+                'ID for menu node "%s" may not be the same as root path "%s"',
+                $id, $this->menuRoot
             ));
         }
 
         if (count($parts) == 1) {
             throw new \InvalidArgumentException(sprintf(
-                'MenuNode "%s" seems to hold the position reserved for a Menu. This should not happen',
+                'MenuNode "%s" may not hold the position reserved for a Menu.',
                 $id
             ));
         }

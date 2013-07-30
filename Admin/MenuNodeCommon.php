@@ -19,6 +19,7 @@ class MenuNodeCommon extends Admin
 {
     protected $contentAwareFactory;
     protected $locales;
+    protected $menuRoot;
     protected $translationDomain = 'CmfMenuBundle';
 
     /**
