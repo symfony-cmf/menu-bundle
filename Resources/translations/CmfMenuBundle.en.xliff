@@ -142,8 +142,8 @@
          <source>form.group_menus</source>
         <target>Menu</target>
       </trans-unit>
-      <trans-unit id="form.label_menus">
-        <source>form.label_menus</source>
+      <trans-unit id="form.label_menu_nodes">
+        <source>form.label_menu_nodes</source>
         <target>Menu</target>
       </trans-unit>
     </body>
