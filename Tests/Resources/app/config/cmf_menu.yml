@@ -1,4 +1,6 @@
 cmf_core:
+    multilang:
+        locales: ['en', 'de', 'fr']
     publish_workflow:
         enabled: false
 
@@ -8,10 +10,6 @@ cmf_menu:
             enabled: true
             use_sonata_admin: true
             menu_basepath: /test/menus
-    multilang:
-        locales:
-            - en
-            - fr
 
 cmf_routing:
     dynamic:
