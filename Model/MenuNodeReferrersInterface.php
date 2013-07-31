@@ -8,7 +8,7 @@ use Knp\Menu\NodeInterface;
  * Interface to be implemented by content that exposes editable menu referrers.
  * This is used with the Sonata MenuAwareExtension.
  */
-interface MenuNodeReferrersWriteInterface
+interface MenuNodeReferrersInterface
 {
     /**
      * Get all menu nodes that point to this content.
