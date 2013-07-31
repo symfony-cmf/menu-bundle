@@ -1,0 +1,14 @@
+<container xmls="http://cmf.symfony,com/schema/dic/services"
+    xmlns:cmf-menu="http://cmf.symfony.com/schema/dic/menu"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <cmf-menu:config>
+        <cmf-menu:persistence>
+            <cmf-menu:phpcr 
+                enabled="true" 
+                use-sonata-admin="true"
+                menu-basepath="/test/menus"/>
+        </cmf-menu:persistence>
+    </cmf-menu:config>
+
+</container>

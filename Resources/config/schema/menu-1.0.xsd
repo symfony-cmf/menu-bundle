@@ -33,6 +33,7 @@
     </xsd:complexType>
 
     <xsd:complexType name="phpcr">
+        <xsd:attribute name="enabled" type="xsd:string" />
         <xsd:attribute name="menu-basepath" type="xsd:string" />
         <xsd:attribute name="content-basepath" type="xsd:string" />
         <xsd:attribute name="manager-name" type="xsd:string" />
