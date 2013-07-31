@@ -1,42 +1,40 @@
-# Symfony Cmf Menu Bundle [![Build Status](https://secure.travis-ci.org/symfony-cmf/MenuBundle.png)](http://travis-ci.org/symfony-cmf/MenuBundle)
+# Symfony CMF Menu Bundle
 
-This is part of the Symfony Cmf: <http://cmf.symfony.com/>
+[![Build Status](https://secure.travis-ci.org/symfony-cmf/MenuBundle.png)](http://travis-ci.org/symfony-cmf/MenuBundle)
+[![Latest Stable Version](https://poser.pugx.org/symfony-cmf/menu-bundle/version.png)](https://packagist.org/packages/symfony-cmf/menu-bundle)
+[![Total Downloads](https://poser.pugx.org/symfony-cmf/menu-bundle/d/total.png)](https://packagist.org/packages/symfony-cmf/menu-bundle)
 
-## Development
+This bundle is part of the [Symfony Content Management Framework (CMF)](http://cmf.symfony.com/)
+and licensed under the [MIT License](LICENSE).
 
-This bundle has a built-in test application:
+The MenuBundle provides menus from a doctrine object manager with the help of KnpMenuBundle.
 
-    $ php vendor/symfony-cmf/testing/bin/server
+## Requirements
 
-You can then access the testing application at `http://localhost:8000`
+* Symfony 2.2.x
+* See also the `require` section of [composer.json](composer.json)
 
 ## Documentation
 
-<http://symfony.com/doc/master/cmf/bundles/menu.html>
+For the install guide and reference, see:
 
-## Installation
+* [MenuBundle documentation](http://symfony.com/doc/master/cmf/bundles/menu.html)
 
-The general installation documentation for the CMF can be found here:
-<http://symfony.com/doc/master/cmf/tutorials/installing-configuring-cmf.html>
+See also:
 
-These instructions should help you if you want to use this bundle alone.
+* [All Symfony CMF documentation](http://symfony.com/doc/master/cmf/index.html)- complete Symfony CMF reference
+* [Symfony CMF Website](http://cmf.symfony.com/) - introduction, live demo, support and community links
 
-The bundle is best included using Composer.
 
-Edit your project composer file to add a new require for
-`symfony-cmf/menu-bundle`.
+## Contributing
 
-Add this bundle (and its dependencies, if they are not already there) to your
-application's kernel:
+Pull requests are welcome. Please see our
+[CONTRIBUTING](https://github.com/symfony-cmf/symfony-cmf/blob/master/CONTRIBUTING.md)
+guide.
 
-    // application/ApplicationKernel.php
-    public function registerBundles()
-    {
-        return array(
-            // ...
-            new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
-            // ...
-        );
-    }
+Unit and/or functional tests exist for this bundle. See the
+[Testing documentation](http://symfony.com/doc/master/cmf/components/testing.html)
+for a guide to running the tests.
+
+Thanks to
+[everyone who has contributed](https://github.com/symfony-cmf/MenuBundle/contributors) already.
