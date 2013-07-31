@@ -3,7 +3,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document;
 
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersWriteInterface;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Knp\Menu\NodeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Routing\Route;
@@ -12,7 +12,7 @@ use Symfony\Cmf\Component\Routing\RouteReferrersInterface;
 /**
  * @PHPCRODM\Document(referenceable=true)
  */
-class Content implements MenuNodeReferrersWriteInterface, RouteReferrersInterface
+class Content implements MenuNodeReferrersInterface, RouteReferrersInterface
 {
     /**
      * @PHPCRODM\Id()

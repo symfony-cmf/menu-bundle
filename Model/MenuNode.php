@@ -2,9 +2,9 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodWriteInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableWriteInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 
 /**
  * This is the standard CMF MenuNode implementation
@@ -21,9 +21,9 @@ use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
  * - Publish Workflow
  */
 class MenuNode extends MenuNodeBase implements
-    PublishTimePeriodWriteInterface,
-    PublishableWriteInterface,
-    TranslatableInterface
+    TranslatableInterface,
+    PublishTimePeriodInterface, 
+    PublishableInterface
 {
     /**
      * @var string
