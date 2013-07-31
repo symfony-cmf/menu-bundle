@@ -25,7 +25,7 @@ sonata_admin:
     extensions:
         cmf_menu.admin_extension.menu_node_referrers:
             implements:
-                - Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersWriteInterface
+                - Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface
 
 sonata_doctrine_phpcr_admin:
     document_tree_defaults: [locale]
