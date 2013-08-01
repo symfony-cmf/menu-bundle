@@ -14,7 +14,7 @@
 
         <reference-one name="content" property="menuContent"/>
 
-        <field name="label" type="string" translated="true"/>
+        <field name="label" type="string" translated="true" nullable="false"/>
         <field name="uri" type="string" translated="true"/>
         <field name="linkType" type="string"/>
         <field name="publishable" type="boolean"/>

@@ -15,7 +15,7 @@
         <nodename name="name"/>
         <parent-document name="parent"/>
 
-        <field name="label" type="string"/>
+        <field name="label" type="string" nullable="false"/>
         <field name="uri" type="string"/>
         <field name="route" type="string"/>
         <field name="routeAbsolute" type="boolean"/>
