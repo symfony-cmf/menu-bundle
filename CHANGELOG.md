@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.0.0-RC1
+---------
+
 * **2013-07-28**: [DependencyInjection] moved phpcr specific configuration
   under `persistence.phpcr`.
 * **2013-07-27**: Removed `MenuCommonAdmin::getBlocks` as not sure what uses it.
