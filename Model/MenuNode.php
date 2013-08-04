@@ -37,7 +37,9 @@ class MenuNode extends MenuNodeBase implements
     protected $linkType;
 
     /**
-     * @var mixed
+     * The content this menu item points to.
+     *
+     * @var object
      */
     protected $content;
 

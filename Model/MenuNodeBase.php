@@ -101,7 +101,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @var array
      */
-    protected $extras;
+    protected $extras = array();
 
     /**
      * Parameters to use when generating the route.
