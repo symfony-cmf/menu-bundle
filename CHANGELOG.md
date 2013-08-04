@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.0.0-RC2
+---------
+
+* **2013-08-04**: [PHPCR-ODM] properly map nullable properties as nullable
+
 1.0.0-RC1
 ---------
 
