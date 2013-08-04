@@ -22,7 +22,7 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
  */
 class MenuNode extends MenuNodeBase implements
     TranslatableInterface,
-    PublishTimePeriodInterface, 
+    PublishTimePeriodInterface,
     PublishableInterface
 {
     /**
