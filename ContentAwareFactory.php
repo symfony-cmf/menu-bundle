@@ -224,12 +224,16 @@ class ContentAwareFactory extends RouterAwareFactory
                         return null;
                     }
                 }
+                unset($options['route']);
+                break;
             case 'uri':
                 unset($options['route']);
                 break;
             case 'route':
                 unset($options['uri']);
                 break;
+            default:
+                throw new \RuntimeException(sprintf('Internal error: unexpected linkType "%s"', $options['linkType']));
         }
 
         $item = parent::createItem($name, $options);
@@ -261,17 +265,20 @@ class ContentAwareFactory extends RouterAwareFactory
         if (!empty($options['content'])) {
             return 'content';
         }
+
+        return 'uri';
     }
 
     /**
-     * Ensure that we have valid link types
+     * Ensure that we have a valid link type.
+     *
+     * @param string $linkType
+     *
+     * @throws \InvalidArgumentException if $linkType is not one of the known
+     *      link types
      */
     protected function validateLinkType($linkType)
     {
-        if (!$linkType) {
-            return 'uri';
-        }
-
         if (!in_array($linkType, $this->linkTypes)) {
             throw new \InvalidArgumentException(sprintf(
                 'Invalid link type "%s". Valid link types are: "%s"',
