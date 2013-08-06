@@ -4,7 +4,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
 
-class MenuAdmin extends MenuNodeCommon
+class MenuAdmin extends MenuNodeCommonAdmin
 {
     protected $baseRouteName = 'cmf_menu';
     protected $baseRoutePattern = '/cmf/menu/menu';
