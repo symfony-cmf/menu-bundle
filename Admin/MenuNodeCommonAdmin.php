@@ -12,7 +12,7 @@ use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 /**
  * Common base admin for Menu and MenuNode
  */
-class MenuNodeCommon extends Admin
+class MenuNodeCommonAdmin extends Admin
 {
     protected $contentAwareFactory;
     protected $menuRoot;

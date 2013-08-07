@@ -7,7 +7,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Doctrine\Common\Util\ClassUtils;
 
-class MenuNodeAdmin extends MenuNodeCommon
+class MenuNodeAdmin extends MenuNodeCommonAdmin
 {
     protected $baseRouteName = 'cmf_menu_menunode';
     protected $baseRoutePattern = '/cmf/menu/menunode';
