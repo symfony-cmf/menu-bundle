@@ -10,7 +10,7 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
 
-class PHPCRMenuProvider implements MenuProviderInterface
+class PhpcrMenuProvider implements MenuProviderInterface
 {
     /**
      * @var ContainerInterface
