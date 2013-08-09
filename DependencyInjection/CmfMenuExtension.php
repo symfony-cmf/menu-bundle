@@ -25,15 +25,6 @@ class CmfMenuExtension extends Extension
         $factory->replaceArgument(1, new Reference($config['content_url_generator']));
         $container->setParameter($this->getAlias() . '.allow_empty_items', $config['allow_empty_items']);
 
-        $locales = array();
-        if (isset($config['multilang'])) {
-            $locales = $config['multilang']['locales'];
-        }
-        $container->setParameter(
-            $this->getAlias() . '.multilang.locales',
-            $locales
-        );
-
         $this->loadVoters($config, $loader, $container);
 
         if (!empty($config['persistence']['phpcr']['enabled'])) {

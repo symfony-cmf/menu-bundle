@@ -50,17 +50,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('uri_prefix')->defaultFalse()->end()
                     ->end()
                 ->end()
-
-                ->arrayNode('multilang')
-                    ->fixXmlConfig('locale')
-                    ->children()
-                        ->arrayNode('locales')
-                            ->isRequired()
-                            ->requiresAtLeastOneElement()
-                            ->prototype('scalar')->end()
-                        ->end()
-                    ->end()
-                ->end()
             ->end()
         ;
 
