@@ -26,7 +26,6 @@
             <argument/>
             <argument>%cmf_menu.persistence.phpcr.menu_document.class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
-            <argument>%cmf_menu.multilang.locales%</argument>
 
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
@@ -58,7 +57,6 @@
             <argument/>
             <argument>%cmf_menu.persistence.phpcr.node_document.class%</argument>
             <argument>SonataAdminBundle:CRUD</argument>
-            <argument>%cmf_menu.multilang.locales%</argument>
 
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
