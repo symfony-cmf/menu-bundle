@@ -10,7 +10,6 @@
     <xsd:complexType name="config">
         <xsd:sequence>
             <xsd:element name="voter" type="voter" minOccurs="0" maxOccurs="unbounded" />
-            <xsd:element name="multilang" type="multilang" minOccurs="0" />
             <xsd:element name="persistence" type="persistence" minOccurs="0"/>
         </xsd:sequence>
 
@@ -44,12 +43,6 @@
 
     <xsd:complexType name="content_identity">
         <xsd:attribute name="content-key" type="xsd:string" />
-    </xsd:complexType>
-
-    <xsd:complexType name="multilang">
-        <xsd:sequence>
-            <xsd:element name="locale" type="xsd:string" minOccurs="1" maxOccurs="unbounded" />
-        </xsd:sequence>
     </xsd:complexType>
 
     <xsd:simpleType name="use_sonata_admin">
