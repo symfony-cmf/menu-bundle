@@ -2,9 +2,9 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file source-language="en" target-language="en" datatype="plaintext" original="CmfMenuBundle.en.xliff">
     <body>
-      <trans-unit id="dashboard.group_menu">
-        <source>dashboard.group_menu</source>
-        <target>Menu</target>
+      <trans-unit id="dashboard.cmf">
+        <source>dashboard.cmf</source>
+        <target>Symfony CMF</target>
       </trans-unit>
       <trans-unit id="dashboard.label_menu">
         <source>dashboard.label_menu</source>
