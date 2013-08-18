@@ -17,7 +17,7 @@
             <tag
                 name="sonata.admin"
                 manager_type="doctrine_phpcr"
-                group="dashboard.group_menu"
+                group="dashboard.cmf"
                 label_catalogue="CmfMenuBundle"
                 label="dashboard.label_menu"
                 label_translator_strategy="sonata.admin.label.strategy.underscore"
@@ -49,7 +49,7 @@
             <tag
                 name="sonata.admin"
                 manager_type="doctrine_phpcr"
-                group="dashboard.group_menu"
+                group="dashboard.cmf"
                 label_catalogue="CmfMenuBundle"
                 label="dashboard.label_menu_node"
                 label_translator_strategy="sonata.admin.label.strategy.underscore"
