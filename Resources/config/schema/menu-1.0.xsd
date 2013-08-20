@@ -32,6 +32,7 @@
     </xsd:complexType>
 
     <xsd:complexType name="phpcr">
+        <xsd:attribute name="enabled" type="boolean" />
         <xsd:attribute name="menu-basepath" type="xsd:string" />
         <xsd:attribute name="content-basepath" type="xsd:string" />
         <xsd:attribute name="manager-name" type="xsd:string" />
@@ -50,6 +51,13 @@
             <xsd:enumeration value="true" />
             <xsd:enumeration value="false" />
             <xsd:enumeration value="auto" />
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="boolean">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="true" />
+            <xsd:enumeration value="false" />
         </xsd:restriction>
     </xsd:simpleType>
 </xsd:schema>

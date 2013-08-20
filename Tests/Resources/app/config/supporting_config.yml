@@ -4,13 +4,6 @@ cmf_core:
     publish_workflow:
         enabled: false
 
-cmf_menu:
-    persistence:
-        phpcr:
-            enabled: true
-            use_sonata_admin: true
-            menu_basepath: /test/menus
-
 cmf_routing:
     dynamic:
         persistence:
@@ -57,3 +50,4 @@ fos_js_routing:
         - admin_cmf_menu_menunode_*
         - admin_cmf_menu_multilangmenunode_*
         - sonata.admin.doctrine_phpcr.phpcrodm_children
+

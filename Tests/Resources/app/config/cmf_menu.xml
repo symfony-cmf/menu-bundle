@@ -1,0 +1,13 @@
+<container xmlns="http://symfony.com/schema/dic/services">
+
+    <config xmlns="http://cmf.symfony.com/schema/dic/menu">
+        <persistence>
+            <phpcr 
+                enabled="true" 
+                use-sonata-admin="true"
+                menu-basepath="/test/menus"
+                />
+        </persistence>
+    </config>
+
+</container>
