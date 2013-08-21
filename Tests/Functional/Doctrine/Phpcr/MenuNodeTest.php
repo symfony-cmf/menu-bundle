@@ -16,6 +16,7 @@ class MenuNodeTest extends BaseTestCase
 
         $this->content = new Content;
         $this->content->setParent($this->baseNode);
+        $this->content->setTitle('fake_weak_content');
         $this->content->setName('fake_weak_content');
         $this->dm->persist($this->content);
 

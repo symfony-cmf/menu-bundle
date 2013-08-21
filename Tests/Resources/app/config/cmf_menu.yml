@@ -13,6 +13,7 @@ cmf_menu:
 
 cmf_routing:
     dynamic:
+        enabled: true
         persistence:
             phpcr:
                 enabled: true
