@@ -21,7 +21,6 @@
         </property>
 
         <property name="locale">
-            <constraint name="NotBlank"/>
             <constraint name="Locale"/>
         </property>
     </class>
