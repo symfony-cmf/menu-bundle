@@ -602,9 +602,4 @@ class MenuNodeBase implements NodeInterface
             'labelAttributes' => $this->labelAttributes,
         );
     }
-
-    public function __toString()
-    {
-        return $this->getLabel() ? (string) $this->getLabel() : '(no label set)';
-    }
 }
