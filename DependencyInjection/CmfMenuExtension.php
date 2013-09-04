@@ -27,7 +27,7 @@ class CmfMenuExtension extends Extension
 
         $this->loadVoters($config, $loader, $container);
 
-        if (!empty($config['persistence']['phpcr']['enabled'])) {
+        if ($config['persistence']['phpcr']['enabled']) {
             $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
         }
     }
