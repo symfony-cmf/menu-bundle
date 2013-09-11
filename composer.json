@@ -19,10 +19,10 @@
         "doctrine/phpcr-bundle": "1.0.*",
         "doctrine/phpcr-odm": "1.0.*",
         "knplabs/knp-menu-bundle": "1.1.*",
-        "symfony-cmf/core-bundle": "~1.0.0-RC1"
+        "symfony-cmf/core-bundle": "~1.0.0-RC5"
     },
     "require-dev": {
-        "symfony-cmf/routing-bundle": "~1.1.0-RC1",
+        "symfony-cmf/routing-bundle": "~1.1.0-RC5",
         "symfony-cmf/testing": "1.0.*",
         "sonata-project/doctrine-phpcr-admin-bundle": "1.0.*",
         "symfony/monolog-bundle": "2.2.*"
