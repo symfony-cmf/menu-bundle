@@ -2,10 +2,10 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
+
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
@@ -13,14 +13,14 @@ use Knp\Menu\Provider\MenuProviderInterface;
 class PhpcrMenuProvider implements MenuProviderInterface
 {
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
      * @var FactoryInterface
      */
     protected $factory = null;
+
+    /**
+     * @var Request
+     */
+    protected $request;
 
     /**
      * base for menu ids
@@ -47,8 +47,6 @@ class PhpcrMenuProvider implements MenuProviderInterface
     protected $managerRegistry;
 
     /**
-     * @param ContainerInterface $container di container to get request from to
-     *      know current request uri
      * @param FactoryInterface $factory the menu factory to create the menu
      *      item with the root document (usually ContentAwareFactory)
      * @param ManagerRegistry $managerRegistry manager registry service to use in conjunction
@@ -56,12 +54,10 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * @param string $menuRoot root id of the menu
      */
     public function __construct(
-        ContainerInterface $container,
         FactoryInterface $factory,
         ManagerRegistry $managerRegistry,
         $menuRoot
     ) {
-        $this->container = $container;
         $this->factory = $factory;
         $this->managerRegistry = $managerRegistry;
         $this->menuRoot = $menuRoot;
@@ -95,6 +91,16 @@ class PhpcrMenuProvider implements MenuProviderInterface
     }
 
     /**
+     * Set the request, used for the cmf_request_aware tag.
+     *
+     * @param Request $request
+     */
+    public function setRequest(Request $request = null)
+    {
+        $this->request = $request;
+    }
+
+    /**
      * Get a menu node by name
      *
      * @param  string                    $name
@@ -117,14 +123,14 @@ class PhpcrMenuProvider implements MenuProviderInterface
             throw new \InvalidArgumentException("Menu at '$name' is not a valid menu node");
         }
 
-        $menuNode = $this->factory->createFromNode($menu);
-        if (empty($menuNode)) {
+        $menuItem = $this->factory->createFromNode($menu);
+        if (empty($menuItem)) {
             throw new \InvalidArgumentException("Menu at '$name' is misconfigured (f.e. the route might be incorrect) and could therefore not be instanciated");
         }
 
-        $menuNode->setCurrentUri($this->container->get('request')->getRequestUri());
+        $menuItem->setCurrentUri($this->request->getRequestUri());
 
-        return $menuNode;
+        return $menuItem;
     }
 
     /**
