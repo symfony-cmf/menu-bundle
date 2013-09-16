@@ -21,13 +21,25 @@ Changelog
  now `Menu[Node]Base`, whereas everything else including **translatable** is
  in `Menu[Node]`. Consequently we have removed **Multilang** admin and we
  provide **just one admin class** per document.
+ Note that additional fields are now mapped into storage, most important the
+ `display` and `displayChildren` fields, which needs to be set to `true` for
+ existing PHPCR documents to keep menu nodes showing up.
+
+ To migrate, use the following script:
+
+     $ php app/console doctrine:phpcr:nodes:update \
+        --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = \"Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MultilangMenuNode\"" \
+        --set-prop=phpcr:class="Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode" \
+        --set-prop=display="true"
+        --set-prop=displayChildren="true"
 
 * **2013-07-19**: Removed choice of weak/strong content reference. Standard is now weak. Migration
   as follows (you may need to adjust the [phpcr:class] clause to match your implementation):
 
        $ php app/console doctrine:phpcr:nodes:update \
-           --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Document\\MenuNode' OR [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Document\\MultilangMenuNode'" \
-           --apply-closure="if (\!\$node->hasProperty('weakContent') && \!\$node->hasProperty('strongContent')) { return; }; \$node->setProperty('menuContent', \$node->getProperty('weak')->getValue() == 1 ? \$node->getProperty('weakContent') : \$node->getWeakProperty('hardContent'));"
+           --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode' OR [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MultilangMenuNode'" \
+           --apply-closure="if (\!\$node->hasProperty('weakContent') && \!\$node->hasProperty('strongContent')) { return; }; \$node->setProperty('menuContent', \$node->getProperty('weak')->getValue() == 1 ? \$node->getProperty('weakContent')->getString() : \$node->getProperty('hardContent')->getString(), PropertyType::WEAKREFERENCE);"
+
 * **2013-07-16**: [Model] Adopted persistance standard model, see: http://symfony.com/doc/master/cmf/contributing/bundles.html#Persistence.
 
   To migrate adapt the following script. Run it once for each document class, replacing <documentClass> with `MenuNode`, `Menu`, `MultilangMenu` and `MultilangMenuNode` respectively:
