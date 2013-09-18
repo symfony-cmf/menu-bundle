@@ -50,7 +50,6 @@ class MenuAdminTest extends BaseTestCase
         $actionUrl = $node->getAttribute('action');
         $uniqId = substr(strchr($actionUrl, '='), 1);
 
-        $form[$uniqId.'[parent]'] = '/test/menus';
         $form[$uniqId.'[name]'] = 'foo-test';
         $form[$uniqId.'[label]'] = 'Foo Test';
 

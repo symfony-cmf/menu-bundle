@@ -3,12 +3,16 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 
 class MenuAdmin extends AbstractMenuNodeAdmin
 {
     protected $baseRouteName = 'cmf_menu';
     protected $baseRoutePattern = '/cmf/menu/menu';
 
+    /**
+     * {@inheritDoc}
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
@@ -29,5 +33,14 @@ class MenuAdmin extends AbstractMenuNodeAdmin
                 ->end()
             ;
         }
+    }
+
+    public function getNewInstance()
+    {
+        /** @var $new Menu */
+        $new = parent::getNewInstance();
+        $new->setParent($this->getModelManager()->find(null, $this->menuRoot));
+
+        return $new;
     }
 }
