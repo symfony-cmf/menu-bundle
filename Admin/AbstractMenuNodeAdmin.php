@@ -34,15 +34,13 @@ abstract class AbstractMenuNodeAdmin extends Admin
         return $this->hasSubject() && null !== $this->getSubject()->getId();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->with('form.group_general')
-                ->add(
-                    'parent',
-                    'doctrine_phpcr_odm_tree',
-                    array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true)
-                )
                 ->add('name', 'text',
                     $this->isSubjectNotNew() ? array(
                         'attr' => array('readonly' => 'readonly')

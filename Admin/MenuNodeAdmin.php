@@ -2,6 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Knp\Menu\ItemInterface as MenuItemInterface;
@@ -11,6 +12,23 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
 {
     protected $baseRouteName = 'cmf_menu_menunode';
     protected $baseRoutePattern = '/cmf/menu/menunode';
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->with('form.group_general')
+                ->add(
+                    'parent',
+                    'doctrine_phpcr_odm_tree',
+                    array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true)
+                )
+            ->end()
+        ;
+        parent::configureFormFields($formMapper);
+    }
 
     /**
      * {@inheritDoc}
