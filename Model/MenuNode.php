@@ -78,9 +78,9 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * Return the content document associated with this menu node
+     * Return the content document associated with this menu node.
      *
-     * @return object - ODM document
+     * @return object the content of this menu node
      */
     public function getContent()
     {
@@ -90,8 +90,8 @@ class MenuNode extends MenuNodeBase implements
     /**
      * Set the content document associated with this menu node
      *
-     * NOTE: The content document must be mapped by PHPCR-ODM so that it can be
-     * persisted.
+     * NOTE: When using doctrine, the content must be mapped for doctrine and
+     * be persisted or cascading be configured on the content field.
      *
      * @param object $content
      *
