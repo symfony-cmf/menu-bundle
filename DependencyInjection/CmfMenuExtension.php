@@ -62,6 +62,7 @@ class CmfMenuExtension extends Extension
             'menu_basepath' => 'menu_basepath',
             'content_basepath' => 'content_basepath',
             'manager_name' => 'manager_name',
+            'admin_recursive_breadcrumbs' => 'admin_recursive_breadcrumbs',
         );
 
         foreach ($keys as $sourceKey => $targetKey) {

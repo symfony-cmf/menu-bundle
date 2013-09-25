@@ -13,6 +13,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
 {
     protected $baseRouteName = 'cmf_menu_menunode';
     protected $baseRoutePattern = '/cmf/menu/menunode';
+    protected $recursiveBreadcrumbs = true;
 
     /**
      * {@inheritDoc}
@@ -38,7 +39,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     {
         $menuNodeNode = parent::buildBreadcrumbs($action, $menu);
 
-        if ($action != 'edit') {
+        if ($action != 'edit' || ! $this->recursiveBreadcrumbs) {
             return $menuNodeNode;
         }
 
@@ -67,4 +68,10 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
 
         return $current;
     }
+
+    public function setRecursiveBreadcrumbs($recursiveBreadcrumbs)
+    {
+        $this->recursiveBreadcrumbs = (bool) $recursiveBreadcrumbs;
+    }
+
 }
