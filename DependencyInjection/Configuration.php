@@ -34,6 +34,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('menu_admin_class')->defaultNull()->end()
                                 ->scalarNode('node_admin_class')->defaultNull()->end()
                                 ->scalarNode('content_basepath')->defaultNull()->end()
+                                ->scalarNode('admin_recursive_breadcrumbs')->defaultTrue()->end()
                             ->end()
                         ->end()
                     ->end()

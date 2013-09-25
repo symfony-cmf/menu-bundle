@@ -74,6 +74,10 @@
                 <argument type="service" id="cmf_menu.factory"/>>
             </call>
 
+            <call method="setRecursiveBreadcrumbs">
+                <argument>%cmf_menu.persistence.phpcr.admin_recursive_breadcrumbs%</argument>
+            </call>
+
         </service>
 
         <service id="cmf_menu.admin_extension.menu_node_referrers" class="%cmf_menu.admin_extension.menu_reference.class%">
