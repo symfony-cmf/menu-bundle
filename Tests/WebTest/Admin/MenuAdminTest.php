@@ -18,7 +18,7 @@ class MenuAdminTest extends BaseTestCase
     {
         $crawler = $this->client->request('GET', '/admin/cmf/menu/menu/list');
         $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
+        $this->assertEquals(200, $res->getStatusCode(), $res->getContent());
         $this->assertCount(1, $crawler->filter('html:contains("test-menu")'));
     }
 
