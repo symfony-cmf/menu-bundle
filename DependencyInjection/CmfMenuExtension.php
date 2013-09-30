@@ -1,4 +1,15 @@
 <?php
+
+/*
+ * This file is part of the Symfony CMF package.
+ *
+ * (c) 2011-2013 Symfony CMF
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+
 namespace Symfony\Cmf\Bundle\MenuBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
@@ -6,7 +17,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-// this use is only used if the class really is present, no hard dependency
 use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
 class CmfMenuExtension extends Extension
