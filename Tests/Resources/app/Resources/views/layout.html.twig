@@ -1,6 +1,24 @@
 <html>
     <head>
         <title>MenuBundle Test Application</title>
+    <style>
+        nav.side li {
+            border: 1px black dashed;
+            background-color: #eee;
+            margin: 2px;
+            width: 196px;
+            list-style: none;
+        }
+
+        nav.side li.current {
+            background-color: green;
+        }
+
+        nav.side li.current a {
+            font-weight: bold;
+            color: white;
+        }
+    </style>
     </head>
     <body>
         <section id="header">

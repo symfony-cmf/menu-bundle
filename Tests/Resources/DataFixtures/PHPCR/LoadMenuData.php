@@ -19,9 +19,13 @@ use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
 use Doctrine\ODM\PHPCR\Document\Generic;
+use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
+use PHPCR\Util\NodeHelper;
 
 class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 {
+    protected $root;
+
     public function getDependencies()
     {
         return array(
@@ -31,20 +35,29 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        $content = new Content;
-        $content->setTitle('Content 1');
-        $content->setId('/test/content-1');
+        $this->root = $manager->find(null, '/test');
 
-        $root = $manager->find(null, '/test');
-        $menuRoot = new Generic;
-        $menuRoot->setNodename('menus');
-        $menuRoot->setParent($root);
-        $manager->persist($menuRoot);
+        NodeHelper::createPath($manager->getPhpcrSession(), '/test/menus');
+        NodeHelper::createPath($manager->getPhpcrSession(), '/test/routes/contents');
+        $this->menuRoot = $manager->find(null, '/test/menus');
+        $this->routeRoot = $manager->find(null, '/test/routes');
+
+        $this->loadMainMenu($manager);
+        $this->loadSideMenu($manager);
+
+        $manager->flush();
+    }
+
+    protected function loadMainMenu($manager)
+    {
+        $content = new Content;
+        $content->setTitle('Menu Item Content 1');
+        $content->setId('/test/content-menu-item-1');
 
         $menu = new Menu;
         $menu->setName('test-menu');
         $menu->setLabel('Test Menu');
-        $menu->setParent($menuRoot);
+        $menu->setParent($this->menuRoot);
         $manager->persist($menu);
 
         $menuNode = new MenuNode;
@@ -94,7 +107,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $menu = new Menu;
         $menu->setName('another-menu');
         $menu->setLabel('Another Menu');
-        $menu->setParent($menuRoot);
+        $menu->setParent($this->menuRoot);
         $manager->persist($menu);
 
         $menuNode = new MenuNode;
@@ -113,6 +126,56 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $manager->persist($menuNode);
 
         $manager->persist($content);
-        $manager->flush();
+    }
+
+    protected function loadSideMenu($manager)
+    {
+        $content = new Content;
+        $content->setTitle('Content 1');
+        $content->setId('/test/content-1');
+        $manager->persist($content);
+
+        $route = new Route();
+        $route->setContent($content);
+        $route->setId('/test/routes/contents/content-1');
+        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::requestContentIdentityAction');
+        $manager->persist($route);
+
+        $content = new Content;
+        $content->setTitle('CMI Content 1');
+        $content->setId('/test/cmi-content-1');
+        $manager->persist($content);
+
+        $menu = new Menu;
+        $menu->setName('side-menu');
+        $menu->setLabel('Side Menu');
+        $menu->setParent($this->menuRoot);
+        $manager->persist($menu);
+
+        $menuNode = new MenuNode;
+        $menuNode->setParent($menu);
+        $menuNode->setLabel('Default Behavior');
+        $menuNode->setName('default');
+        $menuNode->setRoute('current_menu_item_default');
+        $manager->persist($menuNode);
+
+        $menuNode = new MenuNode;
+        $menuNode->setParent($menu);
+        $menuNode->setLabel('Request Content Identity Voter');
+        $menuNode->setName('request-content-identity-voter');
+        $menuNode->setContent($route);
+        $manager->persist($menuNode);
+
+        $menuNode = new MenuNode;
+        $menuNode->setParent($menu);
+        $menuNode->setLabel('URI Prefix Voter');
+        $menuNode->setName('uri-prefix-voter');
+        $manager->persist($menuNode);
+
+        $menuNode = new MenuNode;
+        $menuNode->setParent($menu);
+        $menuNode->setLabel('Request Parent Content Identity Voter');
+        $menuNode->setName('request-parent-content-identity-voter');
+        $manager->persist($menuNode);
     }
 }
