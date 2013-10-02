@@ -1,0 +1,10 @@
+{% extends "::layout.html.twig" %}
+{% block content %}
+{% include "::tests/cmi/_sideMenu.html.twig" %}
+<h1>Request Content</h1>
+This is the content: {{ content.title }}
+<p>
+The content identity voter should now be in use and the "Request Content Identity" menu item should be hilighted.
+</p>
+{% endblock %}
+

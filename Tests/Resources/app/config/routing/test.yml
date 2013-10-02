@@ -17,3 +17,14 @@ link_test_route_with_params:
     pattern: /link_test_route/hello/{bar}/{foo}
     defaults:
         _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::linkTestRouteAction
+
+current_menu_item_default:
+    pattern: /cmi/default
+    defaults:
+        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::defaultAction
+
+current_menu_item_request_content_identity:
+    pattern: /cmi/request_content_identity
+    defaults:
+        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::requestContentIdentityAction
+

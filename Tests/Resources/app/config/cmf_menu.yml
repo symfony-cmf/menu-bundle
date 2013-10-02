@@ -16,6 +16,7 @@ cmf_routing:
         enabled: true
         persistence:
             phpcr:
+                route_basepath: /test/routes
                 enabled: true
     chain:
         routers_by_id:
