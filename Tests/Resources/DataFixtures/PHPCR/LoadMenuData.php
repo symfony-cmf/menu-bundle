@@ -136,15 +136,10 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $manager->persist($content);
 
         $route = new Route();
-        $route->setContent($content);
         $route->setId('/test/routes/contents/content-1');
         $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::requestContentIdentityAction');
+        $route->setContent($content);
         $manager->persist($route);
-
-        $content = new Content;
-        $content->setTitle('CMI Content 1');
-        $content->setId('/test/cmi-content-1');
-        $manager->persist($content);
 
         $menu = new Menu;
         $menu->setName('side-menu');
@@ -163,7 +158,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $menuNode->setParent($menu);
         $menuNode->setLabel('Request Content Identity Voter');
         $menuNode->setName('request-content-identity-voter');
-        $menuNode->setContent($route);
+        $menuNode->setContent($content);
         $manager->persist($menuNode);
 
         $menuNode = new MenuNode;

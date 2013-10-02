@@ -23,7 +23,8 @@ class CmiTestController extends Controller
         $content = $request->get(DynamicRouter::CONTENT_KEY);
         if (!$content) {
             $content = $this->container->get('doctrine_phpcr.odm.document_manager')->find(null, '/test/content-1');
-            $request->query->set(DynamicRouter::CONTENT_KEY, $content);
+            $request->attributes->set(DynamicRouter::CONTENT_KEY, $content);
+
             return $this->render('::tests/cmi/requestContentVoterActive.html.twig', array('content' => $content));
         }
         return $this->render('::tests/cmi/requestContent.html.twig', array('content' => $content));
