@@ -10,6 +10,8 @@ cmf_menu:
             enabled: true
             use_sonata_admin: true
             menu_basepath: /test/menus
+    voters:
+        content_identity: ~
 
 cmf_routing:
     dynamic:
