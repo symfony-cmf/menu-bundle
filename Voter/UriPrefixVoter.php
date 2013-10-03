@@ -54,7 +54,7 @@ class UriPrefixVoter implements VoterInterface
 
         if ($content instanceof Route && $content->hasOption('currentUriPrefix')) {
             $currentUriPrefix = $content->getOption('currentUriPrefix');
-            $currentUriPrefix = str_replace('{_locale}', $this->request->getLocale(), $currentUriPrefix);
+            $currentUriPrefix = str_replace('{_locale_}', $this->request->getLocale(), $currentUriPrefix);
             if (0 === strncmp($this->request->getPathinfo(), $currentUriPrefix, strlen($currentUriPrefix))) {
                 return true;
             }
