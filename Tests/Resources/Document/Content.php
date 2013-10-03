@@ -37,6 +37,11 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
     protected $title;
 
     /**
+     * @PHPCRODM\ParentDocument()
+     */
+    protected $parent;
+
+    /**
      * @PHPCRODM\Referrers(
      *     referringDocument="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode",
      *     referencedBy="content",
@@ -105,5 +110,10 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
         foreach ($this->routes as $route) {
         }
         return $this->routes;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
     }
 }
