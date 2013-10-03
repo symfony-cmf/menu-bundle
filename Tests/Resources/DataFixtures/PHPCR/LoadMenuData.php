@@ -18,6 +18,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
+use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Post;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 use PHPCR\Util\NodeHelper;
@@ -130,6 +131,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 
     protected function loadSideMenu($manager)
     {
+        // test content
         $content = new Content;
         $content->setTitle('Content 1');
         $content->setId('/test/content-1');
@@ -141,6 +143,31 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $route->setContent($content);
         $manager->persist($route);
 
+        // test blog
+        $blog = new Content;
+        $blog->setTitle('Blog');
+        $blog->setId('/test/blog-1');
+        $manager->persist($blog);
+
+        $route = new Route();
+        $route->setId('/test/routes/blog');
+        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::blogAction');
+        $route->setContent($blog);
+        $manager->persist($route);
+
+        // test blog post
+        $post = new Post;
+        $post->setTitle('My Post');
+        $post->setId('/test/blog-1/my-post');
+        $manager->persist($post);
+
+        $route = new Route();
+        $route->setId('/test/routes/blog/my-post');
+        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::postAction');
+        $route->setContent($post);
+        $manager->persist($route);
+
+        // menu items
         $menu = new Menu;
         $menu->setName('side-menu');
         $menu->setLabel('Side Menu');
@@ -171,6 +198,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $menuNode->setParent($menu);
         $menuNode->setLabel('Request Parent Content Identity Voter');
         $menuNode->setName('request-parent-content-identity-voter');
+        $menuNode->setContent($blog);
         $manager->persist($menuNode);
     }
 }
