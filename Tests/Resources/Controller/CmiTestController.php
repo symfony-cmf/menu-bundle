@@ -41,6 +41,11 @@ class CmiTestController extends Controller
         return $this->render('::tests/cmi/blog.html.twig');
     }
 
+    public function articlesAction(Request $request)
+    {
+        return $this->render('::tests/cmi/articles.html.twig');
+    }
+
     public function postAction(Request $request)
     {
         $content = $request->get(DynamicRouter::CONTENT_KEY);

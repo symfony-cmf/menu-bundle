@@ -167,6 +167,34 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $route->setContent($post);
         $manager->persist($route);
 
+        // test articles
+        $articles = new Content;
+        $articles->setTitle('Articles Index');
+        $articles->setId('/test/articles');
+        $manager->persist($articles);
+
+        $articlesRoute = new Route();
+        $articlesRoute->setId('/test/routes/articles');
+        $articlesRoute->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::articlesAction');
+        $articlesRoute->setContent($articles);
+        $articlesRoute->setOption('currentUriPrefix', '/articles');
+        $manager->persist($articlesRoute);
+
+        $article1 = new Content();
+        $article1->setTitle('Article 1');
+        $article1->setId('/test/article-1');
+        $manager->persist($article1);
+
+        $route = new Route();
+        $route->setId('/test/routes/articles/some-category');
+        $manager->persist($route);
+
+        $route = new Route();
+        $route->setId('/test/routes/articles/some-category/article-1');
+        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::postAction');
+        $route->setContent($article1);
+        $manager->persist($route);
+
         // menu items
         $menu = new Menu;
         $menu->setName('side-menu');
@@ -192,6 +220,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $menuNode->setParent($menu);
         $menuNode->setLabel('URI Prefix Voter');
         $menuNode->setName('uri-prefix-voter');
+        $menuNode->setContent($articlesRoute);
         $manager->persist($menuNode);
 
         $menuNode = new MenuNode;

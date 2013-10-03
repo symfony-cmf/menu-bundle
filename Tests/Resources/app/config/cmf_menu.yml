@@ -11,7 +11,8 @@ cmf_menu:
             use_sonata_admin: true
             menu_basepath: /test/menus
     voters:
-        content_identity: ~
+        content_identity: true
+        uri_prefix: ~
 
 cmf_routing:
     dynamic:
