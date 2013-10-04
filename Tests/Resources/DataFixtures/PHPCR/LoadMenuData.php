@@ -15,6 +15,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
@@ -26,6 +27,8 @@ use PHPCR\Util\NodeHelper;
 class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 {
     protected $root;
+    protected $menuRoot;
+    protected $routeRoot;
 
     public function getDependencies()
     {
@@ -49,7 +52,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $manager->flush();
     }
 
-    protected function loadMainMenu($manager)
+    protected function loadMainMenu(DocumentManager $manager)
     {
         $content = new Content;
         $content->setTitle('Menu Item Content 1');
@@ -129,7 +132,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $manager->persist($content);
     }
 
-    protected function loadSideMenu($manager)
+    protected function loadSideMenu(DocumentManager $manager)
     {
         // test content
         $content = new Content;
