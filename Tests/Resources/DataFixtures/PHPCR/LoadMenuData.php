@@ -15,6 +15,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
@@ -26,6 +27,8 @@ use PHPCR\Util\NodeHelper;
 class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 {
     protected $root;
+    protected $menuRoot;
+    protected $routeRoot;
 
     public function getDependencies()
     {
@@ -44,12 +47,12 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $this->routeRoot = $manager->find(null, '/test/routes');
 
         $this->loadMainMenu($manager);
-        $this->loadSideMenu($manager);
+        $this->loadVoterMenu($manager);
 
         $manager->flush();
     }
 
-    protected function loadMainMenu($manager)
+    protected function loadMainMenu(DocumentManager $manager)
     {
         $content = new Content;
         $content->setTitle('Menu Item Content 1');
@@ -129,7 +132,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
         $manager->persist($content);
     }
 
-    protected function loadSideMenu($manager)
+    protected function loadVoterMenu(DocumentManager $manager)
     {
         // test content
         $content = new Content;
@@ -139,7 +142,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 
         $route = new Route();
         $route->setId('/test/routes/contents/content-1');
-        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::requestContentIdentityAction');
+        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::requestContentIdentityAction');
         $route->setContent($content);
         $manager->persist($route);
 
@@ -151,7 +154,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 
         $route = new Route();
         $route->setId('/test/routes/blog');
-        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::blogAction');
+        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::blogAction');
         $route->setContent($blog);
         $manager->persist($route);
 
@@ -163,7 +166,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 
         $route = new Route();
         $route->setId('/test/routes/blog/my-post');
-        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::postAction');
+        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::postAction');
         $route->setContent($post);
         $manager->persist($route);
 
@@ -175,7 +178,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 
         $articlesRoute = new Route();
         $articlesRoute->setId('/test/routes/articles');
-        $articlesRoute->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::articlesAction');
+        $articlesRoute->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::articlesAction');
         $articlesRoute->setContent($articles);
         $articlesRoute->setOption('currentUriPrefix', '/articles');
         $manager->persist($articlesRoute);
@@ -191,7 +194,7 @@ class LoadMenuData implements FixtureInterface, DependentFixtureInterface
 
         $route = new Route();
         $route->setId('/test/routes/articles/some-category/article-1');
-        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::postAction');
+        $route->setDefault('_controller', 'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::postAction');
         $route->setContent($article1);
         $manager->persist($route);
 

@@ -11,7 +11,7 @@ use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
  *
  * Tests actions for current menu item functionality.
  */
-class CmiTestController extends Controller
+class VoterController extends Controller
 {
     protected function getDm()
     {
@@ -20,7 +20,7 @@ class CmiTestController extends Controller
 
     public function defaultAction(Request $request)
     {
-        return $this->render('::tests/cmi/default.html.twig');
+        return $this->render('::tests/voter/default.html.twig');
     }
 
     public function requestContentIdentityAction(Request $request)
@@ -30,30 +30,30 @@ class CmiTestController extends Controller
             $content = $this->getDm()->find(null, '/test/content-1');
             $request->attributes->set(DynamicRouter::CONTENT_KEY, $content);
 
-            return $this->render('::tests/cmi/requestContentVoterActive.html.twig', array('content' => $content));
+            return $this->render('::tests/voter/requestContentVoterActive.html.twig', array('content' => $content));
         }
 
-        return $this->render('::tests/cmi/requestContent.html.twig', array('content' => $content));
+        return $this->render('::tests/voter/requestContent.html.twig', array('content' => $content));
     }
 
     public function blogAction(Request $request)
     {
-        return $this->render('::tests/cmi/blog.html.twig');
+        return $this->render('::tests/voter/blog.html.twig');
     }
 
     public function articlesAction(Request $request)
     {
-        return $this->render('::tests/cmi/articles.html.twig');
+        return $this->render('::tests/voter/articles.html.twig');
     }
 
     public function postAction(Request $request)
     {
         $content = $request->get(DynamicRouter::CONTENT_KEY);
-        return $this->render('::tests/cmi/post.html.twig', array('content' => $content));
+        return $this->render('::tests/voter/post.html.twig', array('content' => $content));
     }
 
     public function urlPrefixAction(Request $request)
     {
-        return $this->render('::tests/cmi/requestContent.html.twig', array('content' => $content));
+        return $this->render('::tests/voter/requestContent.html.twig', array('content' => $content));
     }
 }

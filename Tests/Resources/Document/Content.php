@@ -27,7 +27,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
 {
     /**
-     * @PHPCRODM\Id()
+     * @PHPCRODM\Id(strategy="assigned")
      */
     protected $id;
 

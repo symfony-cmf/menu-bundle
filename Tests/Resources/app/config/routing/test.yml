@@ -21,10 +21,10 @@ link_test_route_with_params:
 current_menu_item_default:
     pattern: /cmi/default
     defaults:
-        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::defaultAction
+        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::defaultAction
 
 current_menu_item_request_content_identity:
     pattern: /cmi/request_content_identity
     defaults:
-        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\CmiTestController::requestContentIdentityAction
+        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::requestContentIdentityAction
 
