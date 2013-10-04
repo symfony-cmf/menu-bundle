@@ -21,8 +21,6 @@ use Doctrine\Common\Util\ClassUtils;
 
 class MenuNodeAdmin extends AbstractMenuNodeAdmin
 {
-    protected $baseRouteName = 'cmf_menu_menunode';
-    protected $baseRoutePattern = '/cmf/menu/menunode';
     protected $recursiveBreadcrumbs = true;
 
     /**

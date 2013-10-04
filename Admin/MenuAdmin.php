@@ -17,8 +17,6 @@ use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 
 class MenuAdmin extends AbstractMenuNodeAdmin
 {
-    protected $baseRouteName = 'cmf_menu';
-    protected $baseRoutePattern = '/cmf/menu/menu';
 
     /**
      * {@inheritDoc}
