@@ -1,0 +1,8 @@
+{% extends "::layout.html.twig" %}
+{% block content %}
+{% include "::tests/voter/_sideMenu.html.twig" %}
+<p>
+This page does NOT use the content identity voter because the URI of the request matches that of the content.
+</p>
+{% endblock %}
+
