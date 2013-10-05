@@ -10,12 +10,16 @@ cmf_menu:
             enabled: true
             use_sonata_admin: true
             menu_basepath: /test/menus
+    voters:
+        content_identity: true
+        uri_prefix: ~
 
 cmf_routing:
     dynamic:
         enabled: true
         persistence:
             phpcr:
+                route_basepath: /test/routes
                 enabled: true
     chain:
         routers_by_id:

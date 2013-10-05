@@ -45,6 +45,7 @@ class CmfMenuExtension extends Extension
     public function loadVoters($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $loader->load('voters.xml');
+
         if (isset($config['voters']['content_identity'])) {
             if (empty($config['voters']['content_identity']['content_key'])) {
                 if (! class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
@@ -59,7 +60,7 @@ class CmfMenuExtension extends Extension
             $container->removeDefinition('cmf_menu.current_item_voter.content_identity');
         }
 
-        if (! isset($config['voters']['uri_prefix'])) {
+        if (!array_key_exists('uri_prefix', $config['voters'])) {
             $container->removeDefinition('cmf_menu.current_item_voter.uri_prefix');
         }
     }

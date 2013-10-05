@@ -1,0 +1,24 @@
+<nav class="side">
+{{ knp_menu_render('side-menu') }}
+</nav>
+<h3>Test Links</h3>
+<ul>
+    <li><a href="{{ path('current_menu_item_request_content_identity') }}">Test Request Content Identity Voter</a></li>
+</ul>
+<h3>Request Content</h3>
+{% if content is defined %}
+<table>
+    <tr>
+        <th>Title</th>
+        <td>{{ content.title }}</td>
+    </tr>
+    <tr>
+        <th>URI</th>
+        <td>{{ path(content) }}</td>
+    </tr>
+</table>
+{% else %}
+<p>
+No content
+</p>
+{% endif %}

@@ -19,6 +19,15 @@
 
         </service>
 
+        <service id="cmf_menu_test.menu_voter.parent"
+            class="Symfony\Cmf\Bundle\MenuBundle\Voter\RequestParentContentIdentityVoter">
+            <argument>contentDocument</argument>
+            <argument>Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Post</argument>
+            <tag name="cmf_menu.voter"/>
+            <tag name="cmf_request_aware"/>
+        </service>
+
+
     </services>
 
 </container>
