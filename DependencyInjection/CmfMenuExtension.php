@@ -60,7 +60,7 @@ class CmfMenuExtension extends Extension
             $container->removeDefinition('cmf_menu.current_item_voter.content_identity');
         }
 
-        if (!array_key_exists('uri_prefix', $config['voters'])) {
+        if (isset($config['voters']) && !array_key_exists('uri_prefix', $config['voters'])) {
             $container->removeDefinition('cmf_menu.current_item_voter.uri_prefix');
         }
     }
