@@ -70,6 +70,8 @@ class CmfMenuExtension extends Extension
         $keys = array(
             'menu_document_class' => 'menu_document.class',
             'node_document_class' => 'node_document.class',
+            'menu_admin_class' => 'menu_admin.class',
+            'node_admin_class' => 'node_admin.class',
             'menu_basepath' => 'menu_basepath',
             'content_basepath' => 'content_basepath',
             'manager_name' => 'manager_name',
