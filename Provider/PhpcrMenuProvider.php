@@ -15,7 +15,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
-
+use PHPCR\Util\PathHelper;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
@@ -124,7 +124,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
             throw new \InvalidArgumentException('The menu name may not be empty');
         }
 
-        $menu = $this->getObjectManager()->find(null, \PHPCR\Util\PathHelper::absolutizePath($name, $this->menuRoot));
+        $menu = $this->getObjectManager()->find(null, PathHelper::absolutizePath($name, $this->menuRoot));
         if ($menu === null) {
             throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
         }
@@ -152,7 +152,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
      */
     public function has($name, array $options = array())
     {
-        $menu = $this->getObjectManager()->find(null, \PHPCR\Util\PathHelper::absolutizePath($name, $this->menuRoot));
+        $menu = $this->getObjectManager()->find(null, PathHelper::absolutizePath($name, $this->menuRoot));
 
         return $menu instanceof NodeInterface;
     }
