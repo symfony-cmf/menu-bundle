@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeBase;
 use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 
 /**
@@ -151,5 +152,13 @@ abstract class AbstractMenuNodeAdmin extends Admin
     public function setContentTreeBlock($contentTreeBlock)
     {
         $this->contentTreeBlock = $contentTreeBlock;
+    }
+
+    public function toString($object)
+    {
+        return $object instanceof MenuNodeBase && $object->getLabel()
+            ? $object->getLabel()
+            : parent::toString($object)
+            ;
     }
 }
