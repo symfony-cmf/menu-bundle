@@ -77,6 +77,7 @@ abstract class AbstractMenuNodeAdmin extends Admin
                             'content' => array('content', 'doctrine_phpcr_odm_tree'),
                         ),
                         'empty_value' => 'auto',
+                        'required' => false
                     ))
                     ->add('route', 'text', array('required' => false))
                     ->add('uri', 'text', array('required' => false))
