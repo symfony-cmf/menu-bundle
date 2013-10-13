@@ -157,9 +157,10 @@ abstract class AbstractMenuNodeAdmin extends Admin
 
     public function toString($object)
     {
-        return $object instanceof MenuNodeBase && $object->getLabel()
-            ? $object->getLabel()
-            : parent::toString($object)
-            ;
+        if ($object instanceof MenuNodeBase && $object->getLabel()) {
+            return $object->getLabel();
+        }
+
+        return $object instanceof Menu ? 'menu' : 'menu item';
     }
 }
