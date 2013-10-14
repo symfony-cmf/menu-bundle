@@ -161,6 +161,6 @@ abstract class AbstractMenuNodeAdmin extends Admin
             return $object->getLabel();
         }
 
-        return $object instanceof Menu ? 'menu' : 'menu item';
+        return $this->trans('link_add', array(), 'SonataAdminBundle');
     }
 }
