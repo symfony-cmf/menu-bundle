@@ -117,8 +117,8 @@ class MenuNodeTest extends BaseTestCase
         $this->assertCount(1, $menuNode->getChildren());
 
         // test publish start and end
-        $publishStartDate = $data['publishStartDate'];
-        $publishEndDate = $data['publishEndDate'];
+        $publishStartDate = $menuNode->getPublishStartDate();
+        $publishEndDate = $menuNode->getPublishEndDate();
 
         $this->assertInstanceOf('\DateTime', $publishStartDate);
         $this->assertInstanceOf('\DateTime', $publishEndDate);
