@@ -21,7 +21,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $c1->setLabel('Child 1');
         $c2 = new MenuNode;
         $c2->setLabel('Child 2');
-        $this->content = new \StdClass;
+        $this->content = new \stdClass;
         $this->parentNode = new MenuNode;
         $this->node = new MenuNode;
         $this->node->setId('/foo/bar')
