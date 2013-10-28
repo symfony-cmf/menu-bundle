@@ -8,6 +8,7 @@
     <mapped-superclass
         name="Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode"
         translator="attribute"
+        referenceable="true"
         >
 
         <locale name="locale"/>

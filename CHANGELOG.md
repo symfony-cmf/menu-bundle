@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.1.0-ALPHA1
+------------
+
+* **2013-10-28**: Added referenceable mixin by default to MenuNode. Migration
+  as follows (you may need to adjust the [phpcr:class] clause to match your implementation):
+
+       $ php app/console doctrine:phpcr:nodes:update \
+           --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode' OR [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MultilangMenuNode'" \
+           --apply-closure="if (\$node->hasProperty('referencable')) { return; }; \$node->setProperty('referencable', true);"
+
 1.0.0-RC4
 ---------
 
