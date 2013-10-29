@@ -40,11 +40,6 @@ abstract class AbstractMenuNodeAdmin extends Admin
             ;
     }
 
-    protected function isSubjectNotNew()
-    {
-        return $this->hasSubject() && null !== $this->getSubject()->getId();
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -52,11 +47,7 @@ abstract class AbstractMenuNodeAdmin extends Admin
     {
         $formMapper
             ->with('form.group_general')
-                ->add('name', 'text',
-                    $this->isSubjectNotNew() ? array(
-                        'attr' => array('readonly' => 'readonly')
-                    ) : array()
-                )
+                ->add('name', 'text')
                 ->add('label', 'text')
             ->end()
         ;

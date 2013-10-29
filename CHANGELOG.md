@@ -1,6 +1,22 @@
 Changelog
 =========
 
+1.0.1
+-----
+
+* **2013-10-29**: Fix MenuNodeReferrersExtension to also work when adding an
+  additional menu item if there already exists one. Allow to edit the menu item
+  name even after creation as in all other admins - this prevented adding
+  another menu item in the menu tab created by the admin extension. If you want
+  the old behaviour back, extend the admin and change the definition of the
+  `name` field, adding back what is removed in the pull request
+  https://github.com/symfony-cmf/MenuBundle/pull/157
+
+1.0.0
+-----
+
+First stable release.
+
 1.0.0-RC4
 ---------
 
