@@ -18,7 +18,7 @@ The MenuBundle provides menus from a doctrine object manager with the help of Kn
 
 For the install guide and reference, see:
 
-* [MenuBundle documentation](http://symfony.com/doc/master/cmf/bundles/menu.html)
+* [MenuBundle documentation](http://symfony.com/doc/master/cmf/bundles/menu/index.html)
 
 See also:
 
