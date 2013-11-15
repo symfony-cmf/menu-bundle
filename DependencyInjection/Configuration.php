@@ -63,6 +63,11 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('uri_prefix')->defaultFalse()->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('publish_workflow')
+                    ->addDefaultsIfNotSet()
+                    ->canBeDisabled()
+                ->end()
             ->end()
         ;
 
