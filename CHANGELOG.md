@@ -1,6 +1,10 @@
 Changelog
 =========
 
+* **2013-11-25**: [PublishWorkflow] added a `MenuContentVoter`, this voter 
+  decides that a menu node is not published if the content it is pointing to is
+  not published.
+
 1.0.1
 -----
 

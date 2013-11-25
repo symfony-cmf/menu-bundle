@@ -40,6 +40,10 @@ class CmfMenuExtension extends Extension
         if ($config['persistence']['phpcr']['enabled']) {
             $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
         }
+
+        if ($config['publish_workflow']['enabled']) {
+            $loader->load('publish-workflow.xml');
+        }
     }
 
     public function loadVoters($config, XmlFileLoader $loader, ContainerBuilder $container)

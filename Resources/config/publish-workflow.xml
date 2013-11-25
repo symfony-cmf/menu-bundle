@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="cmf_menu.security.menu_content_voter.class">Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow\Voter\MenuContentVoter</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="cmf_menu.security.menu_content_voter"
+                 class="%cmf_menu.security.menu_content_voter.class%"
+                 public="false">
+
+            <argument type="service" id="service_container"/>
+            <tag name="cmf_published_voter" priority="30"/>
+        </service>
+
+    </services>
+
+</container>
