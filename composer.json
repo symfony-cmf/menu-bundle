@@ -16,15 +16,15 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.2",
-        "doctrine/phpcr-bundle": "1.0.*",
-        "doctrine/phpcr-odm": "1.0.*",
+        "doctrine/phpcr-bundle": ">=1.0.0,<1.2-dev",
+        "doctrine/phpcr-odm": ">=1.0.0,<1.2-dev",
         "knplabs/knp-menu-bundle": "1.1.*",
         "symfony-cmf/core-bundle": "1.0.*"
     },
     "require-dev": {
         "symfony-cmf/routing-bundle": "1.1.*",
         "symfony-cmf/testing": "1.0.*",
-        "sonata-project/doctrine-phpcr-admin-bundle": "1.0.*",
+        "sonata-project/doctrine-phpcr-admin-bundle": "1.1.*",
         "symfony/monolog-bundle": "2.2.*"
     },
     "suggest": {
