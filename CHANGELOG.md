@@ -1,6 +1,14 @@
 Changelog
 =========
 
+
+* **2013-11-28**: Added referenceable mixin by default to PHPCR Menu and MenuNode. Migration
+  as follows (you may need to adjust the [phpcr:class] clause to match your implementation):
+
+       $ php app/console doctrine:phpcr:nodes:update \
+           --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode' \
+           --apply-closure="$node->addMixin('mix:referenceable');"
+ 
 * **2013-11-25**: [PublishWorkflow] added a `MenuContentVoter`, this voter 
   decides that a menu node is not published if the content it is pointing to is
   not published.
