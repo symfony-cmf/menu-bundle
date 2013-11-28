@@ -6,7 +6,7 @@ Changelog
   as follows (you may need to adjust the [phpcr:class] clause to match your implementation):
 
        $ php app/console doctrine:phpcr:nodes:update \
-           --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode' \
+           --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\Menu' OR [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode'" \
            --apply-closure="$node->addMixin('mix:referenceable');"
  
 * **2013-11-25**: [PublishWorkflow] added a `MenuContentVoter`, this voter 
