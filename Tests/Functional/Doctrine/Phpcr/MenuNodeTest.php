@@ -75,6 +75,9 @@ class MenuNodeTest extends BaseTestCase
             'displayChildren' => false,
         );
 
+        $startDateString = $data['publishStartDate']->format('Y-m-d');
+        $endDateString = $data['publishEndDate']->format('Y-m-d');
+
         $menuNode = new MenuNode;
         $refl = new \ReflectionClass($menuNode);
 
@@ -122,8 +125,8 @@ class MenuNodeTest extends BaseTestCase
 
         $this->assertInstanceOf('\DateTime', $publishStartDate);
         $this->assertInstanceOf('\DateTime', $publishEndDate);
-        $this->assertEquals($data['publishStartDate']->format('Y-m-d'), $publishStartDate->format('Y-m-d'));
-        $this->assertEquals($data['publishEndDate']->format('Y-m-d'), $publishEndDate->format('Y-m-d'));
+        $this->assertEquals($startDateString, $publishStartDate->format('Y-m-d'));
+        $this->assertEquals($endDateString, $publishEndDate->format('Y-m-d'));
 
         // test multi-lang
         $menuNode->setLocale('fr');

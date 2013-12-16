@@ -33,6 +33,7 @@ class Configuration implements ConfigurationInterface
                             ->children()
                                 ->scalarNode('menu_basepath')->defaultValue('/cms/menu')->end()
                                 ->scalarNode('content_basepath')->defaultValue('/cms/content')->end()
+                                ->integerNode('prefetch')->defaultValue(10)->end()
                                 ->scalarNode('manager_name')->defaultNull()->end()
                                 ->scalarNode('menu_document_class')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu')->end()
                                 ->scalarNode('node_document_class')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode')->end()

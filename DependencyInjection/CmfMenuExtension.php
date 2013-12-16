@@ -79,6 +79,7 @@ class CmfMenuExtension extends Extension
             'menu_basepath' => 'menu_basepath',
             'content_basepath' => 'content_basepath',
             'manager_name' => 'manager_name',
+            'prefetch' => 'prefetch',
             'admin_recursive_breadcrumbs' => 'admin_recursive_breadcrumbs',
         );
 

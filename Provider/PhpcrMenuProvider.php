@@ -13,9 +13,11 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
+use PHPCR\ItemNotFoundException;
 use PHPCR\Util\PathHelper;
+use Jackalope\Session;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
@@ -37,6 +39,13 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * @var string
      */
     protected $menuRoot;
+
+    /**
+     * Depth to use to prefetch all menu nodes. Only used if > 0, otherwise
+     * no prefetch is attempted.
+     * @var int
+     */
+    protected $prefetch = 10;
 
     /**
      * doctrine document class name
@@ -101,6 +110,32 @@ class PhpcrMenuProvider implements MenuProviderInterface
     }
 
     /**
+     * Define the depth of menu to prefetch when a menu is accessed.
+     *
+     * Note that if this PHPCR implementation is jackalope and there is a
+     * global fetch depth, the menu provider will prefetch *all* menus at the
+     * menu root when a menu is accessed. If it would not do that, loading the
+     * parent for one menu root would fetch all menu roots and only one menu
+     * would be completely prefetched.
+     *
+     * @param int $depth
+     */
+    public function setPrefetch($depth)
+    {
+        $this->prefetch = intval($depth);
+    }
+
+    /**
+     * Get the depth to use. A depth <= 0 means no prefetching should be done.
+     *
+     * @return int The depth to use when fetching menus.
+     */
+    public function getPrefetch()
+    {
+        return $this->prefetch;
+    }
+
+    /**
      * Set the request, used for the cmf_request_aware tag.
      *
      * @param Request $request
@@ -111,27 +146,23 @@ class PhpcrMenuProvider implements MenuProviderInterface
     }
 
     /**
-     * Get a menu node by name
+     * Create the menu subtree starting from name.
      *
-     * @param  string                    $name
-     * @param  array                     $options
-     * @return \Knp\Menu\ItemInterface
-     * @throws \InvalidArgumentException
+     * If the name is not already absolute, it is interpreted relative to the
+     * menu root. You can thus pass a name or any relative path with slashes to
+     * only load a submenu rather than a whole menu.
+     *
+     * @param  string $name    Name of the menu to load. This can be an
+     *      absolute PHPCR path or one relative to the menu root.
+     * @param  array  $options
+     *
+     * @return ItemInterface The menu (sub)tree starting with name.
+     *
+     * @throws \InvalidArgumentException if the menu can not be found.
      */
     public function get($name, array $options = array())
     {
-        if (empty($name)) {
-            throw new \InvalidArgumentException('The menu name may not be empty');
-        }
-
-        $menu = $this->getObjectManager()->find(null, PathHelper::absolutizePath($name, $this->menuRoot));
-        if ($menu === null) {
-            throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
-        }
-
-        if (! $menu instanceof NodeInterface) {
-            throw new \InvalidArgumentException("Menu at '$name' is not a valid menu node");
-        }
+        $menu = $this->find($name, $options, true);
 
         $menuItem = $this->factory->createFromNode($menu);
         if (empty($menuItem)) {
@@ -144,23 +175,93 @@ class PhpcrMenuProvider implements MenuProviderInterface
     }
 
     /**
-     * Check if a menu node exists
+     * Check if a menu node exists.
      *
-     * @param  string $name
+     * If this method returns true, it means that you can call get() without
+     * an exception.
+     *
+     * @param  string $name    Name of the menu to load. This can be an
+     *      absolute PHPCR path or one relative to the menu root.
      * @param  array  $options
-     * @return bool
+     *
+     * @return boolean Whether a menu with this name can be loaded by this provider.
      */
     public function has($name, array $options = array())
     {
-        $menu = $this->getObjectManager()->find(null, PathHelper::absolutizePath($name, $this->menuRoot));
+        return $this->find($name, $options, false) instanceof NodeInterface;
+    }
 
-        return $menu instanceof NodeInterface;
+    /**
+     * @param string  $name    Name of the menu to load
+     * @param array   $options
+     * @param boolean $throw   Whether to throw an exception if the menu is not
+     *      found or no valid menu. Returns false if $throw is false and there
+     *      is no menu at $name.
+     *
+     * @return object|boolean The menu root found with $name or false if $throw
+     *      is false and the menu was not found.
+     *
+     * @throws \InvalidArgumentException Only if $throw is true throws this
+     *      exception if the name is empty or no menu found.
+     */
+    protected function find($name, array $options, $throw)
+    {
+        if (empty($name)) {
+            if ($throw) {
+                throw new \InvalidArgumentException('The menu name may not be empty');
+            }
+
+            return false;
+        }
+
+        $path = PathHelper::absolutizePath($name, $this->getMenuRoot());
+        $dm = $this->getObjectManager();
+        $session = $dm->getPhpcrSession();
+        if ($this->getPrefetch() > 0) {
+            try {
+                if (
+                    $session instanceof Session
+                    && 0 < $session->getSessionOption(Session::OPTION_FETCH_DEPTH)
+                    && 0 === strncmp($path, $this->getMenuRoot(), strlen($this->getMenuRoot()))
+                ) {
+                    // we have jackalope with a fetch depth. prefetch all menu
+                    // nodes of all menues.
+                    $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
+                } else {
+                    $session->getNode($path, $this->getPrefetch());
+                }
+            } catch(ItemNotFoundException $e) {
+                if ($throw) {
+                    throw new \InvalidArgumentException(sprintf('The menu root "%s" does not exist.', $this->getMenuRoot()));
+                }
+
+                return false;
+            }
+        }
+
+        $menu = $dm->find(null, $path);
+        if (null === $menu) {
+            if ($throw) {
+                throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
+            }
+
+            return false;
+        }
+        if (! $menu instanceof NodeInterface) {
+            if ($throw) {
+                throw new \InvalidArgumentException("Menu at '$name' is not a valid menu node");
+            }
+
+            return false;
+        }
+
+        return $menu;
     }
 
     /**
      * Get the object manager named $managerName from the registry.
      *
-     * @return ObjectManager
+     * @return DocumentManager
      */
     protected function getObjectManager()
     {
