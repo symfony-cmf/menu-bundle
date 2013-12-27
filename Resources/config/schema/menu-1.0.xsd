@@ -9,21 +9,13 @@
 
     <xsd:complexType name="config">
         <xsd:sequence>
-            <xsd:element name="voter" type="voter" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="persistence" type="persistence" minOccurs="0"/>
+            <xsd:element name="voter" type="voter" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="publish-workflow" type="publish-workflow" minOccurs="0" />
         </xsd:sequence>
 
-        <xsd:attribute name="allow-empty-items" type="xsd:string" />
         <xsd:attribute name="content-url-generator" type="xsd:string" />
-    </xsd:complexType>
-
-    <xsd:complexType name="voter">
-        <xsd:sequence>
-            <xsd:element name="content-identity" type="content_identity" minOccurs="0" />
-        </xsd:sequence>
-
-        <xsd:attribute name="uri-prefix" type="xsd:string" />
+        <xsd:attribute name="allow-empty-items" type="xsd:boolean" />
     </xsd:complexType>
 
     <xsd:complexType name="persistence">
@@ -37,21 +29,33 @@
         <xsd:attribute name="menu-basepath" type="xsd:string" />
         <xsd:attribute name="content-basepath" type="xsd:string" />
         <xsd:attribute name="manager-name" type="xsd:string" />
-        <xsd:attribute name="admin-class" type="xsd:string" />
         <xsd:attribute name="menu-document-class" type="xsd:string" />
         <xsd:attribute name="node-document-class" type="xsd:string" />
-        <xsd:attribute name="use-sonata-admin" type="use_sonata_admin" />
+        <xsd:attribute name="use-sonata-admin" type="enable_auto" />
+        <xsd:attribute name="menu-admin-class" type="xsd:string" />
+        <xsd:attribute name="node-admin-class" type="xsd:string" />
+        <xsd:attribute name="admin-recursive-breadcrumbs" type="xsd:boolean" />
     </xsd:complexType>
 
-    <xsd:complexType name="content_identity">
-        <xsd:attribute name="content-key" type="xsd:string" />
+    <xsd:complexType name="voter">
+        <xsd:sequence>
+            <xsd:element name="content-identity" type="content-identity" minOccurs="0" />
+        </xsd:sequence>
+
+        <xsd:attribute name="uri-prefix" type="xsd:string" />
+    </xsd:complexType>
+
+    <xsd:complexType name="content-identity">
+        <xsd:sequence>
+            <xsd:element name="content-key" type="xsd:string" />
+        </xsd:sequence>
     </xsd:complexType>
 
     <xsd:complexType name="publish-workflow">
         <xsd:attribute name="enabled" type="xsd:boolean" />
     </xsd:complexType>
 
-    <xsd:simpleType name="use_sonata_admin">
+    <xsd:simpleType name="enable_auto">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="true" />
             <xsd:enumeration value="false" />
