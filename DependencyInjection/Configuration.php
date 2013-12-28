@@ -43,7 +43,6 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                                 ->scalarNode('menu_admin_class')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Admin\MenuAdmin')->end()
                                 ->scalarNode('node_admin_class')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Admin\MenuNodeAdmin')->end()
-                                ->scalarNode('content_basepath')->defaultNull()->end()
                                 ->booleanNode('admin_recursive_breadcrumbs')->defaultTrue()->end()
                             ->end()
                         ->end()
