@@ -1,0 +1,23 @@
+<config xmlns="http://cmf.symfony.com/schema/dic/menu"
+    content-url-generator="router"
+    allow-empty-items="false">
+
+    <persistence>
+        <phpcr menu-basepath="/cms/menu"
+            content-basepath="/cms/content"
+            manager-name="default"
+            menu-document-class="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu"
+            node-document-class="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode"
+            use-sonata-admin="auto"
+            menu-admin-class="Symfony\Cmf\Bundle\MenuBundle\Admin\MenuAdmin"
+            node-admin-class="Symfony\Cmf\Bundle\MenuBundle\Admin\MenuNodeAdmin"
+            admin-recursive-breadcrumbs="true"
+        />
+    </persistence>
+
+    <voters uri-prefix="false">
+        <content-identity content-key="foo" />
+    </voters>
+
+    <publish-workflow enabled="true" />
+</config>

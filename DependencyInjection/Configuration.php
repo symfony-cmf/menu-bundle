@@ -43,15 +43,14 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                                 ->scalarNode('menu_admin_class')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Admin\MenuAdmin')->end()
                                 ->scalarNode('node_admin_class')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Admin\MenuNodeAdmin')->end()
-                                ->scalarNode('content_basepath')->defaultNull()->end()
-                                ->scalarNode('admin_recursive_breadcrumbs')->defaultTrue()->end()
+                                ->booleanNode('admin_recursive_breadcrumbs')->defaultTrue()->end()
                             ->end()
                         ->end()
                     ->end()
                 ->end()
 
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
-                ->scalarNode('allow_empty_items')->defaultValue(false)->end()
+                ->booleanNode('allow_empty_items')->defaultFalse()->end()
 
                 ->arrayNode('voters')
                     ->children()

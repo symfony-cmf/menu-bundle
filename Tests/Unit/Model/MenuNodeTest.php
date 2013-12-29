@@ -11,6 +11,7 @@
 
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Model;
+
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 
 class MenuNodeTest extends \PHPUnit_Framework_Testcase
