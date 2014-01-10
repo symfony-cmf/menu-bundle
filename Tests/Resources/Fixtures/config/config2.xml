@@ -5,6 +5,7 @@
     <persistence>
         <phpcr menu-basepath="/cms/menu"
             content-basepath="/cms/content"
+            prefetch="7"
             manager-name="default"
             menu-document-class="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu"
             node-document-class="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode"

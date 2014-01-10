@@ -16,6 +16,7 @@
             <argument type="service" id="doctrine_phpcr"/>
             <argument>%cmf_menu.persistence.phpcr.menu_basepath%</argument>
             <call method="setManagerName"><argument>%cmf_menu.persistence.phpcr.manager_name%</argument></call>
+            <call method="setPrefetch"><argument>%cmf_menu.persistence.phpcr.prefetch%</argument></call>
             <tag name="cmf_request_aware"/>
         </service>
 

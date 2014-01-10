@@ -28,6 +28,7 @@
         <xsd:attribute name="enabled" type="xsd:boolean" />
         <xsd:attribute name="menu-basepath" type="xsd:string" />
         <xsd:attribute name="content-basepath" type="xsd:string" />
+        <xsd:attribute name="prefetch" type="xsd:integer" />
         <xsd:attribute name="manager-name" type="xsd:string" />
         <xsd:attribute name="menu-document-class" type="xsd:string" />
         <xsd:attribute name="node-document-class" type="xsd:string" />

@@ -1,12 +1,16 @@
 Changelog
 =========
 
+* **2014-01-10**: The PhpcrMenuProvider now attempts to prefetch the whole menu
+  node tree to reduce the number of requests to the PHPCR storage. You can
+  tweak the behaviour with the configuration setting
+  `cmf_menu.persistence.phpcr.prefetch`.
 
-* **2013-11-28**: Added referenceable mixin by default to PHPCR Menu and MenuNode. Migration
-  as follows (you may need to adjust the [phpcr:class] clause to match your implementation):
+* **2013-11-28**: Added referenceable mixin by default to PHPCR Menu and
+  MenuNode classes. Migration as follows:
 
        $ php app/console doctrine:phpcr:nodes:update \
-           --query="SELECT * FROM [nt:unstructured] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\Menu' OR [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode'" \
+           --query="SELECT * FROM [nt:base] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\Menu' OR [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode'" \
            --apply-closure="$node->addMixin('mix:referenceable');"
  
 * **2013-11-25**: [PublishWorkflow] added a `MenuContentVoter`, this voter 
