@@ -19,7 +19,6 @@ use Knp\Menu\MenuItem;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
 use Symfony\Cmf\Bundle\MenuBundle\Event\CreateMenuItemFromNodeEvent;
 
 use Psr\Log\LoggerInterface;
