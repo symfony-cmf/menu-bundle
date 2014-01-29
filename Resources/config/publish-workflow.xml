@@ -18,6 +18,13 @@
             <tag name="cmf_published_voter" priority="30"/>
         </service>
 
+        <service id="cmf_menu.publish_workflow.create_menu_item_from_node_listener"
+            class="Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow\CreateMenuItemFromNodeListener">
+            <argument type="service" id="cmf_core.publish_workflow.checker"/>
+            <tag name="kernel.event_listener" event="cmf_menu.create_menu_item_from_node" method="onCreateMenuItemFromNode" />
+        </service>
+
+
     </services>
 
 </container>
