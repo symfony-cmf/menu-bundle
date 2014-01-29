@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle;
 
 use Knp\Menu\Silex\RouterAwareFactory;
@@ -17,14 +16,14 @@ use Knp\Menu\ItemInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\MenuItem;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
-
 use Psr\Log\LoggerInterface;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
+
 use Symfony\Cmf\Bundle\MenuBundle\Voter\VoterInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Cmf\Bundle\MenuBundle\Event\CreateMenuItemFromNodeEvent;
 
 /**
  * This factory builds menu items from the menu nodes and builds urls based on
@@ -61,18 +60,6 @@ class ContentAwareFactory extends RouterAwareFactory
     private $logger;
 
     /**
-     * @var SecurityContextInterface
-     */
-    private $securityContext;
-
-    /**
-     * The permission to check for when doing the publish workflow check.
-     *
-     * @var string
-     */
-    private $publishWorkflowPermission = PublishWorkflowChecker::VIEW_ATTRIBUTE;
-
-    /**
      * Whether to return null or a MenuItem without any URL if no URL can be
      * found for a MenuNode.
      *
@@ -84,22 +71,20 @@ class ContentAwareFactory extends RouterAwareFactory
      * @param UrlGeneratorInterface $generator     for the parent class
      * @param UrlGeneratorInterface $contentRouter to generate routes when
      *      content is set
-     * @param SecurityContextInterface $securityContext the publish workflow
-     *      checker to check if menu items are published.
      * @param LoggerInterface $logger
      */
     public function __construct(
         UrlGeneratorInterface $generator,
         UrlGeneratorInterface $contentRouter,
-        SecurityContextInterface $securityContext,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        EventDispatcherInterface $dispatcher
     )
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
-        $this->securityContext = $securityContext;
         $this->logger = $logger;
         $this->linkTypes = array('route', 'uri', 'content');
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -122,17 +107,6 @@ class ContentAwareFactory extends RouterAwareFactory
     public function setAllowEmptyItems($allowEmptyItems)
     {
         $this->allowEmptyItems = $allowEmptyItems;
-    }
-
-    /**
-     * What attribute to use in the publish workflow check. This typically
-     * is VIEW or VIEW_ANONYMOUS.
-     *
-     * @param string $attribute
-     */
-    public function setPublishWorkflowPermission($attribute)
-    {
-        $this->publishWorkflowPermission = $attribute;
     }
 
     /**
@@ -169,17 +143,36 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     public function createFromNode(NodeInterface $node)
     {
-        $item = $this->createItem($node->getName(), $node->getOptions());
+        $event = new CreateMenuItemFromNodeEvent($node, $this);
+        $this->dispatcher->dispatch('cmf_menu.create_menu_item_from_node', $event);
+
+        if ($event->getSkipNode()) {
+            return null;
+        }
+
+        $item = $event->getItem() ?: $this->createItem($node->getName(), $node->getOptions());
 
         if (empty($item)) {
             return null;
         }
 
-        foreach ($node->getChildren() as $childNode) {
-            if (!$this->securityContext->isGranted($this->publishWorkflowPermission, $childNode)) {
-                continue;
-            }
+        if ($event->getSkipChildren()) {
+            return $item;
+        }
 
+        return $this->addChildrenFromNode($node, $item);
+    }
+
+    /**
+     * Add children to a menu item from a node
+     *
+     * @param NodeInterface $node
+     * @param ItemInterface $item
+     * @return ItemInterface
+     */
+    public function addChildrenFromNode(NodeInterface $node, ItemInterface $item)
+    {
+        foreach ($node->getChildren() as $childNode) {
             if ($childNode instanceof NodeInterface) {
                 $child = $this->createFromNode($childNode);
                 if (!empty($child)) {
