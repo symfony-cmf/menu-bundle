@@ -21,10 +21,12 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
+use Symfony\Cmf\Bundle\MenuBundle\Event\CreateMenuItemFromNodeEvent;
 
 use Psr\Log\LoggerInterface;
 
 use Symfony\Cmf\Bundle\MenuBundle\Voter\VoterInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * This factory builds menu items from the menu nodes and builds urls based on
@@ -92,7 +94,8 @@ class ContentAwareFactory extends RouterAwareFactory
         UrlGeneratorInterface $generator,
         UrlGeneratorInterface $contentRouter,
         SecurityContextInterface $securityContext,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        EventDispatcher $dispatcher
     )
     {
         parent::__construct($generator);
@@ -100,6 +103,7 @@ class ContentAwareFactory extends RouterAwareFactory
         $this->securityContext = $securityContext;
         $this->logger = $logger;
         $this->linkTypes = array('route', 'uri', 'content');
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -187,6 +191,10 @@ class ContentAwareFactory extends RouterAwareFactory
                 }
             }
         }
+
+        $event = new CreateMenuItemFromNodeEvent($node, $item, $this);
+        $this->dispatcher->dispatch('cmf_menu.create_menu_item_from_node', $event);
+        $item = $event->getItem();
 
         return $item;
     }

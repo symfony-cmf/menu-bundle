@@ -15,6 +15,7 @@
             <argument/> <!-- content url generator -->
             <argument type="service" id="cmf_core.publish_workflow.checker"/>
             <argument type="service" id="logger"/>
+            <argument type="service" id="event_dispatcher"/>
             <call method="setAllowEmptyItems">
                 <argument>%cmf_menu.allow_empty_items%</argument>
             </call>
