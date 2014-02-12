@@ -21,7 +21,7 @@
         </service>
 
         <service id="cmf_menu.initializer" class="Doctrine\Bundle\PHPCRBundle\Initializer\GenericInitializer">
-            <argument>cmf_menu.initializer</argument>
+            <argument>CmfMenuBundle</argument>
             <argument type="collection">
                 <argument>%cmf_menu.persistence.phpcr.menu_basepath%</argument>
             </argument>
