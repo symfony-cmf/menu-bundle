@@ -15,10 +15,11 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Component\HttpFoundation\Request;
-use PHPCR\ItemNotFoundException;
+use PHPCR\PathNotFoundException;
 use PHPCR\Util\PathHelper;
 use Jackalope\Session;
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
 
@@ -230,7 +231,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
                 } else {
                     $session->getNode($path, $this->getPrefetch());
                 }
-            } catch(ItemNotFoundException $e) {
+            } catch(PathNotFoundException $e) {
                 if ($throw) {
                     throw new \InvalidArgumentException(sprintf('The menu root "%s" does not exist.', $this->getMenuRoot()));
                 }
