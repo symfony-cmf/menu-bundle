@@ -161,6 +161,18 @@ class ContentAwareFactory extends RouterAwareFactory
             return $item;
         }
 
+        return $this->addChildrenFromNode($node, $item);
+    }
+
+    /**
+     * Add children to a menu item from a node
+     * 
+     * @param NodeInterface $node 
+     * @param ItemInterface $item 
+     * @return ItemInterface
+     */
+    public function addChildrenFromNode(NodeInterface $node, ItemInterface $item)
+    {
         foreach ($node->getChildren() as $childNode) {
             if ($childNode instanceof NodeInterface) {
                 $child = $this->createFromNode($childNode);
