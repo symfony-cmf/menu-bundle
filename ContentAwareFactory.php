@@ -24,7 +24,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Event\CreateMenuItemFromNodeEvent;
 use Psr\Log\LoggerInterface;
 
 use Symfony\Cmf\Bundle\MenuBundle\Voter\VoterInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * This factory builds menu items from the menu nodes and builds urls based on
@@ -78,7 +78,7 @@ class ContentAwareFactory extends RouterAwareFactory
         UrlGeneratorInterface $generator,
         UrlGeneratorInterface $contentRouter,
         LoggerInterface $logger,
-        EventDispatcher $dispatcher
+        EventDispatcherInterface $dispatcher
     )
     {
         parent::__construct($generator);
