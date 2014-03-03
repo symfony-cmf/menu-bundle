@@ -144,10 +144,21 @@ class ContentAwareFactory extends RouterAwareFactory
      */
     public function createFromNode(NodeInterface $node)
     {
-        $item = $this->createItem($node->getName(), $node->getOptions());
+        $event = new CreateMenuItemFromNodeEvent($node, $this);
+        $this->dispatcher->dispatch('cmf_menu.create_menu_item_from_node', $event);
+
+        if ($event->getSkipNode()) {
+            return null;
+        }
+
+        $item = $event->getItem() ?: $this->createItem($node->getName(), $node->getOptions());
 
         if (empty($item)) {
             return null;
+        }
+
+        if ($event->getSkipChildren()) {
+            return $item;
         }
 
         foreach ($node->getChildren() as $childNode) {
@@ -158,10 +169,6 @@ class ContentAwareFactory extends RouterAwareFactory
                 }
             }
         }
-
-        $event = new CreateMenuItemFromNodeEvent($node, $item, $this);
-        $this->dispatcher->dispatch('cmf_menu.create_menu_item_from_node', $event);
-        $item = $event->getItem();
 
         return $item;
     }

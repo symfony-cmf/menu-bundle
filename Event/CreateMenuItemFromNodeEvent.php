@@ -20,13 +20,40 @@ use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 
 class CreateMenuItemFromNodeEvent extends Event
 {
+    /**
+     * @var NodeInterface
+     */
+    protected $node;
+
+    /**
+     * @var ContentAwareFactory
+     */
+    protected $factory;
+
+    /**
+     * @var MenuItem
+     */
+    protected $item;
+
+    /**
+     * Whether or not to skip processing of this node
+     * 
+     * @var boolean
+     */
+    protected $skipNode = false;
+
+    /**
+     * Whether or not to skip processing of child nodes
+     * 
+     * @var boolean
+     */
+    protected $skipChildren = false;
+
     public function __construct(
         NodeInterface $node,
-        MenuItem $item = null,
         ContentAwareFactory $factory
     ) {
         $this->node = $node;
-        $this->item = $item;
         $this->factory = $factory;
     }
 
@@ -48,6 +75,26 @@ class CreateMenuItemFromNodeEvent extends Event
     public function getNode()
     {
         return $this->node;
+    }
+
+    public function setSkipNode($skipNode)
+    {
+        $this->skipNode = (bool) $skipNode;
+    }
+
+    public function getSkipNode()
+    {
+        return $this->skipNode;
+    }
+
+    public function setSkipChildren($skipChildren)
+    {
+        $this->skipChildren = (bool) $skipChildren;
+    }
+
+    public function getSkipChildren()
+    {
+        return $this->skipChildren;
     }
 
 }
