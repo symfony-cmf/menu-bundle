@@ -102,10 +102,11 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
                 ->method('getChildren')
                 ->will($this->returnValue(array()));
         } else {
+            $node2 = $this->node2;
             $this->dispatcher->expects($this->any())
                 ->method('dispatch')
-                ->will($this->returnCallback(function ($name, $event) use ($options) {
-                    if ($event->getNode() === $this->node2) {
+                ->will($this->returnCallback(function ($name, $event) use ($options, $node2) {
+                    if ($event->getNode() === $node2) {
                         $event->setSkipNode(true);
                     }
                 }));
