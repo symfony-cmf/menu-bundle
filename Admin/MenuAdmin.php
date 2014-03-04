@@ -35,6 +35,7 @@ class MenuAdmin extends AbstractMenuNodeAdmin
                     'root' => $this->menuRoot,
                     'edit_in_overlay' => false,
                     'create_in_overlay' => false,
+                    'delete_in_overlay' => false
                 ), array(
                     'help' => 'help.items_help'
                 ))
