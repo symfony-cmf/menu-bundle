@@ -18,6 +18,8 @@ use Knp\Menu\MenuItem;
 
 use Psr\Log\LoggerInterface;
 
+use Symfony\Cmf\Bundle\MenuBundle\Event\Events;
+use Symfony\Cmf\Bundle\MenuBundle\Model\Menu;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
@@ -68,23 +70,24 @@ class ContentAwareFactory extends RouterAwareFactory
     private $allowEmptyItems;
 
     /**
-     * @param UrlGeneratorInterface $generator     for the parent class
-     * @param UrlGeneratorInterface $contentRouter to generate routes when
+     * @param UrlGeneratorInterface    $generator     for the parent class
+     * @param UrlGeneratorInterface    $contentRouter to generate routes when
      *      content is set
-     * @param LoggerInterface $logger
+     * @param EventDispatcherInterface $dispatcher    to dispatch the CREATE_ITEM_FROM_NODE event.
+     * @param LoggerInterface          $logger
      */
     public function __construct(
         UrlGeneratorInterface $generator,
         UrlGeneratorInterface $contentRouter,
-        LoggerInterface $logger,
-        EventDispatcherInterface $dispatcher
+        EventDispatcherInterface $dispatcher,
+        LoggerInterface $logger
     )
     {
         parent::__construct($generator);
         $this->contentRouter = $contentRouter;
-        $this->logger = $logger;
         $this->linkTypes = array('route', 'uri', 'content');
         $this->dispatcher = $dispatcher;
+        $this->logger = $logger;
     }
 
     /**
@@ -144,9 +147,14 @@ class ContentAwareFactory extends RouterAwareFactory
     public function createFromNode(NodeInterface $node)
     {
         $event = new CreateMenuItemFromNodeEvent($node, $this);
-        $this->dispatcher->dispatch('cmf_menu.create_menu_item_from_node', $event);
+        $this->dispatcher->dispatch(Events::CREATE_ITEM_FROM_NODE, $event);
 
-        if ($event->getSkipNode()) {
+        if ($event->isSkipNode()) {
+            if ($node instanceof Menu) {
+                // create an empty menu root to avoid the knp menu from failing.
+                return $this->createItem('');
+            }
+
             return null;
         }
 
@@ -156,23 +164,24 @@ class ContentAwareFactory extends RouterAwareFactory
             return null;
         }
 
-        if ($event->getSkipChildren()) {
+        if ($event->isSkipChildren()) {
             return $item;
         }
 
-        return $this->addChildrenFromNode($node, $item);
+        return $this->addChildrenFromNode($node->getChildren(), $item);
     }
 
     /**
-     * Add children to a menu item from a node
+     * Create menu items from a list of menu nodes and add them to $item.
      *
-     * @param NodeInterface $node
-     * @param ItemInterface $item
+     * @param NodeInterface[] $node The menu nodes to create.
+     * @param ItemInterface   $item The menu item to add the children to.
+     *
      * @return ItemInterface
      */
-    public function addChildrenFromNode(NodeInterface $node, ItemInterface $item)
+    public function addChildrenFromNode($nodes, ItemInterface $item)
     {
-        foreach ($node->getChildren() as $childNode) {
+        foreach ($nodes as $childNode) {
             if ($childNode instanceof NodeInterface) {
                 $child = $this->createFromNode($childNode);
                 if (!empty($child)) {
