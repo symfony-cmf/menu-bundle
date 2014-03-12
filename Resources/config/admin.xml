@@ -36,7 +36,7 @@
             </call>
 
             <call method="setContentAwareFactory">
-                <argument type="service" id="cmf_menu.factory"/>>
+                <argument type="service" id="cmf_menu.factory" />
             </call>
 
         </service>
@@ -67,7 +67,7 @@
             </call>
 
             <call method="setContentAwareFactory">
-                <argument type="service" id="cmf_menu.factory"/>>
+                <argument type="service" id="cmf_menu.factory" />
             </call>
 
             <call method="setRecursiveBreadcrumbs">
