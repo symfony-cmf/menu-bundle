@@ -25,7 +25,7 @@ class MenuNodeTest extends BaseTestCase
         $this->baseNode = $this->dm->find(null, '/test');
 
         $this->content = new Content;
-        $this->content->setParent($this->baseNode);
+        $this->content->setParentDocument($this->baseNode);
         $this->content->setTitle('fake_weak_content');
         $this->content->setName('fake_weak_content');
         $this->dm->persist($this->content);
@@ -81,7 +81,7 @@ class MenuNodeTest extends BaseTestCase
         $menuNode = new MenuNode;
         $refl = new \ReflectionClass($menuNode);
 
-        $menuNode->setParent($this->baseNode);
+        $menuNode->setParentDocument($this->baseNode);
 
         foreach ($data as $key => $value) {
             $refl = new \ReflectionClass($menuNode);

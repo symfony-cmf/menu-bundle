@@ -51,7 +51,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
             return $menuNodeNode;
         }
 
-        $parentDoc = $this->getSubject()->getParent();
+        $parentDoc = $this->getSubject()->getParentDocument();
         $pool = $this->getConfigurationPool();
         $parentAdmin = $pool->getAdminByClass(
             ClassUtils::getClass($parentDoc)

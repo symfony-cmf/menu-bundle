@@ -17,6 +17,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
 
 use Knp\Menu\NodeInterface;
 
+use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
@@ -24,7 +25,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 /**
  * @PHPCRODM\Document(referenceable=true)
  */
-class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
+class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface, ChildInterface
 {
     /**
      * @PHPCRODM\Id(strategy="assigned")
@@ -112,7 +113,12 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
         return $this->routes;
     }
 
-    public function getParent()
+    public function setParentDocument($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    public function getParentDocument()
     {
         return $this->parent;
     }
