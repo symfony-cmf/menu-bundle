@@ -1,6 +1,10 @@
 Changelog
 =========
 
+* **2014-03-24**: setParent() and getParent() are now deprecated.
+  Use setParentDocument() and getParentDocument() instead.
+  Moreover, you should now enable the ChildExtension from the CoreBundle.
+
 * **2014-01-10**: The PhpcrMenuProvider now attempts to prefetch the whole menu
   node tree to reduce the number of requests to the PHPCR storage. You can
   tweak the behaviour with the configuration setting

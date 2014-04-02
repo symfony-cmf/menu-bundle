@@ -48,7 +48,7 @@ class MenuAdmin extends AbstractMenuNodeAdmin
     {
         /** @var $new Menu */
         $new = parent::getNewInstance();
-        $new->setParent($this->getModelManager()->find(null, $this->menuRoot));
+        $new->setParentDocument($this->getModelManager()->find(null, $this->menuRoot));
 
         return $new;
     }

@@ -95,27 +95,6 @@ abstract class AbstractMenuNodeAdmin extends Admin
         ;
     }
 
-    /**
-     * @return MenuNode
-     */
-    public function getNewInstance()
-    {
-        /** @var $new MenuNode */
-        $new = parent::getNewInstance();
-
-        if ($this->hasRequest()) {
-
-            // Set the parent
-            $parentId = $this->getRequest()->query->get('parent');
-
-            if (null !== $parentId) {
-                $new->setParent($this->getModelManager()->find(null, $parentId));
-            }
-        }
-
-        return $new;
-    }
-
     public function getExportFormats()
     {
         return array();

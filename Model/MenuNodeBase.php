@@ -13,6 +13,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
 use Knp\Menu\NodeInterface;
+use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 
 /**
  * This is a persistable implementation of the KnpMenu
@@ -21,7 +22,7 @@ use Knp\Menu\NodeInterface;
  * @author Uwe Jäger <uwej711@googlemail.com>
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class MenuNodeBase implements NodeInterface
+class MenuNodeBase implements NodeInterface, ChildInterface
 {
     /**
      * Id of this menu node.
@@ -177,13 +178,31 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
+     * @deprecated Use setParentDocument instead.
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @deprecated Use getParentDocument instead.
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
      * Set the parent of this menu node
      *
      * @param $parent MenuNode - Parent node
      *
      * @return MenuNode - this instance
      */
-    public function setParent($parent)
+    public function setParentDocument($parent)
     {
         $this->parent = $parent;
 
@@ -195,7 +214,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @return object
      */
-    public function getParent()
+    public function getParentDocument()
     {
         return $this->parent;
     }
@@ -418,7 +437,7 @@ class MenuNodeBase implements NodeInterface
      */
     public function addChild(MenuNode $child)
     {
-        $child->setParent($this);
+        $child->setParentDocument($this);
         $this->children[] = $child;
 
         return $child;
