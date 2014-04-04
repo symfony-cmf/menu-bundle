@@ -13,7 +13,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCRODM;
+use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 
 use Knp\Menu\NodeInterface;
 
@@ -23,27 +23,32 @@ use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 
 /**
- * @PHPCRODM\Document(referenceable=true)
+ * @PHPCR\Document(referenceable=true)
  */
 class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface, ChildInterface
 {
     /**
-     * @PHPCRODM\Id(strategy="assigned")
+     * @PHPCR\Id(strategy="assigned")
      */
     protected $id;
 
     /**
-     * @PHPCRODM\String()
+     * @PHPCR\String()
      */
     protected $title;
 
     /**
-     * @PHPCRODM\ParentDocument()
+     * @PHPCR\ParentDocument()
      */
     protected $parent;
 
     /**
-     * @PHPCRODM\Referrers(
+     * @PHPCR\Nodename()
+     */
+    protected $name;
+
+    /**
+     * @PHPCR\Referrers(
      *     referringDocument="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode",
      *     referencedBy="content",
      *     cascade="persist"
@@ -52,7 +57,7 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
     protected $menuNodes;
 
     /**
-     * @PHPCRODM\Referrers(
+     * @PHPCR\Referrers(
      *     referringDocument="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route",
      *     referencedBy="content"
      * )
@@ -121,5 +126,15 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
     public function getParentDocument()
     {
         return $this->parent;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }
