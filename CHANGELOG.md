@@ -1,6 +1,10 @@
 Changelog
 =========
 
+* **2014-04-04**: The menu factory now raises an event when a menu item is
+  built from a menu node. The event can be used to change the behaviour or
+  skip building the menu item altogether.
+
 * **2014-03-24**: setParent() and getParent() are now deprecated.
   Use setParentDocument() and getParentDocument() instead.
   Moreover, you should now enable the ChildExtension from the CoreBundle.
@@ -16,8 +20,8 @@ Changelog
        $ php app/console doctrine:phpcr:nodes:update \
            --query="SELECT * FROM [nt:base] WHERE [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\Menu' OR [phpcr:class] = 'Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode'" \
            --apply-closure="$node->addMixin('mix:referenceable');"
- 
-* **2013-11-25**: [PublishWorkflow] added a `MenuContentVoter`, this voter 
+
+* **2013-11-25**: [PublishWorkflow] added a `MenuContentVoter`, this voter
   decides that a menu node is not published if the content it is pointing to is
   not published.
 

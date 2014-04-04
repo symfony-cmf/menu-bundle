@@ -13,7 +13,7 @@
         <service id="cmf_menu.factory" class="%cmf_menu.factory.class%">
             <argument type="service" id="router"/>
             <argument/> <!-- content url generator -->
-            <argument type="service" id="cmf_core.publish_workflow.checker"/>
+            <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="logger"/>
             <call method="setAllowEmptyItems">
                 <argument>%cmf_menu.allow_empty_items%</argument>
