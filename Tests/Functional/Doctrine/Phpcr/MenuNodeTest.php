@@ -12,22 +12,33 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Doctrine\Phpcr;
 
+use Doctrine\ODM\PHPCR\DocumentManager;
+use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
-use Symfony\Cmf\Component\Testing\Document\Content;
 
 class MenuNodeTest extends BaseTestCase
 {
+    private $content;
+    /**
+     * @var DocumentManager
+     */
+    private $dm;
+    private $rootDocument;
+    /**
+     * @var MenuNode
+     */
+    private $child1;
+
     public function setUp()
     {
         $this->db('PHPCR')->createTestNode();
         $this->dm = $this->db('PHPCR')->getOm();
-        $this->baseNode = $this->dm->find(null, '/test');
+        $this->rootDocument = $this->dm->find(null, '/test');
 
-        $this->content = new Content;
-        $this->content->setParentDocument($this->baseNode);
+        $this->content = new Content();
+        $this->content->setId('/test/fake_weak_content');
         $this->content->setTitle('fake_weak_content');
-        $this->content->setName('fake_weak_content');
         $this->dm->persist($this->content);
 
         $this->child1 = new MenuNode;
@@ -81,7 +92,7 @@ class MenuNodeTest extends BaseTestCase
         $menuNode = new MenuNode;
         $refl = new \ReflectionClass($menuNode);
 
-        $menuNode->setParentDocument($this->baseNode);
+        $menuNode->setParentDocument($this->rootDocument);
 
         foreach ($data as $key => $value) {
             $refl = new \ReflectionClass($menuNode);
