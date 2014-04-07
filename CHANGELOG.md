@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.1.0-RC1
+---------
+
 * **2014-04-04**: The menu factory now raises an event when a menu item is
   built from a menu node. The event can be used to change the behaviour or
   skip building the menu item altogether.
