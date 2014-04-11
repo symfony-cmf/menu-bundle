@@ -11,7 +11,7 @@ The MenuBundle provides menus from a doctrine object manager with the help of Kn
 
 ## Requirements
 
-* Symfony 2.2.x
+* Symfony 2.3+
 * See also the `require` section of [composer.json](composer.json)
 
 ## Documentation

@@ -15,7 +15,7 @@
     "prefer-stable": false,
     "require": {
         "php": ">=5.3.3",
-        "symfony/framework-bundle": "~2.2",
+        "symfony/framework-bundle": "~2.3",
         "doctrine/phpcr-bundle": "1.1.*",
         "doctrine/phpcr-odm": "1.1.*",
         "knplabs/knp-menu-bundle": "1.1.*",
@@ -25,7 +25,7 @@
         "symfony-cmf/routing-bundle": "1.2.*",
         "symfony-cmf/testing": "1.1.*",
         "sonata-project/doctrine-phpcr-admin-bundle": "1.1.*",
-        "symfony/monolog-bundle": "2.2.*"
+        "symfony/monolog-bundle": "2.3.*"
     },
     "suggest": {
         "sonata-project/doctrine-phpcr-admin-bundle": "if you want to have editing capabilities"
