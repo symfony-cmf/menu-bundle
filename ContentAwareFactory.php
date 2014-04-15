@@ -11,7 +11,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle;
 
-use Knp\Menu\Silex\RouterAwareFactory;
+use Knp\Menu\MenuFactory;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\MenuItem;
@@ -37,7 +37,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Event\CreateMenuItemFromNodeEvent;
  * The createItem method uses a voting process to decide whether the menu item
  * is the current item.
  */
-class ContentAwareFactory extends RouterAwareFactory
+class ContentAwareFactory extends MenuFactory
 {
     /**
      * @var UrlGeneratorInterface
@@ -83,7 +83,7 @@ class ContentAwareFactory extends RouterAwareFactory
         LoggerInterface $logger
     )
     {
-        parent::__construct($generator);
+        $this->generator = $generator;
         $this->contentRouter = $contentRouter;
         $this->linkTypes = array('route', 'uri', 'content');
         $this->dispatcher = $dispatcher;
@@ -243,6 +243,22 @@ class ContentAwareFactory extends RouterAwareFactory
                 break;
             case 'route':
                 unset($options['uri']);
+
+                try {
+                    $options['uri'] = $this->generator->generate(
+                        $options['route'],
+                        $options['routeParameters'],
+                        $options['routeAbsolute']
+                    );
+
+                    unset($options['route']);
+                } catch (RouteNotFoundException $e) {
+                    $this->logger->error(sprintf('%s : %s', $name, $e->getMessage()));
+
+                    if (!$this->allowEmptyItems) {
+                        return null;
+                    }
+                }
                 break;
             default:
                 throw new \RuntimeException(sprintf('Internal error: unexpected linkType "%s"', $options['linkType']));
