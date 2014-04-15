@@ -12,6 +12,8 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Knp\Menu\NodeInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 
@@ -48,9 +50,9 @@ class MenuNodeBase implements NodeInterface, ChildInterface
     /**
      * Child menu nodes
      *
-     * @var MenuNode[]
+     * @var Collection
      */
-    protected $children = array();
+    protected $children;
 
     /**
      * Menu label.
@@ -149,6 +151,7 @@ class MenuNodeBase implements NodeInterface, ChildInterface
     public function __construct($name = null)
     {
         $this->name = $name;
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -441,6 +444,16 @@ class MenuNodeBase implements NodeInterface, ChildInterface
         $this->children[] = $child;
 
         return $child;
+    }
+
+    /**
+     * Remove a child menu node
+     *
+     * @param MenuNode $child
+     */
+    public function removeChild(MenuNode $child)
+    {
+        $this->children->removeElement($child);
     }
 
     /**

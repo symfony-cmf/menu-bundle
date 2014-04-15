@@ -147,5 +147,14 @@ class MenuNodeTest extends BaseTestCase
 
         $menuNode = $this->dm->findTranslation(null, '/test/test-node', 'fr');
         $this->assertEquals('fr', $menuNode->getLocale());
+
+        $child = $this->dm->find(null, '/test/test-node/child1');
+        $menuNode = $child->getParent();
+        $this->assertCount(1, $menuNode->getChildren());
+        $menuNode->removeChild($child);
+        $this->dm->flush();
+        $this->dm->clear();
+        $menuNode = $this->dm->find(null, '/test/test-node');
+        $this->assertCount(0, $menuNode->getChildren());
     }
 }
