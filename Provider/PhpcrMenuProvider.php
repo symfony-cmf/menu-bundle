@@ -136,7 +136,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
     }
 
     /**
-     * Set the request, used for the cmf_request_aware tag.
+     * Set the request.
      *
      * @param Request $request
      */
