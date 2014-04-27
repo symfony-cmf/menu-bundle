@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\PublishWorkflow\Voter;
 
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
@@ -142,7 +141,7 @@ class MenuContentVoterTest extends \PHPUnit_Framework_Testcase
      */
     public function testPublishWorkflowChecker($expected, $attributes, $content, $isMenuPusblishable, $isContentPublishable)
     {
-        $attributes = (array) $attributes;       
+        $attributes = (array) $attributes;
         $menuNode = $this->getMock('Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode');
         $menuNode->expects($this->any())
             ->method('getContent')

@@ -27,4 +27,3 @@ current_menu_item_request_content_identity:
     pattern: /cmi/request_content_identity
     defaults:
         _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::requestContentIdentityAction
-

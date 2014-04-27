@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -59,6 +58,7 @@ class VoterController extends Controller
     public function postAction(Request $request)
     {
         $content = $request->get(DynamicRouter::CONTENT_KEY);
+
         return $this->render('::tests/voter/post.html.twig', array('content' => $content));
     }
 

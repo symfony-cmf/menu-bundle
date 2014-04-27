@@ -9,38 +9,25 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
 use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Post;
-use Doctrine\ODM\PHPCR\Document\Generic;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 use PHPCR\Util\NodeHelper;
 
-class LoadMenuData implements FixtureInterface, DependentFixtureInterface
+class LoadMenuData implements FixtureInterface
 {
-    protected $root;
     protected $menuRoot;
     protected $routeRoot;
 
-    public function getDependencies()
-    {
-        return array(
-            'Symfony\Cmf\Component\Testing\DataFixtures\PHPCR\LoadBaseData',
-        );
-    }
-
     public function load(ObjectManager $manager)
     {
-        $this->root = $manager->find(null, '/test');
-
         NodeHelper::createPath($manager->getPhpcrSession(), '/test/menus');
         NodeHelper::createPath($manager->getPhpcrSession(), '/test/routes/contents');
         $this->menuRoot = $manager->find(null, '/test/menus');

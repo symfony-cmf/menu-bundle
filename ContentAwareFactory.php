@@ -72,7 +72,7 @@ class ContentAwareFactory extends MenuFactory
     /**
      * @param UrlGeneratorInterface    $generator     for the parent class
      * @param UrlGeneratorInterface    $contentRouter to generate routes when
-     *      content is set
+     *                                                content is set
      * @param EventDispatcherInterface $dispatcher    to dispatch the CREATE_ITEM_FROM_NODE event.
      * @param LoggerInterface          $logger
      */
@@ -136,13 +136,13 @@ class ContentAwareFactory extends MenuFactory
     }
 
     /**
-     * Create a MenuItem from a NodeInterface instance
+     * Create a MenuItem from a NodeInterface instance.
      *
      * @param NodeInterface $node
      *
-     * @return MenuItem|null if allowEmptyItems is false and this node has
-     *     neither URL nor route nor a content that has a route, this method
-     *     returns null.
+     * @return MenuItem|null If allowEmptyItems is false and this node has
+     *                       neither URL nor route nor a content that has a
+     *                       route, returns null.
      */
     public function createFromNode(NodeInterface $node)
     {
@@ -202,9 +202,11 @@ class ContentAwareFactory extends MenuFactory
      *
      * @param string $name    the menu item name
      * @param array  $options options for the menu item, we care about
-     *                               'content'
+     *                        'content'
      *
-     * @return MenuItem|null returns null if no route can be built for this menu item
+     * @return MenuItem|null Returns null if no route can be built for this menu item,
+     *
+     * @throws \RuntimeException If the stored link type is not known.
      */
     public function createItem($name, array $options = array())
     {
@@ -303,7 +305,7 @@ class ContentAwareFactory extends MenuFactory
      * @param string $linkType
      *
      * @throws \InvalidArgumentException if $linkType is not one of the known
-     *      link types
+     *                                   link types
      */
     protected function validateLinkType($linkType)
     {

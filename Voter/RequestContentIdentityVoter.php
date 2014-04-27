@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\Voter;
 
 use Knp\Menu\ItemInterface;
@@ -38,7 +37,7 @@ class RequestContentIdentityVoter implements VoterInterface
 
     /**
      * @param string $requestKey The key to look up the content in the request
-     *      attributes.
+     *                           attributes.
      */
     public function __construct($requestKey)
     {

@@ -66,11 +66,11 @@ class PhpcrMenuProvider implements MenuProviderInterface
     protected $managerRegistry;
 
     /**
-     * @param FactoryInterface $factory the menu factory to create the menu
-     *      item with the root document (usually ContentAwareFactory)
-     * @param ManagerRegistry $managerRegistry manager registry service to use in conjunction
-     *      with the manager name to load the load menu root document
-     * @param string $menuRoot root id of the menu
+     * @param FactoryInterface $factory         the menu factory to create the menu
+     *                                          item with the root document (usually ContentAwareFactory)
+     * @param ManagerRegistry  $managerRegistry manager registry service to use in conjunction
+     *                                          with the manager name to load the load menu root document
+     * @param string           $menuRoot        root id of the menu
      */
     public function __construct(
         FactoryInterface $factory,
@@ -152,9 +152,9 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * menu root. You can thus pass a name or any relative path with slashes to
      * only load a submenu rather than a whole menu.
      *
-     * @param  string $name    Name of the menu to load. This can be an
-     *      absolute PHPCR path or one relative to the menu root.
-     * @param  array  $options
+     * @param string $name    Name of the menu to load. This can be an
+     *                        absolute PHPCR path or one relative to the menu root.
+     * @param array  $options
      *
      * @return ItemInterface The menu (sub)tree starting with name.
      *
@@ -180,9 +180,9 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * If this method returns true, it means that you can call get() without
      * an exception.
      *
-     * @param  string $name    Name of the menu to load. This can be an
-     *      absolute PHPCR path or one relative to the menu root.
-     * @param  array  $options
+     * @param string $name    Name of the menu to load. This can be an
+     *                        absolute PHPCR path or one relative to the menu root.
+     * @param array  $options
      *
      * @return boolean Whether a menu with this name can be loaded by this provider.
      */
@@ -195,14 +195,14 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * @param string  $name    Name of the menu to load
      * @param array   $options
      * @param boolean $throw   Whether to throw an exception if the menu is not
-     *      found or no valid menu. Returns false if $throw is false and there
-     *      is no menu at $name.
+     *                         found or no valid menu. Returns false if $throw is false and there
+     *                         is no menu at $name.
      *
      * @return object|boolean The menu root found with $name or false if $throw
-     *      is false and the menu was not found.
+     *                        is false and the menu was not found.
      *
      * @throws \InvalidArgumentException Only if $throw is true throws this
-     *      exception if the name is empty or no menu found.
+     *                                   exception if the name is empty or no menu found.
      */
     protected function find($name, array $options, $throw)
     {
@@ -230,7 +230,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
                 } else {
                     $session->getNode($path, $this->getPrefetch());
                 }
-            } catch(PathNotFoundException $e) {
+            } catch (PathNotFoundException $e) {
                 if ($throw) {
                     throw new \InvalidArgumentException(sprintf('The menu root "%s" does not exist.', $this->getMenuRoot()));
                 }

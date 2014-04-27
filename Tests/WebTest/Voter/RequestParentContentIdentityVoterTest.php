@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\WebTest\Voter;
 
-class RequestContentParentIdentityTest extends BaseTestCase
+class RequestParentContentIdentityVoterTest extends BaseTestCase
 {
     public function testRequestContentParentIdentityNoOp()
     {
-        // this test loads the "blog" page which corresponds directly 
+        // this test loads the "blog" page which corresponds directly
         // to the "Request Content PArent Identity" menu item and so DOES NOT invoke
         // the voter.
         $crawler = $this->client->request('GET', '/blog');
@@ -34,4 +33,3 @@ class RequestContentParentIdentityTest extends BaseTestCase
         $this->assertEquals(200, $res->getStatusCode());
     }
 }
-

@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow\Voter;
 
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
@@ -27,8 +26,8 @@ class MenuContentVoter implements VoterInterface
 
     /**
      * @param ContainerInterface $container to get the publish workflow checker
-     *      from. We cannot inject the publish workflow checker directly as
-     *      this would lead to a circular reference.
+     *                                      from. We cannot inject the publish workflow checker directly as
+     *                                      this would lead to a circular reference.
      */
     public function __construct(ContainerInterface $container)
     {
@@ -76,7 +75,7 @@ class MenuContentVoter implements VoterInterface
                 $decision = self::ACCESS_ABSTAIN;
                 continue;
             }
-            
+
             if ($content &&
                 false === $publishWorkflowChecker->isGranted($attribute, $content)
             ) {

@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -105,7 +104,6 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
         $this->routes->add($route);
     }
 
-
     public function removeMenuNode(NodeInterface $menuNode)
     {
         $this->menuNodes->remove($menuNode);
@@ -115,6 +113,7 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
     {
         foreach ($this->routes as $route) {
         }
+
         return $this->routes;
     }
 

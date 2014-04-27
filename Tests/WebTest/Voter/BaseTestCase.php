@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\WebTest\Voter;
 
 use Symfony\Component\DomCrawler\Crawler;

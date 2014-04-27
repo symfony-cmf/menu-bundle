@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\WebTest\Voter;
 
-class RequestContentIdentityTest extends BaseTestCase
+class RequestContentIdentityVoterTest extends BaseTestCase
 {
     public function testRequestContentIdentityVoterNoOp()
     {
@@ -36,4 +35,3 @@ class RequestContentIdentityTest extends BaseTestCase
         $this->assertEquals(200, $res->getStatusCode());
     }
 }
-

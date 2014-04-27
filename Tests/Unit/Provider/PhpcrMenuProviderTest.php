@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Provider;
 
 use Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider;
