@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.1.0-RC3
+---------
+
+* **2014-04-30**: Moved parent handling from MenuNodeBase to MenuNode to conform
+  with the CMF rules of base models being the minimal model. HierarchyInterface
+  on PHPCR MenuNode.
+
 1.1.0-RC2
 ---------
 
@@ -14,8 +21,8 @@ Changelog
   skip building the menu item altogether.
 
 * **2014-03-24**: setParent() and getParent() are now deprecated.
-  Use setParentDocument() and getParentDocument() instead.
-  Moreover, you should now enable the ChildExtension from the CoreBundle.
+  Use setParentObject() and getParentObject() instead.
+  When using Sonata admin, you can enable the ChildExtension from the CoreBundle.
 
 * **2014-01-10**: The PhpcrMenuProvider now attempts to prefetch the whole menu
   node tree to reduce the number of requests to the PHPCR storage. You can

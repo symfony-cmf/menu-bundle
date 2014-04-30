@@ -23,7 +23,7 @@ use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
  * @author Uwe Jäger <uwej711@googlemail.com>
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class MenuNodeBase implements NodeInterface, ChildInterface
+class MenuNodeBase implements NodeInterface
 {
     /**
      * Id of this menu node.
@@ -31,13 +31,6 @@ class MenuNodeBase implements NodeInterface, ChildInterface
      * @var string
      */
     protected $id;
-
-    /**
-     * Parent node.
-     *
-     * @var mixed
-     */
-    protected $parent;
 
     /**
      * Node name.
@@ -154,7 +147,7 @@ class MenuNodeBase implements NodeInterface, ChildInterface
     }
 
     /**
-     * Return ID (PHPCR path) of this menu node
+     * Return ID of this menu node
      *
      * @return string
      */
@@ -164,9 +157,7 @@ class MenuNodeBase implements NodeInterface, ChildInterface
     }
 
     /**
-     * Sets ID (PHPCR path) of this menu node
-     *
-     * The recommended way is to use setParent and setName rather than setId.
+     * Sets ID of this menu node.
      *
      * @param $id string
      *
@@ -177,48 +168,6 @@ class MenuNodeBase implements NodeInterface, ChildInterface
         $this->id = $id;
 
         return $this;
-    }
-
-    /**
-     * @deprecated Use setParentDocument instead.
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * @deprecated Use getParentDocument instead.
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * Set the parent of this menu node
-     *
-     * @param $parent MenuNode - Parent node
-     *
-     * @return MenuNode - this instance
-     */
-    public function setParentDocument($parent)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * Returns the parent of this menu node
-     *
-     * @return object
-     */
-    public function getParentDocument()
-    {
-        return $this->parent;
     }
 
     /**
@@ -284,9 +233,9 @@ class MenuNodeBase implements NodeInterface, ChildInterface
     }
 
     /**
-     * Return the URI
+     * Return the URI this menu node points to.
      *
-     * @return $uri string
+     * @return string URI
      */
     public function getUri()
     {

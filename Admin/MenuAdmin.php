@@ -16,7 +16,6 @@ use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 
 class MenuAdmin extends AbstractMenuNodeAdmin
 {
-
     /**
      * {@inheritDoc}
      */

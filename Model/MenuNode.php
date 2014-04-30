@@ -11,6 +11,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
+use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
@@ -32,8 +33,16 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 class MenuNode extends MenuNodeBase implements
     TranslatableInterface,
     PublishTimePeriodInterface,
-    PublishableInterface
+    PublishableInterface,
+    ChildInterface
 {
+    /**
+     * Parent menu node.
+     *
+     * @var mixed
+     */
+    protected $parent;
+
     /**
      * @var string
      */
@@ -66,6 +75,40 @@ class MenuNode extends MenuNodeBase implements
      * @var \DateTime
      */
     protected $publishEndDate;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setParentObject($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getParentObject()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @deprecated use setParentObject instead.
+     */
+    public function setParent($parent)
+    {
+        return $this->setParentObject($parent);
+    }
+
+    /**
+     * @deprecated use getParentObject instead.
+     */
+    public function getParent()
+    {
+        return $this->getParentObject();
+    }
 
     /**
      * @return string the loaded locale of this menu node
