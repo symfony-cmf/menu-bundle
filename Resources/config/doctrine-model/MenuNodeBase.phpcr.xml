@@ -9,11 +9,8 @@
         name="Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeBase"
         >
 
-        <id name="id">
-            <generator strategy="PARENT"/>
-        </id>
+        <id name="id"/>
         <nodename name="name"/>
-        <parent-document name="parent"/>
 
         <field name="label" type="string"/>
         <field name="uri" type="string" nullable="true"/>

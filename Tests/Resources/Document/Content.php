@@ -24,7 +24,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface, ChildInterface
+class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
 {
     /**
      * @PHPCR\Id(strategy="assigned")

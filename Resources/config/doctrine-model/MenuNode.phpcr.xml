@@ -9,6 +9,7 @@
         name="Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode"
         translator="attribute"
         >
+        <parent-document name="parent"/>
 
         <locale name="locale"/>
 

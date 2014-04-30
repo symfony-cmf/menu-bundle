@@ -23,8 +23,8 @@
             class="Symfony\Cmf\Bundle\MenuBundle\Voter\RequestParentContentIdentityVoter">
             <argument>contentDocument</argument>
             <argument>Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Post</argument>
+            <call method="setRequest"><argument type="service" id="request" on-invalid="null" strict="false"/></call>
             <tag name="cmf_menu.voter"/>
-            <tag name="cmf_request_aware"/>
         </service>
 
 
