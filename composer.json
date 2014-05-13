@@ -19,7 +19,7 @@
         "doctrine/phpcr-bundle": "1.1.*",
         "doctrine/phpcr-odm": "1.1.*",
         "knplabs/knp-menu-bundle": "1.1.*",
-        "symfony-cmf/core-bundle": ">=1.0.0,<1.2-dev"
+        "symfony-cmf/core-bundle": ">=1.1.0,<1.2-dev"
     },
     "require-dev": {
         "symfony-cmf/routing-bundle": "1.2.*",
