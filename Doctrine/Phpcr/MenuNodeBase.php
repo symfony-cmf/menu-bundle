@@ -11,8 +11,8 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr;
 
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeBase as BaseMenuNodeBase;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeBase as ModelMenuNodeBase;
 
-class MenuNodeBase extends BaseMenuNodeBase
+class MenuNodeBase extends ModelMenuNodeBase
 {
 }

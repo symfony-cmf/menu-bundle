@@ -193,22 +193,6 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Convenience method to set parent and name at the same time.
-     *
-     * @param $parent MenuNode
-     * @param $name string
-     *
-     * @return MenuNode - this instance
-     */
-    public function setPosition($parent, $name)
-    {
-        $this->parent = $parent;
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
      * Return the label assigned to this menu node
      *
      * @return string
@@ -380,7 +364,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Add a child menu node, automatically setting the parent node.
+     * Add a child menu node under this node.
      *
      * @param MenuNode $child
      *
@@ -388,7 +372,6 @@ class MenuNodeBase implements NodeInterface
      */
     public function addChild(MenuNode $child)
     {
-        $child->setParentDocument($this);
         $this->children[] = $child;
 
         return $child;

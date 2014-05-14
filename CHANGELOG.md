@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.1.1
+-----
+
+* **2014-05-14**: [BC BREAK when extending Model] Removed parent from
+  MenuNodeBase classes as they are not required by knp menu.
+
 1.1.0
 -----
 
