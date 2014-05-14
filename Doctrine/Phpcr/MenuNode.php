@@ -12,9 +12,9 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr;
 
 use Doctrine\ODM\PHPCR\HierarchyInterface;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode as BaseMenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode as ModelMenuNode;
 
-class MenuNode extends BaseMenuNode implements HierarchyInterface
+class MenuNode extends ModelMenuNode implements HierarchyInterface
 {
     /**
      * Set the parent of this menu node
@@ -36,5 +36,35 @@ class MenuNode extends BaseMenuNode implements HierarchyInterface
     public function getParentDocument()
     {
         return $this->getParentObject();
+    }
+
+    /**
+     * Convenience method to set parent and name at the same time.
+     *
+     * @param $parent MenuNode
+     * @param $name string
+     *
+     * @return MenuNode - this instance
+     */
+    public function setPosition($parent, $name)
+    {
+        $this->setParentObject($parent);
+        $this->setName($name);
+
+        return $this;
+    }
+
+    /**
+     * Add a child menu node, automatically setting the parent node.
+     *
+     * @param MenuNode $child
+     *
+     * @return MenuNode - The newly added child node.
+     */
+    public function addChild(ModelMenuNode $child)
+    {
+        $child->setParentObject($this);
+
+        return parent::addChild($child);
     }
 }
