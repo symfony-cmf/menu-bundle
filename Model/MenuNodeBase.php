@@ -14,7 +14,6 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Knp\Menu\NodeInterface;
-use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 
 /**
  * This is a persistable implementation of the KnpMenu
@@ -161,7 +160,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param $id string
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setId($id)
     {
@@ -183,7 +182,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param string $name
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setName($name)
     {
@@ -207,7 +206,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param $label string
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setLabel($label)
     {
@@ -231,7 +230,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param $uri string
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setUri($uri)
     {
@@ -255,7 +254,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param $route string - name of route
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setRoute($route)
     {
@@ -279,7 +278,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param $attributes array
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setAttributes(array $attributes)
     {
@@ -311,7 +310,7 @@ class MenuNodeBase implements NodeInterface
      * @param string $name  attribute name
      * @param string $value attribute value
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setAttribute($name, $value)
     {
@@ -335,7 +334,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param array $attributes
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setChildrenAttributes(array $attributes)
     {
@@ -348,7 +347,7 @@ class MenuNodeBase implements NodeInterface
      * Get all child menu nodes of this menu node. This will filter out all
      * non-NodeInterface children.
      *
-     * @return MenuNode[]
+     * @return NodeInterface[]
      */
     public function getChildren()
     {
@@ -368,7 +367,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param MenuNode $child
      *
-     * @return MenuNode - The newly added child node.
+     * @return MenuNode The newly added child node.
      */
     public function addChild(MenuNode $child)
     {
@@ -381,6 +380,8 @@ class MenuNodeBase implements NodeInterface
      * Remove a child menu node
      *
      * @param MenuNode $child
+     *
+     * @return MenuNodeBase $this
      */
     public function removeChild(MenuNode $child)
     {
@@ -402,7 +403,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param array $routeParameters
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setRouteParameters($routeParameters)
     {
@@ -426,7 +427,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param array $extras
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setExtras(array $extras)
     {
@@ -450,7 +451,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param array $linkAttributes
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setLinkAttributes($linkAttributes)
     {
@@ -474,7 +475,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param array $labelAttributes
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setLabelAttributes($labelAttributes)
     {
@@ -498,7 +499,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param boolean $display
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setDisplay($display)
     {
@@ -522,7 +523,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param boolean $displayChildren
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setDisplayChildren($displayChildren)
     {
@@ -547,7 +548,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param boolean $routeAbsolute
      *
-     * @return MenuNode - this instance
+     * @return MenuNodeBase - this instance
      */
     public function setRouteAbsolute($routeAbsolute)
     {

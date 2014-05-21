@@ -17,9 +17,9 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode as ModelMenuNode;
 class MenuNode extends ModelMenuNode implements HierarchyInterface
 {
     /**
-     * Set the parent of this menu node
+     * Set the parent of this menu node.
      *
-     * @param $parent MenuNode - Parent node
+     * @param object $parent A mapped document.
      *
      * @return MenuNode - this instance
      */
@@ -29,7 +29,7 @@ class MenuNode extends ModelMenuNode implements HierarchyInterface
     }
 
     /**
-     * Returns the parent of this menu node
+     * Returns the parent of this menu node.
      *
      * @return object
      */
@@ -41,8 +41,8 @@ class MenuNode extends ModelMenuNode implements HierarchyInterface
     /**
      * Convenience method to set parent and name at the same time.
      *
-     * @param $parent MenuNode
-     * @param $name string
+     * @param object $parent A mapped document.
+     * @param string $name
      *
      * @return MenuNode - this instance
      */
@@ -57,13 +57,15 @@ class MenuNode extends ModelMenuNode implements HierarchyInterface
     /**
      * Add a child menu node, automatically setting the parent node.
      *
-     * @param MenuNode $child
+     * @param ModelMenuNode $child
      *
-     * @return MenuNode - The newly added child node.
+     * @return ModelMenuNode - The newly added child node.
      */
     public function addChild(ModelMenuNode $child)
     {
-        $child->setParentObject($this);
+        if ($child instanceof MenuNode) {
+            $child->setParentObject($this);
+        }
 
         return parent::addChild($child);
     }
