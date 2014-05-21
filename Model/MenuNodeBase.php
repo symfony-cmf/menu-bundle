@@ -365,11 +365,11 @@ class MenuNodeBase implements NodeInterface
     /**
      * Add a child menu node under this node.
      *
-     * @param MenuNode $child
+     * @param NodeInterface $child
      *
-     * @return MenuNode The newly added child node.
+     * @return NodeInterface The newly added child node.
      */
-    public function addChild(MenuNode $child)
+    public function addChild(NodeInterface $child)
     {
         $this->children[] = $child;
 
@@ -379,13 +379,15 @@ class MenuNodeBase implements NodeInterface
     /**
      * Remove a child menu node
      *
-     * @param MenuNode $child
+     * @param NodeInterface $child
      *
      * @return MenuNodeBase $this
      */
-    public function removeChild(MenuNode $child)
+    public function removeChild(NodeInterface $child)
     {
         $this->children->removeElement($child);
+
+        return $this;
     }
 
     /**
