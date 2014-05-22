@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.2.x
+-----
+
+* **2014-05-21**: [BC BREAK when extending BaseMenuNode] addChild and
+  removeChild now accepts every Knp\Menu\NodeInterface instead of only
+  MenuNode.
+
 1.1.1
 -----
 
