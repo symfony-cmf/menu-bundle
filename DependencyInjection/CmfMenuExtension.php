@@ -40,6 +40,10 @@ class CmfMenuExtension extends Extension
             $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
         }
 
+        if ($config['persistence']['orm']['enabled']) {
+            $this->loadOrm($config['persistence']['orm'], $loader, $container);
+        }
+
         if ($config['publish_workflow']['enabled']) {
             $loader->load('publish-workflow.xml');
         }
@@ -68,7 +72,23 @@ class CmfMenuExtension extends Extension
         }
     }
 
-    public function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)
+    protected function loadOrm($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $keys = array(
+            'manager_name' => 'manager_name',
+        );
+
+        foreach ($keys as $sourceKey => $targetKey) {
+            $container->setParameter(
+                $kkey = $this->getAlias() . '.persistence.orm.'. $targetKey,
+                $config[$sourceKey]
+            );
+        }
+
+        $loader->load('persistence-orm.xml');
+    }
+
+    protected function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $keys = array(
             'menu_document_class' => 'menu_document.class',

@@ -9,9 +9,16 @@ class AppKernel extends TestKernel
     {
         $this->requireBundleSets(array(
             'default',
-            'phpcr_odm',
-            'sonata_admin_phpcr',
         ));
+
+        if ('phpcr' === $this->environment) {
+            $this->requireBundleSets(array(
+                'phpcr_odm',
+                'sonata_admin_phpcr',
+            ));
+        } else {
+            $this->requireBundleSet('doctrine_orm');
+        }
 
         $this->addBundles(array(
             new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
@@ -22,8 +29,7 @@ class AppKernel extends TestKernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config.php');
+        $loader->load(__DIR__.'/config/config_' . $this->environment . '.php');
         $loader->load(__DIR__.'/config/test-services.xml');
     }
-
 }

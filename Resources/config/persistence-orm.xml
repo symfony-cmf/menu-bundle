@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="cmf_menu.provider.orm.class">Symfony\Cmf\Bundle\MenuBundle\Provider\OrmMenuProvider</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="cmf_menu.provider.orm" class="%cmf_menu.provider.orm.class%">
+            <tag name="knp_menu.provider" />
+            <argument type="service" id="cmf_menu.factory"/>
+            <argument type="service" id="doctrine"/>
+            <call method="setManagerName"><argument>%cmf_menu.persistence.orm.manager_name%</argument></call>
+            <call method="setRequest"><argument type="service" id="request" on-invalid="null" strict="false"/></call>
+        </service>
+
+    </services>
+
+</container>
