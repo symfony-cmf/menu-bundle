@@ -52,7 +52,7 @@ class CmfMenuBundle extends Bundle
                     realpath(__DIR__ . '/Resources/config/doctrine-model') => 'Symfony\Cmf\Bundle\MenuBundle\Model',
                     realpath(__DIR__ . '/Resources/config/doctrine-orm') => 'Symfony\Cmf\Bundle\MenuBundle\Doctrine\Orm',
                 ),
-                array('cmf_menu.dynamic.persistence.orm.manager_name'),
+                array('cmf_menu.persistence.orm.manager_name'),
                 'cmf_menu.backend_type_orm'
             )
         );

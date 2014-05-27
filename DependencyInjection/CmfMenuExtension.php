@@ -74,6 +74,8 @@ class CmfMenuExtension extends Extension
 
     protected function loadOrm($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
+        $container->setParameter($this->getAlias() . '.backend_type_orm', true);
+
         $keys = array(
             'manager_name' => 'manager_name',
         );
@@ -90,6 +92,8 @@ class CmfMenuExtension extends Extension
 
     protected function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
+        $container->setParameter($this->getAlias() . '.backend_type_phpcr', true);
+
         $keys = array(
             'menu_document_class' => 'menu_document.class',
             'node_document_class' => 'node_document.class',

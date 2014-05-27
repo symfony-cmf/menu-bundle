@@ -8,20 +8,6 @@
     <mapped-superclass
         name="Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode"
         >
-
-        <!-- <locale name="locale"/> -->
-        <!-- <reference-one name="content" targetEntity=""/> -->
-
-        <reference-one name="parent" targetEntity="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Orm\MenuNode"/>
-
-        <field name="label" type="string" translated="true"/>
-        <field name="uri" type="string" translated="true" nullable="true"/>
-        <field name="linkType" type="string" nullable="true"/>
-
-        <field name="publishable" type="boolean"/>
-        <field name="publishStartDate" type="date" nullable="true"/>
-        <field name="publishEndDate" type="date" nullable="true"/>
-
     </mapped-superclass>
 
 </doctrine-mapping>
