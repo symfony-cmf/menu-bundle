@@ -16,18 +16,22 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/framework-bundle": "~2.3",
-        "doctrine/phpcr-bundle": "1.1.*",
-        "doctrine/phpcr-odm": "1.1.*",
         "knplabs/knp-menu-bundle": "1.1.*",
         "symfony-cmf/core-bundle": ">=1.1.0,<1.2-dev"
     },
     "require-dev": {
         "symfony-cmf/routing-bundle": "1.2.*",
         "symfony-cmf/testing": "1.1.*",
+        "doctrine/phpcr-bundle": "1.1.*",
+        "doctrine/phpcr-odm": "1.1.*",
+        "doctrine/orm": "2.3.*",
         "sonata-project/doctrine-phpcr-admin-bundle": "1.1.*",
         "symfony/monolog-bundle": "2.3.*"
     },
     "suggest": {
+        "doctrine/phpcr-odm": "To enable support for the PHPCR ODM documents",
+        "doctrine/phpcr-bundle": "To enable support for the PHPCR ODM documents",
+        "doctrine/orm": "To enable support for the ORM entities",
         "sonata-project/doctrine-phpcr-admin-bundle": "if you want to have editing capabilities"
     },
     "autoload":{

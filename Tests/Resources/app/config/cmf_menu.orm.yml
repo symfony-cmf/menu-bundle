@@ -1,0 +1,11 @@
+cmf_menu:
+    persistence:
+        orm:
+            enabled: true
+
+cmf_routing:
+    dynamic:
+        enabled: true
+        persistence:
+            orm:
+                enabled: true
