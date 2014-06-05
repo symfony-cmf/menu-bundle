@@ -80,4 +80,18 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
         $this->recursiveBreadcrumbs = (bool) $recursiveBreadcrumbs;
     }
 
+    public function getNewInstance()
+    {
+        $new = parent::getNewInstance();
+
+        if ($this->hasRequest()) {
+            $parentId = $this->getRequest()->query->get('parent');
+            if (null !== $parentId) {
+                $new->setParent($this->getModelManager()->find(null, $parentId));
+            }
+        }
+
+        return $new;
+    }
+
 }
