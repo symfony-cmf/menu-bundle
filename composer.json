@@ -28,7 +28,8 @@
         "symfony/monolog-bundle": "2.3.*"
     },
     "suggest": {
-        "sonata-project/doctrine-phpcr-admin-bundle": "if you want to have editing capabilities"
+        "sonata-project/doctrine-phpcr-admin-bundle": "if you want to have editing capabilities",
+        "burgov/key-value-form-bundle": "if you want to edit the advanced options on the node with the menu options extension"
     },
     "autoload": {
         "psr-4": {

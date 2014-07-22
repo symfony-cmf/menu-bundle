@@ -15,6 +15,7 @@ use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuOptionsInterface;
 
 /**
  * This is the standard CMF MenuNode implementation
@@ -34,6 +35,7 @@ class MenuNode extends MenuNodeBase implements
     TranslatableInterface,
     PublishTimePeriodInterface,
     PublishableInterface,
+    MenuOptionsInterface,
     ChildInterface
 {
     /**

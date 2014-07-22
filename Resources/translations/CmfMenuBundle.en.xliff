@@ -126,6 +126,34 @@
         <source>form.label_menu_nodes</source>
         <target>Menu</target>
       </trans-unit>
+      <trans-unit id="form.group_menu_options">
+        <source>form.group_menu_options</source>
+        <target>Menu Options</target>
+      </trans-unit>
+      <trans-unit id="form.label_display">
+        <source>form.label_display</source>
+        <target>Display</target>
+      </trans-unit>
+      <trans-unit id="form.label_display_children">
+        <source>form.label_display_children</source>
+        <target>Display Children</target>
+      </trans-unit>
+      <trans-unit id="form.label_attributes">
+        <source>form.label_attributes</source>
+        <target>Menu attributes</target>
+      </trans-unit>
+      <trans-unit id="form.label_label_attributes">
+        <source>form.label_label_attributes</source>
+        <target>Label attributes</target>
+      </trans-unit>
+      <trans-unit id="form.label_children_attributes">
+        <source>form.label_children_attributes</source>
+        <target>Children attributes</target>
+      </trans-unit>
+      <trans-unit id="form.label_link_attributes">
+        <source>form.label_link_attributes</source>
+        <target>Link attributes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
