@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="cmf_menu.admin_extension.menu_node_options.class">Symfony\Cmf\Bundle\MenuBundle\Admin\Extension\MenuOptionsExtension</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="cmf_menu.admin_extension.menu_options" class="%cmf_menu.admin_extension.menu_node_options.class%">
+            <argument>form.group_menu_options</argument>
+            <argument>%cmf_menu.admin_extensions.menu_options.advanced%</argument>
+            <tag name="sonata.admin.extension"/>
+        </service>
+
+    </services>
+
+</container>

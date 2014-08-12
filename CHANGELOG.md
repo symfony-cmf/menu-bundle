@@ -1,6 +1,7 @@
 Changelog
 =========
 
+* **2014-07-11**: Added MenuOptionsExtension that adds the editing feature of menu options in Sonata Admin
 * **2014-06-06**: Updated to PSR-4 autoloading
 
 1.2.x

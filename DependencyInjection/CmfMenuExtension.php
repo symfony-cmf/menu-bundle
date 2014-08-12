@@ -12,6 +12,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
@@ -23,6 +24,7 @@ class CmfMenuExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
+        $bundles = $container->getParameter('kernel.bundles');
 
         $loader = new XmlFileLoader(
             $container,
@@ -38,6 +40,20 @@ class CmfMenuExtension extends Extension
 
         if ($config['persistence']['phpcr']['enabled']) {
             $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
+        }
+
+        if ($config['admin_extensions']['menu_options']['enabled']) {
+            if(!isset($bundles['SonataAdminBundle'])) {
+                throw new InvalidConfigurationException('To use menu options extionsion, you need sonata-project/SonataAdminBundle in your project.');
+            }
+
+            if ($config['admin_extensions']['menu_options']['advanced'] && !isset($bundles['BurgovKeyValueFormBundle'])) {
+                throw new InvalidConfigurationException('To use advanced menu options, you need the burgov/key-value-bundle in your project.');
+            }
+
+            $container->setParameter($this->getAlias() . '.admin_extensions.menu_options.advanced', $config['admin_extensions']['menu_options']['advanced']);
+
+            $loader->load('admin-extension.xml');
         }
 
         if ($config['publish_workflow']['enabled']) {
@@ -111,7 +127,6 @@ class CmfMenuExtension extends Extension
                     $config[$key.'_admin_class']
                 );
             }
-
         }
 
         $loader->load('admin.xml');
