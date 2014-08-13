@@ -18,7 +18,7 @@
         "symfony/framework-bundle": "~2.3",
         "doctrine/phpcr-bundle": ">=1.1.0,<1.3-dev",
         "doctrine/phpcr-odm": ">=1.1.0,<1.3-dev",
-        "knplabs/knp-menu-bundle": "1.1.*",
+        "knplabs/knp-menu-bundle": "~2.0",
         "symfony-cmf/core-bundle": ">=1.1.0,<1.3-dev"
     },
     "require-dev": {
@@ -37,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2-dev"
+            "dev-master": "2.0-dev"
         }
     }
 }
