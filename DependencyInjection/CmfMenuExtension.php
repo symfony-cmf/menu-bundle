@@ -43,17 +43,7 @@ class CmfMenuExtension extends Extension
         }
 
         if ($config['admin_extensions']['menu_options']['enabled']) {
-            if(!isset($bundles['SonataAdminBundle'])) {
-                throw new InvalidConfigurationException('To use menu options extionsion, you need sonata-project/SonataAdminBundle in your project.');
-            }
-
-            if ($config['admin_extensions']['menu_options']['advanced'] && !isset($bundles['BurgovKeyValueFormBundle'])) {
-                throw new InvalidConfigurationException('To use advanced menu options, you need the burgov/key-value-bundle in your project.');
-            }
-
-            $container->setParameter($this->getAlias() . '.admin_extensions.menu_options.advanced', $config['admin_extensions']['menu_options']['advanced']);
-
-            $loader->load('admin-extension.xml');
+            $this->loadExtensions($config, $loader, $container);
         }
 
         if ($config['publish_workflow']['enabled']) {
@@ -130,6 +120,27 @@ class CmfMenuExtension extends Extension
         }
 
         $loader->load('admin.xml');
+    }
+
+    public function loadExtensions($config, XmlFileLoader $loader, ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+
+        if ('auto' === $config['admin_extensions']['menu_options']['enabled'] && !isset($bundles['SonataAdminBundle'])) {
+            return;
+        }
+
+        if (!isset($bundles['SonataAdminBundle'])) {
+            throw new InvalidConfigurationException('To use menu options extionsion, you need sonata-project/SonataAdminBundle in your project.');
+        }
+
+        if ($config['admin_extensions']['menu_options']['advanced'] && !isset($bundles['BurgovKeyValueFormBundle'])) {
+            throw new InvalidConfigurationException('To use advanced menu options, you need the burgov/key-value-bundle in your project.');
+        }
+
+        $container->setParameter($this->getAlias() . '.admin_extensions.menu_options.advanced', $config['admin_extensions']['menu_options']['advanced']);
+
+        $loader->load('admin-extension.xml');
     }
 
     /**
