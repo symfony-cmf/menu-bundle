@@ -118,6 +118,42 @@
         <source>form.label_menu_nodes</source>
         <target>Menü</target>
       </trans-unit>
+      <trans-unit id="form.group_menu_options">
+        <source>form.group_menu_options</source>
+        <target>Menü-Optionen</target>
+      </trans-unit>
+      <trans-unit id="form.label_display">
+        <source>form.label_display</source>
+        <target>Anzeigen</target>
+      </trans-unit>
+      <trans-unit id="form.help_display">
+        <source>form.help_display</source>
+        <target>Ein Menüeintrag wird nur angezeigt wenn die Beschriftung nicht leer ist.</target>
+      </trans-unit>
+      <trans-unit id="form.label_display_children">
+        <source>form.label_display_children</source>
+        <target>Unterelemente anzeigen</target>
+      </trans-unit>
+      <trans-unit id="form.help_display_children">
+        <source>form.help_display_children</source>
+        <target>Unterelemente werden nur angezeigt, wenn der Menüeintrag selber angezeigt wird.</target>
+      </trans-unit>
+      <trans-unit id="form.label_attributes">
+        <source>form.label_attributes</source>
+        <target>Menü-Attribute</target>
+      </trans-unit>
+      <trans-unit id="form.label_label_attributes">
+        <source>form.label_label_attributes</source>
+        <target>Beschriftungs-Attribute</target>
+      </trans-unit>
+      <trans-unit id="form.label_children_attributes">
+        <source>form.label_children_attributes</source>
+        <target>Attribute für Unterelemente</target>
+      </trans-unit>
+      <trans-unit id="form.label_link_attributes">
+        <source>form.label_link_attributes</source>
+        <target>Link-Attribute</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

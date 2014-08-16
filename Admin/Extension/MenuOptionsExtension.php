@@ -34,7 +34,7 @@ class MenuOptionsExtension extends AdminExtension
 
     /**
      * @param string $formGroup - group to use for form mapper
-     * @param bool $advanced - activates editing all fields of the node
+     * @param bool   $advanced - activates editing all fields of the node
      */
     public function __construct($formGroup = 'form.group_menu_options', $advanced = false)
     {
@@ -53,12 +53,14 @@ class MenuOptionsExtension extends AdminExtension
             ->add(
                 'display',
                 'checkbox',
-                array('required' => false)
+                array('required' => false),
+                array('help' => 'form.help_display')
             )
             ->add(
                 'displayChildren',
                 'checkbox',
-                array('required' => false)
+                array('required' => false),
+                array('help' => 'form.help_display_children')
             )
           ->end();
 
@@ -81,7 +83,7 @@ class MenuOptionsExtension extends AdminExtension
                 array(
                   'value_type' => 'text',
                   'required' => false,
-                  'options' => $child_options
+                  'options' => $child_options,
                 )
             )
             ->add(
@@ -90,7 +92,7 @@ class MenuOptionsExtension extends AdminExtension
                 array(
                   'value_type' => 'text',
                   'required' => false,
-                  'options' => $child_options
+                  'options' => $child_options,
                 )
             )
             ->add(
@@ -99,7 +101,7 @@ class MenuOptionsExtension extends AdminExtension
                 array(
                   'value_type' => 'text',
                   'required' => false,
-                  'options' => $child_options
+                  'options' => $child_options,
                 )
             )
             ->add(
@@ -108,7 +110,7 @@ class MenuOptionsExtension extends AdminExtension
                 array(
                   'value_type' => 'text',
                   'required' => false,
-                  'options' => $child_options
+                  'options' => $child_options,
                 )
             )
           ->end();

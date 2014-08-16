@@ -134,9 +134,17 @@
         <source>form.label_display</source>
         <target>Display</target>
       </trans-unit>
+      <trans-unit id="form.help_display">
+        <source>form.help_display</source>
+        <target>A menu entry is only displayed if the label is not empty.</target>
+      </trans-unit>
       <trans-unit id="form.label_display_children">
         <source>form.label_display_children</source>
         <target>Display Children</target>
+      </trans-unit>
+      <trans-unit id="form.help_display_children">
+        <source>form.help_display_children</source>
+        <target>Children are only displayed if the menu entry itself is displayed.</target>
       </trans-unit>
       <trans-unit id="form.label_attributes">
         <source>form.label_attributes</source>

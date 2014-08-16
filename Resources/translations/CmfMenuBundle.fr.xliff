@@ -126,6 +126,42 @@
         <source>form.label_menu_nodes</source>
         <target>Menu</target>
       </trans-unit>
+      <trans-unit id="form.group_menu_options">
+        <source>form.group_menu_options</source>
+        <target>Options Menu</target>
+      </trans-unit>
+      <trans-unit id="form.label_display">
+        <source>form.label_display</source>
+        <target>Visible</target>
+      </trans-unit>
+      <trans-unit id="form.help_display">
+        <source>form.help_display</source>
+        <target>Un élément menu est visible seulement si le nom est remplit.</target>
+      </trans-unit>
+      <trans-unit id="form.label_display_children">
+        <source>form.label_display_children</source>
+        <target>Montrer les éléments subordonné</target>
+      </trans-unit>
+      <trans-unit id="form.help_display_children">
+        <source>form.help_display_children</source>
+        <target>Les éléments subordonné sont visible seulement si l'élément menu lui-même est visible.</target>
+      </trans-unit>
+      <trans-unit id="form.label_attributes">
+        <source>form.label_attributes</source>
+        <target>Attributs Menu</target>
+      </trans-unit>
+      <trans-unit id="form.label_label_attributes">
+        <source>form.label_label_attributes</source>
+        <target>Attributs Nom</target>
+      </trans-unit>
+      <trans-unit id="form.label_children_attributes">
+        <source>form.label_children_attributes</source>
+        <target>Attributs éléments subordonnés</target>
+      </trans-unit>
+      <trans-unit id="form.label_link_attributes">
+        <source>form.label_link_attributes</source>
+        <target>Attributs Lien</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
