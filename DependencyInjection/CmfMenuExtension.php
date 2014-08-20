@@ -24,7 +24,6 @@ class CmfMenuExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
-        $bundles = $container->getParameter('kernel.bundles');
 
         $loader = new XmlFileLoader(
             $container,
@@ -34,7 +33,7 @@ class CmfMenuExtension extends Extension
         $loader->load('menu.xml');
         $factory = $container->getDefinition($this->getAlias().'.factory');
         $factory->replaceArgument(1, new Reference($config['content_url_generator']));
-        $container->setParameter($this->getAlias() . '.allow_empty_items', $config['allow_empty_items']);
+        $container->setParameter($this->getAlias().'.allow_empty_items', $config['allow_empty_items']);
 
         $this->loadVoters($config, $loader, $container);
 

@@ -113,6 +113,7 @@ class MenuOptionsExtension extends AdminExtension
                   'options' => $child_options,
                 )
             )
-          ->end();
+            ->end()
+        ;
     }
 }
