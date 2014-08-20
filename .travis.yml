@@ -1,10 +1,10 @@
 language: php
 
 php:
-    - 5.3
-    - 5.4
+#    - 5.3
+#    - 5.4
     - 5.5
-    - hhvm
+#    - hhvm
 
 env:
   - SYMFONY_VERSION=2.5.*
@@ -12,12 +12,12 @@ env:
 matrix:
   allow_failures:
     - env: SYMFONY_VERSION=dev-master
-    - php: hhvm
+#    - php: hhvm
   include:
-    - php: 5.5
-      env: SYMFONY_VERSION=2.3.*
-    - php: 5.5
-      env: SYMFONY_VERSION=2.4.*
+#    - php: 5.5
+#      env: SYMFONY_VERSION=2.3.*
+#    - php: 5.5
+#      env: SYMFONY_VERSION=2.4.*
     - php: 5.5
       env: SYMFONY_VERSION=dev-master
 
@@ -29,5 +29,6 @@ before_script:
 script: phpunit --coverage-text
 
 notifications:
-  irc: "irc.freenode.org#symfony-cmf"
-  email: "symfony-cmf-devs@googlegroups.com"
+#  irc: "irc.freenode.org#symfony-cmf"
+#  email: "symfony-cmf-devs@googlegroups.com"
+  email: "cordoval@gmail.com"
