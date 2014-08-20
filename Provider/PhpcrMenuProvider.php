@@ -225,7 +225,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
                     && 0 === strncmp($path, $this->getMenuRoot(), strlen($this->getMenuRoot()))
                 ) {
                     // we have jackalope with a fetch depth. prefetch all menu
-                    // nodes of all menues.
+                    // nodes of all menus.
                     $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
                 } else {
                     $session->getNode($path, $this->getPrefetch());

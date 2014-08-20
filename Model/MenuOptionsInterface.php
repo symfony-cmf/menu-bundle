@@ -9,7 +9,6 @@ use Knp\Menu\NodeInterface;
  *
  * @author Mojtaba Koosej <mkoosej@gmail.com>
  */
-
 interface MenuOptionsInterface extends NodeInterface
 {
     /**
@@ -106,7 +105,7 @@ interface MenuOptionsInterface extends NodeInterface
     /**
      * Set the children attributes
      *
-     * @param array $attributes
+     * @param array $childrenAttributes
      *
      * @return Page The current Page instance
      */
@@ -127,5 +126,4 @@ interface MenuOptionsInterface extends NodeInterface
      * @return Page The current Page instance
      */
     function setLabelAttributes($labelAttributes);
-
 }
