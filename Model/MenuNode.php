@@ -15,7 +15,6 @@ use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuOptionsInterface;
 
 /**
  * This is the standard CMF MenuNode implementation
@@ -239,7 +238,7 @@ class MenuNode extends MenuNodeBase implements
      * @see getLinkType
      * @see ContentAwareFactory::$validLinkTypes
      *
-     * Valid link types are defined in ContenentAwareFactory
+     * Valid link types are defined in ContentAwareFactory
      *
      * @param $linkType string - one of uri, route or content
      */
