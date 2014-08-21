@@ -1,6 +1,6 @@
 # Symfony CMF Menu Bundle
 
-[![Build Status](https://secure.travis-ci.org/symfony-cmf/MenuBundle.png?branch=1.1)](http://travis-ci.org/symfony-cmf/MenuBundle)
+[![Build Status](https://secure.travis-ci.org/symfony-cmf/MenuBundle.png?branch=master)](http://travis-ci.org/symfony-cmf/MenuBundle)
 [![Latest Stable Version](https://poser.pugx.org/symfony-cmf/menu-bundle/version.png)](https://packagist.org/packages/symfony-cmf/menu-bundle)
 [![Total Downloads](https://poser.pugx.org/symfony-cmf/menu-bundle/d/total.png)](https://packagist.org/packages/symfony-cmf/menu-bundle)
 
