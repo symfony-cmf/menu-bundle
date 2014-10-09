@@ -135,7 +135,7 @@ class CmfMenuExtension extends Extension
         }
 
         if ($config['admin_extensions']['menu_options']['advanced'] && !isset($bundles['BurgovKeyValueFormBundle'])) {
-            throw new InvalidConfigurationException('To use advanced menu options, you need the burgov/key-value-bundle in your project.');
+            throw new InvalidConfigurationException('To use advanced menu options, you need the burgov/key-value-form-bundle in your project.');
         }
 
         $container->setParameter($this->getAlias() . '.admin_extensions.menu_options.advanced', $config['admin_extensions']['menu_options']['advanced']);
