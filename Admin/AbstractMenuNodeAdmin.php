@@ -102,11 +102,11 @@ abstract class AbstractMenuNodeAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('id', 'text')
-            ->add('name', 'text')
-            ->add('label', 'text')
-            ->add('uri', 'text')
-            ->add('content', 'text')
+            ->add('id')
+            ->add('name')
+            ->add('label')
+            ->add('uri')
+            ->add('content', null, array('associated_property' => 'title'))
         ;
     }
 
