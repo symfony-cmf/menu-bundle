@@ -24,8 +24,24 @@ use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
  */
 abstract class AbstractMenuNodeAdmin extends Admin
 {
+    /**
+     * @var ContentAwareFactory
+     */
     protected $contentAwareFactory;
+
+    /**
+     * @var string
+     */
+    protected $contentRoot;
+
+    /**
+     * @var string
+     */
     protected $menuRoot;
+
+    /**
+     * @var string
+     */
     protected $translationDomain = 'CmfMenuBundle';
 
     protected function configureListFields(ListMapper $listMapper)
@@ -83,7 +99,7 @@ abstract class AbstractMenuNodeAdmin extends Admin
         }
     }
 
-    protected function configureShowField(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
             ->add('id', 'text')
