@@ -14,10 +14,13 @@
             <argument type="service" id="router"/>
             <argument/> <!-- content url generator -->
             <argument type="service" id="event_dispatcher"/>
+	 </service>
+
+        <service id="cmf_menu.factory.quiet" class="Symfony\Cmf\Bundle\MenuBundle\QuietFactory"
+                 decorates="knp_menu.factory" public="false">
+            <argument type="service" id="cmf_menu.factory.quiet.inner" />
             <argument type="service" id="logger"/>
-            <call method="setAllowEmptyItems">
-                <argument>%cmf_menu.allow_empty_items%</argument>
-            </call>
+            <argument>%cmf_menu.allow_empty_items%</argument>
         </service>
 
         <service id="cmf_menu.loader.node" class="Knp\Menu\Loader\NodeLoader">
