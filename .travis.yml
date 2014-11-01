@@ -35,7 +35,6 @@ matrix:
 before_script:
   - composer self-update
   - composer require symfony/symfony:${SYMFONY_VERSION} --prefer-dist
-  - vendor/symfony-cmf/testing/bin/travis/phpcr_odm_doctrine_dbal.sh
 
 script: phpunit --coverage-text
 
