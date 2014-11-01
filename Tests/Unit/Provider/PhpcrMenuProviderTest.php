@@ -52,13 +52,13 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
             ->method('getManager')
             ->will($this->returnValue($objectManager));
 
-        $factory = $this->getMock('Knp\Menu\FactoryInterface');
-        $factory->expects($this->once())
-            ->method('createFromNode')
+        $loader = $this->getMockBuilder('Knp\Menu\Loader\NodeLoader')->disableOriginalConstructor()->getMock();
+        $loader->expects($this->once())
+            ->method('load')
             ->will($this->returnValue($this->getMock('Knp\Menu\ItemInterface')));
 
         $provider = new PhpcrMenuProvider(
-            $factory,
+            $loader,
             $managerRegistry,
             $menuRoot
         );
@@ -85,7 +85,7 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
             ->will($this->returnValue($objectManager));
 
         $provider = new PhpcrMenuProvider(
-            $this->getMock('Knp\Menu\FactoryInterface'),
+            $this->getMockBuilder('Knp\Menu\Loader\NodeLoader')->disableOriginalConstructor()->getMock(),
             $managerRegistry,
             $menuRoot
         );

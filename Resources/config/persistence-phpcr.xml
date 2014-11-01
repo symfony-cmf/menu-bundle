@@ -12,7 +12,7 @@
 
         <service id="cmf_menu.provider" class="%cmf_menu.provider.class%">
             <tag name="knp_menu.provider" />
-            <argument type="service" id="cmf_menu.factory"/>
+            <argument type="service" id="cmf_menu.loader.node"/>
             <argument type="service" id="doctrine_phpcr"/>
             <argument>%cmf_menu.persistence.phpcr.menu_basepath%</argument>
             <call method="setManagerName"><argument>%cmf_menu.persistence.phpcr.manager_name%</argument></call>

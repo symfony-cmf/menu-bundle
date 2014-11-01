@@ -20,6 +20,9 @@
             </call>
         </service>
 
+        <service id="cmf_menu.loader.node" class="Knp\Menu\Loader\NodeLoader">
+            <argument type="service" id="knp_menu.factory"/>
+        </service>
 
     </services>
 

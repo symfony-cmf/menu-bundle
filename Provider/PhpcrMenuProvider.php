@@ -13,6 +13,8 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\PHPCR\DocumentManager;
+use Knp\Menu\Loader\LoaderInterface;
+use Knp\Menu\Loader\NodeLoader;
 use Symfony\Component\HttpFoundation\Request;
 use PHPCR\PathNotFoundException;
 use PHPCR\Util\PathHelper;
@@ -25,9 +27,9 @@ use Knp\Menu\Provider\MenuProviderInterface;
 class PhpcrMenuProvider implements MenuProviderInterface
 {
     /**
-     * @var FactoryInterface
+     * @var LoaderInterface
      */
-    protected $factory = null;
+    protected $loader = null;
 
     /**
      * @var Request
@@ -73,11 +75,11 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * @param string           $menuRoot        root id of the menu
      */
     public function __construct(
-        FactoryInterface $factory,
+        NodeLoader $loader,
         ManagerRegistry $managerRegistry,
         $menuRoot
     ) {
-        $this->factory = $factory;
+        $this->loader = $loader;
         $this->managerRegistry = $managerRegistry;
         $this->menuRoot = $menuRoot;
     }
@@ -164,7 +166,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
     {
         $menu = $this->find($name, $options, true);
 
-        $menuItem = $this->factory->createFromNode($menu);
+        $menuItem = $this->loader->load($menu);
         if (empty($menuItem)) {
             throw new \InvalidArgumentException("Menu at '$name' is misconfigured (f.e. the route might be incorrect) and could therefore not be instanciated");
         }

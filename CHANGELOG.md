@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.0-alpha1
+------------
+
+* **2014-10-30**: PhpcrMenuProvider now requires the NodeLoader as first argument instead of a FactoryInterface
+
 1.2.0-RC1
 ---------
 
