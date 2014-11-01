@@ -12,6 +12,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Voter;
 
 use Knp\Menu\ItemInterface;
+use Knp\Menu\Matcher\Voter\VoterInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

@@ -171,8 +171,6 @@ class PhpcrMenuProvider implements MenuProviderInterface
             throw new \InvalidArgumentException("Menu at '$name' is misconfigured (f.e. the route might be incorrect) and could therefore not be instanciated");
         }
 
-        $menuItem->setCurrentUri($this->request->getRequestUri());
-
         return $menuItem;
     }
 

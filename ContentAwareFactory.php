@@ -45,31 +45,6 @@ class ContentAwareFactory extends MenuFactory
     protected $contentRouter;
 
     /**
-     * Valid link types values, e.g. route, uri, content
-     */
-    protected $linkTypes = array();
-
-    /**
-     * List of priority => array of VoterInterface
-     *
-     * @var array
-     */
-    private $voters = array();
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * Whether to return null or a MenuItem without any URL if no URL can be
-     * found for a MenuNode.
-     *
-     * @var boolean
-     */
-    private $allowEmptyItems;
-
-    /**
      * @param UrlGeneratorInterface    $generator     for the parent class
      * @param UrlGeneratorInterface    $contentRouter to generate routes when
      *                                                content is set
@@ -77,51 +52,10 @@ class ContentAwareFactory extends MenuFactory
      * @param LoggerInterface          $logger
      */
     public function __construct(
-        UrlGeneratorInterface $generator,
-        UrlGeneratorInterface $contentRouter,
-        EventDispatcherInterface $dispatcher,
-        LoggerInterface $logger
+        UrlGeneratorInterface $contentRouter
     )
     {
-        $this->generator = $generator;
         $this->contentRouter = $contentRouter;
-        $this->linkTypes = array('route', 'uri', 'content');
-        $this->dispatcher = $dispatcher;
-        $this->logger = $logger;
-    }
-
-    /**
-     * Return the linkTypes handled by this factory.
-     * e.g. array('uri', 'route', 'content').
-     *
-     * @return array
-     */
-    public function getLinkTypes()
-    {
-        return $this->linkTypes;
-    }
-
-    /**
-     * Add a voter to decide on current item.
-     *
-     * @param VoterInterface $voter
-     * @param int            $priority High numbers can vote first
-     *
-     * @see VoterInterface
-     */
-    public function addCurrentItemVoter(VoterInterface $voter)
-    {
-        $this->voters[] = $voter;
-    }
-
-    /**
-     * Get the ordered list of all menu item voters.
-     *
-     * @return VoterInterface[]
-     */
-    private function getVoters()
-    {
-        return $this->voters;
     }
 
     /**
@@ -180,61 +114,5 @@ class ContentAwareFactory extends MenuFactory
         }
 
         return $item;
-    }
-
-    /**
-     * Create a MenuItem. This triggers the voters to decide if its the current
-     * item.
-     *
-     * You can add custom link types by overwriting this method and calling the
-     * parent - setting the URI option and the linkType to "uri".
-     *
-     * @param string $name    the menu item name
-     * @param array  $options options for the menu item, we care about
-     *                        'content'
-     *
-     * @return MenuItem|null Returns null if no route can be built for this menu item,
-     *
-     * @throws \RuntimeException If the stored link type is not known.
-     */
-    public function createItem($name, array $options = array())
-    {
-
-        $current = $this->isCurrentItem($item);
-
-        if ($current) {
-            $item->setCurrent(true);
-        }
-
-        return $item;
-    }
-
-    /**
-     * Cycle through all voters. If any votes true, this is the current item. If
-     * any votes false cycling stops. Continue cycling while we get null.
-     *
-     * @param ItemInterface $item the newly created menu item
-     *
-     * @return bool
-     *
-     * @see VoterInterface
-     */
-    private function isCurrentItem(ItemInterface $item)
-    {
-        foreach ($this->getVoters() as $voter) {
-            try {
-                $vote = $voter->matchItem($item);
-                if (null ===$vote) {
-                    continue;
-                }
-
-                return $vote;
-            } catch (\Exception $e) {
-                // ignore
-                $this->logger->error(sprintf('Current item voter failed with: "%s"', $e->getMessage()));
-            }
-        }
-
-        return false;
     }
 }
