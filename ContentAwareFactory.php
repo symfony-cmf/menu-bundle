@@ -102,17 +102,6 @@ class ContentAwareFactory extends MenuFactory
     }
 
     /**
-     * Whether to return a MenuItem without an URL or null when a MenuNode has
-     * no URL that can be found.
-     *
-     * @param boolean $allowEmptyItems
-     */
-    public function setAllowEmptyItems($allowEmptyItems)
-    {
-        $this->allowEmptyItems = $allowEmptyItems;
-    }
-
-    /**
      * Add a voter to decide on current item.
      *
      * @param VoterInterface $voter
@@ -210,64 +199,6 @@ class ContentAwareFactory extends MenuFactory
      */
     public function createItem($name, array $options = array())
     {
-        $options = array_merge(array(
-            'content' => null,
-            'routeParameters' => array(),
-            'routeAbsolute' => false,
-            'uri' => null,
-            'route' => null,
-            'linkType' => null,
-        ), $options);
-
-        if (null === $options['linkType']) {
-            $options['linkType'] = $this->determineLinkType($options);
-        }
-
-        $this->validateLinkType($options['linkType']);
-
-        switch ($options['linkType']) {
-            case 'content':
-                try {
-                    $options['uri'] = $this->contentRouter->generate(
-                        $options['content'],
-                        $options['routeParameters'],
-                        $options['routeAbsolute']
-                    );
-                } catch (RouteNotFoundException $e) {
-                    if (!$this->allowEmptyItems) {
-                        return null;
-                    }
-                }
-                unset($options['route']);
-                break;
-            case 'uri':
-                unset($options['route']);
-                break;
-            case 'route':
-                unset($options['uri']);
-
-                try {
-                    $options['uri'] = $this->generator->generate(
-                        $options['route'],
-                        $options['routeParameters'],
-                        $options['routeAbsolute']
-                    );
-
-                    unset($options['route']);
-                } catch (RouteNotFoundException $e) {
-                    $this->logger->error(sprintf('%s : %s', $name, $e->getMessage()));
-
-                    if (!$this->allowEmptyItems) {
-                        return null;
-                    }
-                }
-                break;
-            default:
-                throw new \RuntimeException(sprintf('Internal error: unexpected linkType "%s"', $options['linkType']));
-        }
-
-        $item = parent::createItem($name, $options);
-        $item->setExtra('content', $options['content']);
 
         $current = $this->isCurrentItem($item);
 
@@ -276,46 +207,6 @@ class ContentAwareFactory extends MenuFactory
         }
 
         return $item;
-    }
-
-    /**
-     * If linkType not specified, we can determine it from
-     * existing options
-     */
-    protected function determineLinkType($options)
-    {
-        if (!empty($options['uri'])) {
-            return 'uri';
-        }
-
-        if (!empty($options['route'])) {
-            return 'route';
-        }
-
-        if (!empty($options['content'])) {
-            return 'content';
-        }
-
-        return 'uri';
-    }
-
-    /**
-     * Ensure that we have a valid link type.
-     *
-     * @param string $linkType
-     *
-     * @throws \InvalidArgumentException if $linkType is not one of the known
-     *                                   link types
-     */
-    protected function validateLinkType($linkType)
-    {
-        if (!in_array($linkType, $this->linkTypes)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Invalid link type "%s". Valid link types are: "%s"',
-                $linkType,
-                implode(',', $this->linkTypes)
-            ));
-        }
     }
 
     /**

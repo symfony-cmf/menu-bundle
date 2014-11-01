@@ -4,23 +4,21 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="cmf_menu.factory.class">Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory</parameter>
-    </parameters>
-
     <services>
 
-        <service id="cmf_menu.factory" class="%cmf_menu.factory.class%">
-            <argument type="service" id="router"/>
-            <argument/> <!-- content url generator -->
-            <argument type="service" id="event_dispatcher"/>
-	 </service>
+        <service id="cmf_menu.content_router" alias="router"/>
 
         <service id="cmf_menu.factory.quiet" class="Symfony\Cmf\Bundle\MenuBundle\QuietFactory"
                  decorates="knp_menu.factory" public="false">
             <argument type="service" id="cmf_menu.factory.quiet.inner" />
             <argument type="service" id="logger"/>
             <argument>%cmf_menu.allow_empty_items%</argument>
+        </service>
+
+        <service id="cmf_menu.factory_extension.content" class="Symfony\Cmf\Bundle\MenuBundle\Extension\ContentExtension">
+            <argument type="service" id="cmf_menu.content_router"/>
+
+            <tag name="knp_menu.factory_extension" priority="10"/>
         </service>
 
         <service id="cmf_menu.loader.node" class="Knp\Menu\Loader\NodeLoader">
