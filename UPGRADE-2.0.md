@@ -106,3 +106,39 @@
       }
   }
   ```
+
+## CreateMenuItemFromNodeEvent
+
+* The event has no longer access to the menu factory:
+
+  **Before**
+  ```php
+  class CreateMenuItemFromNodeListener
+  {
+      public function onEvent(CreateMenuItemFromNodeEvent $event)
+      {
+          $event->getFactory()->createItem(...);
+      }
+  }
+  ```
+
+  **After**
+  ```php
+  use Knp\Menu\FactoryInterface;
+
+  class CreateMenuItemFromNodeListener
+  {
+      private $factory;
+
+      // factory is available as the knp_menu.factory service
+      public function __construct(FactoryInterface $factory)
+      {
+          $this->factory = $factory;
+      }
+
+      public function onEvent(CreateMenuItemFromNodeEvent $event)
+      {
+          $this->factory->createItem(...);
+      }
+  }
+  ```

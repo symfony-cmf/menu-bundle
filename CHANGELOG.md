@@ -4,6 +4,7 @@ Changelog
 2.0.0-alpha1
 ------------
 
+* **2014-11-03**: [BC BREAK] The CreateMenuItemFromNodeEvent class no longer has a getFactory method, inject the factory as a service instead
 * **2014-11-01**: [BC BREAK] The voters now need to use the voter mechanism of KnpMenu.
 * **2014-10-31**: [BC BREAK] The cmf_menu.factory service has been removed, knp_menu.factory should be used instead
 * **2014-10-30**: [BC BREAK] PhpcrMenuProvider now requires the NodeLoader as first argument instead of a FactoryInterface
