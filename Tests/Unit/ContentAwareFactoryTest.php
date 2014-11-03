@@ -53,67 +53,6 @@ class ContentAwareFactoryTest extends \PHPUnit_Framework_Testcase
         $this->content = new \stdClass;
     }
 
-    public function provideCreateFromNode()
-    {
-        return array(
-            array(array(
-            )),
-            array(array(
-                'node2_is_published' => false,
-            )),
-        );
-    }
-
-    /**
-     * @dataProvider provideCreateFromNode
-     */
-    public function testCreateFromNode($options)
-    {
-        $options = array_merge(array(
-            'node2_is_published' => true
-        ), $options);
-
-        $this->contentUrlGenerator->expects($this->any())
-            ->method('generate')
-            ->will($this->returnValue('foobar'));
-
-        $this->node1->expects($this->any())
-            ->method('getOptions')->will($this->returnValue(array()));
-        $this->node3->expects($this->any())
-            ->method('getOptions')->will($this->returnValue(array()));
-
-        $this->node1->expects($this->once())
-            ->method('getChildren')
-            ->will($this->returnValue(array(
-                $this->node2,
-                $this->node3,
-            )));
-
-        $this->node3->expects($this->once())
-            ->method('getChildren')
-            ->will($this->returnValue(array()));
-
-        if ($options['node2_is_published']) {
-            $this->node2->expects($this->any())
-                ->method('getOptions')->will($this->returnValue(array()));
-            $this->node2->expects($this->once())
-                ->method('getChildren')
-                ->will($this->returnValue(array()));
-        } else {
-            $node2 = $this->node2;
-            $this->dispatcher->expects($this->any())
-                ->method('dispatch')
-                ->will($this->returnCallback(function ($name, $event) use ($options, $node2) {
-                    if ($event->getNode() === $node2) {
-                        $event->setSkipNode(true);
-                    }
-                }));
-        }
-
-        $res = $this->factory->createFromNode($this->node1);
-        $this->assertInstanceOf('Knp\Menu\MenuItem', $res);
-    }
-
     public function provideCreateItem()
     {
         return array(

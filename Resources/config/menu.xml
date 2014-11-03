@@ -21,8 +21,9 @@
             <tag name="knp_menu.factory_extension" priority="10"/>
         </service>
 
-        <service id="cmf_menu.loader.node" class="Knp\Menu\Loader\NodeLoader">
+        <service id="cmf_menu.loader.node" class="Symfony\Cmf\Bundle\MenuBundle\Loader\VotingNodeLoader">
             <argument type="service" id="knp_menu.factory"/>
+            <argument type="service" id="event_dispatcher"/>
         </service>
 
     </services>
