@@ -4,7 +4,6 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Extension;
 
 use Knp\Menu\Factory\ExtensionInterface;
 use Knp\Menu\ItemInterface;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -52,10 +51,14 @@ class ContentExtension implements ExtensionInterface
         $this->validateLinkType($options['linkType']);
 
         if ('content' === $options['linkType']) {
+            if (!isset($options['content'])) {
+                throw new \InvalidArgumentException(sprintf('Link type content configured, but could not find content option in the provided options: %s', implode(', ', array_keys($options))));
+            }
+
             $options['uri'] = $this->contentRouter->generate(
                 $options['content'],
-                $options['routeParameters'],
-                $options['routeAbsolute']
+                isset($options['routeParameters']) ? $options['routeParameters'] : array(),
+                isset($options['routeAbsolute']) ? $options['routeAbsolute'] : false
             );
         }
 
