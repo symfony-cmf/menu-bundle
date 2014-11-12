@@ -21,6 +21,7 @@ class MenuNodeAdminTest extends BaseTestCase
             'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR\LoadMenuData',
         ));
         $this->client = $this->createClient();
+        $this->documentManager = $this->db('PHPCR')->getOm();
     }
 
     public function testEdit()
@@ -28,5 +29,23 @@ class MenuNodeAdminTest extends BaseTestCase
         $this->client->request('GET', '/admin/cmf/menu/menunode/test/menus/test-menu/item-1/edit');
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
+    }
+
+    public function testDelete()
+    {
+        $crawler = $this->client->request('GET', '/admin/cmf/menu/menunode/test/menus/test-menu/item-2/delete');
+        $res = $this->client->getResponse();
+        $this->assertEquals(200, $res->getStatusCode());
+
+        $button = $crawler->selectButton('Yes, delete');
+        $form = $button->form();
+        $crawler = $this->client->submit($form);
+        $res = $this->client->getResponse();
+
+        // If we have a 302 redirect, then all is well
+        $this->assertEquals(302, $res->getStatusCode());
+
+        $this->setExpectedException('PHPCR\InvalidItemStateException');
+        $menuItem = $this->documentManager->find(null, '/test/menus/test-menu/item-2');
     }
 }
