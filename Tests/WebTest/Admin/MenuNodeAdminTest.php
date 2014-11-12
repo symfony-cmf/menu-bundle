@@ -21,7 +21,6 @@ class MenuNodeAdminTest extends BaseTestCase
             'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR\LoadMenuData',
         ));
         $this->client = $this->createClient();
-        $this->documentManager = $this->db('PHPCR')->getOm();
     }
 
     public function testEdit()
@@ -45,7 +44,8 @@ class MenuNodeAdminTest extends BaseTestCase
         // If we have a 302 redirect, then all is well
         $this->assertEquals(302, $res->getStatusCode());
 
-        $this->setExpectedException('PHPCR\InvalidItemStateException');
-        $menuItem = $this->documentManager->find(null, '/test/menus/test-menu/item-2');
+        $documentManager = $this->client->getContainer()->get('doctrine_phpcr.odm.document_manager');
+        $menuItem = $documentManager->find(null, '/test/menus/test-menu/item-2');
+        $this->assertNull($menuItem);
     }
 }
