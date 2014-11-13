@@ -29,4 +29,23 @@ class MenuNodeAdminTest extends BaseTestCase
         $res = $this->client->getResponse();
         $this->assertEquals(200, $res->getStatusCode());
     }
+
+    public function testDelete()
+    {
+        $crawler = $this->client->request('GET', '/admin/cmf/menu/menunode/test/menus/test-menu/item-2/delete');
+        $res = $this->client->getResponse();
+        $this->assertEquals(200, $res->getStatusCode());
+
+        $button = $crawler->selectButton('Yes, delete');
+        $form = $button->form();
+        $crawler = $this->client->submit($form);
+        $res = $this->client->getResponse();
+
+        // If we have a 302 redirect, then all is well
+        $this->assertEquals(302, $res->getStatusCode());
+
+        $documentManager = $this->client->getContainer()->get('doctrine_phpcr.odm.document_manager');
+        $menuItem = $documentManager->find(null, '/test/menus/test-menu/item-2');
+        $this->assertNull($menuItem);
+    }
 }

@@ -21,6 +21,7 @@ class MenuAdminTest extends BaseTestCase
             'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR\LoadMenuData',
         ));
         $this->client = $this->createClient();
+        $this->documentManager = $this->client->getContainer()->get('doctrine_phpcr.odm.document_manager');
     }
 
     public function testMenuList()
@@ -67,5 +68,24 @@ class MenuAdminTest extends BaseTestCase
 
         // If we have a 302 redirect, then all is well
         $this->assertEquals(302, $res->getStatusCode(), $res->getContent());
+    }
+
+    public function testMenuDelete()
+    {
+        $crawler = $this->client->request('GET', '/admin/cmf/menu/menu/test/menus/test-menu/delete');
+        $res = $this->client->getResponse();
+        $this->assertEquals(200, $res->getStatusCode());
+
+        $button = $crawler->selectButton('Yes, delete');
+        $form = $button->form();
+        $crawler = $this->client->submit($form);
+        $res = $this->client->getResponse();
+
+        // If we have a 302 redirect, then all is well
+        $this->assertEquals(302, $res->getStatusCode());
+
+        $documentManager = $this->client->getContainer()->get('doctrine_phpcr.odm.document_manager');
+        $menu = $documentManager->find(null, '/test/menus/test-menu');
+        $this->assertNull($menu);
     }
 }
