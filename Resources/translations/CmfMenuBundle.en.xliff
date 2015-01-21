@@ -118,8 +118,12 @@
         <source>help.items_help</source>
         <target>Click on item to edit, right click to create new items.</target>
       </trans-unit>
-      <trans-unit id="form.group_menus">
-         <source>form.group_menus</source>
+      <trans-unit id="form.tab_menu">
+         <source>form.tab_menu</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.group_menu">
+         <source>form.group_menu</source>
         <target>Menu</target>
       </trans-unit>
       <trans-unit id="form.label_menu_nodes">

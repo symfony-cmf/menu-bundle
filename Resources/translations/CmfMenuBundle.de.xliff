@@ -110,8 +110,12 @@
         <source>help.items_help</source>
         <target>Klicken Sie auf ein Element, um es zu bearbeiten. Rechtsklick um Einträge hinzuzufügen.</target>
       </trans-unit>
-      <trans-unit id="form.group_menus">
-        <source>form.group_menus</source>
+      <trans-unit id="form.tab_menu">
+        <source>form.tab_menu</source>
+        <target>Menü</target>
+      </trans-unit>
+      <trans-unit id="form.group_menu">
+        <source>form.group_menu</source>
         <target>Menü</target>
       </trans-unit>
      <trans-unit id="form.label_menu_nodes">

@@ -4,11 +4,24 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="cmf_menu.admin_extension.menu_reference.class">Symfony\Cmf\Bundle\MenuBundle\Admin\Extension\MenuNodeReferrersExtension</parameter>
-    </parameters>
-
     <services>
+
+        <service id="cmf_menu.sonata_admin.extension.menu_node_options"
+            class="Symfony\Cmf\Bundle\MenuBundle\Admin\Extension\MenuOptionsExtension">
+            <argument>%cmf_menu.sonata_admin.extension.menu_options.form_group%</argument>
+            <argument>%cmf_menu.sonata_admin.extension.menu_options.form_tab%</argument>
+            <argument>%cmf_menu.sonata_admin.extension.menu_options.advanced%</argument>
+
+            <tag name="sonata.admin.extension"/>
+        </service>
+
+        <service id="cmf_menu.sonata_admin.extension.menu_node_referrers"
+            class="Symfony\Cmf\Bundle\MenuBundle\Admin\Extension\MenuNodeReferrersExtension">
+            <argument>%cmf_menu.sonata_admin.extension.menu_referrers.form_group%</argument>
+            <argument>%cmf_menu.sonata_admin.extension.menu_referrers.form_tab%</argument>
+
+            <tag name="sonata.admin.extension"/>
+        </service>
 
         <service id="cmf_menu.menu_admin" class="%cmf_menu.persistence.phpcr.menu_admin.class%">
             <tag
@@ -67,10 +80,6 @@
                 <argument>%cmf_menu.persistence.phpcr.admin_recursive_breadcrumbs%</argument>
             </call>
 
-        </service>
-
-        <service id="cmf_menu.admin_extension.menu_node_referrers" class="%cmf_menu.admin_extension.menu_reference.class%">
-            <tag name="sonata.admin.extension"/>
         </service>
 
     </services>

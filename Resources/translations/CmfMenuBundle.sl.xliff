@@ -118,8 +118,12 @@
         <source>help.items_help</source>
         <target>Kliknite na element za urejanje, desni klik za ustvarjanje novih elementov.</target>
       </trans-unit>
-      <trans-unit id="form.group_menus">
-         <source>form.group_menus</source>
+      <trans-unit id="form.tab_menu">
+         <source>form.tab_menu</source>
+        <target>Meni</target>
+      </trans-unit>
+      <trans-unit id="form.group_menu">
+         <source>form.group_menu</source>
         <target>Meni</target>
       </trans-unit>
       <trans-unit id="form.label_menu_nodes">

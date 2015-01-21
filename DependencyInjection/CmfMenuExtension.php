@@ -41,9 +41,7 @@ class CmfMenuExtension extends Extension
             $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);
         }
 
-        if ($config['admin_extensions']['menu_options']['enabled']) {
-            $this->loadExtensions($config, $loader, $container);
-        }
+        $this->loadExtensions($config['sonata_admin']['extensions'], $loader, $container);
 
         if ($config['publish_workflow']['enabled']) {
             $loader->load('publish-workflow.xml');
@@ -125,21 +123,19 @@ class CmfMenuExtension extends Extension
     {
         $bundles = $container->getParameter('kernel.bundles');
 
-        if ('auto' === $config['admin_extensions']['menu_options']['enabled'] && !isset($bundles['SonataAdminBundle'])) {
-            return;
+        foreach ($config as $extensionName => $parameters) {
+            foreach ($parameters as $parameterName => $value) {
+                $container->setParameter(
+                    sprintf('%s.sonata_admin.extension.%s.%s', $this->getAlias(), $extensionName, $parameterName),
+                    $value
+                );
+            }
         }
 
-        if (!isset($bundles['SonataAdminBundle'])) {
-            throw new InvalidConfigurationException('To use menu options extionsion, you need sonata-project/SonataAdminBundle in your project.');
-        }
-
-        if ($config['admin_extensions']['menu_options']['advanced'] && !isset($bundles['BurgovKeyValueFormBundle'])) {
+        // do this at the very end, so other extensions can be set up normally
+        if ($config['menu_options']['advanced'] && !isset($bundles['BurgovKeyValueFormBundle'])) {
             throw new InvalidConfigurationException('To use advanced menu options, you need the burgov/key-value-form-bundle in your project.');
         }
-
-        $container->setParameter($this->getAlias() . '.admin_extensions.menu_options.advanced', $config['admin_extensions']['menu_options']['advanced']);
-
-        $loader->load('admin-extension.xml');
     }
 
     /**

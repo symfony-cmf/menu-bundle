@@ -28,6 +28,11 @@ class MenuOptionsExtension extends AdminExtension
     protected $formGroup;
 
     /**
+     * @var string
+     */
+    protected $formTab;
+
+    /**
     * @var bool
     */
     protected $advanced;
@@ -36,9 +41,10 @@ class MenuOptionsExtension extends AdminExtension
      * @param string $formGroup - group to use for form mapper
      * @param bool   $advanced - activates editing all fields of the node
      */
-    public function __construct($formGroup = 'form.group_menu_options', $advanced = false)
+    public function __construct($formGroup = 'form.group_menu_options', $formTab = 'form.tab_menu', $advanced = false)
     {
         $this->formGroup = $formGroup;
+        $this->formTab = $formTab;
         $this->advanced = $advanced;
     }
 
@@ -47,24 +53,37 @@ class MenuOptionsExtension extends AdminExtension
      */
     public function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->with($this->formGroup, array(
-                'translation_domain' => 'CmfMenuBundle',
-            ))
-            ->add(
-                'display',
-                'checkbox',
-                array('required' => false),
-                array('help' => 'form.help_display')
-            )
-            ->add(
-                'displayChildren',
-                'checkbox',
-                array('required' => false),
-                array('help' => 'form.help_display_children')
-            )
-          ->end();
+        if ($formMapper->hasOpenTab()) {
+            $formMapper->end();
+        }
 
-        if (! $this->advanced) {
+        $formMapper
+            ->tab($this->formTab, 'form.tab_menu' === $this->formTab
+                ? array('translation_domain' => 'CmfMenuBundle')
+                : array()
+            )
+                ->with($this->formGroup, 'form.group_menu_options' === $this->formGroup
+                    ? array('translation_domain' => 'CmfMenuBundle')
+                    : array()
+                )
+                    ->add(
+                        'display',
+                        'checkbox',
+                        array('required' => false),
+                        array('help' => 'form.help_display')
+                    )
+                    ->add(
+                        'displayChildren',
+                        'checkbox',
+                        array('required' => false),
+                        array('help' => 'form.help_display_children')
+                    )
+                ->end()
+        ;
+
+        if (!$this->advanced) {
+            $formMapper->end();
+
             return;
         }
 
@@ -74,45 +93,44 @@ class MenuOptionsExtension extends AdminExtension
             'attr'=> array('style' => 'clear:both')
         );
 
-        $formMapper->with($this->formGroup, array(
-                'translation_domain' => 'CmfMenuBundle',
-            ))
-            ->add(
-                'attributes',
-                'burgov_key_value',
-                array(
-                  'value_type' => 'text',
-                  'required' => false,
-                  'options' => $child_options,
+        $formMapper
+            ->with($this->formGroup)
+                ->add(
+                    'attributes',
+                    'burgov_key_value',
+                    array(
+                    'value_type' => 'text',
+                    'required' => false,
+                    'options' => $child_options,
+                    )
                 )
-            )
-            ->add(
-                'labelAttributes',
-                'burgov_key_value',
-                array(
-                  'value_type' => 'text',
-                  'required' => false,
-                  'options' => $child_options,
+                ->add(
+                    'labelAttributes',
+                    'burgov_key_value',
+                    array(
+                    'value_type' => 'text',
+                    'required' => false,
+                    'options' => $child_options,
+                    )
                 )
-            )
-            ->add(
-                'childrenAttributes',
-                'burgov_key_value',
-                array(
-                  'value_type' => 'text',
-                  'required' => false,
-                  'options' => $child_options,
+                ->add(
+                    'childrenAttributes',
+                    'burgov_key_value',
+                    array(
+                    'value_type' => 'text',
+                    'required' => false,
+                    'options' => $child_options,
+                    )
                 )
-            )
-            ->add(
-                'linkAttributes',
-                'burgov_key_value',
-                array(
-                  'value_type' => 'text',
-                  'required' => false,
-                  'options' => $child_options,
+                ->add(
+                    'linkAttributes',
+                    'burgov_key_value',
+                    array(
+                    'value_type' => 'text',
+                    'required' => false,
+                    'options' => $child_options,
+                    )
                 )
-            )
-          ->end();
+            ->end();
     }
 }
