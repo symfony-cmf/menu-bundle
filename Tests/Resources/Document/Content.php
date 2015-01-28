@@ -17,6 +17,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Knp\Menu\NodeInterface;
 
 use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
@@ -24,7 +25,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
+class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface, PublishableInterface
 {
     /**
      * @PHPCR\Id(strategy="assigned")
@@ -62,6 +63,7 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
      * )
      */
     protected $routes;
+    private $published;
 
     public function __construct()
     {
@@ -135,5 +137,20 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    public function isPublishable()
+    {
+        return $this->published;
+    }
+
+    /**
+     * Set the boolean flag whether this content is publishable or not.
+     *
+     * @param boolean $publishable
+     */
+    public function setPublishable($publishable)
+    {
+        $this->published = $publishable;
     }
 }
