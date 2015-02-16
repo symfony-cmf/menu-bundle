@@ -24,7 +24,7 @@
     "require-dev": {
         "symfony-cmf/routing-bundle": "~1.2",
         "symfony-cmf/testing": "~1.1",
-        "sonata-project/doctrine-phpcr-admin-bundle": "~1.1",
+        "sonata-project/doctrine-phpcr-admin-bundle": "~2.0",
         "symfony/monolog-bundle": "~2.3"
     },
     "suggest": {
