@@ -46,7 +46,35 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
                 )
             ->end()
         ;
+
         parent::configureFormFields($formMapper);
+
+        if (null === $this->getParentFieldDescription()) {
+
+            // Add the choice for the node links "target"
+            $formMapper
+                ->with('form.group_general')
+                    ->add('linkType', 'choice_field_mask', array(
+                        'map' => array(
+                            'route' => array('route'),
+                            'uri' => array('uri'),
+                            'content' => array('content', 'doctrine_phpcr_odm_tree'),
+                        ),
+                        'empty_value' => 'auto',
+                        'required' => false
+                    ))
+                    ->add('route', 'text', array('required' => false))
+                    ->add('uri', 'text', array('required' => false))
+                    ->add('content', 'doctrine_phpcr_odm_tree',
+                        array(
+                            'root_node' => $this->contentRoot,
+                            'choice_list' => array(),
+                            'required' => false
+                        )
+                    )
+                ->end()
+            ;
+        }
     }
 
     /**
