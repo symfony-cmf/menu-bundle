@@ -39,11 +39,11 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     {
         $formMapper
             ->with('form.group_general')
-                ->add(
-                    'parent',
-                    'doctrine_phpcr_odm_tree',
-                    array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true)
-                )
+                ->add('parent', 'doctrine_phpcr_odm_tree', array(
+                    'root_node' => $this->menuRoot,
+                    'choice_list' => array(),
+                    'select_root_node' => true
+                ))
             ->end()
         ;
 
