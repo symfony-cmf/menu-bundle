@@ -11,10 +11,14 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\MenuBundle\Model\Menu;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Doctrine\Common\Util\ClassUtils;
 
@@ -63,8 +67,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
                         'empty_value' => 'auto',
                         'required' => false
                     ))
-                    ->add('route', 'text', array('required' => false))
-                    ->add('uri', 'text', array('required' => false))
+                    ->add('link', 'text', array('required' => false, 'mapped' => false))
                     ->add('content', 'doctrine_phpcr_odm_tree',
                         array(
                             'root_node' => $this->contentRoot,
@@ -75,6 +78,67 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
                 ->end()
             ;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function defineFormBuilder(FormBuilderInterface $formBuilder)
+    {
+        parent::defineFormBuilder($formBuilder);
+
+        $formBuilder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+            $link = $event->getForm()->get('link');
+            $node = $event->getData();
+
+            if (!$node instanceof MenuNode) {
+                return;
+            }
+
+            switch ($node->getLinkType()) {
+                case 'route':
+                    $link->setData($node->getRoute());
+                    break;
+
+                case 'uri':
+                    $link->setData($node->getUri());
+                    break;
+
+                case null:
+                    $linkType = $event->getForm()->get('linkType');
+
+                    if ($data = $node->getUri()) {
+                        $linkType->setData('uri');
+                    } else {
+                        $data = $node->getRoute();
+                        $linkType->setData('route');
+                    }
+
+                    $link->setData($data);
+            }
+        });
+
+        $formBuilder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            $form = $event->getForm();
+            $node = $event->getData();
+
+            if (!$node instanceof MenuNode) {
+                return;
+            }
+
+            $linkType = $form->get('linkType')->getData();
+            $link = $form->get('link')->getData();
+
+            switch ($linkType) {
+                case 'route':
+                    $node->setRoute($link);
+                    break;
+
+                case 'uri':
+                    $node->setUri($link);
+                    break;
+            }
+        });
     }
 
     /**
