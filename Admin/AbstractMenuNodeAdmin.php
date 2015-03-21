@@ -40,12 +40,9 @@ abstract class AbstractMenuNodeAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id', 'text')
-            ->add('name', 'text')
+            ->addIdentifier('name', 'text')
             ->add('label', 'text')
-            ->add('uri', 'text')
-            ->add('route', 'text')
-            ;
+        ;
     }
 
     /**
