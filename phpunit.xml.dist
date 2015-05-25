@@ -8,7 +8,12 @@
 
     <testsuites>
         <testsuite name="Symfony CmfMenuBundle Test Suite">
-            <directory>./Tests</directory>
+            <directory>./Tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="phpcr">
+            <directory>./Tests/Functional</directory>
+            <directory>./Tests/WebTest</directory>
         </testsuite>
     </testsuites>
 
@@ -24,6 +29,10 @@
             </exclude>
         </whitelist>
     </filter>
+
+    <listeners>
+        <listener class="Symfony\Cmf\Component\Testing\Phpunit\DatabaseTestListener" />
+    </listeners>
 
     <php>
         <server name="KERNEL_DIR" value="Tests/Resources/app" />

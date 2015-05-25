@@ -12,14 +12,13 @@
     <services>
 
         <service id="cmf_menu.current_item_voter.uri_prefix" class="%cmf_menu.current_item_voter.uri_prefix.class%">
-            <call method="setRequest"><argument type="service" id="request" on-invalid="null" strict="false"/></call>
-            <tag name="cmf_menu.voter"/>
+            <tag name="knp_menu.voter" request="true"/>
         </service>
 
         <service id="cmf_menu.current_item_voter.content_identity" class="%cmf_menu.current_item_voter.content_identity.class%">
             <argument>%cmf_menu.content_key%</argument>
-            <call method="setRequest"><argument type="service" id="request" on-invalid="null" strict="false"/></call>
-            <tag name="cmf_menu.voter"/>
+
+            <tag name="knp_menu.voter" request="true"/>
         </service>
 
     </services>

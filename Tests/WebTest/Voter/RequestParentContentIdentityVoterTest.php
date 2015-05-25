@@ -26,7 +26,7 @@ class RequestParentContentIdentityVoterTest extends BaseTestCase
 
     public function testRequestContentParentIdentity()
     {
-        // this test shows an post whose parent is the blog content referenced in teh menu item
+        // this test shows an post whose parent is the blog content referenced in the menu item
         $crawler = $this->client->request('GET', '/blog/my-post');
         $res = $this->client->getResponse();
         $this->assertCurrentItem($crawler, 'Request Parent Content Identity Voter');

@@ -12,6 +12,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\WebTest\Render;
 
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 
 class TwigTest extends BaseTestCase
 {
@@ -20,13 +21,28 @@ class TwigTest extends BaseTestCase
         $this->db('PHPCR')->loadFixtures(array(
             'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR\LoadMenuData',
         ));
-        $this->client = $this->createClient();
     }
 
     public function testTwig()
     {
-        $crawler = $this->client->request('GET', '/render-test');
-        $res = $this->client->getResponse();
+        $client = $this->createClient();
+        $crawler = $client->request('GET', '/render-test');
+        $res = $client->getResponse();
+
         $this->assertEquals(200, $res->getStatusCode());
+        $this->assertMenuHasItems($crawler->filter('#content ul')->eq(0), array(
+            'This node has a URI',
+            '@todo this node should have content',
+            'This node has an assigned route',
+            'This node has an assigned route with parameters',
+            'item-3',
+        ));
+    }
+
+    protected function assertMenuHasItems(Crawler $crawler, array $items)
+    {
+        foreach ($items as $item) {
+            $this->assertCount(1, $crawler->filterXPath('//li/*[text()="'.$item.'"]'), 'Menu contains list item: '.$item);
+        }
     }
 }

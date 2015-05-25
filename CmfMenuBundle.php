@@ -13,8 +13,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
-use Symfony\Cmf\Bundle\MenuBundle\DependencyInjection\Compiler\AddVotersPass;
+use Symfony\Cmf\Bundle\MenuBundle\DependencyInjection\Compiler\DecorateMenuFactoryPass;
 use Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass;
 
 class CmfMenuBundle extends Bundle
@@ -22,7 +21,9 @@ class CmfMenuBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
-        $container->addCompilerPass(new AddVotersPass());
+
+        $container->addCompilerPass(new DecorateMenuFactoryPass());
+
         if (class_exists('Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass')) {
             $container->addCompilerPass(
                 DoctrinePhpcrMappingsPass::createXmlMappingDriver(

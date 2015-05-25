@@ -11,10 +11,10 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Voter;
 
+use Knp\Menu\ItemInterface;
+use Knp\Menu\Matcher\Voter\VoterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
-
-use Knp\Menu\ItemInterface;
 
 /**
  * This voter checks if the content entry in the menu item extras is a Symfony
@@ -45,7 +45,7 @@ class UriPrefixVoter implements VoterInterface
      */
     public function matchItem(ItemInterface $item)
     {
-        if (! $this->request) {
+        if (!$this->request) {
             return null;
         }
 

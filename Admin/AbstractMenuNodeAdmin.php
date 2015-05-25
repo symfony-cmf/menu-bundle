@@ -15,20 +15,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeBase;
-use Symfony\Cmf\Bundle\MenuBundle\ContentAwareFactory;
 
 /**
  * Common base admin for Menu and MenuNode
  */
 abstract class AbstractMenuNodeAdmin extends Admin
 {
-    /**
-     * @var ContentAwareFactory
-     */
-    protected $contentAwareFactory;
-
     /**
      * @var string
      */
@@ -73,9 +66,10 @@ abstract class AbstractMenuNodeAdmin extends Admin
             $formMapper
                 ->with('form.group_general')
                     ->add('linkType', 'choice_field_mask', array(
-                        'choices' => array_combine(
-                            $this->contentAwareFactory->getLinkTypes(),
-                            $this->contentAwareFactory->getLinkTypes()
+                        'choices' => array(
+                            'route' => 'route',
+                            'uri' => 'uri',
+                            'content' => 'content',
                         ),
                         'map' => array(
                             'route' => array('route'),
@@ -113,16 +107,6 @@ abstract class AbstractMenuNodeAdmin extends Admin
     public function getExportFormats()
     {
         return array();
-    }
-
-    public function getContentAwareFactory()
-    {
-        return $this->contentAwareFactory;
-    }
-
-    public function setContentAwareFactory(ContentAwareFactory $contentAwareFactory)
-    {
-        $this->contentAwareFactory = $contentAwareFactory;
     }
 
     public function setContentRoot($contentRoot)

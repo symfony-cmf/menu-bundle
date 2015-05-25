@@ -67,7 +67,7 @@ class LoadMenuData implements FixtureInterface
         $manager->persist($menuNode);
 
         $content->addMenuNode($menuNode);
-
+        
         $subNode = new MenuNode;
         $subNode->setParentDocument($menuNode);
         $subNode->setLabel('@todo this node should have content');

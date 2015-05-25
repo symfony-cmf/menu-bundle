@@ -9,6 +9,7 @@
     </parameters>
 
     <services>
+
         <service id="cmf_menu.menu_admin" class="%cmf_menu.persistence.phpcr.menu_admin.class%">
             <tag
                 name="sonata.admin"
@@ -33,10 +34,6 @@
 
             <call method="setMenuRoot">
                 <argument>%cmf_menu.persistence.phpcr.menu_basepath%</argument>
-            </call>
-
-            <call method="setContentAwareFactory">
-                <argument type="service" id="cmf_menu.factory" />
             </call>
 
         </service>
@@ -64,10 +61,6 @@
 
             <call method="setMenuRoot">
                 <argument>%cmf_menu.persistence.phpcr.menu_basepath%</argument>
-            </call>
-
-            <call method="setContentAwareFactory">
-                <argument type="service" id="cmf_menu.factory" />
             </call>
 
             <call method="setRecursiveBreadcrumbs">
