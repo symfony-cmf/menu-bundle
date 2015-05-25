@@ -27,14 +27,17 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('form.group_general')
-                ->add(
-                    'parent',
-                    'doctrine_phpcr_odm_tree',
-                    array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true)
-                )
-            ->end()
+            ->tab('form.tab_general')
+                ->with('form.group_general', array('name' => 'form.group_node'))
+                    ->add(
+                        'parent',
+                        'doctrine_phpcr_odm_tree',
+                        array('root_node' => $this->menuRoot, 'choice_list' => array(), 'select_root_node' => true)
+                    )
+                ->end() // group general
+            ->end() // tab general
         ;
+
         parent::configureFormFields($formMapper);
     }
 

@@ -66,13 +66,29 @@
         <source>list.label_route</source>
         <target>Route</target>
       </trans-unit>
-      <trans-unit id="form.group_general">
-        <source>form.group_general</source>
+      <trans-unit id="form.tab_general">
+        <source>form.tab_general</source>
         <target>General</target>
+      </trans-unit>
+      <trans-unit id="form.tab_menu">
+         <source>form.tab_menu</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.group_general">
+         <source>form.group_general</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.group_node">
+        <source>form.group_node</source>
+        <target>Node</target>
       </trans-unit>
       <trans-unit id="form.group_items">
         <source>form.group_items</source>
         <target>Items</target>
+      </trans-unit>
+      <trans-unit id="form.group_menu_options">
+        <source>form.group_menu_options</source>
+        <target>Menu Options</target>
       </trans-unit>
       <trans-unit id="form.label_children">
         <source>form.label_children</source>
@@ -118,21 +134,9 @@
         <source>help.items_help</source>
         <target>Click on item to edit, right click to create new items.</target>
       </trans-unit>
-      <trans-unit id="form.tab_menu">
-         <source>form.tab_menu</source>
-        <target>Menu</target>
-      </trans-unit>
-      <trans-unit id="form.group_menu">
-         <source>form.group_menu</source>
-        <target>Menu</target>
-      </trans-unit>
       <trans-unit id="form.label_menu_nodes">
         <source>form.label_menu_nodes</source>
         <target>Menu</target>
-      </trans-unit>
-      <trans-unit id="form.group_menu_options">
-        <source>form.group_menu_options</source>
-        <target>Menu Options</target>
       </trans-unit>
       <trans-unit id="form.label_display">
         <source>form.label_display</source>

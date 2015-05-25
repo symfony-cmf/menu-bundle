@@ -66,8 +66,8 @@
         <source>list.label_route</source>
         <target>Route</target>
       </trans-unit>
-      <trans-unit id="form.group_general">
-        <source>form.group_general</source>
+      <trans-unit id="form.tab_general">
+        <source>form.tab_general</source>
         <target>Allgemein</target>
       </trans-unit>
       <trans-unit id="form.group_items">
@@ -114,8 +114,8 @@
         <source>form.tab_menu</source>
         <target>Menü</target>
       </trans-unit>
-      <trans-unit id="form.group_menu">
-        <source>form.group_menu</source>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
         <target>Menü</target>
       </trans-unit>
      <trans-unit id="form.label_menu_nodes">
