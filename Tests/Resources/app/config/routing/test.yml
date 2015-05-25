@@ -1,29 +1,29 @@
 test_index:
-    pattern: /
+    path: /
     defaults:
         _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::indexAction
 
 render_test:
-    pattern: /render-test
+    path: /render-test
     defaults:
         _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::renderAction
 
 link_test_route:
-    pattern: /link_test_route
+    path: /link_test_route
     defaults:
         _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::linkTestRouteAction
 
 link_test_route_with_params:
-    pattern: /link_test_route/hello/{bar}/{foo}
+    path: /link_test_route/hello/{bar}/{foo}
     defaults:
         _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::linkTestRouteAction
 
 current_menu_item_default:
-    pattern: /cmi/default
+    path: /cmi/default
     defaults:
         _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::defaultAction
 
 current_menu_item_request_content_identity:
-    pattern: /cmi/request_content_identity
+    path: /cmi/request_content_identity
     defaults:
         _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\VoterController::requestContentIdentityAction
