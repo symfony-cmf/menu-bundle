@@ -15,6 +15,7 @@ cache:
 
 env:
   - SYMFONY_VERSION=2.6.*
+  - SYMFONY_DEPRECATIONS_HELPER=weak
 
 matrix:
   include:
@@ -38,7 +39,7 @@ before_install:
 
 install: composer require symfony/symfony:${SYMFONY_VERSION} --prefer-dist
 
-script: SYMFONY_DEPRECATIONS_HELPER=weak && phpunit --coverage-text
+script: phpunit --coverage-text
 
 notifications:
   irc: "irc.freenode.org#symfony-cmf"
