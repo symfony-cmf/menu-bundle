@@ -20,10 +20,12 @@ class QuietFactory implements FactoryInterface
      * @var FactoryInterface
      */
     private $innerFactory;
+
     /**
      * @var LoggerInterface
      */
     private $logger;
+
     /**
      * Whether to return null or a MenuItem without any URL if no URL can be
      * found for a MenuNode.
