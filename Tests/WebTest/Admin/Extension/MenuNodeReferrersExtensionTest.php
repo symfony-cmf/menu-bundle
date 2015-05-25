@@ -27,7 +27,7 @@ class MenuNodeReferrersExtensionTest extends BaseTestCase
     {
         $crawler = $this->client->request('GET', '/admin/cmf/menu-test/content/test/content-1/edit');
         $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
+        $this->assertResponseSuccess($res);
 
         $button = $crawler->selectButton('Update');
         $form = $button->form();

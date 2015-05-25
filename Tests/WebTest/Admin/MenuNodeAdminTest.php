@@ -26,15 +26,14 @@ class MenuNodeAdminTest extends BaseTestCase
     public function testEdit()
     {
         $this->client->request('GET', '/admin/cmf/menu/menunode/test/menus/test-menu/item-1/edit');
-        $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
+
+        $this->assertResponseSuccess($this->client->getResponse());
     }
 
     public function testDelete()
     {
         $crawler = $this->client->request('GET', '/admin/cmf/menu/menunode/test/menus/test-menu/item-2/delete');
-        $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
+        $this->assertResponseSuccess($this->client->getResponse());
 
         $button = $crawler->selectButton('Yes, delete');
         $form = $button->form();
