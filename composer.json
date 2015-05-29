@@ -18,7 +18,7 @@
         "symfony/framework-bundle": "~2.3",
         "doctrine/phpcr-bundle": "~1.1",
         "doctrine/phpcr-odm": "~1.1",
-        "knplabs/knp-menu-bundle": "~2.0",
+        "knplabs/knp-menu-bundle": "~2.0,>=2.0.0",
         "symfony-cmf/core-bundle": "~1.1"
     },
     "require-dev": {
