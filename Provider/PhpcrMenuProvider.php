@@ -13,8 +13,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\PHPCR\DocumentManager;
-use Knp\Menu\Loader\LoaderInterface;
-use Knp\Menu\Loader\NodeLoader;
+use PHPCR\NamespaceException;
 use Symfony\Component\HttpFoundation\Request;
 use PHPCR\PathNotFoundException;
 use PHPCR\Util\PathHelper;
@@ -27,9 +26,9 @@ use Knp\Menu\Provider\MenuProviderInterface;
 class PhpcrMenuProvider implements MenuProviderInterface
 {
     /**
-     * @var LoaderInterface
+     * @var FactoryInterface
      */
-    protected $loader = null;
+    protected $factory = null;
 
     /**
      * @var Request
@@ -75,11 +74,11 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * @param string           $menuRoot        root id of the menu
      */
     public function __construct(
-        NodeLoader $loader,
+        FactoryInterface $factory,
         ManagerRegistry $managerRegistry,
         $menuRoot
     ) {
-        $this->loader = $loader;
+        $this->factory = $factory;
         $this->managerRegistry = $managerRegistry;
         $this->menuRoot = $menuRoot;
     }
@@ -166,10 +165,12 @@ class PhpcrMenuProvider implements MenuProviderInterface
     {
         $menu = $this->find($name, $options, true);
 
-        $menuItem = $this->loader->load($menu);
+        $menuItem = $this->factory->createFromNode($menu);
         if (empty($menuItem)) {
             throw new \InvalidArgumentException("Menu at '$name' is misconfigured (f.e. the route might be incorrect) and could therefore not be instanciated");
         }
+
+        $menuItem->setCurrentUri($this->request->getRequestUri());
 
         return $menuItem;
     }
@@ -201,6 +202,10 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * @return object|boolean The menu root found with $name or false if $throw
      *                        is false and the menu was not found.
      *
+     *
+     * @throws NamespaceException Only if $throw is true throws this
+     *                                   exception if the name has a colon (namespace) and
+     *                                   no menu found.
      * @throws \InvalidArgumentException Only if $throw is true throws this
      *                                   exception if the name is empty or no menu found.
      */
@@ -228,7 +233,15 @@ class PhpcrMenuProvider implements MenuProviderInterface
                     // nodes of all menues.
                     $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
                 } else {
-                    $session->getNode($path, $this->getPrefetch());
+                    try {
+                        $session->getNode($path, $this->getPrefetch());
+                    } catch (NamespaceException $e) {
+                        if ($throw) {
+                            throw $e;
+                        }
+
+                        return false;
+                    }
                 }
             } catch (PathNotFoundException $e) {
                 if ($throw) {
