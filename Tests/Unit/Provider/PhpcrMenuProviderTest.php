@@ -22,6 +22,10 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
             ->method('getNode')
             ->with($path)
         ;
+        $session->expects($this->once())
+            ->method('getNamespacePrefixes')
+            ->will($this->returnValue(array('jcr', 'nt')))
+        ;
         $dm = $this
             ->getMockBuilder('Doctrine\ODM\PHPCR\DocumentManager')
             ->disableOriginalConstructor()
@@ -90,7 +94,45 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
             $menuRoot
         );
 
-        $provider->has($name);
+        $this->assertTrue($provider->has($name));
+    }
+
+    public function testHasNot()
+    {
+        $session = $this->getMock('PHPCR\SessionInterface');
+        $session->expects($this->never())
+            ->method('getNode')
+        ;
+        $session->expects($this->any())
+            ->method('getNamespacePrefixes')
+            ->will($this->returnValue(array('jcr', 'nt')))
+        ;
+        $objectManager = $this
+            ->getMockBuilder('Doctrine\ODM\PHPCR\DocumentManager')
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+        $objectManager->expects($this->any())
+            ->method('getPhpcrSession')
+            ->will($this->returnValue($session))
+        ;
+        $objectManager->expects($this->never())
+            ->method('find')
+        ;
+
+        $managerRegistry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $managerRegistry->expects($this->any())
+            ->method('getManager')
+            ->will($this->returnValue($objectManager));
+
+        $provider = new PhpcrMenuProvider(
+            $this->getMock('Knp\Menu\FactoryInterface'),
+            $managerRegistry,
+            '/foo'
+        );
+
+        $this->assertFalse($provider->has('notavalidnamespace:bar'));
+        $this->assertFalse($provider->has('not:a:valid:name'));
     }
 
     public function getMenuTests()
@@ -98,7 +140,7 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
         return array(
             array('/test/menu', 'foo', '/test/menu/foo'),
             array('/test/menu', '/another/menu/path', '/another/menu/path'),
+            array('/test/menu', 'jcr:namespaced', '/test/menu/jcr:namespaced'),
         );
     }
-
 }
