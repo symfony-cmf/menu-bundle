@@ -14,7 +14,7 @@
     "minimum-stability": "dev",
     "prefer-stable": false,
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.9",
         "symfony/framework-bundle": "~2.3",
         "doctrine/phpcr-bundle": "~1.1",
         "doctrine/phpcr-odm": "~1.1",
