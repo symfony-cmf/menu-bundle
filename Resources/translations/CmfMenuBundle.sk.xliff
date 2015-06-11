@@ -66,8 +66,8 @@
         <source>list.label_route</source>
         <target>Cesta</target>
       </trans-unit>
-      <trans-unit id="form.group_general">
-        <source>form.group_general</source>
+      <trans-unit id="form.tab_general">
+        <source>form.tab_general</source>
         <target>Všeobecný</target>
       </trans-unit>
       <trans-unit id="form.group_items">
@@ -118,8 +118,12 @@
         <source>help.items_help</source>
         <target>Kliknite na položku, ktorú chcete upraviť. Kliknite pravým tlačidlom myši pre pridanie nových záznamov.</target>
       </trans-unit>
-      <trans-unit id="form.group_menus">
-         <source>form.group_menus</source>
+      <trans-unit id="form.tab_menu">
+         <source>form.tab_menu</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.group_general">
+         <source>form.group_general</source>
         <target>Menu</target>
       </trans-unit>
       <trans-unit id="form.label_menu_nodes">

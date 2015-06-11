@@ -66,8 +66,8 @@
         <source>list.label_route</source>
         <target>Route</target>
       </trans-unit>
-      <trans-unit id="form.group_general">
-        <source>form.group_general</source>
+      <trans-unit id="form.tab_general">
+        <source>form.tab_general</source>
         <target>Générale</target>
       </trans-unit>
       <trans-unit id="form.group_items">
@@ -118,8 +118,12 @@
         <source>help.items_help</source>
         <target>Cliquez sur un élément pour le modifier, cliquez avec la touche droite pour ajouter des éléments.</target>
       </trans-unit>
-      <trans-unit id="form.group_menus">
-        <source>form.group_menus</source>
+      <trans-unit id="form.tab_menu">
+        <source>form.tab_menu</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
         <target>Menu</target>
       </trans-unit>
       <trans-unit id="form.label_menu_nodes">

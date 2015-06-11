@@ -21,20 +21,47 @@ use Sonata\AdminBundle\Form\FormMapper;
  */
 class MenuNodeReferrersExtension extends AdminExtension
 {
+    /**
+     * @var string
+     */
+    private $formTab;
+
+    /**
+     * @var string
+     */
+    private $formGroup;
+
+    public function __construct($formGroup = 'form.group_menu', $formTab = 'form.tab_menu')
+    {
+        $this->formGroup = $formGroup;
+        $this->formTab = $formTab;
+    }
+
     public function configureFormFields(FormMapper $formMapper)
     {
+        if ($formMapper->hasOpenTab()) {
+            $formMapper->end();
+        }
+
         $formMapper
-            ->with('form.group_menus', array(
-                'translation_domain' => 'CmfMenuBundle',
-            ))
-            ->add(
-                'menuNodes',
-                'sonata_type_collection',
-                array(),
-                array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                ))
+            ->tab($this->formTab, 'form.tab_menu' === $this->formTab
+                ? array('translation_domain' => 'CmfMenuBundle')
+                : array()
+            )
+                ->with($this->formGroup, 'form.group_menu' === $this->formGroup
+                    ? array('translation_domain' => 'CmfMenuBundle')
+                    : array()
+                )
+                    ->add(
+                        'menuNodes',
+                        'sonata_type_collection',
+                        array(),
+                        array(
+                            'edit' => 'inline',
+                            'inline' => 'table',
+                        )
+                    )
+                ->end()
             ->end()
         ;
     }

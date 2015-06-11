@@ -54,43 +54,44 @@ abstract class AbstractMenuNodeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('form.group_general')
-                ->add('name', 'text')
-                ->add('label', 'text')
-            ->end()
+            ->tab('form.tab_general')
+                ->with('form.group_general')
+                    ->add('name', 'text')
+                    ->add('label', 'text')
         ;
 
         if (null === $this->getParentFieldDescription()) {
-
             // Add the choice for the node links "target"
             $formMapper
-                ->with('form.group_general')
-                    ->add('linkType', 'choice_field_mask', array(
-                        'choices' => array(
+                ->add('linkType', 'choice_field_mask', array(
+                    'choices' => array(
                             'route' => 'route',
                             'uri' => 'uri',
                             'content' => 'content',
-                        ),
-                        'map' => array(
-                            'route' => array('route'),
-                            'uri' => array('uri'),
-                            'content' => array('content', 'doctrine_phpcr_odm_tree'),
-                        ),
-                        'empty_value' => 'auto',
+                    ),
+                    'map' => array(
+                        'route' => array('route'),
+                        'uri' => array('uri'),
+                        'content' => array('content', 'doctrine_phpcr_odm_tree'),
+                    ),
+                    'empty_value' => 'auto',
+                    'required' => false
+                ))
+                ->add('route', 'text', array('required' => false))
+                ->add('uri', 'text', array('required' => false))
+                ->add('content', 'doctrine_phpcr_odm_tree',
+                    array(
+                        'root_node' => $this->contentRoot,
+                        'choice_list' => array(),
                         'required' => false
-                    ))
-                    ->add('route', 'text', array('required' => false))
-                    ->add('uri', 'text', array('required' => false))
-                    ->add('content', 'doctrine_phpcr_odm_tree',
-                        array(
-                            'root_node' => $this->contentRoot,
-                            'choice_list' => array(),
-                            'required' => false
-                        )
                     )
-                ->end()
+                )
             ;
         }
+
+        $formMapper->end() // group general
+            ->end() // tab general
+        ;
     }
 
     protected function configureShowFields(ShowMapper $showMapper)

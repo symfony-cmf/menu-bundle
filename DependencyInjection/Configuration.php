@@ -22,6 +22,15 @@ class Configuration implements ConfigurationInterface
 
         $treeBuilder->root('cmf_menu')
             ->fixXmlConfig('voter')
+            ->beforeNormalization()
+                ->ifTrue(function ($v) { return isset($v['admin_extensions']); })
+                ->then(function ($v) {
+                    $v['sonata_admin']['extensions'] = $v['admin_extensions'];
+                    unset($v['admin_extensions']);
+
+                    return $v;
+                })
+            ->end()
             ->children()
                 ->arrayNode('persistence')
                     ->addDefaultsIfNotSet()
@@ -63,19 +72,30 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
-                ->arrayNode('admin_extensions')
+                ->arrayNode('sonata_admin')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('menu_options')
+                        ->arrayNode('extensions')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->enumNode('enabled')
-                                    ->values(array(true, false, 'auto'))
-                                    ->defaultValue('auto')
+                                ->arrayNode('menu_options')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->booleanNode('advanced')->defaultValue(false)->end()
+                                        ->scalarNode('form_group')->defaultValue('form.group_menu')->end()
+                                        ->scalarNode('form_tab')->defaultValue('form.tab_menu')->end()
+                                    ->end()
                                 ->end()
-                                ->booleanNode('advanced')->defaultValue(false)->end()
+
+                                ->arrayNode('menu_referrers')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('form_group')->defaultValue('form.group_menu')->end()
+                                        ->scalarNode('form_tab')->defaultValue('form.tab_menu')->end()
+                                    ->end()
+                                ->end()
                             ->end()
-                        ->end()
+                        ->end() // extensions
                     ->end()
                 ->end()
 
