@@ -18,13 +18,17 @@
         "symfony/framework-bundle": "~2.3",
         "doctrine/phpcr-bundle": "~1.1",
         "doctrine/phpcr-odm": "~1.1",
-        "knplabs/knp-menu-bundle": "~2.0",
-        "symfony-cmf/core-bundle": "~1.1"
+        "knplabs/knp-menu-bundle": "~2.0,>=2.0.0",
+        "knplabs/knp-menu": "~2.0,>=2.0.0",
+        "symfony-cmf/core-bundle": "~1.1,>=1.1.0"
     },
     "require-dev": {
-        "symfony-cmf/routing-bundle": "~1.2",
-        "symfony-cmf/testing": "~1.1",
+        "twig/twig": "~1.12,>=1.12.1",
+        "symfony-cmf/routing-bundle": "~1.2,>=1.2.0",
+        "symfony-cmf/testing": "~1.2,>=1.2.6",
         "sonata-project/doctrine-phpcr-admin-bundle": "~1.1",
+        "sonata-project/block-bundle": ">=2.2.8",
+        "sonata-project/core-bundle": ">=2.2.3",
         "symfony/monolog-bundle": "~2.3"
     },
     "suggest": {
