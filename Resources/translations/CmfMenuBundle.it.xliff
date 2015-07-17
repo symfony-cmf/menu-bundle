@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="it" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="dashboard.cmf">
+        <source>dashboard.cmf</source>
+        <target>Symfony CMF</target>
+      </trans-unit>
+      <trans-unit id="dashboard.label_menu">
+        <source>dashboard.label_menu</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="dashboard.label_menu_node">
+        <source>dashboard.label_menu_node</source>
+        <target>Nodo menu</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_list">
+        <source>breadcrumb.link_menu_list</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_create">
+        <source>breadcrumb.link_menu_create</source>
+        <target>Crea menu</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_edit">
+        <source>breadcrumb.link_menu_edit</source>
+        <target>Modifica</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_delete">
+        <source>breadcrumb.link_menu_delete</source>
+        <target>Elimina</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_node_list">
+        <source>breadcrumb.link_menu_node_list</source>
+        <target>Nodi menu</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_node_create">
+        <source>breadcrumb.link_menu_node_create</source>
+        <target>Crea</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_node_edit">
+        <source>breadcrumb.link_menu_node_edit</source>
+        <target>Modifica</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_node_delete">
+        <source>breadcrumb.link_menu_node_delete</source>
+        <target>Elimina</target>
+      </trans-unit>
+      <trans-unit id="list.label_id">
+        <source>list.label_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="list.label_name">
+        <source>list.label_name</source>
+        <target>Nome</target>
+      </trans-unit>
+      <trans-unit id="list.label_label">
+        <source>list.label_label</source>
+        <target>Codice</target>
+      </trans-unit>
+      <trans-unit id="list.label_uri">
+        <source>list.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="list.label_route">
+        <source>list.label_route</source>
+        <target>Rotta</target>
+      </trans-unit>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
+        <target>Generale</target>
+      </trans-unit>
+      <trans-unit id="form.group_items">
+        <source>form.group_items</source>
+        <target>Elementi</target>
+      </trans-unit>
+      <trans-unit id="form.label_children">
+        <source>form.label_children</source>
+        <target>Elementi</target>
+      </trans-unit>
+      <trans-unit id="form.label_parent">
+        <source>form.label_parent</source>
+        <target>Genitore</target>
+      </trans-unit>
+      <trans-unit id="form.label_name">
+        <source>form.label_name</source>
+        <target>Nome</target>
+      </trans-unit>
+      <trans-unit id="form.label_label">
+        <source>form.label_label</source>
+        <target>Codice</target>
+      </trans-unit>
+      <trans-unit id="form.label_uri">
+        <source>form.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="form.label_route">
+        <source>form.label_route</source>
+        <target>Rotta</target>
+      </trans-unit>
+      <trans-unit id="form.label_parameters">
+        <source>form.label_parameters</source>
+        <target>Parametri rotta</target>
+      </trans-unit>
+      <trans-unit id="form.label_content">
+        <source>form.label_content</source>
+        <target>Contenuto</target>
+      </trans-unit>
+      <trans-unit id="form.label_link_type">
+        <source>form.label_link_type</source>
+        <target>Tipo link</target>
+      </trans-unit>
+      <trans-unit id="form.label_weak">
+        <source>form.label_weak</source>
+        <target>Associazione debole</target>
+      </trans-unit>
+      <trans-unit id="help.items_help">
+        <source>help.items_help</source>
+        <target>Clic su elemento per modificare, clic col pulsante destro per creare nuovi elementi.</target>
+      </trans-unit>
+      <trans-unit id="form.group_menus">
+         <source>form.group_menus</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.label_menu_nodes">
+        <source>form.label_menu_nodes</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.group_menu_options">
+        <source>form.group_menu_options</source>
+        <target>Opzioni menu</target>
+      </trans-unit>
+      <trans-unit id="form.label_display">
+        <source>form.label_display</source>
+        <target>Visualizza</target>
+      </trans-unit>
+      <trans-unit id="form.help_display">
+        <source>form.help_display</source>
+        <target>La voce di menu è visibile solo se il codice non è vuoto.</target>
+      </trans-unit>
+      <trans-unit id="form.label_display_children">
+        <source>form.label_display_children</source>
+        <target>Visualizza figli</target>
+      </trans-unit>
+      <trans-unit id="form.help_display_children">
+        <source>form.help_display_children</source>
+        <target>I figli sono visibili solo se anche la voce di menu è visibile.</target>
+      </trans-unit>
+      <trans-unit id="form.label_attributes">
+        <source>form.label_attributes</source>
+        <target>Attributi menu</target>
+      </trans-unit>
+      <trans-unit id="form.label_label_attributes">
+        <source>form.label_label_attributes</source>
+        <target>Attributi codice</target>
+      </trans-unit>
+      <trans-unit id="form.label_children_attributes">
+        <source>form.label_children_attributes</source>
+        <target>Attributi figli</target>
+      </trans-unit>
+      <trans-unit id="form.label_link_attributes">
+        <source>form.label_link_attributes</source>
+        <target>Attributi link</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
