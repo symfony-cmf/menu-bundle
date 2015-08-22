@@ -114,6 +114,28 @@
         <source>form.label_weak</source>
         <target>Weak association</target>
       </trans-unit>
+
+      <trans-unit id="show.label_id">
+        <source>show.label_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="show.label_name">
+        <source>show.label_name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="show.label_label">
+        <source>show.label_label</source>
+        <target>Label</target>
+      </trans-unit>
+      <trans-unit id="show.label_uri">
+        <source>show.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="show.label_content">
+        <source>show.label_content</source>
+        <target>Content</target>
+      </trans-unit>
+
       <trans-unit id="help.items_help">
         <source>help.items_help</source>
         <target>Click on item to edit, right click to create new items.</target>

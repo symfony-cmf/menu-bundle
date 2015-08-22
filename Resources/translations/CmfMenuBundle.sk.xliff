@@ -114,6 +114,28 @@
         <source>form.label_weak</source>
         <target>Slabé prepojenie</target>
       </trans-unit>
+
+      <trans-unit id="show.label_id">
+        <source>show.label_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="show.label_name">
+        <source>show.label_name</source>
+        <target>Názov</target>
+      </trans-unit>
+      <trans-unit id="show.label_label">
+        <source>show.label_label</source>
+        <target>Označenie</target>
+      </trans-unit>
+      <trans-unit id="show.label_uri">
+        <source>show.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="show.label_content">
+        <source>show.label_content</source>
+        <target>Obsah</target>
+      </trans-unit>
+
       <trans-unit id="help.items_help">
         <source>help.items_help</source>
         <target>Kliknite na položku, ktorú chcete upraviť. Kliknite pravým tlačidlom myši pre pridanie nových záznamov.</target>
