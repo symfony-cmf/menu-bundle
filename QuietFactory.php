@@ -20,7 +20,7 @@ class QuietFactory implements FactoryInterface
     private $innerFactory;
 
     /**
-     * @var LoggerInterface
+     * @var LoggerInterface|null
      */
     private $logger;
 
@@ -33,7 +33,7 @@ class QuietFactory implements FactoryInterface
      */
     private $allowEmptyItems;
 
-    public function __construct(FactoryInterface $innerFactory, LoggerInterface $logger, $allowEmptyItems = false)
+    public function __construct(FactoryInterface $innerFactory, LoggerInterface $logger = null, $allowEmptyItems = false)
     {
         $this->innerFactory = $innerFactory;
         $this->logger = $logger;
@@ -48,7 +48,12 @@ class QuietFactory implements FactoryInterface
         try {
             return $this->innerFactory->createItem($name, $options);
         } catch (RouteNotFoundException $e) {
-            $this->logger->error(sprintf('%s : %s', $name, $e->getMessage()));
+            if (null !== $this->logger) {
+                $this->logger->error(
+                    sprintf('An exception was thrown while creating a menu item called "%s"', $name),
+                    array('exception' => $e)
+                );
+            }
 
             if (!$this->allowEmptyItems) {
                 return null;
