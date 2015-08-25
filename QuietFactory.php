@@ -2,9 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle;
 
-use Knp\Menu\Factory\ExtensionInterface;
 use Knp\Menu\FactoryInterface;
-use Knp\Menu\ItemInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
@@ -27,8 +25,9 @@ class QuietFactory implements FactoryInterface
     private $logger;
 
     /**
-     * Whether to return null or a MenuItem without any URL if no URL can be
-     * found for a MenuNode.
+     * Whether to return null (if value is false) or a MenuItem
+     * without any URL (if value is true) if no URL can be found
+     * for a MenuNode.
      *
      * @var bool
      */
@@ -54,6 +53,12 @@ class QuietFactory implements FactoryInterface
             if (!$this->allowEmptyItems) {
                 return null;
             }
+
+            // remove route and content options
+            unset($options['route']);
+            unset($options['content']);
+
+            return $this->innerFactory->createItem($name, $options);
         }
     }
 }
