@@ -106,6 +106,26 @@
         <source>form.label_link_type</source>
         <target>Linktyp</target>
       </trans-unit>
+      <trans-unit id="show.label_id">
+        <source>show.label_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="show.label_name">
+        <source>show.label_name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="show.label_label">
+        <source>show.label_label</source>
+        <target>Beschriftung</target>
+      </trans-unit>
+      <trans-unit id="show.label_uri">
+        <source>show.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="show.label_content">
+        <source>show.label_content</source>
+        <target>Inhalt</target>
+      </trans-unit>
       <trans-unit id="help.items_help">
         <source>help.items_help</source>
         <target>Klicken Sie auf ein Element, um es zu bearbeiten. Rechtsklick um Einträge hinzuzufügen.</target>

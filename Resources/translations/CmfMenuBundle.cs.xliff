@@ -114,6 +114,26 @@
         <source>form.label_weak</source>
         <target>Slabé propojení</target>
       </trans-unit>
+      <trans-unit id="show.label_id">
+        <source>show.label_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="show.label_name">
+        <source>show.label_name</source>
+        <target>Název</target>
+      </trans-unit>
+      <trans-unit id="show.label_label">
+        <source>show.label_label</source>
+        <target>Označení</target>
+      </trans-unit>
+      <trans-unit id="show.label_uri">
+        <source>show.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="show.label_content">
+        <source>show.label_content</source>
+        <target>Obsah</target>
+      </trans-unit>
       <trans-unit id="help.items_help">
         <source>help.items_help</source>
         <target>Klepněte na položku, kterou chcete upravit. Klikněte pravým tlačítkem myši pro přidání nových záznamů.</target>

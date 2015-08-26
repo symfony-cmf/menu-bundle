@@ -114,6 +114,26 @@
         <source>form.label_weak</source>
         <target>Slaba pridružitev</target>
       </trans-unit>
+      <trans-unit id="show.label_id">
+        <source>show.label_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="show.label_name">
+        <source>show.label_name</source>
+        <target>Ime</target>
+      </trans-unit>
+      <trans-unit id="show.label_label">
+        <source>show.label_label</source>
+        <target>Oznaka</target>
+      </trans-unit>
+      <trans-unit id="show.label_uri">
+        <source>show.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="show.label_content">
+        <source>show.label_content</source>
+        <target>Vsebina</target>
+      </trans-unit>
       <trans-unit id="help.items_help">
         <source>help.items_help</source>
         <target>Kliknite na element za urejanje, desni klik za ustvarjanje novih elementov.</target>
