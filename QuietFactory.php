@@ -2,9 +2,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle;
 
-use Knp\Menu\Factory\ExtensionInterface;
 use Knp\Menu\FactoryInterface;
-use Knp\Menu\ItemInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
@@ -22,19 +20,20 @@ class QuietFactory implements FactoryInterface
     private $innerFactory;
 
     /**
-     * @var LoggerInterface
+     * @var LoggerInterface|null
      */
     private $logger;
 
     /**
-     * Whether to return null or a MenuItem without any URL if no URL can be
-     * found for a MenuNode.
+     * Whether to return null (if value is false) or a MenuItem
+     * without any URL (if value is true) if no URL can be found
+     * for a MenuNode.
      *
      * @var bool
      */
     private $allowEmptyItems;
 
-    public function __construct(FactoryInterface $innerFactory, LoggerInterface $logger, $allowEmptyItems = false)
+    public function __construct(FactoryInterface $innerFactory, LoggerInterface $logger = null, $allowEmptyItems = false)
     {
         $this->innerFactory = $innerFactory;
         $this->logger = $logger;
@@ -49,11 +48,22 @@ class QuietFactory implements FactoryInterface
         try {
             return $this->innerFactory->createItem($name, $options);
         } catch (RouteNotFoundException $e) {
-            $this->logger->error(sprintf('%s : %s', $name, $e->getMessage()));
+            if (null !== $this->logger) {
+                $this->logger->error(
+                    sprintf('An exception was thrown while creating a menu item called "%s"', $name),
+                    array('exception' => $e)
+                );
+            }
 
             if (!$this->allowEmptyItems) {
                 return null;
             }
+
+            // remove route and content options
+            unset($options['route']);
+            unset($options['content']);
+
+            return $this->innerFactory->createItem($name, $options);
         }
     }
 }

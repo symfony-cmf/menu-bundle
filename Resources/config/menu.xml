@@ -10,7 +10,7 @@
 
         <service id="cmf_menu.factory.quiet" class="Symfony\Cmf\Bundle\MenuBundle\QuietFactory" public="false">
             <argument type="service" id="cmf_menu.factory.quiet.inner" />
-            <argument type="service" id="logger"/>
+            <argument type="service" id="logger" on-invalid="ignore" />
             <argument>%cmf_menu.allow_empty_items%</argument>
         </service>
 
