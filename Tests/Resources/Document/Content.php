@@ -33,7 +33,7 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
     protected $id;
 
     /**
-     * @PHPCR\String()
+     * @PHPCR\Field(type="string")
      */
     protected $title;
 

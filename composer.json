@@ -12,28 +12,29 @@
         }
     ],
     "minimum-stability": "dev",
-    "prefer-stable": false,
+    "prefer-stable": true,
     "require": {
         "php": ">=5.3.9",
-        "symfony/framework-bundle": "~2.3",
-        "doctrine/phpcr-bundle": "~1.1",
-        "doctrine/phpcr-odm": "~1.1",
-        "knplabs/knp-menu-bundle": "~2.0,>=2.0.0@stable",
-        "knplabs/knp-menu": "~2.0,>=2.0.0@stable",
-        "symfony-cmf/core-bundle": "~1.1,>=1.1.0-RC3"
+        "symfony/framework-bundle": "^2.3",
+        "symfony-cmf/core-bundle": "^1.1.0-RC3",
+        "doctrine/phpcr-bundle": "^1.1",
+        "doctrine/phpcr-odm": "^1.1",
+        "knplabs/knp-menu-bundle": "^2.0.0",
+        "knplabs/knp-menu": "^2.0.0"
     },
     "require-dev": {
-        "twig/twig": "~1.12,>=1.12.1",
-        "symfony-cmf/routing-bundle": "~1.2,>=1.2.0-RC3",
-        "symfony-cmf/testing": "~1.2,>=1.2.6",
-        "sonata-project/doctrine-phpcr-admin-bundle": "~1.1",
-        "symfony-cmf/tree-browser-bundle": ">=1.0.0-RC1",
-        "sonata-project/block-bundle": ">=2.2.8",
-        "sonata-project/core-bundle": ">=2.2.3",
-        "symfony/monolog-bundle": "~2.3"
+        "symfony/monolog-bundle": "^2.3",
+        "symfony-cmf/routing-bundle": "^1.2.0-RC3",
+        "symfony-cmf/testing": "^1.3",
+        "symfony-cmf/tree-browser-bundle": "^1.0.0-RC1",
+        "doctrine/phpcr-odm": "^1.3",
+        "twig/twig": "^1.12.1",
+        "sonata-project/doctrine-phpcr-admin-bundle": "^1.1",
+        "sonata-project/block-bundle": "^2.2.8",
+        "sonata-project/core-bundle": "^2.2.3"
     },
     "suggest": {
-        "sonata-project/doctrine-phpcr-admin-bundle": "if you want to have editing capabilities",
+        "sonata-project/doctrine-phpcr-admin-bundle": "if you want to have editing capabilities (^1.1)",
         "burgov/key-value-form-bundle": "if you want to edit the advanced options on the node with the menu options extension"
     },
     "autoload": {
