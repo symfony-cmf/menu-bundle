@@ -11,7 +11,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -83,7 +83,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     /**
      * {@inheritdoc}
      */
-    public function defineFormBuilder(FormBuilderInterface $formBuilder)
+    public function defineFormBuilder(FormBuilder $formBuilder)
     {
         parent::defineFormBuilder($formBuilder);
 
