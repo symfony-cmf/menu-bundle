@@ -54,7 +54,6 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
         parent::configureFormFields($formMapper);
 
         if (null === $this->getParentFieldDescription()) {
-
             // Add the choice for the node links "target"
             $formMapper
                 ->with('form.group_general')
@@ -88,6 +87,10 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
         parent::defineFormBuilder($formBuilder);
 
         $formBuilder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
+            if (!$event->getForm()->has('link')) {
+                return;
+            }
+
             $link = $event->getForm()->get('link');
             $node = $event->getData();
 
@@ -119,6 +122,10 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
         });
 
         $formBuilder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            if (!$event->getForm()->has('link')) {
+                return;
+            }
+
             $form = $event->getForm();
             $node = $event->getData();
 
