@@ -19,17 +19,17 @@ class RequestParentContentIdentityVoterTest extends BaseTestCase
         // to the "Request Content PArent Identity" menu item and so DOES NOT invoke
         // the voter.
         $crawler = $this->client->request('GET', '/blog');
+
+        $this->assertResponseSuccess($this->client->getResponse());
         $this->assertCurrentItem($crawler, 'Request Parent Content Identity Voter');
-        $res = $this->client->getResponse();
-        $this->assertEquals(200, $res->getStatusCode());
     }
 
     public function testRequestContentParentIdentity()
     {
         // this test shows an post whose parent is the blog content referenced in the menu item
         $crawler = $this->client->request('GET', '/blog/my-post');
-        $res = $this->client->getResponse();
+
+        $this->assertResponseSuccess($this->client->getResponse());
         $this->assertCurrentItem($crawler, 'Request Parent Content Identity Voter');
-        $this->assertEquals(200, $res->getStatusCode());
     }
 }

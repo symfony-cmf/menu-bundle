@@ -27,9 +27,8 @@ class TwigTest extends BaseTestCase
     {
         $client = $this->createClient();
         $crawler = $client->request('GET', '/render-test');
-        $res = $client->getResponse();
 
-        $this->assertEquals(200, $res->getStatusCode());
+        $this->assertResponseSuccess($client->getResponse());
         $this->assertMenuHasItems($crawler->filter('#content ul')->eq(0), array(
             'This node has a URI',
             '@todo this node should have content',

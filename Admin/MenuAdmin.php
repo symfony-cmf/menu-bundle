@@ -24,19 +24,19 @@ class MenuAdmin extends AbstractMenuNodeAdmin
         parent::configureFormFields($formMapper);
 
         $subject = $this->getSubject();
-        $isNew = $subject->getId() ? false : true;
+        $isNew = $subject->getId() === null;
 
-        if (false === $isNew) {
+        if (!$isNew) {
             $formMapper
                 ->with('form.group_items', array())
-                ->add('children', 'doctrine_phpcr_odm_tree_manager', array(
-                    'root' => $this->menuRoot,
-                    'edit_in_overlay' => false,
-                    'create_in_overlay' => false,
-                    'delete_in_overlay' => false
-                ), array(
-                    'help' => 'help.items_help'
-                ))
+                    ->add('children', 'doctrine_phpcr_odm_tree_manager', array(
+                        'root' => $this->menuRoot,
+                        'edit_in_overlay' => false,
+                        'create_in_overlay' => false,
+                        'delete_in_overlay' => false,
+                    ), array(
+                        'help' => 'help.items_help',
+                    ))
                 ->end()
             ;
         }
