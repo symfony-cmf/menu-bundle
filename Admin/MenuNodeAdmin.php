@@ -82,9 +82,9 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     /**
      * {@inheritdoc}
      */
-    public function defineFormBuilder(FormBuilder $formBuilder)
+    public function getFormBuilder()
     {
-        parent::defineFormBuilder($formBuilder);
+        $formBuilder = parent::getFormBuilder();
 
         $formBuilder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {
             if (!$event->getForm()->has('link')) {
