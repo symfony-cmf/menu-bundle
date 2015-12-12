@@ -146,6 +146,8 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
                     break;
             }
         });
+        
+        return $formBuilder;
     }
 
     /**
