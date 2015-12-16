@@ -95,9 +95,9 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
     public function testOptionsAsRemovedWhenLinkTypeIsElse()
     {
         $options = array(
-            'uri'      => '/configured_uri',
-            'route'    => 'configured_route',
-            'content'  => 'configured_content',
+            'uri' => '/configured_uri',
+            'route' => 'configured_route',
+            'content' => 'configured_content',
             'linkType' => 'content',
         );
 

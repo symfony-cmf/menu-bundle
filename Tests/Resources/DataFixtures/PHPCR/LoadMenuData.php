@@ -41,17 +41,17 @@ class LoadMenuData implements FixtureInterface
 
     protected function loadMainMenu(DocumentManager $manager)
     {
-        $content = new Content;
+        $content = new Content();
         $content->setTitle('Menu Item Content 1');
         $content->setId('/test/content-menu-item-1');
 
-        $menu = new Menu;
+        $menu = new Menu();
         $menu->setName('test-menu');
         $menu->setLabel('Test Menu');
         $menu->setParentDocument($this->menuRoot);
         $manager->persist($menu);
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $menuNode->setParentDocument($menu);
         $menuNode->setLabel('item-1');
         $menuNode->setName('item-1');
@@ -59,7 +59,7 @@ class LoadMenuData implements FixtureInterface
 
         $content->addMenuNode($menuNode);
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $menuNode->setParentDocument($menu);
         $menuNode->setLabel('This node has a URI');
         $menuNode->setUri('http://www.example.com');
@@ -67,21 +67,21 @@ class LoadMenuData implements FixtureInterface
         $manager->persist($menuNode);
 
         $content->addMenuNode($menuNode);
-        
-        $subNode = new MenuNode;
+
+        $subNode = new MenuNode();
         $subNode->setParentDocument($menuNode);
         $subNode->setLabel('@todo this node should have content');
         $subNode->setName('sub-item-1');
         $manager->persist($subNode);
 
-        $subNode = new MenuNode;
+        $subNode = new MenuNode();
         $subNode->setParentDocument($menuNode);
         $subNode->setLabel('This node has an assigned route');
         $subNode->setName('sub-item-2');
         $subNode->setRoute('link_test_route');
         $manager->persist($subNode);
 
-        $subNode = new MenuNode;
+        $subNode = new MenuNode();
         $subNode->setParentDocument($menuNode);
         $subNode->setLabel('This node has an assigned route with parameters');
         $subNode->setName('sub-item-3');
@@ -89,19 +89,19 @@ class LoadMenuData implements FixtureInterface
         $subNode->setRouteParameters(array('foo' => 'bar', 'bar' => 'foo'));
         $manager->persist($subNode);
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $menuNode->setParentDocument($menu);
         $menuNode->setLabel('item-3');
         $menuNode->setName('item-3');
         $manager->persist($menuNode);
 
-        $menu = new Menu;
+        $menu = new Menu();
         $menu->setName('another-menu');
         $menu->setLabel('Another Menu');
         $menu->setParentDocument($this->menuRoot);
         $manager->persist($menu);
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $menuNode->setParentDocument($menu);
         $menuNode->setLabel('This node has uri, route and content set. but linkType is set to route');
         $menuNode->setLinkType('route');
@@ -110,7 +110,7 @@ class LoadMenuData implements FixtureInterface
         $menuNode->setName('item-1');
         $manager->persist($menuNode);
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $menuNode->setParentDocument($menu);
         $menuNode->setLabel('item-2');
         $menuNode->setName('item-2');
@@ -122,7 +122,7 @@ class LoadMenuData implements FixtureInterface
     protected function loadVoterMenu(DocumentManager $manager)
     {
         // test content
-        $content = new Content;
+        $content = new Content();
         $content->setTitle('Content 1');
         $content->setId('/test/content-1');
         $manager->persist($content);
@@ -134,7 +134,7 @@ class LoadMenuData implements FixtureInterface
         $manager->persist($route);
 
         // test blog
-        $blog = new Content;
+        $blog = new Content();
         $blog->setTitle('Blog');
         $blog->setId('/test/blog-1');
         $manager->persist($blog);
@@ -146,7 +146,7 @@ class LoadMenuData implements FixtureInterface
         $manager->persist($route);
 
         // test blog post
-        $post = new Post;
+        $post = new Post();
         $post->setTitle('My Post');
         $post->setId('/test/blog-1/my-post');
         $manager->persist($post);
@@ -158,7 +158,7 @@ class LoadMenuData implements FixtureInterface
         $manager->persist($route);
 
         // test articles
-        $articles = new Content;
+        $articles = new Content();
         $articles->setTitle('Articles Index');
         $articles->setId('/test/articles');
         $manager->persist($articles);
@@ -186,34 +186,34 @@ class LoadMenuData implements FixtureInterface
         $manager->persist($route);
 
         // menu items
-        $menu = new Menu;
+        $menu = new Menu();
         $menu->setName('side-menu');
         $menu->setLabel('Side Menu');
         $menu->setParentDocument($this->menuRoot);
         $manager->persist($menu);
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $menuNode->setParentDocument($menu);
         $menuNode->setLabel('Default Behavior');
         $menuNode->setName('default');
         $menuNode->setRoute('current_menu_item_default');
         $manager->persist($menuNode);
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $menuNode->setParentDocument($menu);
         $menuNode->setLabel('Request Content Identity Voter');
         $menuNode->setName('request-content-identity-voter');
         $menuNode->setContent($content);
         $manager->persist($menuNode);
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $menuNode->setParentDocument($menu);
         $menuNode->setLabel('URI Prefix Voter');
         $menuNode->setName('uri-prefix-voter');
         $menuNode->setContent($articlesRoute);
         $manager->persist($menuNode);
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $menuNode->setParentDocument($menu);
         $menuNode->setLabel('Request Parent Content Identity Voter');
         $menuNode->setName('request-parent-content-identity-voter');

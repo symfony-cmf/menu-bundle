@@ -3,7 +3,7 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,10 +15,9 @@ use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuOptionsInterface;
 
 /**
- * This is the standard CMF MenuNode implementation
+ * This is the standard CMF MenuNode implementation.
  *
  * Menu bundle specific additions:
  *
@@ -51,7 +50,8 @@ class MenuNode extends MenuNodeBase implements
     protected $locale;
 
     /**
-     * Enum, values determined by ContentAwareFactory
+     * Enum, values determined by ContentAwareFactory.
+     *
      * @var string
      */
     protected $linkType;
@@ -64,7 +64,7 @@ class MenuNode extends MenuNodeBase implements
     protected $content;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $publishable = true;
 
@@ -79,7 +79,7 @@ class MenuNode extends MenuNodeBase implements
     protected $publishEndDate;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setParentObject($parent)
     {
@@ -89,7 +89,7 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getParentObject()
     {
@@ -142,7 +142,7 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * Set the content document associated with this menu node
+     * Set the content document associated with this menu node.
      *
      * NOTE: When using doctrine, the content must be mapped for doctrine and
      * be persisted or cascading be configured on the content field.
@@ -157,8 +157,9 @@ class MenuNode extends MenuNodeBase implements
 
         return $this;
     }
+
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getOptions()
     {
@@ -171,7 +172,7 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isPublishable()
     {
@@ -181,7 +182,7 @@ class MenuNode extends MenuNodeBase implements
     /**
      * Set the publishable workflow flag.
      *
-     * @param boolean $publishable
+     * @param bool $publishable
      */
     public function setPublishable($publishable)
     {
@@ -189,7 +190,7 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPublishStartDate()
     {
@@ -197,7 +198,7 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setPublishStartDate(\DateTime $date = null)
     {
@@ -205,7 +206,7 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPublishEndDate()
     {
@@ -213,7 +214,7 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setPublishEndDate(\DateTime $date = null)
     {
@@ -221,7 +222,7 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * Get the link type
+     * Get the link type.
      *
      * The link type is used to explicitly determine which of the uri, route
      * and content fields are used to determine the link which will bre

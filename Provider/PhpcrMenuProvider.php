@@ -37,7 +37,8 @@ class PhpcrMenuProvider implements MenuProviderInterface
     protected $request;
 
     /**
-     * base for menu ids
+     * base for menu ids.
+     *
      * @var string
      */
     protected $menuRoot;
@@ -45,12 +46,14 @@ class PhpcrMenuProvider implements MenuProviderInterface
     /**
      * Depth to use to prefetch all menu nodes. Only used if > 0, otherwise
      * no prefetch is attempted.
+     *
      * @var int
      */
     protected $prefetch = 10;
 
     /**
-     * doctrine document class name
+     * doctrine document class name.
+     *
      * @var string
      */
     protected $className;
@@ -184,7 +187,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
      *                        absolute PHPCR path or one relative to the menu root.
      * @param array  $options
      *
-     * @return boolean Whether a menu with this name can be loaded by this provider.
+     * @return bool Whether a menu with this name can be loaded by this provider.
      */
     public function has($name, array $options = array())
     {
@@ -192,14 +195,14 @@ class PhpcrMenuProvider implements MenuProviderInterface
     }
 
     /**
-     * @param string  $name    Name of the menu to load
-     * @param array   $options
-     * @param boolean $throw   Whether to throw an exception if the menu is not
-     *                         found or no valid menu. Returns false if $throw is false and there
-     *                         is no menu at $name.
+     * @param string $name    Name of the menu to load
+     * @param array  $options
+     * @param bool   $throw   Whether to throw an exception if the menu is not
+     *                        found or no valid menu. Returns false if $throw is false and there
+     *                        is no menu at $name.
      *
-     * @return object|boolean The menu root found with $name or false if $throw
-     *                        is false and the menu was not found.
+     * @return object|bool The menu root found with $name or false if $throw
+     *                     is false and the menu was not found.
      *
      * @throws \InvalidArgumentException Only if $throw is true throws this
      *                                   exception if the name is empty or no menu found.
@@ -247,7 +250,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
 
             return false;
         }
-        if (! $menu instanceof NodeInterface) {
+        if (!$menu instanceof NodeInterface) {
             if ($throw) {
                 throw new \InvalidArgumentException("Menu at '$name' is not a valid menu node");
             }

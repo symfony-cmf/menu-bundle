@@ -38,7 +38,7 @@ class VotingNodeLoaderTest extends \PHPUnit_Framework_TestCase
 
         // predictions
         $options = array_merge(array(
-            'node2_is_published' => true
+            'node2_is_published' => true,
         ), $options);
 
         $dispatchMethodMock = $this->dispatcher->expects($this->exactly(3))->method('dispatch');
@@ -54,7 +54,7 @@ class VotingNodeLoaderTest extends \PHPUnit_Framework_TestCase
         }
 
         $that = $this;
-        $this->factory->expects($this->exactly($nodes))->method('createItem')->will($this->returnCallback(function() use ($that) {
+        $this->factory->expects($this->exactly($nodes))->method('createItem')->will($this->returnCallback(function () use ($that) {
             return $that->getMock('Knp\Menu\ItemInterface');
         }));
 

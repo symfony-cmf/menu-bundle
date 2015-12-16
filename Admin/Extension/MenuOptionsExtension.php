@@ -3,7 +3,7 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,13 +28,13 @@ class MenuOptionsExtension extends AdminExtension
     protected $formGroup;
 
     /**
-    * @var bool
-    */
+     * @var bool
+     */
     protected $advanced;
 
     /**
      * @param string $formGroup - group to use for form mapper
-     * @param bool   $advanced - activates editing all fields of the node
+     * @param bool   $advanced  - activates editing all fields of the node
      */
     public function __construct($formGroup = 'form.group_menu_options', $advanced = false)
     {
@@ -43,7 +43,7 @@ class MenuOptionsExtension extends AdminExtension
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureFormFields(FormMapper $formMapper)
     {
@@ -64,14 +64,14 @@ class MenuOptionsExtension extends AdminExtension
             )
           ->end();
 
-        if (! $this->advanced) {
+        if (!$this->advanced) {
             return;
         }
 
         $child_options = array(
             'value_type' => 'text',
             'label' => false,
-            'attr'=> array('style' => 'clear:both')
+            'attr' => array('style' => 'clear:both'),
         );
 
         $formMapper->with($this->formGroup, array(

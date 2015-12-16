@@ -50,7 +50,7 @@ class QuietFactory implements FactoryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createItem($name, array $options = array())
     {
@@ -65,7 +65,7 @@ class QuietFactory implements FactoryInterface
             }
 
             if (!$this->allowEmptyItems) {
-                return null;
+                return;
             }
 
             // remove route and content options

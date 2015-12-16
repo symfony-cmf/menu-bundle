@@ -13,12 +13,8 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
-
 use Knp\Menu\NodeInterface;
-
-use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
-use Symfony\Component\Routing\Route;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 
@@ -147,7 +143,7 @@ class Content implements MenuNodeReferrersInterface, RouteReferrersReadInterface
     /**
      * Set the boolean flag whether this content is publishable or not.
      *
-     * @param boolean $publishable
+     * @param bool $publishable
      */
     public function setPublishable($publishable)
     {

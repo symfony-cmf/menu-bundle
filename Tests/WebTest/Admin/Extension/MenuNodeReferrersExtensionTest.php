@@ -33,7 +33,7 @@ class MenuNodeReferrersExtensionTest extends BaseTestCase
         $form = $button->form();
         $node = $form->getFormNode();
         $actionUrl = $node->getAttribute('action');
-        $uniqId = substr(strchr($actionUrl, '='), 1);
+        $uniqId = substr(strstr($actionUrl, '='), 1);
 
         $form[$uniqId.'[menuNodes][0][label]'] = 'Test Value';
 
