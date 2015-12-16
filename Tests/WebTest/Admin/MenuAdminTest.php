@@ -58,7 +58,7 @@ class MenuAdminTest extends BaseTestCase
         $form = $button->form();
         $node = $form->getFormNode();
         $actionUrl = $node->getAttribute('action');
-        $uniqId = substr(strchr($actionUrl, '='), 1);
+        $uniqId = substr(strstr($actionUrl, '='), 1);
 
         $form[$uniqId.'[name]'] = 'foo-test';
         $form[$uniqId.'[label]'] = 'Foo Test';

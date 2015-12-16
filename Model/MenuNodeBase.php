@@ -3,7 +3,7 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -39,7 +39,7 @@ class MenuNodeBase implements NodeInterface
     protected $name;
 
     /**
-     * Child menu nodes
+     * Child menu nodes.
      *
      * @var Collection
      */
@@ -117,25 +117,25 @@ class MenuNodeBase implements NodeInterface
     protected $routeParameters = array();
 
     /**
-     * Set to false to not render
+     * Set to false to not render.
      *
-     * @var boolean
+     * @var bool
      */
     protected $display = true;
 
     /**
      * Set to false to not render the children.
      *
-     * @var boolean
+     * @var bool
      */
     protected $displayChildren = true;
 
     /**
-     * Generate an absolute route
+     * Generate an absolute route.
      *
      * To be used with the "content" or "route" option.
      *
-     * @var boolean
+     * @var bool
      */
     protected $routeAbsolute = false;
 
@@ -146,7 +146,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Return ID of this menu node
+     * Return ID of this menu node.
      *
      * @return string
      */
@@ -170,7 +170,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -178,7 +178,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Set the name of this node (used in ID)
+     * Set the name of this node (used in ID).
      *
      * @param string $name
      *
@@ -192,7 +192,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Return the label assigned to this menu node
+     * Return the label assigned to this menu node.
      *
      * @return string
      */
@@ -202,7 +202,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Set label for this menu node
+     * Set label for this menu node.
      *
      * @param $label string
      *
@@ -226,7 +226,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Set the URI
+     * Set the URI.
      *
      * @param $uri string
      *
@@ -240,7 +240,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Return the route name
+     * Return the route name.
      *
      * @return string
      */
@@ -250,7 +250,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Set the route name
+     * Set the route name.
      *
      * @param $route string - name of route
      *
@@ -264,7 +264,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Return the attributes associated with this menu node
+     * Return the attributes associated with this menu node.
      *
      * @return array
      */
@@ -274,7 +274,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Set the attributes associated with this menu node
+     * Set the attributes associated with this menu node.
      *
      * @param $attributes array
      *
@@ -288,7 +288,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Return the given attribute, optionally specifying a default value
+     * Return the given attribute, optionally specifying a default value.
      *
      * @param string $name    The name of the attribute to return
      * @param string $default The value to return if the attribute doesn't exist
@@ -305,7 +305,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Set the named attribute
+     * Set the named attribute.
      *
      * @param string $name  attribute name
      * @param string $value attribute value
@@ -320,7 +320,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Return the children attributes
+     * Return the children attributes.
      *
      * @return array
      */
@@ -330,7 +330,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Set the children attributes
+     * Set the children attributes.
      *
      * @param array $attributes
      *
@@ -377,7 +377,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * Remove a child menu node
+     * Remove a child menu node.
      *
      * @param NodeInterface $child
      *
@@ -489,7 +489,7 @@ class MenuNodeBase implements NodeInterface
     /**
      * Whether to display this menu node.
      *
-     * @return boolean
+     * @return bool
      */
     public function getDisplay()
     {
@@ -499,7 +499,7 @@ class MenuNodeBase implements NodeInterface
     /**
      * Set whether to display this menu node.
      *
-     * @param boolean $display
+     * @param bool $display
      *
      * @return MenuNodeBase - this instance
      */
@@ -513,7 +513,7 @@ class MenuNodeBase implements NodeInterface
     /**
      * Whether to display the children of this menu node.
      *
-     * @return boolean
+     * @return bool
      */
     public function getDisplayChildren()
     {
@@ -523,7 +523,7 @@ class MenuNodeBase implements NodeInterface
     /**
      * Set whether to display the children of this menu node.
      *
-     * @param boolean $displayChildren
+     * @param bool $displayChildren
      *
      * @return MenuNodeBase - this instance
      */
@@ -537,7 +537,7 @@ class MenuNodeBase implements NodeInterface
     /**
      * Whether to generate absolute links for route or content.
      *
-     * @return boolean
+     * @return bool
      */
     public function getRouteAbsolute()
     {
@@ -548,7 +548,7 @@ class MenuNodeBase implements NodeInterface
      * Set whether to generate absolute links when generating from a route
      * or the content.
      *
-     * @param boolean $routeAbsolute
+     * @param bool $routeAbsolute
      *
      * @return MenuNodeBase - this instance
      */
@@ -563,7 +563,7 @@ class MenuNodeBase implements NodeInterface
      * Whether this menu node can be displayed, meaning it is set to display
      * and it does have a non-empty label.
      *
-     * @return boolean
+     * @return bool
      */
     public function isDisplayable()
     {
@@ -571,7 +571,7 @@ class MenuNodeBase implements NodeInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getOptions()
     {

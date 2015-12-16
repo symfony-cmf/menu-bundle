@@ -3,7 +3,7 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,13 +17,13 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
 {
     public function setUp()
     {
-        $c1 = new MenuNode;
+        $c1 = new MenuNode();
         $c1->setLabel('Child 1');
-        $c2 = new MenuNode;
+        $c2 = new MenuNode();
         $c2->setLabel('Child 2');
-        $this->content = new \stdClass;
-        $this->parentNode = new MenuNode;
-        $this->node = new MenuNode;
+        $this->content = new \stdClass();
+        $this->parentNode = new MenuNode();
+        $this->node = new MenuNode();
         $this->node->setId('/foo/bar')
             ->setParentDocument($this->parentNode)
             ->setName('test')
@@ -55,7 +55,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->assertEquals(array('bar' => 'foo'), $this->node->getChildrenAttributes());
         $this->assertEquals(array('far' => 'boo'), $this->node->getExtras());
 
-        $this->parentNode = new MenuNode;
+        $this->parentNode = new MenuNode();
         $this->node->setPosition($this->parentNode, 'FOOO');
         $this->assertSame($this->parentNode, $this->node->getParentDocument());
         $this->assertEquals('FOOO', $this->node->getName());
@@ -69,9 +69,9 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
 
     public function testAddChild()
     {
-        $c1 = new MenuNode;
-        $c2 = new MenuNode;
-        $m = new MenuNode;
+        $c1 = new MenuNode();
+        $c2 = new MenuNode();
+        $m = new MenuNode();
         $m->addChild($c1);
         $ret = $m->addChild($c2);
 
@@ -83,7 +83,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
 
     public function testMultilang()
     {
-        $n = new MenuNode;
+        $n = new MenuNode();
         $n->setLocale('fr');
         $this->assertEquals('fr', $n->getLocale());
     }
@@ -93,7 +93,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $startDate = new \DateTime('2013-01-01');
         $endDate = new \DateTime('2013-02-01');
 
-        $n = new MenuNode;
+        $n = new MenuNode();
 
         $this->assertInstanceOf(
             'Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface',

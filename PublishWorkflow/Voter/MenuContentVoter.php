@@ -3,7 +3,7 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -68,7 +68,7 @@ class MenuContentVoter implements VoterInterface
         $content = $object->getContent();
         $decision = self::ACCESS_GRANTED;
         foreach ($attributes as $attribute) {
-            if (! $this->supportsAttribute($attribute)) {
+            if (!$this->supportsAttribute($attribute)) {
                 // there was an unsupported attribute in the request.
                 // now we only abstain or deny if we find a supported attribute
                 // and the content is not publishable

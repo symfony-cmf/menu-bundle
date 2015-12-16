@@ -3,7 +3,7 @@
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2014 Symfony CMF
+ * (c) 2011-2015 Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -40,7 +40,7 @@ class MenuNodeTest extends BaseTestCase
         $this->content->setTitle('fake_weak_content');
         $this->dm->persist($this->content);
 
-        $this->child1 = new MenuNode;
+        $this->child1 = new MenuNode();
         $this->child1->setName('child1');
     }
 
@@ -88,7 +88,7 @@ class MenuNodeTest extends BaseTestCase
         $startDateString = $data['publishStartDate']->format('Y-m-d');
         $endDateString = $data['publishEndDate']->format('Y-m-d');
 
-        $menuNode = new MenuNode;
+        $menuNode = new MenuNode();
         $refl = new \ReflectionClass($menuNode);
 
         $menuNode->setParentDocument($this->rootDocument);

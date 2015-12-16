@@ -37,21 +37,21 @@ class CreateMenuItemFromNodeEvent extends Event
     private $item;
 
     /**
-     * Whether or not to skip processing of this node
+     * Whether or not to skip processing of this node.
      *
-     * @var boolean
+     * @var bool
      */
     private $skipNode = false;
 
     /**
-     * Whether or not to skip processing of child nodes
+     * Whether or not to skip processing of child nodes.
      *
-     * @var boolean
+     * @var bool
      */
     private $skipChildren = false;
 
     /**
-     * @param NodeInterface       $node
+     * @param NodeInterface $node
      */
     public function __construct(NodeInterface $node)
     {

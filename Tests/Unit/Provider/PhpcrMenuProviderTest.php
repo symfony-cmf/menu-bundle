@@ -100,5 +100,4 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
             array('/test/menu', '/another/menu/path', '/another/menu/path'),
         );
     }
-
 }

@@ -57,13 +57,13 @@ class VotingNodeLoader extends NodeLoader
                 return $this->menuFactory->createItem('');
             }
 
-            return null;
+            return;
         }
 
         $item = $event->getItem() ?: $this->menuFactory->createItem($data->getName(), $data->getOptions());
 
         if (empty($item)) {
-            return null;
+            return;
         }
 
         if ($event->isSkipChildren()) {

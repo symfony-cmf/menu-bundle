@@ -81,7 +81,7 @@ class ContentExtension implements ExtensionInterface
     }
 
     /**
-     * Configures the item with the passed options
+     * Configures the item with the passed options.
      *
      * @param ItemInterface $item
      * @param array         $options
@@ -92,7 +92,7 @@ class ContentExtension implements ExtensionInterface
 
     /**
      * If linkType not specified, we can determine it from
-     * existing options
+     * existing options.
      */
     protected function determineLinkType($options)
     {

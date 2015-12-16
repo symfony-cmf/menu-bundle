@@ -11,13 +11,10 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
-use Symfony\Cmf\Bundle\MenuBundle\Model\Menu;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Doctrine\Common\Util\ClassUtils;
@@ -37,7 +34,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -46,7 +43,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
                 ->add('parent', 'doctrine_phpcr_odm_tree', array(
                     'root_node' => $this->menuRoot,
                     'choice_list' => array(),
-                    'select_root_node' => true
+                    'select_root_node' => true,
                 ))
             ->end()
         ;
@@ -64,14 +61,14 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
                             'content' => array('content', 'doctrine_phpcr_odm_tree'),
                         ),
                         'empty_value' => 'auto',
-                        'required' => false
+                        'required' => false,
                     ))
                     ->add('link', 'text', array('required' => false, 'mapped' => false))
                     ->add('content', 'doctrine_phpcr_odm_tree',
                         array(
                             'root_node' => $this->contentRoot,
                             'choice_list' => array(),
-                            'required' => false
+                            'required' => false,
                         )
                     )
                 ->end()
@@ -146,18 +143,18 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
                     break;
             }
         });
-        
+
         return $formBuilder;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function buildBreadcrumbs($action, MenuItemInterface $menu = null)
     {
         $menuNodeNode = parent::buildBreadcrumbs($action, $menu);
 
-        if ($action != 'edit' || ! $this->recursiveBreadcrumbs) {
+        if ($action != 'edit' || !$this->recursiveBreadcrumbs) {
             return $menuNodeNode;
         }
 
@@ -176,7 +173,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
         if ($parentAdmin->isGranted('EDIT' && $parentAdmin->hasRoute('edit'))) {
             $parentEditNode->setUri(
                 $parentAdmin->generateUrl('edit', array(
-                    'id' => $this->getUrlsafeIdentifier($parentDoc)
+                    'id' => $this->getUrlsafeIdentifier($parentDoc),
                 ))
             );
         }
@@ -191,5 +188,4 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     {
         $this->recursiveBreadcrumbs = (bool) $recursiveBreadcrumbs;
     }
-
 }

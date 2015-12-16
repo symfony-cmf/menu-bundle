@@ -18,7 +18,7 @@ use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeBase;
 
 /**
- * Common base admin for Menu and MenuNode
+ * Common base admin for Menu and MenuNode.
  */
 abstract class AbstractMenuNodeAdmin extends Admin
 {
@@ -46,7 +46,7 @@ abstract class AbstractMenuNodeAdmin extends Admin
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
