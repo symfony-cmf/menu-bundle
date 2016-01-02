@@ -11,6 +11,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Extension;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Extension\ContentExtension;
 
 class ContentExtensionTest extends \PHPUnit_Framework_TestCase
@@ -76,7 +77,7 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->generator->expects($this->once())
                 ->method('generate')
-                ->with('configured_content', array('test' => 'foo'), true)
+                ->with('configured_content', array('test' => 'foo'), UrlGeneratorInterface::ABSOLUTE_URL)
                 ->willReturn('/generated_uri');
 
         $this->assertEquals(
@@ -103,7 +104,7 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->generator->expects($this->once())
             ->method('generate')
-            ->with('configured_content', array(), false)
+            ->with('configured_content', array(), UrlGeneratorInterface::ABSOLUTE_PATH)
             ->willReturn('/generated_uri');
 
         $this->assertEquals(
