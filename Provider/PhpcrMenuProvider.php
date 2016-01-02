@@ -17,6 +17,7 @@ use Knp\Menu\Loader\LoaderInterface;
 use Knp\Menu\Loader\NodeLoader;
 use Symfony\Component\HttpFoundation\Request;
 use PHPCR\PathNotFoundException;
+use PHPCR\RepositoryException;
 use PHPCR\Util\PathHelper;
 use Jackalope\Session;
 use Knp\Menu\FactoryInterface;
@@ -217,9 +218,20 @@ class PhpcrMenuProvider implements MenuProviderInterface
             return false;
         }
 
-        $path = PathHelper::absolutizePath($name, $this->getMenuRoot());
         $dm = $this->getObjectManager();
         $session = $dm->getPhpcrSession();
+
+        try {
+            $path = PathHelper::absolutizePath($name, $this->getMenuRoot());
+            PathHelper::assertValidAbsolutePath($path, false, true, $session->getNamespacePrefixes());
+        } catch (RepositoryException $e) {
+            if ($throw) {
+                throw $e;
+            }
+
+            return false;
+        }
+
         if ($this->getPrefetch() > 0) {
             try {
                 if (
