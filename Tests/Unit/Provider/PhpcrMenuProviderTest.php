@@ -126,7 +126,7 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
             ->will($this->returnValue($objectManager));
 
         $provider = new PhpcrMenuProvider(
-            $this->getMock('Knp\Menu\FactoryInterface'),
+            $this->getMockBuilder('Knp\Menu\Loader\NodeLoader')->disableOriginalConstructor()->getMock(),
             $managerRegistry,
             '/foo'
         );
