@@ -67,7 +67,7 @@ class ContentExtension implements ExtensionInterface
             $options['uri'] = $this->contentRouter->generate(
                 $options['content'],
                 isset($options['routeParameters']) ? $options['routeParameters'] : array(),
-                isset($options['routeAbsolute']) ? $options['routeAbsolute'] : false
+                (isset($options['routeAbsolute']) && $options['routeAbsolute']) ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::ABSOLUTE_PATH
             );
         }
 

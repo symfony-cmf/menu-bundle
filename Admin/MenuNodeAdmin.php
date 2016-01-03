@@ -169,6 +169,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
         }
 
         $parentAdmin->setSubject($parentDoc);
+        $parentAdmin->setRequest($this->request);
         $parentEditNode = $parentAdmin->buildBreadcrumbs($action, $menu);
         if ($parentAdmin->isGranted('EDIT' && $parentAdmin->hasRoute('edit'))) {
             $parentEditNode->setUri(
