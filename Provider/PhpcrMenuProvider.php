@@ -13,8 +13,8 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\PHPCR\DocumentManager;
-use Knp\Menu\Loader\LoaderInterface;
 use Knp\Menu\Loader\NodeLoader;
+use PHPCR\RepositoryException;
 use Symfony\Component\HttpFoundation\Request;
 use PHPCR\PathNotFoundException;
 use PHPCR\Util\PathHelper;
@@ -27,9 +27,9 @@ use Knp\Menu\Provider\MenuProviderInterface;
 class PhpcrMenuProvider implements MenuProviderInterface
 {
     /**
-     * @var LoaderInterface
+     * @var NodeLoader
      */
-    protected $loader = null;
+    protected $loader;
 
     /**
      * @var Request
@@ -217,9 +217,20 @@ class PhpcrMenuProvider implements MenuProviderInterface
             return false;
         }
 
-        $path = PathHelper::absolutizePath($name, $this->getMenuRoot());
         $dm = $this->getObjectManager();
         $session = $dm->getPhpcrSession();
+
+        try {
+            $path = PathHelper::absolutizePath($name, $this->getMenuRoot());
+            PathHelper::assertValidAbsolutePath($path, false, true, $session->getNamespacePrefixes());
+        } catch (RepositoryException $e) {
+            if ($throw) {
+                throw $e;
+            }
+
+            return false;
+        }
+
         if ($this->getPrefetch() > 0) {
             try {
                 if (
