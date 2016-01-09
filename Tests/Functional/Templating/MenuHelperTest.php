@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Symfony CMF package.
+ *
+ * (c) 2011-2015 Symfony CMF
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Templating;
 
 use Symfony\Cmf\Bundle\MenuBundle\Templating\MenuHelper;
@@ -16,7 +25,8 @@ class MenuHelperTest extends BaseTestCase
             'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR\LoadMenuData',
         ));
 
-        $this->helper = new MenuHelper($this->db('PHPCR')->getOm(), $this->getContainer()->get('knp_menu.factory'));
+        $container = $this->getContainer();
+        $this->helper = new MenuHelper($container->get('doctrine_phpcr'), $container->get('knp_menu.factory'));
     }
 
     /**

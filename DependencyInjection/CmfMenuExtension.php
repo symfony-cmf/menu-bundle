@@ -32,7 +32,15 @@ class CmfMenuExtension extends Extension
 
         $loader->load('menu.xml');
         $container->setAlias('cmf_menu.content_router', $config['content_url_generator']);
-        $container->setParameter($this->getAlias().'.allow_empty_items', $config['allow_empty_items']);
+
+        $settingToParameterMap = array(
+            'allow_empty_items' => 'allow_empty_items',
+            'content_key' => 'request_content_key',
+            'route_name_key' => 'request_route_name_key',
+        );
+        foreach ($settingToParameterMap as $setting => $parameter) {
+            $container->setParameter('cmf_menu.'.$parameter , $config[$setting]);
+        }
 
         $this->loadVoters($config, $loader, $container);
 

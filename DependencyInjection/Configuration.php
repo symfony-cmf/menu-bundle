@@ -13,11 +13,13 @@ namespace Symfony\Cmf\Bundle\MenuBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 
 class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
+        $cmfRoutingAvailable = interface_exists('Symfony\Cmf\Component\Routing\RouteObjectInterface');
         $treeBuilder = new TreeBuilder();
 
         $treeBuilder->root('cmf_menu')
@@ -51,6 +53,8 @@ class Configuration implements ConfigurationInterface
 
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
                 ->booleanNode('allow_empty_items')->defaultFalse()->end()
+                ->scalarNode('content_key')->defaultValue($cmfRoutingAvailable ? RouteObjectInterface::CONTENT_OBJECT : '')->end()
+                ->scalarNode('route_name_key')->defaultValue($cmfRoutingAvailable ? RouteObjectInterface::ROUTE_NAME : '')->end()
 
                 ->arrayNode('voters')
                     ->children()

@@ -16,6 +16,8 @@
 
         <xsd:attribute name="content-url-generator" type="xsd:string" />
         <xsd:attribute name="allow-empty-items" type="xsd:boolean" />
+        <xsd:attribute name="content-key" type="xsd:string" />
+        <xsd:attribute name="route-name-key" type="xsd:string" />
     </xsd:complexType>
 
     <xsd:complexType name="persistence">
