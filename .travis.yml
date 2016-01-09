@@ -15,7 +15,7 @@ cache:
     - $HOME/.composer/cache/files
 
 env:
-  global: SYMFONY_DEPRECATIONS_HELPER=533
+  global: SYMFONY_DEPRECATIONS_HELPER=548
 
 matrix:
   include:

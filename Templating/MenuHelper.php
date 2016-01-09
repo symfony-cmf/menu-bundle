@@ -132,23 +132,30 @@ class MenuHelper extends Helper
      */
     public function getCurrentNode(Request $request)
     {
+        $repository = $this->managerRegistry->getManager($this->managerName)
+            ->getRepository('Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode');
+
         if ($request->attributes->has($this->contentObjectKey)) {
             $content = $request->attributes->get($this->contentObjectKey);
 
-            return $this->managerRegistry->getManager($this->managerName)->getRepository('CmfMenuBundle:MenuNode')->findOneBy(array('content' => $content));
+            return $this->filterByLinkType($repository->findBy(array('content' => $content)), 'content');
         }
         
         if ($request->attributes->has($this->routeNameKey)) {
             $route = $request->attributes->get($this->routeNameKey);
 
-            $nodes = $this->managerRegistry->getManager($this->managerName)->getRepository('CmfMenuBundle:MenuNode')->findBy(array('route' => $route));
-            if (1 === count($nodes)) {
-                return $nodes->first();
-            } else {
-                foreach ($nodes as $node) {
-                    if ('route' === $node->getLinkType()) {
-                        return $node;
-                    }
+            return $this->filterByLinkType($repository->findBy(array('route' => $route)), 'route');
+        }
+    }
+
+    private function filterByLinkType($nodes, $type)
+    {
+        if (1 === count($nodes)) {
+            return $nodes->first();
+        } else {
+            foreach ($nodes as $node) {
+                if ($type === $node->getLinkType()) {
+                    return $node;
                 }
             }
         }
