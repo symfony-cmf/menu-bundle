@@ -140,7 +140,7 @@ class MenuHelper extends Helper
 
             return $this->filterByLinkType($repository->findBy(array('content' => $content)), 'content');
         }
-        
+
         if ($request->attributes->has($this->routeNameKey)) {
             $route = $request->attributes->get($this->routeNameKey);
 
