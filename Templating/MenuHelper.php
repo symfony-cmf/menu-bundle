@@ -15,10 +15,12 @@ use Knp\Menu\ItemInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\FactoryInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Templating\Helper\Helper;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 
 /**
  * A templating helper providing faster solutions to
@@ -138,7 +140,9 @@ class MenuHelper extends Helper
         if ($request->attributes->has($this->contentObjectKey)) {
             $content = $request->attributes->get($this->contentObjectKey);
 
-            return $this->filterByLinkType($repository->findBy(array('content' => $content)), 'content');
+            if ($content instanceof MenuNodeReferrersInterface) {
+                return $this->filterByLinkType(new ArrayCollection($content->getMenuNodes()), 'content');
+            }
         }
 
         if ($request->attributes->has($this->routeNameKey)) {
@@ -148,7 +152,7 @@ class MenuHelper extends Helper
         }
     }
 
-    private function filterByLinkType($nodes, $type)
+    private function filterByLinkType(\Traversable $nodes, $type)
     {
         if (1 === count($nodes)) {
             return $nodes->first();

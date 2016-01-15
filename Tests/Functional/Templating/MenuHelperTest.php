@@ -11,9 +11,11 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Templating;
 
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Templating\MenuHelper;
 use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
+use Knp\Menu\NodeInterface;
 
 class MenuHelperTest extends BaseTestCase
 {
@@ -87,7 +89,20 @@ class MenuHelperTest extends BaseTestCase
 
     public function testGetCurrentNodeWithContent()
     {
-        $this->markTestIncomplete('Matching by content is not yet supported');
+        $content = new MenuHelperTest_NodeReferrer();
+        $content->addMenuNode($this->db('PHPCR')->getOm()->find(null, '/test/menus/test-menu/item-1'));
+
+        $attributes = $this->prophesize('Symfony\Component\HttpFoundation\ParameterBag');
+        $attributes->has(RouteObjectInterface::CONTENT_OBJECT)->willReturn(true);
+        $attributes->has(RouteObjectInterface::ROUTE_NAME)->willReturn(true);
+        $attributes->get(RouteObjectInterface::CONTENT_OBJECT)->willReturn($content);
+
+        $request = $this->prophesize('Symfony\Component\HttpFoundation\Request');
+        $request->attributes = $attributes->reveal();
+
+        $node = $this->helper->getCurrentNode($request->reveal());
+        $this->assertInstanceOf('Knp\Menu\NodeInterface', $node);
+        $this->assertEquals('item-1', $node->getName());
     }
 
     public function testGetCurrentNodeWithoutMatch()
@@ -115,5 +130,25 @@ class MenuHelperTest extends BaseTestCase
         $item = $this->helper->getCurrentItem($request->reveal());
         $this->assertInstanceOf('Knp\Menu\ItemInterface', $item);
         $this->assertEquals('sub-item-3', $item->getName());
+    }
+}
+
+class MenuHelperTest_NodeReferrer implements MenuNodeReferrersInterface
+{
+    private $nodes = array();
+
+    public function getMenuNodes()
+    {
+        return $this->nodes;
+    }
+
+    public function addMenuNode(NodeInterface $menu)
+    {
+        $this->nodes[] = $menu;
+    }
+
+    public function removeMenuNode(NodeInterface $menu)
+    {
+        // dummy
     }
 }
