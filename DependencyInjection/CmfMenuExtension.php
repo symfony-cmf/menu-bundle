@@ -39,7 +39,7 @@ class CmfMenuExtension extends Extension
             'route_name_key' => 'request_route_name_key',
         );
         foreach ($settingToParameterMap as $setting => $parameter) {
-            $container->setParameter('cmf_menu.'.$parameter , $config[$setting]);
+            $container->setParameter('cmf_menu.'.$parameter, $config[$setting]);
         }
 
         $this->loadVoters($config, $loader, $container);
