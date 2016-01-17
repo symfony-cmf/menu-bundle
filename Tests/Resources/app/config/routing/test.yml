@@ -10,8 +10,6 @@ render_test:
 
 link_test_route:
     path: /link_test_route
-    defaults:
-        _controller: Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Controller\TestController::linkTestRouteAction
 
 link_test_route_with_params:
     path: /link_test_route/hello/{bar}/{foo}
