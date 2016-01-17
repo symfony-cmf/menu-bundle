@@ -32,6 +32,7 @@ class MenuNodeTest extends BaseTestCase
     public function setUp()
     {
         $this->db('PHPCR')->createTestNode();
+
         $this->dm = $this->db('PHPCR')->getOm();
         $this->rootDocument = $this->dm->find(null, '/test');
 

@@ -25,7 +25,7 @@ class MenuNodeReferrersExtensionTest extends BaseTestCase
 
     public function testEdit()
     {
-        $crawler = $this->client->request('GET', '/admin/cmf/menu-test/content/test/content-1/edit');
+        $crawler = $this->client->request('GET', '/admin/cmf/menu-test/content/test/content-menu-item-1/edit');
         $res = $this->client->getResponse();
         $this->assertResponseSuccess($res);
 
@@ -43,7 +43,7 @@ class MenuNodeReferrersExtensionTest extends BaseTestCase
         // If we have a 302 redirect, then all is well
         $this->assertEquals(302, $res->getStatusCode());
 
-        $crawler = $this->client->request('GET', '/admin/cmf/menu-test/content/test/content-1/edit');
+        $crawler = $this->client->request('GET', '/admin/cmf/menu-test/content/test/content-menu-item-1/edit');
         $this->assertCount(1, $crawler->filter('input[value="Test Value"]'));
     }
 }
