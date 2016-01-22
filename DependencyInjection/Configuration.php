@@ -13,13 +13,13 @@ namespace Symfony\Cmf\Bundle\MenuBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
 class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $cmfRoutingAvailable = interface_exists('Symfony\Cmf\Component\Routing\RouteObjectInterface');
+        $cmfRoutingAvailable = class_exists('Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter');
         $treeBuilder = new TreeBuilder();
 
         $treeBuilder->root('cmf_menu')
@@ -53,8 +53,8 @@ class Configuration implements ConfigurationInterface
 
                 ->scalarNode('content_url_generator')->defaultValue('router')->end()
                 ->booleanNode('allow_empty_items')->defaultFalse()->end()
-                ->scalarNode('content_key')->defaultValue($cmfRoutingAvailable ? RouteObjectInterface::CONTENT_OBJECT : '')->end()
-                ->scalarNode('route_name_key')->defaultValue($cmfRoutingAvailable ? RouteObjectInterface::ROUTE_NAME : '')->end()
+                ->scalarNode('content_key')->defaultValue($cmfRoutingAvailable ? DynamicRouter::CONTENT_KEY : '')->end()
+                ->scalarNode('route_name_key')->defaultValue($cmfRoutingAvailable ? DynamicRouter::ROUTE_KEY : '')->end()
 
                 ->arrayNode('voters')
                     ->children()

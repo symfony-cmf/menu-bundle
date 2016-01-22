@@ -33,6 +33,7 @@ class MenuExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFunction('cmf_menu_get_breadcrumbs_array', array($this->helper, 'getBreadcrumbsArray')),
             new \Twig_SimpleFunction('cmf_menu_get_current_item', array($this->helper, 'getCurrentItem')),
+            new \Twig_SimpleFunction('cmf_menu_get_current_node', array($this->helper, 'getCurrentNode')),
         );
     }
 

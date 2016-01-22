@@ -18,7 +18,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Templating\Helper\Helper;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 
@@ -51,7 +51,7 @@ class MenuHelper extends Helper
      * @param string           $routeNameKey     The name of the request attribute holding
      *                                           the name of the current route
      */
-    public function __construct(ManagerRegistry $managerRegistry, FactoryInterface $menuFactory, $contentObjectKey = RouteObjectInterface::CONTENT_OBJECT, $routeNameKey = RouteObjectInterface::ROUTE_NAME)
+    public function __construct(ManagerRegistry $managerRegistry, FactoryInterface $menuFactory, $contentObjectKey = DynamicRouter::CONTENT_KEY, $routeNameKey = DynamicRouter::ROUTE_KEY)
     {
         $this->managerRegistry = $managerRegistry;
         $this->menuFactory = $menuFactory;
@@ -79,7 +79,7 @@ class MenuHelper extends Helper
      *
      * @return array An array with breadcrumb items (each item has the following keys: label, uri, item)
      */
-    public function getBreadcrumbArray(NodeInterface $node, $includeMenuRoot = true)
+    public function getBreadcrumbsArray(NodeInterface $node, $includeMenuRoot = true)
     {
         $item = $this->menuFactory->createItem($node->getName(), $node->getOptions());
 
@@ -97,7 +97,7 @@ class MenuHelper extends Helper
             return $includeMenuRoot ? $breadcrumbs : array();
         }
 
-        return array_merge($this->getBreadcrumbArray($parent, $includeMenuRoot), $breadcrumbs);
+        return array_merge($this->getBreadcrumbsArray($parent, $includeMenuRoot), $breadcrumbs);
     }
 
     /**
@@ -127,8 +127,8 @@ class MenuHelper extends Helper
      * It uses some special Request attributes that are managed by
      * the CmfRoutingBundle:
      *
-     *  * RouteObjectInterface::CONTENT_OBJECT to match a menu node by the refering content
-     *  * RouteObjectInterface::ROUTE_NAME to match a menu node by the refering route name
+     *  * DynamicRouter::CONTENT_KEY to match a menu node by the refering content
+     *  * DynamicRouter::ROUTE_KEY to match a menu node by the refering route name
      *
      * @return NodeInterface|null
      */
@@ -141,7 +141,11 @@ class MenuHelper extends Helper
             $content = $request->attributes->get($this->contentObjectKey);
 
             if ($content instanceof MenuNodeReferrersInterface) {
-                return $this->filterByLinkType(new ArrayCollection($content->getMenuNodes()), 'content');
+                $node = $this->filterByLinkType(new ArrayCollection($content->getMenuNodes()), 'content');
+
+                if ($node) {
+                    return $node;
+                }
             }
         }
 

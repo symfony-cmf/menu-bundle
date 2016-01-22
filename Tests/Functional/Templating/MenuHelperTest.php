@@ -13,7 +13,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Templating;
 
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Templating\MenuHelper;
-use Symfony\Cmf\Component\Routing\RouteObjectInterface;
+use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 use Knp\Menu\NodeInterface;
 
@@ -32,13 +32,13 @@ class MenuHelperTest extends BaseTestCase
     }
 
     /**
-     * @dataProvider provideGetBreadcrumbArrayData
+     * @dataProvider provideGetBreadcrumbsArrayData
      */
-    public function testGetBreadcrumbArray($includeMenuRoot)
+    public function testGetBreadcrumbsArray($includeMenuRoot)
     {
         $currentNode = $this->db('PHPCR')->getOm()->find(null, '/test/menus/test-menu/item-2/sub-item-2');
 
-        $breadcrumbs = $this->helper->getBreadcrumbArray($currentNode, $includeMenuRoot);
+        $breadcrumbs = $this->helper->getBreadcrumbsArray($currentNode, $includeMenuRoot);
 
         // simplify the returned breadcrumb array
         $breadcrumbs = array_map(function ($breadcrumb) {
@@ -56,7 +56,7 @@ class MenuHelperTest extends BaseTestCase
         $this->assertEquals($expectedBreadcrumbs, $breadcrumbs);
     }
 
-    public function provideGetBreadcrumbArrayData()
+    public function provideGetBreadcrumbsArrayData()
     {
         return array('menu root included' => array(true), 'menu route excluded' => array(false));
     }
@@ -67,9 +67,9 @@ class MenuHelperTest extends BaseTestCase
     public function testGetCurrentNodeWithRoute($routeName, $nodeName)
     {
         $attributes = $this->prophesize('Symfony\Component\HttpFoundation\ParameterBag');
-        $attributes->has(RouteObjectInterface::CONTENT_OBJECT)->willReturn(false);
-        $attributes->has(RouteObjectInterface::ROUTE_NAME)->willReturn(true);
-        $attributes->get(RouteObjectInterface::ROUTE_NAME)->willReturn($routeName);
+        $attributes->has(DynamicRouter::CONTENT_KEY)->willReturn(false);
+        $attributes->has(DynamicRouter::ROUTE_KEY)->willReturn(true);
+        $attributes->get(DynamicRouter::ROUTE_KEY)->willReturn($routeName);
 
         $request = $this->prophesize('Symfony\Component\HttpFoundation\Request');
         $request->attributes = $attributes->reveal();
@@ -93,9 +93,9 @@ class MenuHelperTest extends BaseTestCase
         $content->addMenuNode($this->db('PHPCR')->getOm()->find(null, '/test/menus/test-menu/item-1'));
 
         $attributes = $this->prophesize('Symfony\Component\HttpFoundation\ParameterBag');
-        $attributes->has(RouteObjectInterface::CONTENT_OBJECT)->willReturn(true);
-        $attributes->has(RouteObjectInterface::ROUTE_NAME)->willReturn(true);
-        $attributes->get(RouteObjectInterface::CONTENT_OBJECT)->willReturn($content);
+        $attributes->has(DynamicRouter::CONTENT_KEY)->willReturn(true);
+        $attributes->has(DynamicRouter::ROUTE_KEY)->willReturn(true);
+        $attributes->get(DynamicRouter::CONTENT_KEY)->willReturn($content);
 
         $request = $this->prophesize('Symfony\Component\HttpFoundation\Request');
         $request->attributes = $attributes->reveal();
@@ -108,8 +108,8 @@ class MenuHelperTest extends BaseTestCase
     public function testGetCurrentNodeWithoutMatch()
     {
         $attributes = $this->prophesize('Symfony\Component\HttpFoundation\ParameterBag');
-        $attributes->has(RouteObjectInterface::CONTENT_OBJECT)->willReturn(false);
-        $attributes->has(RouteObjectInterface::ROUTE_NAME)->willReturn(false);
+        $attributes->has(DynamicRouter::CONTENT_KEY)->willReturn(false);
+        $attributes->has(DynamicRouter::ROUTE_KEY)->willReturn(false);
 
         $request = $this->prophesize('Symfony\Component\HttpFoundation\Request');
         $request->attributes = $attributes->reveal();
@@ -120,9 +120,9 @@ class MenuHelperTest extends BaseTestCase
     public function testGetCurrentItemWithMatch()
     {
         $attributes = $this->prophesize('Symfony\Component\HttpFoundation\ParameterBag');
-        $attributes->has(RouteObjectInterface::CONTENT_OBJECT)->willReturn(false);
-        $attributes->has(RouteObjectInterface::ROUTE_NAME)->willReturn(true);
-        $attributes->get(RouteObjectInterface::ROUTE_NAME)->willReturn('link_test_route_with_params');
+        $attributes->has(DynamicRouter::CONTENT_KEY)->willReturn(false);
+        $attributes->has(DynamicRouter::ROUTE_KEY)->willReturn(true);
+        $attributes->get(DynamicRouter::ROUTE_KEY)->willReturn('link_test_route_with_params');
 
         $request = $this->prophesize('Symfony\Component\HttpFoundation\Request');
         $request->attributes = $attributes->reveal();
