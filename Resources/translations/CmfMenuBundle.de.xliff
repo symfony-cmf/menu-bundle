@@ -106,6 +106,10 @@
         <source>form.label_link_type</source>
         <target>Linktyp</target>
       </trans-unit>
+      <trans-unit id="form.label_link">
+        <source>form.label_link</source>
+        <target>Link</target>
+      </trans-unit>
       <trans-unit id="show.label_id">
         <source>show.label_id</source>
         <target>Id</target>
