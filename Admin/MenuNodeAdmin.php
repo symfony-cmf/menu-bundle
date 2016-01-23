@@ -55,9 +55,14 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
             $formMapper
                 ->with('form.group_general')
                     ->add('linkType', 'choice_field_mask', array(
+                        'choices' => array(
+                            'route' => 'route',
+                            'uri' => 'uri',
+                            'content' => 'content',
+                        ),
                         'map' => array(
-                            'route' => array('route'),
-                            'uri' => array('uri'),
+                            'route' => array('link'),
+                            'uri' => array('link'),
                             'content' => array('content', 'doctrine_phpcr_odm_tree'),
                         ),
                         'empty_value' => 'auto',
