@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="dashboard.cmf">
+        <source>dashboard.cmf</source>
+        <target>Symfony CMF</target>
+      </trans-unit>
+      <trans-unit id="dashboard.label_menu">
+        <source>dashboard.label_menu</source>
+        <target>Menu's</target>
+      </trans-unit>
+      <trans-unit id="dashboard.label_menu_node">
+        <source>dashboard.label_menu_node</source>
+        <target>Menu item</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_list">
+        <source>breadcrumb.link_menu_list</source>
+        <target>Menu's</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_create">
+        <source>breadcrumb.link_menu_create</source>
+        <target>Aanmaken</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_edit">
+        <source>breadcrumb.link_menu_edit</source>
+        <target>Aanpassen</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_delete">
+        <source>breadcrumb.link_menu_delete</source>
+        <target>Verwijderen</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_node_list">
+        <source>breadcrumb.link_menu_node_list</source>
+        <target>Menu items</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_node_create">
+        <source>breadcrumb.link_menu_node_create</source>
+        <target>Aanmaken</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_node_edit">
+        <source>breadcrumb.link_menu_node_edit</source>
+        <target>Aanpassen</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_menu_node_delete">
+        <source>breadcrumb.link_menu_node_delete</source>
+        <target>Verwijderen</target>
+      </trans-unit>
+      <trans-unit id="list.label_id">
+        <source>list.label_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="list.label_name">
+        <source>list.label_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="list.label_label">
+        <source>list.label_label</source>
+        <target>Label</target>
+      </trans-unit>
+      <trans-unit id="list.label_uri">
+        <source>list.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="list.label_route">
+        <source>list.label_route</source>
+        <target>Route</target>
+      </trans-unit>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
+        <target>Algemene Instellingen</target>
+      </trans-unit>
+      <trans-unit id="form.group_items">
+        <source>form.group_items</source>
+        <target>Items</target>
+      </trans-unit>
+      <trans-unit id="form.label_children">
+        <source>form.label_children</source>
+        <target>Items</target>
+      </trans-unit>
+      <trans-unit id="form.label_parent">
+        <source>form.label_parent</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.label_name">
+        <source>form.label_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="form.label_label">
+        <source>form.label_label</source>
+        <target>Label</target>
+      </trans-unit>
+      <trans-unit id="form.label_uri">
+        <source>form.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="form.label_route">
+        <source>form.label_route</source>
+        <target>Route</target>
+      </trans-unit>
+      <trans-unit id="form.label_parameters">
+        <source>form.label_parameters</source>
+        <target>Route parameters</target>
+      </trans-unit>
+      <trans-unit id="form.label_content">
+        <source>form.label_content</source>
+        <target>Content</target>
+      </trans-unit>
+      <trans-unit id="form.label_link_type">
+        <source>form.label_link_type</source>
+        <target>Link type</target>
+      </trans-unit>
+      <trans-unit id="show.label_id">
+        <source>show.label_id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="show.label_name">
+        <source>show.label_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="show.label_label">
+        <source>show.label_label</source>
+        <target>Label</target>
+      </trans-unit>
+      <trans-unit id="show.label_uri">
+        <source>show.label_uri</source>
+        <target>URI</target>
+      </trans-unit>
+      <trans-unit id="show.label_content">
+        <source>show.label_content</source>
+        <target>Content</target>
+      </trans-unit>
+
+      <trans-unit id="help.items_help">
+        <source>help.items_help</source>
+        <target>Klik op een item om het aan te passen, gebruik de rechtermuisknop om nieuwe items toe te voegen.</target>
+      </trans-unit>
+      <trans-unit id="form.group_menus">
+         <source>form.group_menus</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.label_menu_nodes">
+        <source>form.label_menu_nodes</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="form.group_menu_options">
+        <source>form.group_menu_options</source>
+        <target>Menu Opties</target>
+      </trans-unit>
+      <trans-unit id="form.label_display">
+        <source>form.label_display</source>
+        <target>Weergeven</target>
+      </trans-unit>
+      <trans-unit id="form.help_display">
+        <source>form.help_display</source>
+        <target>Een menu item wordt alleen getoond wanneer de label is ingevuld.</target>
+      </trans-unit>
+      <trans-unit id="form.label_display_children">
+        <source>form.label_display_children</source>
+        <target>Sub-items weergeven</target>
+      </trans-unit>
+      <trans-unit id="form.help_display_children">
+        <source>form.help_display_children</source>
+        <target>Sub-items worden alleen getoond als het hoofd-item ook wordt getoond.</target>
+      </trans-unit>
+      <trans-unit id="form.label_attributes">
+        <source>form.label_attributes</source>
+        <target>Menu attributen</target>
+      </trans-unit>
+      <trans-unit id="form.label_label_attributes">
+        <source>form.label_label_attributes</source>
+        <target>Label attributen</target>
+      </trans-unit>
+      <trans-unit id="form.label_children_attributes">
+        <source>form.label_children_attributes</source>
+        <target>Children attributen</target>
+      </trans-unit>
+      <trans-unit id="form.label_link_attributes">
+        <source>form.label_link_attributes</source>
+        <target>Link attributen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
