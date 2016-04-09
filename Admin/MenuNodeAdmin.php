@@ -11,11 +11,14 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
+use Sonata\DoctrinePHPCRAdminBundle\Form\Type\ChoiceFieldMaskType;
+use Sonata\DoctrinePHPCRAdminBundle\Form\Type\TreeModelType;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 use Doctrine\Common\Util\ClassUtils;
 
@@ -40,7 +43,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     {
         $formMapper
             ->with('form.group_general')
-                ->add('parent', 'doctrine_phpcr_odm_tree', array(
+                ->add('parent', TreeModelType::class, array(
                     'root_node' => $this->menuRoot,
                     'choice_list' => array(),
                     'select_root_node' => true,
@@ -54,7 +57,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
             // Add the choice for the node links "target"
             $formMapper
                 ->with('form.group_general')
-                    ->add('linkType', 'choice_field_mask', array(
+                    ->add('linkType', ChoiceFieldMaskType::class, array(
                         'choices' => array(
                             'route' => 'route',
                             'uri' => 'uri',
@@ -63,13 +66,13 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
                         'map' => array(
                             'route' => array('link'),
                             'uri' => array('link'),
-                            'content' => array('content', 'doctrine_phpcr_odm_tree'),
+                            'content' => array('content', TreeModelType::class),
                         ),
-                        'empty_value' => 'auto',
+                        'placeholder' => 'auto',
                         'required' => false,
                     ))
-                    ->add('link', 'text', array('required' => false, 'mapped' => false))
-                    ->add('content', 'doctrine_phpcr_odm_tree',
+                    ->add('link', TextType::class, array('required' => false, 'mapped' => false))
+                    ->add('content', TreeModelType::class,
                         array(
                             'root_node' => $this->contentRoot,
                             'choice_list' => array(),
@@ -159,15 +162,13 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     {
         $menuNodeNode = parent::buildBreadcrumbs($action, $menu);
 
-        if ($action != 'edit' || !$this->recursiveBreadcrumbs) {
+        if ('edit' !== $action || !$this->recursiveBreadcrumbs) {
             return $menuNodeNode;
         }
 
         $parentDoc = $this->getSubject()->getParentDocument();
         $pool = $this->getConfigurationPool();
-        $parentAdmin = $pool->getAdminByClass(
-            ClassUtils::getClass($parentDoc)
-        );
+        $parentAdmin = $pool->getAdminByClass(ClassUtils::getClass($parentDoc));
 
         if (null === $parentAdmin) {
             return $menuNodeNode;

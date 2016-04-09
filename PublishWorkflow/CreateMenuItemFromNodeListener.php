@@ -11,7 +11,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Event\CreateMenuItemFromNodeEvent;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
 
@@ -36,10 +36,10 @@ class CreateMenuItemFromNodeListener
     private $publishWorkflowPermission;
 
     /**
-     * @param SecurityContextInterface $publishWorkflowChecker The publish workflow checker.
-     * @param string                   $attribute              The permission to check.
+     * @param AuthorizationCheckerInterface $publishWorkflowChecker The publish workflow checker.
+     * @param string                        $attribute              The permission to check.
      */
-    public function __construct(SecurityContextInterface $publishWorkflowChecker, $attribute = PublishWorkflowChecker::VIEW_ATTRIBUTE)
+    public function __construct(AuthorizationCheckerInterface $publishWorkflowChecker, $attribute = PublishWorkflowChecker::VIEW_ATTRIBUTE)
     {
         $this->publishWorkflowChecker = $publishWorkflowChecker;
         $this->publishWorkflowPermission = $attribute;

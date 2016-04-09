@@ -12,6 +12,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\DoctrinePHPCRAdminBundle\Form\Type\TreeManagerType;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 
 class MenuAdmin extends AbstractMenuNodeAdmin
@@ -29,7 +30,7 @@ class MenuAdmin extends AbstractMenuNodeAdmin
         if (!$isNew) {
             $formMapper
                 ->with('form.group_items', array())
-                    ->add('children', 'doctrine_phpcr_odm_tree_manager', array(
+                    ->add('children', TreeManagerType::class, array(
                         'root' => $this->menuRoot,
                         'edit_in_overlay' => false,
                         'create_in_overlay' => false,
