@@ -1,6 +1,8 @@
 <config xmlns="http://cmf.symfony.com/schema/dic/menu"
     content-url-generator="router"
-    allow-empty-items="false">
+    allow-empty-items="false"
+    content-key="_custom_content"
+    route-name-key="_custom_route_name">
 
     <persistence>
         <phpcr menu-basepath="/cms/menu"

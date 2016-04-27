@@ -28,6 +28,20 @@
             <tag name="doctrine_phpcr.initializer"/>
         </service>
 
+        <service id="cmf_menu.templating.helper" class="Symfony\Cmf\Bundle\MenuBundle\Templating\MenuHelper" public="false">
+            <argument type="service" id="doctrine_phpcr"/>
+            <argument type="service" id="knp_menu.factory"/>
+            <argument>%cmf_menu.request_content_key%</argument>
+            <argument>%cmf_menu.request_route_name_key%</argument>
+            <call method="setManagerName"><argument>%cmf_menu.persistence.phpcr.manager_name%</argument></call>
+            <tag name="templating.helper" alias="cmf_menu"/>
+        </service>
+
+        <service id="cmf_menu.twig.extension" class="Symfony\Cmf\Bundle\MenuBundle\Twig\MenuExtension" public="false">
+            <argument type="service" id="cmf_menu.templating.helper"/>
+            <tag name="twig.extension"/>
+        </service>
+
     </services>
 
 </container>
