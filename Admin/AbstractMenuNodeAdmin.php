@@ -15,6 +15,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeBase;
 
 /**
@@ -52,8 +53,8 @@ abstract class AbstractMenuNodeAdmin extends Admin
     {
         $formMapper
             ->with('form.group_general')
-                ->add('name', 'text')
-                ->add('label', 'text')
+                ->add('name', TextType::class)
+                ->add('label', TextType::class)
             ->end()
         ;
     }
