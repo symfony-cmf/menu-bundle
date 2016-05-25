@@ -44,7 +44,9 @@ class CmfMenuExtension extends Extension
             $this->loadExtensions($config, $loader, $container);
         }
 
-        if ($config['publish_workflow']['enabled']) {
+        if (true === $config['publish_workflow']['enabled']
+            || 'auto' === $config['publish_workflow']['enabled'] && isset($bundles['CmfCoreBundle'])
+        ) {
             $loader->load('publish-workflow.xml');
         }
     }
