@@ -81,7 +81,12 @@ class Configuration implements ConfigurationInterface
 
                 ->arrayNode('publish_workflow')
                     ->addDefaultsIfNotSet()
-                    ->canBeDisabled()
+                    ->children()
+                        ->enumNode('enabled')
+                            ->values(array(true, false, 'auto'))
+                            ->defaultValue('auto')
+                        ->end()
+                    ->end()
                 ->end()
             ->end()
         ;

@@ -1,6 +1,12 @@
 Changelog
 =========
 
+unreleased
+----------
+
+* **2016-05-25** Use "auto" for publish workflow enabled flag. If auto and
+  CmfCoreBundle is not instantiated, publish workflow integration is not enabled.
+
 2.0.0
 -----
 
