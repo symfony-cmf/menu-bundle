@@ -114,9 +114,12 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
 
                     if ($data = $node->getUri()) {
                         $linkType->setData('uri');
-                    } else {
-                        $data = $node->getRoute();
+                    } elseif ($data = $node->getRoute()) {
                         $linkType->setData('route');
+                    } elseif ($node->getContent()) {
+                        $linkType->setData('content');
+                    } else {
+                        $linkType->setData('auto');
                     }
 
                     $link->setData($data);
