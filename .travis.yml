@@ -15,6 +15,7 @@ cache:
     - $HOME/.composer/cache/files
 
 env:
+  matrix: SYMFONY_VERSION=2.8.*
   global: SYMFONY_DEPRECATIONS_HELPER=533
 
 matrix:
