@@ -13,7 +13,6 @@ namespace Symfony\Cmf\Bundle\MenuBundle;
 
 use Knp\Menu\Factory\ExtensionInterface;
 use Knp\Menu\FactoryInterface;
-use LogicException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
@@ -88,11 +87,12 @@ class QuietFactory implements FactoryInterface
     public function addExtension(ExtensionInterface $extension, $priority = 0)
     {
         if (!method_exists($this->innerFactory, 'addExtension')) {
-            throw new LogicException(sprintf(
+            throw new \LogicException(sprintf(
                 'Wrapped factory "%s" does not have the method "addExtension".',
                 get_class($this->innerFactory)
             ));
         }
+
         $this->innerFactory->addExtension($extension, $priority);
     }
 }
