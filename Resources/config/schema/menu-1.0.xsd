@@ -51,7 +51,7 @@
     </xsd:complexType>
 
     <xsd:complexType name="publish-workflow">
-        <xsd:attribute name="enabled" type="xsd:boolean" />
+        <xsd:attribute name="enabled" type="enable_auto" />
     </xsd:complexType>
 
     <xsd:simpleType name="enable_auto">
