@@ -160,10 +160,10 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
      */
     public function buildBreadcrumbs($action, MenuItemInterface $menu = null)
     {
-        $menuNodeNode = parent::buildBreadcrumbs($action, $menu);
+        $menuNodeItem = parent::buildBreadcrumbs($action, $menu);
 
         if ($action != 'edit' || !$this->recursiveBreadcrumbs) {
-            return $menuNodeNode;
+            return $menuNodeItem;
         }
 
         $parentDoc = $this->getSubject()->getParentDocument();
@@ -173,7 +173,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
         );
 
         if (null === $parentAdmin) {
-            return $menuNodeNode;
+            return $menuNodeItem;
         }
 
         $parentAdmin->setSubject($parentDoc);
@@ -187,8 +187,8 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
             );
         }
 
-        $menuNodeNode->setParent(null);
-        $current = $parentEditNode->addChild($menuNodeNode);
+        $menuNodeItem->setParent(null);
+        $current = $parentEditNode->addChild($menuNodeItem);
 
         return $current;
     }
