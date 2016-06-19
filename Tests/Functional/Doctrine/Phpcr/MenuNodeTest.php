@@ -149,7 +149,7 @@ class MenuNodeTest extends BaseTestCase
         $this->assertEquals('fr', $menuNode->getLocale());
 
         $child = $this->dm->find(null, '/test/test-node/child1');
-        $menuNode = $child->getParent();
+        $menuNode = $child->getParentDocument();
         $this->assertCount(1, $menuNode->getChildren());
         $menuNode->removeChild($child);
         $this->dm->flush();

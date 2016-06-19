@@ -78,8 +78,8 @@
         <source>form.label_children</source>
         <target>Items</target>
       </trans-unit>
-      <trans-unit id="form.label_parent">
-        <source>form.label_parent</source>
+      <trans-unit id="form.label_parentDocument">
+        <source>form.label_parentDocument</source>
         <target>Menu</target>
       </trans-unit>
       <trans-unit id="form.label_name">
