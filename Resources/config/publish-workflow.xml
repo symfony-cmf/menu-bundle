@@ -4,27 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="cmf_menu.security.menu_content_voter.class">Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow\Voter\MenuContentVoter</parameter>
-        <parameter key="cmf_menu.publish_workflow.create_menu_item_from_node_listener.class">Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow\CreateMenuItemFromNodeListener</parameter>
-    </parameters>
-
     <services>
 
-        <service id="cmf_menu.security.menu_content_voter"
-                 class="%cmf_menu.security.menu_content_voter.class%"
-                 public="false">
-
+        <service id="cmf_menu.security.menu_content_voter" class="Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow\Voter\MenuContentVoter" public="false">
             <argument type="service" id="service_container"/>
             <tag name="cmf_published_voter" priority="30"/>
         </service>
 
         <service id="cmf_menu.publish_workflow.create_menu_item_from_node_listener"
-            class="%cmf_menu.publish_workflow.create_menu_item_from_node_listener.class%">
+            class="Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow\CreateMenuItemFromNodeListener">
             <argument type="service" id="cmf_core.publish_workflow.checker"/>
             <tag name="kernel.event_listener" event="cmf_menu.create_menu_item_from_node" method="onCreateMenuItemFromNode" />
         </service>
-
 
     </services>
 
