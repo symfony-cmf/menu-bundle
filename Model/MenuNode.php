@@ -101,6 +101,8 @@ class MenuNode extends MenuNodeBase implements
      */
     public function setParent($parent)
     {
+        @trigger_error(__METHOD__.' is deprecated since 1.1 and will be removed in 2.1.', E_USER_DEPRECATED);
+
         return $this->setParentObject($parent);
     }
 
@@ -109,6 +111,8 @@ class MenuNode extends MenuNodeBase implements
      */
     public function getParent()
     {
+        @trigger_error(__METHOD__.' is deprecated since 1.1 and will be removed in 2.1.', E_USER_DEPRECATED);
+
         return $this->getParentObject();
     }
 
