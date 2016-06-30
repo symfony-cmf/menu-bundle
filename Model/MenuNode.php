@@ -97,22 +97,6 @@ class MenuNode extends MenuNodeBase implements
     }
 
     /**
-     * @deprecated use setParentObject instead.
-     */
-    public function setParent($parent)
-    {
-        return $this->setParentObject($parent);
-    }
-
-    /**
-     * @deprecated use getParentObject instead.
-     */
-    public function getParent()
-    {
-        return $this->getParentObject();
-    }
-
-    /**
      * @return string the loaded locale of this menu node
      */
     public function getLocale()

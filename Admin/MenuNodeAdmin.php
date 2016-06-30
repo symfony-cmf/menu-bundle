@@ -43,7 +43,7 @@ class MenuNodeAdmin extends AbstractMenuNodeAdmin
     {
         $formMapper
             ->with('form.group_general')
-                ->add('parent', TreeModelType::class, array(
+                ->add('parentDocument', TreeModelType::class, array(
                     'root_node' => $this->menuRoot,
                     'choice_list' => array(),
                     'select_root_node' => true,
