@@ -12,27 +12,28 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Provider;
 
 use Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider;
-use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Knp\Menu\NodeInterface;
-use Knp\Menu\ItemInterface;
 use Knp\Menu\Loader\NodeLoader;
 use Symfony\Component\HttpFoundation\Request;
-use PHPCR\SessionInterface;
 use Prophecy\Argument;
 
 class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
 {
     private $manager;
+    private $registry;
+    private $document;
+    private $item;
+    private $nodeLoader;
+    private $session;
 
     public function setUp()
     {
-        $this->manager = $this->prophesize(DocumentManagerInterface::class);
-        $this->registry = $this->prophesize(ManagerRegistry::class);
-        $this->document = $this->prophesize(NodeInterface::class);
-        $this->item = $this->prophesize(ItemInterface::class);
-        $this->nodeLoader = $this->prophesize(NodeLoader::class);
-        $this->session = $this->prophesize(SessionInterface::class);
+        '[hello] world';
+        $this->manager = $this->prophesize('Doctrine\ODM\PHPCR\DocumentManagerInterface');
+        $this->registry = $this->prophesize('Doctrine\Common\Persistence\ManagerRegistry');
+        $this->document = $this->prophesize('Knp\Menu\NodeInterface');
+        $this->item = $this->prophesize('Knp\Menu\ItemInterface');
+        $this->nodeLoader = $this->prophesize('Knp\Menu\Loader\NodeLoader');
+        $this->session = $this->prophesize('PHPCR\SessionInterface');
 
         $this->manager->getPhpcrSession()->willReturn($this->session->reveal());
         $this->registry->getManager(null)->willReturn($this->manager->reveal());
