@@ -11,8 +11,11 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Admin\Extension;
 
+use Burgov\Bundle\KeyValueFormBundle\Form\Type\KeyValueType;
 use Sonata\AdminBundle\Admin\AdminExtension;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * Admin extension for editing menu options
@@ -52,13 +55,13 @@ class MenuOptionsExtension extends AdminExtension
             ))
             ->add(
                 'display',
-                'checkbox',
+                CheckboxType::class,
                 array('required' => false),
                 array('help' => 'form.help_display')
             )
             ->add(
                 'displayChildren',
-                'checkbox',
+                CheckboxType::class,
                 array('required' => false),
                 array('help' => 'form.help_display_children')
             )
@@ -69,7 +72,7 @@ class MenuOptionsExtension extends AdminExtension
         }
 
         $child_options = array(
-            'value_type' => 'text',
+            'value_type' => TextType::class,
             'label' => false,
             'attr' => array('style' => 'clear:both'),
         );
@@ -79,38 +82,38 @@ class MenuOptionsExtension extends AdminExtension
             ))
             ->add(
                 'attributes',
-                'burgov_key_value',
+                KeyValueType::class,
                 array(
-                  'value_type' => 'text',
+                  'value_type' => TextType::class,
                   'required' => false,
-                  'options' => $child_options,
+                  'entry_options' => $child_options,
                 )
             )
             ->add(
                 'labelAttributes',
-                'burgov_key_value',
+                KeyValueType::class,
                 array(
-                  'value_type' => 'text',
+                  'value_type' => TextType::class,
                   'required' => false,
-                  'options' => $child_options,
+                  'entry_options' => $child_options,
                 )
             )
             ->add(
                 'childrenAttributes',
-                'burgov_key_value',
+                KeyValueType::class,
                 array(
-                  'value_type' => 'text',
+                  'value_type' => TextType::class,
                   'required' => false,
-                  'options' => $child_options,
+                  'entry_options' => $child_options,
                 )
             )
             ->add(
                 'linkAttributes',
-                'burgov_key_value',
+                KeyValueType::class,
                 array(
-                  'value_type' => 'text',
+                  'value_type' => TextType::class,
                   'required' => false,
-                  'options' => $child_options,
+                  'entry_options' => $child_options,
                 )
             )
           ->end();
