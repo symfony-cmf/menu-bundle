@@ -13,6 +13,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Admin\Extension;
 
 use Sonata\AdminBundle\Admin\AdminExtension;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\CoreBundle\Form\Type\CollectionType;
 
 /**
  * Admin extension to add menu items tab to content.
@@ -29,7 +30,7 @@ class MenuNodeReferrersExtension extends AdminExtension
             ))
             ->add(
                 'menuNodes',
-                'sonata_type_collection',
+                CollectionType::class,
                 array(),
                 array(
                     'edit' => 'inline',
