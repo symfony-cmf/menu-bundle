@@ -18,11 +18,12 @@ use PHPCR\RepositoryException;
 use Symfony\Component\HttpFoundation\Request;
 use PHPCR\PathNotFoundException;
 use PHPCR\Util\PathHelper;
-use Jackalope\Session;
+use Jackalope\Session as JackalopeSession;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
+use PHPCR\SessionInterface;
 
 class PhpcrMenuProvider implements MenuProviderInterface
 {
@@ -157,116 +158,81 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * menu root. You can thus pass a name or any relative path with slashes to
      * only load a submenu rather than a whole menu.
      *
-     * @param string $name    Name of the menu to load. This can be an
-     *                        absolute PHPCR path or one relative to the menu root.
-     * @param array  $options
-     *
-     * @return ItemInterface The menu (sub)tree starting with name.
-     *
-     * @throws \InvalidArgumentException if the menu can not be found.
+     * {@inheritDoc}
      */
     public function get($name, array $options = array())
     {
-        $menu = $this->find($name, $options, true);
+        $document = $this->find($name, $options, true);
 
-        $menuItem = $this->loader->load($menu);
+        if (null === $document) {
+            throw new \InvalidArgumentException(sprintf(
+                'Menu "%s" could not be located by the PhpcrMenuProvider',
+                $name
+            ));
+        }
+
+        $menuItem = $this->loader->load($document);
+
         if (empty($menuItem)) {
-            throw new \InvalidArgumentException("Menu at '$name' is misconfigured (f.e. the route might be incorrect) and could therefore not be instanciated");
+            throw new \InvalidArgumentException(sprintf(
+                'Menu "%s" is misconfigured (f.e. the route might be incorrect) and could therefore not be instansiated',
+                $name
+            ));
         }
 
         return $menuItem;
     }
 
     /**
-     * Check if a menu node exists.
-     *
-     * If this method returns true, it means that you can call get() without
-     * an exception.
-     *
-     * @param string $name    Name of the menu to load. This can be an
-     *                        absolute PHPCR path or one relative to the menu root.
-     * @param array  $options
-     *
-     * @return bool Whether a menu with this name can be loaded by this provider.
+     * {@inheritDoc}
      */
     public function has($name, array $options = array())
     {
-        return $this->find($name, $options, false) instanceof NodeInterface;
+        $document = $this->find($name, $options);
+
+        if (null === $document) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
-     * @param string $name    Name of the menu to load
+     * Find the named menu or `null` if the menu cannot be located.
+     *
+     * @param string $name Name of the menu to load
      * @param array  $options
-     * @param bool   $throw   Whether to throw an exception if the menu is not
-     *                        found or no valid menu. Returns false if $throw is false and there
-     *                        is no menu at $name.
      *
-     * @return object|bool The menu root found with $name or false if $throw
-     *                     is false and the menu was not found.
+     * @return ItemInterface|null
      *
-     * @throws \InvalidArgumentException Only if $throw is true throws this
-     *                                   exception if the name is empty or no menu found.
+     * @throws \RuntimeException If the found node does not implement the
+     *     correct interface.
      */
-    protected function find($name, array $options, $throw)
+    protected function find($name, array $options)
     {
-        if (empty($name)) {
-            if ($throw) {
-                throw new \InvalidArgumentException('The menu name may not be empty');
-            }
-
-            return false;
-        }
-
-        $dm = $this->getObjectManager();
-        $session = $dm->getPhpcrSession();
-
-        try {
-            $path = PathHelper::absolutizePath($name, $this->getMenuRoot());
-            PathHelper::assertValidAbsolutePath($path, false, true, $session->getNamespacePrefixes());
-        } catch (RepositoryException $e) {
-            if ($throw) {
-                throw $e;
-            }
-
-            return false;
-        }
+        $manager = $this->getObjectManager();
+        $session = $manager->getPhpcrSession();
+        $path = PathHelper::absolutizePath($name, $this->getMenuRoot());
 
         if ($this->getPrefetch() > 0) {
-            try {
-                if (
-                    $session instanceof Session
-                    && 0 < $session->getSessionOption(Session::OPTION_FETCH_DEPTH)
-                    && 0 === strncmp($path, $this->getMenuRoot(), strlen($this->getMenuRoot()))
-                ) {
-                    // we have jackalope with a fetch depth. prefetch all menu
-                    // nodes of all menues.
-                    $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
-                } else {
-                    $session->getNode($path, $this->getPrefetch());
-                }
-            } catch (PathNotFoundException $e) {
-                if ($throw) {
-                    throw new \InvalidArgumentException(sprintf('The menu root "%s" does not exist.', $this->getMenuRoot()));
-                }
-
-                return false;
+            if ($session instanceof JackalopeSession) {
+                $this->jackalopePrefetch($session, $path);
             }
+
+            $this->genericPrefetch($session, $path);
         }
 
-        $menu = $dm->find(null, $path);
+        $menu = $manager->find(null, $path);
+
         if (null === $menu) {
-            if ($throw) {
-                throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
-            }
-
-            return false;
+            return null;
         }
-        if (!$menu instanceof NodeInterface) {
-            if ($throw) {
-                throw new \InvalidArgumentException("Menu at '$name' is not a valid menu node");
-            }
 
-            return false;
+        if (!$menu instanceof NodeInterface) {
+            throw new \RuntimeException(sprintf(
+                'Menu document at "%s" does not implement Knp\Menu\NodeInterface',
+                $path
+            ));
         }
 
         return $menu;
@@ -280,5 +246,46 @@ class PhpcrMenuProvider implements MenuProviderInterface
     protected function getObjectManager()
     {
         return $this->managerRegistry->getManager($this->managerName);
+    }
+
+    /**
+     * Special case for Jackalope prefetching.
+     */
+    private function jackalopePrefetch(JackalopeSession $session, $path)
+    {
+        $fetchDepth = $session->getSessionOption(JackalopeSession::OPTION_FETCH_DEPTH);
+
+        // under what circumstance would the path not contain the menu root?
+        $containsRoot = 0 === strncmp($path, $this->getMenuRoot(), strlen($this->getMenuRoot()));
+
+        if (false === $containsRoot || 0 === $fetchDepth) {
+            return $this->genericPrefetch($session, $path);
+        }
+
+        try {
+            // we have jackalope with a fetch depth. prefetch all menu
+            // nodes of all menues.
+            $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
+        } catch (PathNotFoundException $e) {
+            throw new \InvalidArgumentException(sprintf(
+                'The menu root "%s" does not exist when prefetching for Jackalope', 
+                $this->getMenuRoot()
+            ), null, $e);
+        }
+    }
+
+    /**
+     * Generic prefetch
+     */
+    private function genericPrefetch(SessionInterface $session, $path)
+    {
+        try {
+            $session->getNode($path, $this->getPrefetch());
+        } catch (PathNotFoundException $e) {
+            throw new \InvalidArgumentException(sprintf(
+                'The menu node "%s" does not exist.',
+                $path
+            ), null, $e);
+        }
     }
 }
