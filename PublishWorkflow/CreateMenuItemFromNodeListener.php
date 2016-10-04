@@ -36,8 +36,8 @@ class CreateMenuItemFromNodeListener
     private $publishWorkflowPermission;
 
     /**
-     * @param AuthorizationCheckerInterface $publishWorkflowChecker The publish workflow checker.
-     * @param string                        $attribute              The permission to check.
+     * @param AuthorizationCheckerInterface $publishWorkflowChecker The publish workflow checker
+     * @param string                        $attribute              The permission to check
      */
     public function __construct(AuthorizationCheckerInterface $publishWorkflowChecker, $attribute = PublishWorkflowChecker::VIEW_ATTRIBUTE)
     {

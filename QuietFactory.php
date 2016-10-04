@@ -83,7 +83,7 @@ class QuietFactory implements FactoryInterface
      * @param ExtensionInterface $extension
      * @param int                $priority
      *
-     * @throws \Exception if the inner factory does not implement the addExtension method.
+     * @throws \Exception if the inner factory does not implement the addExtension method
      */
     public function addExtension(ExtensionInterface $extension, $priority = 0)
     {
