@@ -367,7 +367,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @param NodeInterface $child
      *
-     * @return NodeInterface The newly added child node.
+     * @return NodeInterface The newly added child node
      */
     public function addChild(NodeInterface $child)
     {

@@ -47,7 +47,7 @@ class RequestParentContentIdentityVoter implements VoterInterface
      *                           attributes
      * @param string $childClass Fully qualified class name of the model class
      *                           the content in the request must have to
-     *                           attempt calling getParentDocument on it.
+     *                           attempt calling getParentDocument on it
      */
     public function __construct($requestKey, $childClass)
     {

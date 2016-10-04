@@ -133,7 +133,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
     /**
      * Get the depth to use. A depth <= 0 means no prefetching should be done.
      *
-     * @return int The depth to use when fetching menus.
+     * @return int The depth to use when fetching menus
      */
     public function getPrefetch()
     {
@@ -158,12 +158,12 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * only load a submenu rather than a whole menu.
      *
      * @param string $name    Name of the menu to load. This can be an
-     *                        absolute PHPCR path or one relative to the menu root.
+     *                        absolute PHPCR path or one relative to the menu root
      * @param array  $options
      *
-     * @return ItemInterface The menu (sub)tree starting with name.
+     * @return ItemInterface The menu (sub)tree starting with name
      *
-     * @throws \InvalidArgumentException if the menu can not be found.
+     * @throws \InvalidArgumentException if the menu can not be found
      */
     public function get($name, array $options = array())
     {
@@ -184,10 +184,10 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * an exception.
      *
      * @param string $name    Name of the menu to load. This can be an
-     *                        absolute PHPCR path or one relative to the menu root.
+     *                        absolute PHPCR path or one relative to the menu root
      * @param array  $options
      *
-     * @return bool Whether a menu with this name can be loaded by this provider.
+     * @return bool Whether a menu with this name can be loaded by this provider
      */
     public function has($name, array $options = array())
     {
@@ -199,13 +199,13 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * @param array  $options
      * @param bool   $throw   Whether to throw an exception if the menu is not
      *                        found or no valid menu. Returns false if $throw is false and there
-     *                        is no menu at $name.
+     *                        is no menu at $name
      *
      * @return object|bool The menu root found with $name or false if $throw
-     *                     is false and the menu was not found.
+     *                     is false and the menu was not found
      *
      * @throws \InvalidArgumentException Only if $throw is true throws this
-     *                                   exception if the name is empty or no menu found.
+     *                                   exception if the name is empty or no menu found
      */
     protected function find($name, array $options, $throw)
     {
