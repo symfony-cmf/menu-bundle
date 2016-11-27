@@ -24,16 +24,11 @@
         "symfony/monolog-bundle": "^2.3|^3.0",
         "symfony-cmf/routing-bundle": "^1.4|^2.0",
         "symfony-cmf/testing": "^2.0",
-        "twig/twig": "^1.18|^2.0",
-        "sonata-project/doctrine-phpcr-admin-bundle": "^2.0",
-        "sonata-project/admin-bundle": "^2.3.7|^3.0",
-        "sonata-project/block-bundle": "^2.2.8|^3.0",
-        "sonata-project/core-bundle": "^2.2.5|^3.0"
+        "twig/twig": "^1.18|^2.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "suggest": {
-        "sonata-project/doctrine-phpcr-admin-bundle": "if you want to have editing capabilities (^1.1)",
         "burgov/key-value-form-bundle": "if you want to edit the advanced options on the node with the menu options extension"
     },
     "autoload": {
