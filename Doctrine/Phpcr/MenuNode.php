@@ -20,7 +20,7 @@ class MenuNode extends ModelMenuNode implements HierarchyInterface
     /**
      * Set the parent of this menu node.
      *
-     * @param object $parent A mapped document.
+     * @param object $parent A mapped document
      *
      * @return MenuNode - this instance
      */
@@ -42,7 +42,7 @@ class MenuNode extends ModelMenuNode implements HierarchyInterface
     /**
      * Convenience method to set parent and name at the same time.
      *
-     * @param object $parent A mapped document.
+     * @param object $parent A mapped document
      * @param string $name
      *
      * @return MenuNode - this instance
@@ -60,7 +60,7 @@ class MenuNode extends ModelMenuNode implements HierarchyInterface
      *
      * @param NodeInterface $child
      *
-     * @return NodeInterface - The newly added child node.
+     * @return NodeInterface - The newly added child node
      */
     public function addChild(NodeInterface $child)
     {
