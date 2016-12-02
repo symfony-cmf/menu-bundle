@@ -88,7 +88,7 @@ class CreateMenuItemFromNodeEvent extends Event
      * will still be built and added after eventual children this menu item
      * has.
      *
-     * @param ItemInterface $item Menu item to use.
+     * @param ItemInterface $item Menu item to use
      */
     public function setItem(ItemInterface $item = null)
     {
@@ -111,7 +111,7 @@ class CreateMenuItemFromNodeEvent extends Event
     }
 
     /**
-     * @return bool Whether the node associated to this event is to be skipped.
+     * @return bool Whether the node associated to this event is to be skipped
      */
     public function isSkipNode()
     {
@@ -136,7 +136,7 @@ class CreateMenuItemFromNodeEvent extends Event
 
     /**
      * @return bool Whether the children of the node associated to this event
-     *              should be handled or ignored.
+     *              should be handled or ignored
      */
     public function isSkipChildren()
     {

@@ -27,7 +27,7 @@ class MenuContentVoter implements VoterInterface
     /**
      * @param ContainerInterface $container to get the publish workflow checker
      *                                      from. We cannot inject the publish workflow checker directly as
-     *                                      this would lead to a circular reference.
+     *                                      this would lead to a circular reference
      */
     public function __construct(ContainerInterface $container)
     {

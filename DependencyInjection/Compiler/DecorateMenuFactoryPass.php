@@ -21,7 +21,7 @@ class DecorateMenuFactoryPass implements CompilerPassInterface
      * {@inheritdoc}
      *
      * @todo Add `decorates="knp_menu.factory"` to the service definition
-     *       instead if Symfony 2.3 support is dropped.
+     *       instead if Symfony 2.3 support is dropped
      */
     public function process(ContainerBuilder $container)
     {
