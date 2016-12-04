@@ -1,6 +1,7 @@
 Changelog
 =========
 
+* **2016-11-27**: [BC BREAK] Removed all admin integration in favor of the CmfSonataAdminIntegrationBundle.
 * **2016-06-19**: [BC BREAK] Removed `setParent()`/`getParent()` from the model `MenuNode`.
 * **2016-06-18**: [BC BREAK] Removed all `*.class` parameters.
 * **2016-05-25**: Use "auto" for publish workflow enabled flag. If auto and
