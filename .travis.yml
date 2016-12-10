@@ -10,20 +10,21 @@ sudo: false
 
 cache:
   directories:
+    - .phpunit
     - $HOME/.composer/cache/files
 
 env:
-  matrix: SYMFONY_VERSION=2.8.*
-  global: SYMFONY_DEPRECATIONS_HELPER=321
+  matrix: SYMFONY_VERSION=3.2.*
+  global: SYMFONY_PHPUNIT_DIR=.phpunit SYMFONY_PHPUNIT_REMOVE="symfony/yaml"
 
 matrix:
   include:
-    - php: 7.0
-      env: DEPS=dev SYMFONY_VERSION=3.1.*
+    - php: 7.1
+      env: DEPS=dev SYMFONY_VERSION=3.3.*
     - php: 5.5
-      env: COMPOSER_FLAGS="--prefer-lowest" SYMFONY_DEPRECATIONS_HELPER=weak
-    - php: 5.6
-      env: DEPS=dev COMPOSER_FLAGS="--prefer-stable" SYMFONY_VERSION=3.0.*
+      env: COMPOSER_FLAGS="--prefer-lowest" SYMFONY_VERSION=2.8.* SYMFONY_DEPRECATIONS_HELPER=weak
+    - php: 7.1
+      env: SYMFONY_VERSION=3.1.*
   fast_finish: true
 
 before_install:
