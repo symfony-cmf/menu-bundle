@@ -14,6 +14,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Cmf\Bundle\MenuBundle\DependencyInjection\Compiler\DecorateMenuFactoryPass;
+use Symfony\Cmf\Bundle\MenuBundle\DependencyInjection\Compiler\ValidationPass;
 use Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass;
 
 class CmfMenuBundle extends Bundle
@@ -23,6 +24,7 @@ class CmfMenuBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new DecorateMenuFactoryPass());
+        $container->addCompilerPass(new ValidationPass());
 
         if (class_exists('Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass')) {
             $container->addCompilerPass(
