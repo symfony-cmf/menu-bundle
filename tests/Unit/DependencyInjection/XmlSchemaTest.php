@@ -24,6 +24,6 @@ class XmlSchemaTest extends XmlSchemaTestCase
             'config2.xml',
         ));
 
-        $this->assertSchemaAcceptsXml($xmlFiles, __DIR__.'/../../../Resources/config/schema/menu-1.0.xsd');
+        $this->assertSchemaAcceptsXml($xmlFiles, __DIR__.'/../../../src/Resources/config/schema/menu-1.0.xsd');
     }
 }

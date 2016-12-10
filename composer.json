@@ -33,7 +33,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Symfony\\Cmf\\Bundle\\MenuBundle\\": ""
+            "Symfony\\Cmf\\Bundle\\MenuBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Symfony\\Cmf\\Bundle\\MenuBundle\\Tests\\": "tests/"
         }
     },
     "extra": {
