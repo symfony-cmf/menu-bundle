@@ -1,9 +1,72 @@
 # Upgrade from 2.0 to 2.1
 
-## Sonata Admin
+### SonataAdmin Support
 
-* All Sonata Admin integration has been removed. The integration is now
-  available via the CmfSonataAdminIntegrationBundle.
+ * The Admin extensions where moved into `symfony-cmf/sonata-admin-integration-bundle`.
+   With the move, the admin extension service names also changed. If you are using one of the menu extensions,
+   you need to adjust your configuration.
+   
+   Before:
+   
+   ```yaml
+        # app/config/config.yml
+     
+        sonata_admin:
+            extensions:
+                cmf_menu.admin_extension.menu_options:
+                     implements:
+                         - Symfony\Cmf\Bundle\MenuBundle\Model\MenuOptionsInterface
+                cmf_menu.admin_extension.menu_node_referrers:
+                     implements:
+                         - Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface
+   ```
+
+    After:
+       
+   ```yaml
+        # app/config/config.yml
+                
+        sonata_admin:
+            extensions:
+                 cmf_sonata_admin_integration.menu.extension.menu_options:
+                     implements:
+                         - Symfony\Cmf\Bundle\MenuBundle\Model\MenuOptionsInterface
+                 cmf_sonata_admin_integration.menu.extension.menu_node_referrers:
+                     implements:
+                         - Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface
+   ```
+   Admin service names also changed. If you are using the admin, you need to adjust your configuration,
+   i.e. in the sonata dashboard:
+   
+   Before:
+   
+   ```yaml
+        # app/config/config.yml
+        sonata_admin:
+            dashboard:
+               groups:
+                   content:
+                       label: URLs
+                       icon: '<i class="fa fa-file-text-o"></i>'
+                       items:
+                           - cmf_menu.menu_admin
+                           - cmf_menu.node_admin
+   ```
+
+    After:
+       
+   ```yaml
+        # app/config/config.yml
+        sonata_admin:
+           dashboard:
+               groups:
+                   content:
+                       label: Menu
+                       icon: '<i class="fa fa-file-text-o"></i>'
+                       items:
+                           - cmf_sonata_admin_integration.menu.menu_admin
+                           - cmf_sonata_admin_integration.menu.node_admin
+   ```
 
 ## Model
 
