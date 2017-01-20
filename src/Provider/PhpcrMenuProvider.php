@@ -232,24 +232,32 @@ class PhpcrMenuProvider implements MenuProviderInterface
         }
 
         if ($this->getPrefetch() > 0) {
-            try {
-                if (
+            if (
                     $session instanceof Session
                     && 0 < $session->getSessionOption(Session::OPTION_FETCH_DEPTH)
                     && 0 === strncmp($path, $this->getMenuRoot(), strlen($this->getMenuRoot()))
                 ) {
-                    // we have jackalope with a fetch depth. prefetch all menu
+                // we have jackalope with a fetch depth. prefetch all menu
                     // nodes of all menues.
-                    $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
-                } else {
-                    $session->getNode($path, $this->getPrefetch());
-                }
-            } catch (PathNotFoundException $e) {
-                if ($throw) {
-                    throw new \InvalidArgumentException(sprintf('The menu root "%s" does not exist.', $this->getMenuRoot()));
-                }
+                    try {
+                        $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
+                    } catch (PathNotFoundException $e) {
+                        if ($throw) {
+                            throw new \InvalidArgumentException(sprintf('The menu root "%s" does not exist.', $this->getMenuRoot()));
+                        }
 
-                return false;
+                        return false;
+                    }
+            } else {
+                try {
+                    $session->getNode($path, $this->getPrefetch());
+                } catch (PathNotFoundException $e) {
+                    if ($throw) {
+                        throw new \InvalidArgumentException(sprintf('No menu found at "%s".', $path));
+                    }
+
+                    return false;
+                }
             }
         }
 
