@@ -232,12 +232,12 @@ class PhpcrMenuProvider implements MenuProviderInterface
         }
 
         if ($this->getPrefetch() > 0) {
-                if (
+            if (
                     $session instanceof Session
                     && 0 < $session->getSessionOption(Session::OPTION_FETCH_DEPTH)
                     && 0 === strncmp($path, $this->getMenuRoot(), strlen($this->getMenuRoot()))
                 ) {
-                    // we have jackalope with a fetch depth. prefetch all menu
+                // we have jackalope with a fetch depth. prefetch all menu
                     // nodes of all menues.
                     try {
                         $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
@@ -248,18 +248,17 @@ class PhpcrMenuProvider implements MenuProviderInterface
 
                         return false;
                     }
-                } else {
-                    try {
-                        $session->getNode($path, $this->getPrefetch());
-                    } catch (PathNotFoundException $e) {
-                        if ($throw) {
-                            throw new \InvalidArgumentException(sprintf('No menu found at "%s".', $path));
-                        }
-
-                        return false;
+            } else {
+                try {
+                    $session->getNode($path, $this->getPrefetch());
+                } catch (PathNotFoundException $e) {
+                    if ($throw) {
+                        throw new \InvalidArgumentException(sprintf('No menu found at "%s".', $path));
                     }
-                }
 
+                    return false;
+                }
+            }
         }
 
         $menu = $dm->find(null, $path);
