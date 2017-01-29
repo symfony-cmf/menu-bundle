@@ -11,11 +11,11 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\DependencyInjection;
 
+use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter;
 
 class CmfMenuExtension extends Extension
 {
@@ -71,14 +71,14 @@ class CmfMenuExtension extends Extension
 
     public function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
-        $keys = array(
+        $keys = [
             'menu_document_class' => 'menu_document.class',
             'node_document_class' => 'node_document.class',
             'menu_basepath' => 'menu_basepath',
             'content_basepath' => 'content_basepath',
             'manager_name' => 'manager_name',
             'prefetch' => 'prefetch',
-        );
+        ];
 
         foreach ($keys as $sourceKey => $targetKey) {
             $container->setParameter(

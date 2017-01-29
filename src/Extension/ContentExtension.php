@@ -47,11 +47,11 @@ class ContentExtension implements ExtensionInterface
      */
     public function buildOptions(array $options)
     {
-        $options = array_merge(array(
+        $options = array_merge([
             'content' => null,
             'linkType' => null,
-            'extras' => array(),
-        ), $options);
+            'extras' => [],
+        ], $options);
 
         if (null === $options['linkType']) {
             $options['linkType'] = $this->determineLinkType($options);
@@ -66,7 +66,7 @@ class ContentExtension implements ExtensionInterface
 
             $options['uri'] = $this->contentRouter->generate(
                 $options['content'],
-                isset($options['routeParameters']) ? $options['routeParameters'] : array(),
+                isset($options['routeParameters']) ? $options['routeParameters'] : [],
                 (isset($options['routeAbsolute']) && $options['routeAbsolute']) ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::ABSOLUTE_PATH
             );
         }
@@ -121,7 +121,7 @@ class ContentExtension implements ExtensionInterface
      */
     protected function validateLinkType($linkType)
     {
-        $linkTypes = array('uri', 'route', 'content');
+        $linkTypes = ['uri', 'route', 'content'];
         if (!in_array($linkType, $linkTypes)) {
             throw new \InvalidArgumentException(sprintf(
                 'Invalid link type "%s", expected: "%s"',

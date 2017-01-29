@@ -11,15 +11,15 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Provider;
 
-use Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider;
-use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Knp\Menu\NodeInterface;
+use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Loader\NodeLoader;
-use Symfony\Component\HttpFoundation\Request;
+use Knp\Menu\NodeInterface;
 use PHPCR\SessionInterface;
 use Prophecy\Argument;
+use Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
 {
@@ -71,7 +71,7 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
     {
         $this->session->getNode()->shouldNotBeCalled();
         $this->session->getNamespacePrefixes()
-            ->willReturn(array('jcr', 'nt'));
+            ->willReturn(['jcr', 'nt']);
 
         $this->manager->find(Argument::cetera())->shouldNotBeCalled();
 
@@ -83,11 +83,11 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
 
     public function provideMenuTests()
     {
-        return array(
-            array('/test/menu', 'foo', '/test/menu/foo'),
-            array('/test/menu', '/another/menu/path', '/another/menu/path'),
-            array('/test/menu', 'jcr:namespaced', '/test/menu/jcr:namespaced'),
-        );
+        return [
+            ['/test/menu', 'foo', '/test/menu/foo'],
+            ['/test/menu', '/another/menu/path', '/another/menu/path'],
+            ['/test/menu', 'jcr:namespaced', '/test/menu/jcr:namespaced'],
+        ];
     }
 
     private function createProvider($basePath)

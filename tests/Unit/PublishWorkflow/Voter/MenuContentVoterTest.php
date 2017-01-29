@@ -59,81 +59,81 @@ class MenuContentVoterTest extends \PHPUnit_Framework_Testcase
     {
         $content = $this->getMock('Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableReadInterface');
 
-        return array(
-            array(
+        return [
+            [
                 'expected' => VoterInterface::ACCESS_GRANTED,
                 'attributes' => PublishWorkflowChecker::VIEW_ATTRIBUTE,
                 $content,
                 'isMenuPublishable' => true,
                 'isContentPublishable' => true,
-            ),
-            array(
+            ],
+            [
                 'expected' => VoterInterface::ACCESS_DENIED,
                 'attributes' => PublishWorkflowChecker::VIEW_ATTRIBUTE,
                 $content,
                 'isMenuPublishable' => false,
                 'isContentPublishable' => false,
-            ),
-            array(
+            ],
+            [
                 'expected' => VoterInterface::ACCESS_GRANTED,
-                'attributes' => array(
+                'attributes' => [
                     PublishWorkflowChecker::VIEW_ANONYMOUS_ATTRIBUTE,
                     PublishWorkflowChecker::VIEW_ATTRIBUTE,
-                ),
+                ],
                 $content,
                 'isMenuPublishable' => true,
                 'isContentPublishable' => true,
-            ),
-            array(
+            ],
+            [
                 'expected' => VoterInterface::ACCESS_DENIED,
                 'attributes' => PublishWorkflowChecker::VIEW_ANONYMOUS_ATTRIBUTE,
                 $content,
                 'isMenuPublishable' => false,
                 'isContentPublishable' => false,
-            ),
-            array(
+            ],
+            [
                 'expected' => VoterInterface::ACCESS_ABSTAIN,
                 'attributes' => 'other',
                 $content,
                 'isMenuPublishable' => true,
                 'isContentPublishable' => true,
-            ),
-            array(
+            ],
+            [
                 'expected' => VoterInterface::ACCESS_ABSTAIN,
-                'attributes' => array(PublishWorkflowChecker::VIEW_ATTRIBUTE, 'other'),
+                'attributes' => [PublishWorkflowChecker::VIEW_ATTRIBUTE, 'other'],
                 $content,
                 'isMenuPublishable' => true,
                 'isContentPublishable' => true,
-            ),
-            array(
+            ],
+            [
                 'expected' => VoterInterface::ACCESS_GRANTED,
-                'attributes' => array(PublishWorkflowChecker::VIEW_ATTRIBUTE),
+                'attributes' => [PublishWorkflowChecker::VIEW_ATTRIBUTE],
                 null,
                 'isMenuPublishable' => true,
                 'isContentPublishable' => null,
-            ),
-            array(
+            ],
+            [
                 'expected' => VoterInterface::ACCESS_ABSTAIN,
-                'attributes' => array(PublishWorkflowChecker::VIEW_ATTRIBUTE, 'other'),
+                'attributes' => [PublishWorkflowChecker::VIEW_ATTRIBUTE, 'other'],
                 null,
                 'isMenuPublishable' => true,
                 'isContentPublishable' => null,
-            ),
-            array(
+            ],
+            [
                 'expected' => VoterInterface::ACCESS_DENIED,
-                'attributes' => array(PublishWorkflowChecker::VIEW_ATTRIBUTE, 'other'),
+                'attributes' => [PublishWorkflowChecker::VIEW_ATTRIBUTE, 'other'],
                 $content,
                 'isMenuPublishable' => true,
                 'isContentPublishable' => false,
-            ),
-            array(
+            ],
+            [
                 'expected' => VoterInterface::ACCESS_DENIED,
                 'attributes' => PublishWorkflowChecker::VIEW_ATTRIBUTE,
                 $content,
                 'isMenuPublishable' => true,
                 'isContentPublishable' => false,
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -160,7 +160,7 @@ class MenuContentVoterTest extends \PHPUnit_Framework_Testcase
         $result = $this->voter->vote(
             $this->token,
             $this,
-            array(PublishWorkflowChecker::VIEW_ATTRIBUTE)
+            [PublishWorkflowChecker::VIEW_ATTRIBUTE]
         );
         $this->assertEquals(VoterInterface::ACCESS_ABSTAIN, $result);
     }

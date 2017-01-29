@@ -12,8 +12,8 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Alias;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class DecorateMenuFactoryPass implements CompilerPassInterface
 {

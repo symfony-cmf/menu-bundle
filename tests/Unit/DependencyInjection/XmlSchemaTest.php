@@ -19,10 +19,10 @@ class XmlSchemaTest extends XmlSchemaTestCase
     {
         $xmlFiles = array_map(function ($file) {
             return __DIR__.'/../../Resources/Fixtures/config/'.$file;
-        }, array(
+        }, [
             'config1.xml',
             'config2.xml',
-        ));
+        ]);
 
         $this->assertSchemaAcceptsXml($xmlFiles, __DIR__.'/../../../src/Resources/config/schema/menu-1.0.xsd');
     }

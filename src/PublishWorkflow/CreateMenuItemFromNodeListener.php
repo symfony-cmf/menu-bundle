@@ -11,9 +11,9 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow;
 
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Cmf\Bundle\MenuBundle\Event\CreateMenuItemFromNodeEvent;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
+use Symfony\Cmf\Bundle\MenuBundle\Event\CreateMenuItemFromNodeEvent;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Listener for the CREATE_ITEM_FROM_NODE event that skips the node if it is

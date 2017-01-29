@@ -12,9 +12,9 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Model;
 
 use Symfony\Cmf\Bundle\CoreBundle\Model\ChildInterface;
-use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
-use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
+use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishTimePeriodInterface;
+use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 
 /**
  * This is the standard CMF MenuNode implementation.
@@ -149,10 +149,10 @@ class MenuNode extends MenuNodeBase implements
     {
         $options = parent::getOptions();
 
-        return array_merge($options, array(
+        return array_merge($options, [
             'linkType' => $this->linkType,
             'content' => $this->getContent(),
-        ));
+        ]);
     }
 
     /**

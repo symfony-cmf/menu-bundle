@@ -13,16 +13,16 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\PHPCR\DocumentManager;
-use Knp\Menu\Loader\NodeLoader;
-use PHPCR\RepositoryException;
-use Symfony\Component\HttpFoundation\Request;
-use PHPCR\PathNotFoundException;
-use PHPCR\Util\PathHelper;
 use Jackalope\Session;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Knp\Menu\Loader\NodeLoader;
 use Knp\Menu\NodeInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
+use PHPCR\PathNotFoundException;
+use PHPCR\RepositoryException;
+use PHPCR\Util\PathHelper;
+use Symfony\Component\HttpFoundation\Request;
 
 class PhpcrMenuProvider implements MenuProviderInterface
 {
@@ -165,7 +165,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
      *
      * @throws \InvalidArgumentException if the menu can not be found
      */
-    public function get($name, array $options = array())
+    public function get($name, array $options = [])
     {
         $menu = $this->find($name, $options, true);
 
@@ -189,7 +189,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
      *
      * @return bool Whether a menu with this name can be loaded by this provider
      */
-    public function has($name, array $options = array())
+    public function has($name, array $options = [])
     {
         return $this->find($name, $options, false) instanceof NodeInterface;
     }

@@ -12,9 +12,9 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Doctrine\Phpcr;
 
 use Doctrine\ODM\PHPCR\DocumentManager;
+use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
-use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 
 class MenuNodeTest extends BaseTestCase
 {
@@ -47,7 +47,7 @@ class MenuNodeTest extends BaseTestCase
 
     public function testMenuNode()
     {
-        $data = array(
+        $data = [
             'name' => 'test-node',
             'label' => 'label_foobar',
             'uri' => 'http://www.example.com/foo',
@@ -57,34 +57,34 @@ class MenuNodeTest extends BaseTestCase
             'publishable' => false,
             'publishStartDate' => new \DateTime('2013-06-18'),
             'publishEndDate' => new \DateTime('2013-06-18'),
-            'attributes' => array(
+            'attributes' => [
                 'attr_foobar_1' => 'barfoo',
                 'attr_foobar_2' => 'barfoo',
-            ),
-            'childrenAttributes' => array(
+            ],
+            'childrenAttributes' => [
                 'child_foobar_1' => 'barfoo',
                 'child_foobar_2' => 'barfoo',
-            ),
-            'linkAttributes' => array(
+            ],
+            'linkAttributes' => [
                 'link_foobar_1' => 'barfoo',
                 'link_foobar_2' => 'barfoo',
-            ),
-            'labelAttributes' => array(
+            ],
+            'labelAttributes' => [
                 'label_foobar_1' => 'barfoo',
                 'label_foobar_2' => 'barfoo',
-            ),
-            'extras' => array(
+            ],
+            'extras' => [
                 'extra_foobar_1' => 'barfoo',
                 'extra_foobar_2' => 'barfoo',
-            ),
-            'routeParameters' => array(
+            ],
+            'routeParameters' => [
                 'route_param_foobar_1' => 'barfoo',
                 'route_param_foobar_2' => 'barfoo',
-            ),
+            ],
             'routeAbsolute' => true,
             'display' => false,
             'displayChildren' => false,
-        );
+        ];
 
         $startDateString = $data['publishStartDate']->format('Y-m-d');
         $endDateString = $data['publishEndDate']->format('Y-m-d');
