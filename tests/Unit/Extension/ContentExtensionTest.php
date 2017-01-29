@@ -11,8 +11,8 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Extension;
 
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Extension\ContentExtension;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ContentExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,10 +27,10 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function getLinkTypeData()
     {
-        return array(
-            array(true),
-            array(false),
-        );
+        return [
+            [true],
+            [false],
+        ];
     }
 
     /**
@@ -38,13 +38,13 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testUriLinkType($typeSet)
     {
-        $options = array('uri' => '/configured_uri');
+        $options = ['uri' => '/configured_uri'];
         if ($typeSet) {
             $options['linkType'] = 'uri';
         }
 
         $this->assertEquals(
-            array('uri' => '/configured_uri', 'linkType' => 'uri', 'content' => null, 'extras' => array('content' => null)),
+            ['uri' => '/configured_uri', 'linkType' => 'uri', 'content' => null, 'extras' => ['content' => null]],
             $this->subject->buildOptions($options)
         );
     }
@@ -54,13 +54,13 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testRouteLinkType($typeSet)
     {
-        $options = array('route' => 'configured_route');
+        $options = ['route' => 'configured_route'];
         if ($typeSet) {
             $options['linkType'] = 'route';
         }
 
         $this->assertEquals(
-            array('route' => 'configured_route', 'linkType' => 'route', 'content' => null, 'extras' => array('content' => null)),
+            ['route' => 'configured_route', 'linkType' => 'route', 'content' => null, 'extras' => ['content' => null]],
             $this->subject->buildOptions($options)
         );
     }
@@ -70,50 +70,50 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testContentLinkType($typeSet)
     {
-        $options = array('content' => 'configured_content', 'routeParameters' => array('test' => 'foo'), 'routeAbsolute' => true);
+        $options = ['content' => 'configured_content', 'routeParameters' => ['test' => 'foo'], 'routeAbsolute' => true];
         if ($typeSet) {
             $options['linkType'] = 'content';
         }
 
         $this->generator->expects($this->once())
                 ->method('generate')
-                ->with('configured_content', array('test' => 'foo'), UrlGeneratorInterface::ABSOLUTE_URL)
+                ->with('configured_content', ['test' => 'foo'], UrlGeneratorInterface::ABSOLUTE_URL)
                 ->willReturn('/generated_uri');
 
         $this->assertEquals(
-            array(
+            [
                 'uri' => '/generated_uri',
                 'linkType' => 'content',
                 'content' => 'configured_content',
-                'extras' => array('content' => 'configured_content'),
-                'routeParameters' => array('test' => 'foo'),
+                'extras' => ['content' => 'configured_content'],
+                'routeParameters' => ['test' => 'foo'],
                 'routeAbsolute' => true,
-            ),
+            ],
             $this->subject->buildOptions($options)
         );
     }
 
     public function testOptionsAsRemovedWhenLinkTypeIsElse()
     {
-        $options = array(
+        $options = [
             'uri' => '/configured_uri',
             'route' => 'configured_route',
             'content' => 'configured_content',
             'linkType' => 'content',
-        );
+        ];
 
         $this->generator->expects($this->once())
             ->method('generate')
-            ->with('configured_content', array(), UrlGeneratorInterface::ABSOLUTE_PATH)
+            ->with('configured_content', [], UrlGeneratorInterface::ABSOLUTE_PATH)
             ->willReturn('/generated_uri');
 
         $this->assertEquals(
-            array(
+            [
                 'uri' => '/generated_uri',
                 'content' => 'configured_content',
                 'linkType' => 'content',
-                'extras' => array('content' => 'configured_content'),
-            ),
+                'extras' => ['content' => 'configured_content'],
+            ],
             $this->subject->buildOptions($options)
         );
     }
@@ -124,7 +124,7 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFailsOnInvalidLinkType()
     {
-        $this->subject->buildOptions(array('linkType' => 'not_valid'));
+        $this->subject->buildOptions(['linkType' => 'not_valid']);
     }
 
     /**
@@ -133,6 +133,6 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
      */
     public function testFailsWhenContentIsNotAvailable()
     {
-        $this->subject->buildOptions(array('linkType' => 'content'));
+        $this->subject->buildOptions(['linkType' => 'content']);
     }
 }

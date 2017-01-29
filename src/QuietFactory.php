@@ -54,7 +54,7 @@ class QuietFactory implements FactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createItem($name, array $options = array())
+    public function createItem($name, array $options = [])
     {
         try {
             return $this->innerFactory->createItem($name, $options);
@@ -62,7 +62,7 @@ class QuietFactory implements FactoryInterface
             if (null !== $this->logger) {
                 $this->logger->error(
                     sprintf('An exception was thrown while creating a menu item called "%s"', $name),
-                    array('exception' => $e)
+                    ['exception' => $e]
                 );
             }
 

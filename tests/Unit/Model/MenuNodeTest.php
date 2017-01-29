@@ -31,11 +31,11 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
             ->setUri('http://www.example.com')
             ->setRoute('test_route')
             ->setContent($this->content)
-            ->setAttributes(array('foo' => 'bar'))
-            ->setChildrenAttributes(array('bar' => 'foo'))
-            ->setExtras(array('far' => 'boo'))
-            ->setLinkAttributes(array('link' => 'knil'))
-            ->setLabelAttributes(array('label' => 'lebal'))
+            ->setAttributes(['foo' => 'bar'])
+            ->setChildrenAttributes(['bar' => 'foo'])
+            ->setExtras(['far' => 'boo'])
+            ->setLinkAttributes(['link' => 'knil'])
+            ->setLabelAttributes(['label' => 'lebal'])
             ->setDisplay(false)
             ->setDisplayChildren(false)
             ->setRouteAbsolute(true)
@@ -50,17 +50,17 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
         $this->assertEquals('http://www.example.com', $this->node->getUri());
         $this->assertEquals('test_route', $this->node->getRoute());
         $this->assertSame($this->content, $this->node->getContent());
-        $this->assertEquals(array('foo' => 'bar'), $this->node->getAttributes());
+        $this->assertEquals(['foo' => 'bar'], $this->node->getAttributes());
         $this->assertEquals('bar', $this->node->getAttribute('foo'));
-        $this->assertEquals(array('bar' => 'foo'), $this->node->getChildrenAttributes());
-        $this->assertEquals(array('far' => 'boo'), $this->node->getExtras());
+        $this->assertEquals(['bar' => 'foo'], $this->node->getChildrenAttributes());
+        $this->assertEquals(['far' => 'boo'], $this->node->getExtras());
 
         $this->parentNode = new MenuNode();
         $this->node->setPosition($this->parentNode, 'FOOO');
         $this->assertSame($this->parentNode, $this->node->getParentDocument());
         $this->assertEquals('FOOO', $this->node->getName());
-        $this->assertEquals(array('link' => 'knil'), $this->node->getLinkAttributes());
-        $this->assertEquals(array('label' => 'lebal'), $this->node->getLabelAttributes());
+        $this->assertEquals(['link' => 'knil'], $this->node->getLinkAttributes());
+        $this->assertEquals(['label' => 'lebal'], $this->node->getLabelAttributes());
         $this->assertFalse($this->node->getDisplay());
         $this->assertFalse($this->node->getDisplayChildren());
         $this->assertTrue($this->node->getRouteAbsolute());
@@ -118,7 +118,7 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
      */
     public function testGetOptions()
     {
-        $this->assertEquals(array(
+        $this->assertEquals([
             'uri' => $this->node->getUri(),
             'route' => $this->node->getRoute(),
             'label' => $this->node->getLabel(),
@@ -132,6 +132,6 @@ class MenuNodeTest extends \PHPUnit_Framework_Testcase
             'linkAttributes' => $this->node->getLinkAttributes(),
             'labelAttributes' => $this->node->getLabelAttributes(),
             'linkType' => $this->node->getLinkType(),
-        ), $this->node->getOptions());
+        ], $this->node->getOptions());
     }
 }

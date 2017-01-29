@@ -11,8 +11,8 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Register validation files only if their persistence layer is enabled.

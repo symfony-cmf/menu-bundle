@@ -15,8 +15,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Knp\Menu\NodeInterface;
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
-use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNodeReferrersInterface;
+use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 
 /**
  * @PHPCR\Document(referenceable=true)

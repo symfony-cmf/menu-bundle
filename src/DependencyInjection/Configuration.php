@@ -59,7 +59,7 @@ class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->enumNode('enabled')
-                            ->values(array(true, false, 'auto'))
+                            ->values([true, false, 'auto'])
                             ->defaultValue('auto')
                         ->end()
                     ->end()

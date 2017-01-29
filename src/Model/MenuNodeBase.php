@@ -71,7 +71,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @var array
      */
-    protected $attributes = array();
+    protected $attributes = [];
 
     /**
      * HTML attributes to add to the children list element.
@@ -80,7 +80,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @var array
      */
-    protected $childrenAttributes = array();
+    protected $childrenAttributes = [];
 
     /**
      * HTML attributes to add to items link.
@@ -89,7 +89,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @var array
      */
-    protected $linkAttributes = array();
+    protected $linkAttributes = [];
 
     /**
      * HTML attributes to add to the items label.
@@ -98,14 +98,14 @@ class MenuNodeBase implements NodeInterface
      *
      * @var array
      */
-    protected $labelAttributes = array();
+    protected $labelAttributes = [];
 
     /**
      * Hashmap for extra stuff associated to the node.
      *
      * @var array
      */
-    protected $extras = array();
+    protected $extras = [];
 
     /**
      * Parameters to use when generating the route.
@@ -114,7 +114,7 @@ class MenuNodeBase implements NodeInterface
      *
      * @var array
      */
-    protected $routeParameters = array();
+    protected $routeParameters = [];
 
     /**
      * Set to false to not render.
@@ -351,7 +351,7 @@ class MenuNodeBase implements NodeInterface
      */
     public function getChildren()
     {
-        $children = array();
+        $children = [];
         foreach ($this->children as $child) {
             if (!$child instanceof NodeInterface) {
                 continue;
@@ -575,7 +575,7 @@ class MenuNodeBase implements NodeInterface
      */
     public function getOptions()
     {
-        return array(
+        return [
             'uri' => $this->getUri(),
             'route' => $this->getRoute(),
             'label' => $this->getLabel(),
@@ -587,6 +587,6 @@ class MenuNodeBase implements NodeInterface
             'routeAbsolute' => $this->getRouteAbsolute(),
             'linkAttributes' => $this->getLinkAttributes(),
             'labelAttributes' => $this->getLabelAttributes(),
-        );
+        ];
     }
 }

@@ -26,11 +26,11 @@ class QuietFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function provideItemsWithNotExistingLinks()
     {
-        return array(
-            array(array('route' => 'not_existent'), array('route' => 'not_existent')),
-            array(array('content' => 'not_existent'), array('content' => 'not_existent')),
-            array(array('linkType' => 'route', 'route' => 'not_existent'), array('linkType' => 'route')),
-        );
+        return [
+            [['route' => 'not_existent'], ['route' => 'not_existent']],
+            [['content' => 'not_existent'], ['content' => 'not_existent']],
+            [['linkType' => 'route', 'route' => 'not_existent'], ['linkType' => 'route']],
+        ];
     }
 
     /** @dataProvider provideItemsWithNotExistingLinks */
@@ -49,11 +49,11 @@ class QuietFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testDisallowEmptyItemsReturnsNull()
     {
-        $this->innerFactory->createItem('Home', array('route' => 'not_existent'))
+        $this->innerFactory->createItem('Home', ['route' => 'not_existent'])
             ->willThrow('Symfony\Component\Routing\Exception\RouteNotFoundException');
 
         $factory = new QuietFactory($this->innerFactory->reveal(), $this->logger->reveal(), false);
 
-        $this->assertEquals(null, $factory->createItem('Home', array('route' => 'not_existent')));
+        $this->assertEquals(null, $factory->createItem('Home', ['route' => 'not_existent']));
     }
 }

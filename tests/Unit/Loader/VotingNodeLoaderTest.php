@@ -34,12 +34,12 @@ class VotingNodeLoaderTest extends \PHPUnit_Framework_TestCase
         // promises
         $node2 = $this->getNode('node2');
         $node3 = $this->getNode('node3');
-        $node1 = $this->getNode('node1', array(), array($node2, $node3));
+        $node1 = $this->getNode('node1', [], [$node2, $node3]);
 
         // predictions
-        $options = array_merge(array(
+        $options = array_merge([
             'node2_is_published' => true,
-        ), $options);
+        ], $options);
 
         $dispatchMethodMock = $this->dispatcher->expects($this->exactly(3))->method('dispatch');
 
@@ -65,16 +65,16 @@ class VotingNodeLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function getCreateFromNodeData()
     {
-        return array(
-            array(array(
-            )),
-            array(array(
+        return [
+            [[
+            ]],
+            [[
                 'node2_is_published' => false,
-            )),
-        );
+            ]],
+        ];
     }
 
-    protected function getNode($name, $options = array(), $children = array())
+    protected function getNode($name, $options = [], $children = [])
     {
         $node = $this->getMock('Knp\Menu\NodeInterface');
 
