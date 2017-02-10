@@ -11,6 +11,7 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Doctrine\Phpcr;
 
+use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
@@ -29,7 +30,7 @@ class MenuNodeTest extends BaseTestCase
      */
     private $child1;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->db('PHPCR')->createTestNode();
 
@@ -156,5 +157,24 @@ class MenuNodeTest extends BaseTestCase
         $this->dm->clear();
         $menuNode = $this->dm->find(null, '/test/test-node');
         $this->assertCount(0, $menuNode->getChildren());
+    }
+
+    /**
+     * @expectedException \Doctrine\ODM\PHPCR\Exception\OutOfBoundsException
+     * @expectedExceptionMessage Allowed child classes "Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode"
+     */
+    public function testPersistInvalidChild()
+    {
+        $menuNode = new MenuNode();
+        $menuNode->setName('menu-node');
+        $menuNode->setParentDocument($this->rootDocument);
+        $this->dm->persist($menuNode);
+
+        $generic = new Generic();
+        $generic->setParentDocument($menuNode);
+        $generic->setNodename('invalid');
+        $this->dm->persist($generic);
+
+        $this->dm->flush();
     }
 }

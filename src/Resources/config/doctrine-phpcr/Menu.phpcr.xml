@@ -9,6 +9,7 @@
         name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu"
         referenceable="true"
         >
+        <child-class name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode"/>
     </document>
 
 </doctrine-mapping>

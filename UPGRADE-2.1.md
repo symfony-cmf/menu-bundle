@@ -67,3 +67,9 @@
                            - cmf_sonata_admin_integration.menu.menu_admin
                            - cmf_sonata_admin_integration.menu.node_admin
    ```
+
+# Doctrine PHPCR ODM
+
+ * Only `MenuNode` documents are allowed as children of the `Menu` and
+   `MenuNode` documents. This behaviour can be changed by overriding the
+   `child-class` setting of the PHPCR ODM mapping.

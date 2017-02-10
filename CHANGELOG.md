@@ -1,6 +1,9 @@
 Changelog
 =========
 
+* **2017-02-09**: [BC BREAK] Added child restrictions to the `Menu` and `MenuNode` documents.
+  See the UPGRADE guide for detailed information.
+
 2.1.0-RC1
 ---------
 
