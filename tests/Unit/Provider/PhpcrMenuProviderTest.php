@@ -19,7 +19,6 @@ use Knp\Menu\NodeInterface;
 use PHPCR\SessionInterface;
 use Prophecy\Argument;
 use Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider;
-use Symfony\Component\HttpFoundation\Request;
 
 class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
 {
@@ -49,7 +48,6 @@ class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
             ->willReturn($this->item->reveal());
 
         $provider = $this->createProvider($menuRoot);
-        $provider->setRequest(Request::create('/'));
         $item = $provider->get($name);
 
         $this->assertSame($this->item->reveal(), $item);

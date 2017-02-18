@@ -14,7 +14,6 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Provider;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Jackalope\Session;
-use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Loader\NodeLoader;
 use Knp\Menu\NodeInterface;
@@ -22,26 +21,20 @@ use Knp\Menu\Provider\MenuProviderInterface;
 use PHPCR\PathNotFoundException;
 use PHPCR\RepositoryException;
 use PHPCR\Util\PathHelper;
-use Symfony\Component\HttpFoundation\Request;
 
 class PhpcrMenuProvider implements MenuProviderInterface
 {
     /**
      * @var NodeLoader
      */
-    protected $loader;
-
-    /**
-     * @var Request
-     */
-    protected $request;
+    private $loader;
 
     /**
      * base for menu ids.
      *
      * @var string
      */
-    protected $menuRoot;
+    private $menuRoot;
 
     /**
      * Depth to use to prefetch all menu nodes. Only used if > 0, otherwise
@@ -49,33 +42,25 @@ class PhpcrMenuProvider implements MenuProviderInterface
      *
      * @var int
      */
-    protected $prefetch = 10;
-
-    /**
-     * doctrine document class name.
-     *
-     * @var string
-     */
-    protected $className;
+    private $prefetch = 10;
 
     /**
      * If this is null, the manager registry will return the default manager.
      *
      * @var string|null Name of object manager to use
      */
-    protected $managerName;
+    private $managerName;
 
     /**
      * @var ManagerRegistry
      */
-    protected $managerRegistry;
+    private $managerRegistry;
 
     /**
-     * @param FactoryInterface $factory         the menu factory to create the menu
-     *                                          item with the root document (usually ContentAwareFactory)
-     * @param ManagerRegistry  $managerRegistry manager registry service to use in conjunction
-     *                                          with the manager name to load the load menu root document
-     * @param string           $menuRoot        root id of the menu
+     * @param NodeLoader      $loader          Factory for the menu items
+     * @param ManagerRegistry $managerRegistry manager registry service to use in conjunction
+     *                                         with the manager name to load the load menu root document
+     * @param string          $menuRoot        root id of the menu
      */
     public function __construct(
         NodeLoader $loader,
@@ -127,7 +112,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
      */
     public function setPrefetch($depth)
     {
-        $this->prefetch = intval($depth);
+        $this->prefetch = (int) $depth;
     }
 
     /**
@@ -138,16 +123,6 @@ class PhpcrMenuProvider implements MenuProviderInterface
     public function getPrefetch()
     {
         return $this->prefetch;
-    }
-
-    /**
-     * Set the request.
-     *
-     * @param Request $request
-     */
-    public function setRequest(Request $request = null)
-    {
-        $this->request = $request;
     }
 
     /**
@@ -167,10 +142,10 @@ class PhpcrMenuProvider implements MenuProviderInterface
      */
     public function get($name, array $options = [])
     {
-        $menu = $this->find($name, $options, true);
+        $menu = $this->find($name, true);
 
         $menuItem = $this->loader->load($menu);
-        if (empty($menuItem)) {
+        if (!$menuItem) {
             throw new \InvalidArgumentException("Menu at '$name' is misconfigured (f.e. the route might be incorrect) and could therefore not be instanciated");
         }
 
@@ -191,15 +166,14 @@ class PhpcrMenuProvider implements MenuProviderInterface
      */
     public function has($name, array $options = [])
     {
-        return $this->find($name, $options, false) instanceof NodeInterface;
+        return $this->find($name, false) instanceof NodeInterface;
     }
 
     /**
-     * @param string $name    Name of the menu to load
-     * @param array  $options
-     * @param bool   $throw   Whether to throw an exception if the menu is not
-     *                        found or no valid menu. Returns false if $throw is false and there
-     *                        is no menu at $name
+     * @param string $name  Name of the menu to load
+     * @param bool   $throw Whether to throw an exception if the menu is not
+     *                      found or no valid menu. Returns false if $throw is
+     *                      false and there is no menu at $name
      *
      * @return object|bool The menu root found with $name or false if $throw
      *                     is false and the menu was not found
@@ -207,9 +181,9 @@ class PhpcrMenuProvider implements MenuProviderInterface
      * @throws \InvalidArgumentException Only if $throw is true throws this
      *                                   exception if the name is empty or no menu found
      */
-    protected function find($name, array $options, $throw)
+    private function find($name, $throw)
     {
-        if (empty($name)) {
+        if (!$name) {
             if ($throw) {
                 throw new \InvalidArgumentException('The menu name may not be empty');
             }
@@ -232,22 +206,24 @@ class PhpcrMenuProvider implements MenuProviderInterface
         }
 
         if ($this->getPrefetch() > 0) {
-            if (
-                    $session instanceof Session
-                    && 0 < $session->getSessionOption(Session::OPTION_FETCH_DEPTH)
-                    && 0 === strncmp($path, $this->getMenuRoot(), strlen($this->getMenuRoot()))
-                ) {
+            if ($session instanceof Session
+                && 0 < $session->getSessionOption(Session::OPTION_FETCH_DEPTH)
+                && 0 === strncmp($path, $this->getMenuRoot(), strlen($this->getMenuRoot()))
+            ) {
                 // we have jackalope with a fetch depth. prefetch all menu
-                    // nodes of all menues.
-                    try {
-                        $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
-                    } catch (PathNotFoundException $e) {
-                        if ($throw) {
-                            throw new \InvalidArgumentException(sprintf('The menu root "%s" does not exist.', $this->getMenuRoot()));
-                        }
-
-                        return false;
+                // nodes of all menues.
+                try {
+                    $session->getNode($this->getMenuRoot(), $this->getPrefetch() + 1);
+                } catch (PathNotFoundException $e) {
+                    if ($throw) {
+                        throw new \InvalidArgumentException(sprintf(
+                            'The menu root "%s" does not exist.',
+                            $this->getMenuRoot()
+                        ));
                     }
+
+                    return false;
+                }
             } else {
                 try {
                     $session->getNode($path, $this->getPrefetch());
