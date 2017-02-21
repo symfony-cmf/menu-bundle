@@ -1,6 +1,8 @@
 Changelog
 =========
 
+* **2017-02-17**: [BC BREAK] Removed unused setRequest from PhpcrMenuProvider and changed properties to private.
+
 2.0.0-RC2
 ---------
 
