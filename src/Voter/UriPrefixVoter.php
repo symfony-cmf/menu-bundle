@@ -58,7 +58,5 @@ class UriPrefixVoter implements VoterInterface
                 return true;
             }
         }
-
-        return;
     }
 }

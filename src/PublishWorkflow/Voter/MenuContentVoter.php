@@ -12,6 +12,7 @@
 namespace Symfony\Cmf\Bundle\MenuBundle\PublishWorkflow\Voter;
 
 use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker;
+use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
@@ -49,7 +50,7 @@ class MenuContentVoter implements VoterInterface
      */
     public function supportsClass($class)
     {
-        return is_subclass_of($class, 'Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode');
+        return is_subclass_of($class, MenuNode::class);
     }
 
     /**
@@ -62,9 +63,9 @@ class MenuContentVoter implements VoterInterface
         if (!$this->supportsClass(get_class($object))) {
             return self::ACCESS_ABSTAIN;
         }
-
         /** @var PublishWorkflowChecker $publishWorkflowChecker */
         $publishWorkflowChecker = $this->container->get('cmf_core.publish_workflow.checker');
+        /** @var MenuNode $object */
         $content = $object->getContent();
         $decision = self::ACCESS_GRANTED;
         foreach ($attributes as $attribute) {

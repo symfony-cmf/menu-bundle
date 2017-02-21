@@ -78,7 +78,5 @@ class RequestParentContentIdentityVoter implements VoterInterface
         ) {
             return true;
         }
-
-        return;
     }
 }
