@@ -40,7 +40,7 @@ class CmfMenuExtension extends Extension
         }
 
         if (true === $config['publish_workflow']['enabled']
-            || 'auto' === $config['publish_workflow']['enabled'] && isset($bundles['CmfCoreBundle'])
+            || ('auto' === $config['publish_workflow']['enabled'] && isset($bundles['CmfCoreBundle']))
         ) {
             $loader->load('publish-workflow.xml');
         }
@@ -52,7 +52,7 @@ class CmfMenuExtension extends Extension
 
         if (isset($config['voters']['content_identity'])) {
             if (empty($config['voters']['content_identity']['content_key'])) {
-                if (!class_exists('Symfony\\Cmf\\Bundle\\RoutingBundle\\Routing\\DynamicRouter')) {
+                if (!class_exists(DynamicRouter::class)) {
                     throw new \RuntimeException('You need to set the content_key when not using the CmfRoutingBundle DynamicRouter');
                 }
                 $contentKey = DynamicRouter::CONTENT_KEY;

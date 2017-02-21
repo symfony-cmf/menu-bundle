@@ -11,6 +11,8 @@
 
 namespace Symfony\Cmf\Bundle\MenuBundle\DependencyInjection;
 
+use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
+use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -34,8 +36,8 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('content_basepath')->defaultValue('/cms/content')->end()
                                 ->integerNode('prefetch')->defaultValue(10)->end()
                                 ->scalarNode('manager_name')->defaultNull()->end()
-                                ->scalarNode('menu_document_class')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu')->end()
-                                ->scalarNode('node_document_class')->defaultValue('Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode')->end()
+                                ->scalarNode('menu_document_class')->defaultValue(Menu::class)->end()
+                                ->scalarNode('node_document_class')->defaultValue(MenuNode::class)->end()
                             ->end()
                         ->end()
                     ->end()

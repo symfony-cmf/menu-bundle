@@ -26,7 +26,7 @@ class CmfMenuBundle extends Bundle
         $container->addCompilerPass(new DecorateMenuFactoryPass());
         $container->addCompilerPass(new ValidationPass());
 
-        if (class_exists('Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass')) {
+        if (class_exists(DoctrinePhpcrMappingsPass::class)) {
             $container->addCompilerPass(
                 DoctrinePhpcrMappingsPass::createXmlMappingDriver(
                     [

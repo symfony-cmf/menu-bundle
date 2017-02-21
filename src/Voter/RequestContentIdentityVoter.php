@@ -67,7 +67,5 @@ class RequestContentIdentityVoter implements VoterInterface
         ) {
             return true;
         }
-
-        return;
     }
 }

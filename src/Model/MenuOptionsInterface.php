@@ -64,7 +64,7 @@ interface MenuOptionsInterface extends NodeInterface
      *
      * @param $attributes array
      *
-     * @return Page The current Page instance
+     * @return MenuOptionsInterface The item to provide a fluent interface
      */
     public function setAttributes(array $attributes);
 
@@ -84,7 +84,7 @@ interface MenuOptionsInterface extends NodeInterface
      * @param string $name  attribute name
      * @param string $value attribute value
      *
-     * @return Page The current Page instance
+     * @return MenuOptionsInterface The item to provide a fluent interface
      */
     public function setAttribute($name, $value);
 
@@ -100,7 +100,7 @@ interface MenuOptionsInterface extends NodeInterface
      *
      * @param array $linkAttributes
      *
-     * @return Page The current Page instance
+     * @return MenuOptionsInterface The item to provide a fluent interface
      */
     public function setLinkAttributes($linkAttributes);
 
@@ -114,9 +114,9 @@ interface MenuOptionsInterface extends NodeInterface
     /**
      * Set the children attributes.
      *
-     * @param array $attributes
+     * @param array $childrenAttributes
      *
-     * @return Page The current Page instance
+     * @return MenuOptionsInterface The item to provide a fluent interface
      */
     public function setChildrenAttributes(array $childrenAttributes);
 
@@ -132,7 +132,7 @@ interface MenuOptionsInterface extends NodeInterface
      *
      * @param array $labelAttributes
      *
-     * @return Page The current Page instance
+     * @return MenuOptionsInterface The item to provide a fluent interface
      */
     public function setLabelAttributes($labelAttributes);
 }

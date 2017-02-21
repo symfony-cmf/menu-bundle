@@ -91,10 +91,13 @@ class ContentExtension implements ExtensionInterface
     }
 
     /**
-     * If linkType not specified, we can determine it from
-     * existing options.
+     * If linkType not specified, we can determine it from existing options.
+     *
+     * @param array $options Menu node options
+     *
+     * @return string The type of link to use
      */
-    protected function determineLinkType($options)
+    private function determineLinkType(array $options)
     {
         if (!empty($options['uri'])) {
             return 'uri';
@@ -119,7 +122,7 @@ class ContentExtension implements ExtensionInterface
      * @throws \InvalidArgumentException if $linkType is not one of the known
      *                                   link types
      */
-    protected function validateLinkType($linkType)
+    private function validateLinkType($linkType)
     {
         $linkTypes = ['uri', 'route', 'content'];
         if (!in_array($linkType, $linkTypes)) {
