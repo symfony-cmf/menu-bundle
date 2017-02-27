@@ -73,3 +73,7 @@
  * Only `MenuNode` documents are allowed as children of the `Menu` and
    `MenuNode` documents. This behaviour can be changed by overriding the
    `child-class` setting of the PHPCR ODM mapping.
+
+ * `PhpcrMenuProvider` had a `setRequest` method that was completely unused.
+   The method is removed, as well as the `$request` property. If you extend
+   the provider, check if you happened to rely on this method or the property.

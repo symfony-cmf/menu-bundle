@@ -1,9 +1,12 @@
 Changelog
 =========
 
+2.1.0
+-----
+
 * **2017-02-17**: [BC BREAK] Removed unused setRequest from PhpcrMenuProvider and changed properties to private.
 
-2.0.0-RC2
+2.1.0-RC2
 ---------
 
 * **2017-02-09**: [BC BREAK] Added child restrictions to the `Menu` and `MenuNode` documents.
