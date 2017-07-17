@@ -12,7 +12,9 @@ cache:
 
 env:
   matrix: SYMFONY_VERSION=3.2.*
-  global: SYMFONY_PHPUNIT_DIR=.phpunit SYMFONY_PHPUNIT_REMOVE="symfony/yaml"
+  global:
+    - SYMFONY_DEPRECATIONS_HELPER=2080
+    - SYMFONY_PHPUNIT_DIR=".phpunit" SYMFONY_PHPUNIT_REMOVE="symfony/yaml" SYMFONY_PHPUNIT_VERSION=5.7
 
 matrix:
   include:
@@ -35,7 +37,7 @@ before_install:
 
 install: composer update --prefer-dist $COMPOSER_FLAGS
 
-script: phpunit
+script: vendor/bin/simple-phpunit
 
 notifications:
   irc: "irc.freenode.org#symfony-cmf"
