@@ -74,6 +74,7 @@ class MenuContentVoter implements VoterInterface
                 // now we only abstain or deny if we find a supported attribute
                 // and the content is not publishable
                 $decision = self::ACCESS_ABSTAIN;
+
                 continue;
             }
 
