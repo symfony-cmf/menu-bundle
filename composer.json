@@ -14,9 +14,6 @@
     "require": {
         "php": "^5.6|^7.0",
         "symfony/framework-bundle": "^2.8|^3.0",
-        "symfony-cmf/core-bundle": "^2.0",
-        "doctrine/phpcr-bundle": "^1.1",
-        "doctrine/phpcr-odm": "^1.4.2",
         "knplabs/knp-menu-bundle": "^2.0.0",
         "knplabs/knp-menu": "^2.0.0"
     },
@@ -25,7 +22,15 @@
         "symfony/phpunit-bridge": "^3.2",
         "symfony-cmf/routing-bundle": "^1.4|^2.0",
         "symfony-cmf/testing": "^2.0",
-        "twig/twig": "^1.18|^2.0"
+        "twig/twig": "^1.18|^2.0",
+        "symfony-cmf/core-bundle": "^2.0",
+        "doctrine/phpcr-bundle": "^1.1",
+        "doctrine/phpcr-odm": "^1.4.2"
+    },
+    "suggest": {
+        "doctrine/phpcr-odm": "To enable support for the PHPCR ODM documents (^1.4)",
+        "doctrine/phpcr-bundle": "To enable support for the PHPCR ODM documents",
+        "symfony-cmf/core-bundle": "To enable support for publishing workflow"
     },
     "autoload": {
         "psr-4": {
