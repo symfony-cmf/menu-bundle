@@ -1,32 +1,43 @@
 # Symfony CMF Menu Bundle
 
-[![Build Status](https://travis-ci.org/symfony-cmf/menu-bundle.svg?branch=master)](https://travis-ci.org/symfony-cmf/menu-bundle)
-[![StyleCI](https://styleci.io/repos/4233004/shield)](https://styleci.io/repos/4233004)
-[![Latest Stable Version](https://poser.pugx.org/symfony-cmf/menu-bundle/version.png)](https://packagist.org/packages/symfony-cmf/menu-bundle)
-[![Total Downloads](https://poser.pugx.org/symfony-cmf/menu-bundle/d/total.png)](https://packagist.org/packages/symfony-cmf/menu-bundle)
+[![Latest Stable Version](https://poser.pugx.org/symfony-cmf/menu-bundle/v/stable)](https://packagist.org/packages/symfony-cmf/menu-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/symfony-cmf/menu-bundle/v/unstable)](https://packagist.org/packages/symfony-cmf/menu-bundle)
+[![License](https://poser.pugx.org/symfony-cmf/menu-bundle/license)](https://packagist.org/packages/symfony-cmf/menu-bundle)
 
-This bundle is part of the [Symfony Content Management Framework (CMF)](http://cmf.symfony.com/)
-and licensed under the [MIT License](LICENSE).
+[![Total Downloads](https://poser.pugx.org/symfony-cmf/menu-bundle/downloads)](https://packagist.org/packages/symfony-cmf/menu-bundle)
+[![Monthly Downloads](https://poser.pugx.org/symfony-cmf/menu-bundle/d/monthly)](https://packagist.org/packages/symfony-cmf/menu-bundle)
+[![Daily Downloads](https://poser.pugx.org/symfony-cmf/menu-bundle/d/daily)](https://packagist.org/packages/symfony-cmf/menu-bundle)
+
+Branch | Travis | Coveralls |
+------ | ------ | --------- |
+master | [![Build Status][travis_unstable_badge]][travis_unstable_link] | [![Coverage Status][coveralls_unstable_badge]][coveralls_unstable_link] |
+
+This bundle is part of the [Symfony Content Management Framework (CMF)](http://cmf.symfony.com/) and licensed
+under the [MIT License](LICENSE).
 
 The MenuBundle provides menus from a doctrine object manager with the help of KnpMenuBundle.
 
+
 ## Requirements
 
-* PHP 5.6 / 7
-* Symfony 2.8 / 3
+* PHP 5.6 / 7.0 / 7.1
+* Symfony 2.8 / 3.1 / 3.2 / 3.3
 * See also the `require` section of [composer.json](composer.json)
 
 ## Documentation
 
 For the install guide and reference, see:
 
-* [MenuBundle documentation](http://symfony.com/doc/master/cmf/bundles/menu/index.html)
+* [symfony-cmf/menu-bundle Documentation](http://symfony.com/doc/master/cmf/bundles/menu/index.html)
 
 See also:
 
 * [All Symfony CMF documentation](http://symfony.com/doc/master/cmf/index.html) - complete Symfony CMF reference
 * [Symfony CMF Website](http://cmf.symfony.com/) - introduction, live demo, support and community links
 
+## Support
+
+For general support and questions, please use [StackOverflow](http://stackoverflow.com/questions/tagged/symfony-cmf).
 
 ## Contributing
 
@@ -39,4 +50,22 @@ Unit and/or functional tests exist for this bundle. See the
 for a guide to running the tests.
 
 Thanks to
-[everyone who has contributed](https://github.com/symfony-cmf/MenuBundle/contributors) already.
+[everyone who has contributed](contributors) already.
+
+## License
+
+This package is available under the [MIT license](src/Resources/meta/LICENSE).
+
+[travis_legacy_badge]: https://travis-ci.org/symfony-cmf/menu-bundle.svg?branch=master
+[travis_legacy_link]: https://travis-ci.org/symfony-cmf/menu-bundle
+[travis_stable_badge]: https://travis-ci.org/symfony-cmf/menu-bundle.svg?branch=master
+[travis_stable_link]: https://travis-ci.org/symfony-cmf/menu-bundle
+[travis_unstable_badge]: https://travis-ci.org/symfony-cmf/menu-bundle.svg?branch=master
+[travis_unstable_link]: https://travis-ci.org/symfony-cmf/menu-bundle
+
+[coveralls_legacy_badge]: https://coveralls.io/repos/github/symfony-cmf/menu-bundle/badge.svg?branch=master
+[coveralls_legacy_link]: https://coveralls.io/github/symfony-cmf/menu-bundle?branch=master
+[coveralls_stable_badge]: https://coveralls.io/repos/github/symfony-cmf/menu-bundle/badge.svg?branch=master
+[coveralls_stable_link]: https://coveralls.io/github/symfony-cmf/menu-bundle?branch=master
+[coveralls_unstable_badge]: https://coveralls.io/repos/github/symfony-cmf/menu-bundle/badge.svg?branch=master
+[coveralls_unstable_link]: https://coveralls.io/github/symfony-cmf/menu-bundle?branch=master
