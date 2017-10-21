@@ -21,7 +21,7 @@
         "symfony/monolog-bundle": "^2.3|^3.0",
         "symfony/phpunit-bridge": "^3.2",
         "symfony-cmf/routing-bundle": "^1.4|^2.0",
-        "symfony-cmf/testing": "^2.0",
+        "symfony-cmf/testing": "^2.1@dev",
         "twig/twig": "^1.18|^2.0",
         "symfony-cmf/core-bundle": "^2.0",
         "doctrine/phpcr-bundle": "^1.1",
@@ -46,5 +46,6 @@
         "branch-alias": {
             "dev-master": "2.2-dev"
         }
-    }
+    },
+    "prefer-stable": true
 }
