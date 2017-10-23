@@ -18,7 +18,7 @@ class RenderingTest extends BaseTestCase
     protected function setUp()
     {
         $this->db('PHPCR')->loadFixtures([
-            'Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\DataFixtures\PHPCR\LoadMenuData',
+            'Symfony\Cmf\Bundle\MenuBundle\Tests\Fixtures\App\DataFixtures\PHPCR\LoadMenuData',
         ]);
     }
 
@@ -59,7 +59,7 @@ class RenderingTest extends BaseTestCase
         $xpath = new \DOMXpath($menu);
         $menuItems = [];
         foreach ($xpath->query('//ul/li/*[self::span or self::a]') as $menuItem) {
-            $menuItems[$menuItem->textContent] = $menuItem->nodeName === 'span'
+            $menuItems[$menuItem->textContent] = 'span' === $menuItem->nodeName
                 ? null
                 : $menuItem->getAttribute('href')
             ;

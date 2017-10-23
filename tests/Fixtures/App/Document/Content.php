@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Fixtures\App\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;

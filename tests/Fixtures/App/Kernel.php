@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Fixtures\App;
+
 use Symfony\Cmf\Component\Testing\HttpKernel\TestKernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-class AppKernel extends TestKernel
+class Kernel extends TestKernel
 {
     public function configure()
     {
