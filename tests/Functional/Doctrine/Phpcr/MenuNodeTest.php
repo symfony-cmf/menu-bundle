@@ -14,7 +14,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Functional\Doctrine\Phpcr;
 use Doctrine\ODM\PHPCR\Document\Generic;
 use Doctrine\ODM\PHPCR\DocumentManager;
 use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode;
-use Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content;
+use Symfony\Cmf\Bundle\MenuBundle\Tests\Fixtures\App\Document\Content;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 
 class MenuNodeTest extends BaseTestCase

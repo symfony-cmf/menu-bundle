@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Admin;
+namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Fixtures\App\Admin;
 
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;

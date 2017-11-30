@@ -20,7 +20,7 @@ ifdef BRANCH
 	VERSION=dev-${BRANCH}
 endif
 PACKAGE=symfony-cmf/menu-bundle
-
+export KERNEL_CLASS=Symfony\Cmf\Bundle\MenuBundle\Tests\Fixtures\App\Kernel
 list:
 	@echo 'test:                    will run all tests'
 	@echo 'unit_tests:               will run unit tests only'
@@ -31,4 +31,5 @@ include ${TESTING_SCRIPTS_DIR}/make/unit_tests.mk
 include ${TESTING_SCRIPTS_DIR}/make/functional_tests_phpcr.mk
 include ${TESTING_SCRIPTS_DIR}/make/test_installation.mk
 
+.PHONY: test
 test: unit_tests functional_tests_phpcr

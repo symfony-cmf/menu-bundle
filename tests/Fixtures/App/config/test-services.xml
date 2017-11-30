@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="cmf_menu_test.content_admin" class="Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Admin\TestContentAdmin">
+        <service id="cmf_menu_test.content_admin" class="Symfony\Cmf\Bundle\MenuBundle\Tests\Fixtures\App\Admin\TestContentAdmin">
             <tag name="sonata.admin" manager_type="doctrine_phpcr" group="Test" label="Test Content" />
 
             <argument/>
-            <argument>Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Content</argument>
+            <argument>Symfony\Cmf\Bundle\MenuBundle\Tests\Fixtures\App\Document\Content</argument>
             <argument>SonataAdminBundle:CRUD</argument>
 
         </service>
@@ -17,7 +17,7 @@
         <service id="cmf_menu_test.menu_voter.parent"
             class="Symfony\Cmf\Bundle\MenuBundle\Voter\RequestParentContentIdentityVoter">
             <argument>contentDocument</argument>
-            <argument>Symfony\Cmf\Bundle\MenuBundle\Tests\Resources\Document\Post</argument>
+            <argument>Symfony\Cmf\Bundle\MenuBundle\Tests\Fixtures\App\Document\Post</argument>
 
             <tag name="knp_menu.voter" request="true"/>
         </service>
