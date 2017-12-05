@@ -2,7 +2,10 @@
     "name": "symfony-cmf/menu-bundle",
     "type": "symfony-bundle",
     "description": "Symfony CMF Menu Bundle",
-    "keywords": ["Symfony CMF", "menu"],
+    "keywords": [
+        "Symfony CMF",
+        "menu"
+    ],
     "homepage": "http://cmf.symfony.com",
     "license": "MIT",
     "authors": [
@@ -12,19 +15,19 @@
         }
     ],
     "require": {
-        "php": "^5.6|^7.0",
-        "symfony/framework-bundle": "^2.8|^3.0",
+        "php": "^7.1",
+        "symfony/framework-bundle": "^2.8 || ^3.3 || ^4.0",
         "knplabs/knp-menu-bundle": "^2.2.0",
         "knplabs/knp-menu": "^2.0.0"
     },
     "require-dev": {
-        "symfony/monolog-bundle": "^2.3|^3.0",
-        "symfony/phpunit-bridge": "^3.2",
-        "symfony-cmf/routing-bundle": "^1.4|^2.0",
+        "symfony/monolog-bundle": "~3.1",
+        "symfony/phpunit-bridge": "^3.3 || ^4.0",
+        "symfony-cmf/routing-bundle": "^1.4 || ^2.0",
         "symfony-cmf/testing": "^2.1@dev",
         "twig/twig": "^1.18|^2.0",
         "symfony-cmf/core-bundle": "^2.0",
-        "doctrine/phpcr-odm": "^1.4.2"
+        "doctrine/phpcr-odm": "^1.4.2 || ^2.0"
     },
     "suggest": {
         "doctrine/phpcr-odm": "To enable support for the PHPCR ODM documents (^1.4)",
@@ -45,7 +48,5 @@
         "branch-alias": {
             "dev-master": "2.2-dev"
         }
-    },
-    "minimum-stability":"dev",
-    "prefer-stable": true
+    }
 }
