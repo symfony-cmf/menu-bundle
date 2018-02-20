@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class ContentExtensionTest extends \PHPUnit_Framework_TestCase
 {
     private $generator;
+
     private $subject;
 
     public function setUp()
