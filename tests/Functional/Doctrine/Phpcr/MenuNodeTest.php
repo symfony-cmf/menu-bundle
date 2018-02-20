@@ -20,11 +20,14 @@ use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
 class MenuNodeTest extends BaseTestCase
 {
     private $content;
+
     /**
      * @var DocumentManager
      */
     private $dm;
+
     private $rootDocument;
+
     /**
      * @var MenuNode
      */
