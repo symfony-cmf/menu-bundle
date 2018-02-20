@@ -16,7 +16,9 @@ use Symfony\Cmf\Bundle\MenuBundle\Loader\VotingNodeLoader;
 class VotingNodeLoaderTest extends \PHPUnit_Framework_TestCase
 {
     private $subject;
+
     private $factory;
+
     private $dispatcher;
 
     public function setUp()

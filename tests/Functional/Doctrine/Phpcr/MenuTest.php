@@ -23,6 +23,7 @@ class MenuTest extends BaseTestCase
      * @var DocumentManager
      */
     private $dm;
+
     private $rootDocument;
 
     protected function setUp()

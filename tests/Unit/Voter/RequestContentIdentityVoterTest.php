@@ -16,6 +16,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Voter\RequestContentIdentityVoter;
 class RequestContentIdentityVoterTest extends \PHPUnit_Framework_TestCase
 {
     private $voter;
+
     private $request;
 
     protected function setUp()

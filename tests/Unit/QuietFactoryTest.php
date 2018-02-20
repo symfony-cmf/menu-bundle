@@ -16,6 +16,7 @@ use Symfony\Cmf\Bundle\MenuBundle\QuietFactory;
 class QuietFactoryTest extends \PHPUnit_Framework_TestCase
 {
     private $innerFactory;
+
     private $logger;
 
     protected function setUp()

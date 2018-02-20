@@ -22,6 +22,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode;
 class TestContentAdmin extends Admin
 {
     protected $baseRouteName = 'cmf_menu_test_content';
+
     protected $baseRoutePattern = '/cmf/menu-test/content';
 
     protected function configureListFields(ListMapper $listMapper)

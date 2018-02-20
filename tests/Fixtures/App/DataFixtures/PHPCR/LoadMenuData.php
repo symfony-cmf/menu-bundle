@@ -23,6 +23,7 @@ use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 class LoadMenuData implements FixtureInterface
 {
     protected $menuRoot;
+
     protected $routeRoot;
 
     public function load(ObjectManager $manager)
