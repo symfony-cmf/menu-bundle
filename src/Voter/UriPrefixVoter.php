@@ -14,6 +14,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Voter;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\Voter\VoterInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Route;
 
 /**
@@ -31,12 +32,36 @@ use Symfony\Component\Routing\Route;
 class UriPrefixVoter implements VoterInterface
 {
     /**
+     * @var RequestStack
+     */
+     private $requestStack;
+ 
+    /**
      * @var Request|null
      */
     private $request;
 
+    public function __construct(RequestStack $requestStack = null)
+    {
+        $this->requestStack = $requestStack;
+    }
+
+    /**
+     * @deprecated since version 3.x. Pass a RequestStack to the constructor instead.
+     *
+     * @return $this
+     */
     public function setRequest(Request $request = null)
     {
+        @trigger_error(
+            sprintf(
+                'The %s() method is deprecated since version 3.x.
+                Pass a Symfony\Component\HttpFoundation\RequestStack
+                in the constructor instead.',
+            __METHOD__),
+            E_USER_DEPRECATED
+        );
+
         $this->request = $request;
     }
 
@@ -51,6 +76,11 @@ class UriPrefixVoter implements VoterInterface
 
         $content = $item->getExtra('content');
 
+        $request = $this->request;
+        if (null !== $this->requestStack) {
+            $request = $this->requestStack->getMasterRequest();
+        }
+/* no idea what to do here ... & beyond */        
         if ($content instanceof Route && $content->hasOption('currentUriPrefix')) {
             $currentUriPrefix = $content->getOption('currentUriPrefix');
             $currentUriPrefix = str_replace('{_locale}', $this->request->getLocale(), $currentUriPrefix);
