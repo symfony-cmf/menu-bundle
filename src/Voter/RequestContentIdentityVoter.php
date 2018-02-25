@@ -14,6 +14,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Voter;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\Voter\VoterInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * This voter compares whether a key in the request is identical to the content
@@ -32,6 +33,11 @@ class RequestContentIdentityVoter implements VoterInterface
     private $requestKey;
 
     /**
+     * @var RequestStack|null
+     */
+    private $requestStack;
+
+    /**
      * @var Request|null
      */
     private $request;
@@ -40,32 +46,55 @@ class RequestContentIdentityVoter implements VoterInterface
      * @param string $requestKey The key to look up the content in the request
      *                           attributes
      */
-    public function __construct($requestKey)
+    public function __construct($requestKey, RequestStack $requestStack = null)
     {
         $this->requestKey = $requestKey;
+        $this->requestStack = $requestStack;
     }
 
+    /**
+     * @deprecated since version 2.2. Pass a RequestStack to the constructor instead.
+     */
     public function setRequest(Request $request = null)
     {
+        @trigger_error(
+            sprintf(
+                'The %s() method is deprecated since version 2.2.
+                Pass a Symfony\Component\HttpFoundation\RequestStack
+                in the constructor instead.',
+                __METHOD__),
+            E_USER_DEPRECATED
+        );
+
         $this->request = $request;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function matchItem(ItemInterface $item = null)
+    public function matchItem(ItemInterface $item)
     {
-        if (!$this->request) {
+        $request = $this->getRequest();
+        if (!$request) {
             return;
         }
 
         $content = $item->getExtra('content');
 
         if (null !== $content
-            && $this->request->attributes->has($this->requestKey)
-            && $this->request->attributes->get($this->requestKey) === $content
+            && $request->attributes->has($this->requestKey)
+            && $request->attributes->get($this->requestKey) === $content
         ) {
             return true;
         }
+    }
+
+    private function getRequest()
+    {
+        if ($this->requestStack) {
+            return $this->requestStack->getMasterRequest();
+        }
+
+        return $this->request;
     }
 }

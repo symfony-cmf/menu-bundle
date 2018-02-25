@@ -7,13 +7,14 @@
     <services>
 
         <service id="cmf_menu.current_item_voter.uri_prefix" class="Symfony\Cmf\Bundle\MenuBundle\Voter\UriPrefixVoter">
-            <tag name="knp_menu.voter" request="true"/>
+            <argument type="service" id="request_stack"/>
+            <tag name="knp_menu.voter"/>
         </service>
 
         <service id="cmf_menu.current_item_voter.content_identity" class="Symfony\Cmf\Bundle\MenuBundle\Voter\RequestContentIdentityVoter">
             <argument>%cmf_menu.content_key%</argument>
-
-            <tag name="knp_menu.voter" request="true"/>
+            <argument type="service" id="request_stack"/>
+            <tag name="knp_menu.voter"/>
         </service>
 
     </services>
