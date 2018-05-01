@@ -24,10 +24,10 @@
     "require-dev": {
         "symfony/monolog-bundle": "~3.1",
         "symfony/phpunit-bridge": "^3.3 || ^4.0",
-        "symfony-cmf/routing-bundle": "^1.4 || ^2.1.0-RC1",
-        "symfony-cmf/testing": "^2.1.0-RC1",
+        "symfony-cmf/routing-bundle": "^1.4 || ^2.0",
+        "symfony-cmf/testing": "^2.1@dev",
         "twig/twig": "^1.35 || ^2.4.4",
-        "symfony-cmf/core-bundle": "^2.1.0-RC1",
+        "symfony-cmf/core-bundle": "^2.1",
         "doctrine/phpcr-odm": "^1.4.2 || ^2.0"
     },
     "suggest": {
