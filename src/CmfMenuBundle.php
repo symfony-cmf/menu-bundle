@@ -33,7 +33,7 @@ class CmfMenuBundle extends Bundle
                         realpath(__DIR__.'/Resources/config/doctrine-model') => 'Symfony\Cmf\Bundle\MenuBundle\Model',
                         realpath(__DIR__.'/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr',
                     ],
-                    ['cmf_menu.manager_name'],
+                    ['cmf_menu.persistence.phpcr.manager_name'],
                     false,
                     ['CmfMenuBundle' => 'Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr']
                 )
