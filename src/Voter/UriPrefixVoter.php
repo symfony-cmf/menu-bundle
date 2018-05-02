@@ -14,6 +14,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Voter;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\Voter\VoterInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Route;
 
 /**
@@ -31,12 +32,36 @@ use Symfony\Component\Routing\Route;
 class UriPrefixVoter implements VoterInterface
 {
     /**
+     * @var RequestStack|null
+     */
+    private $requestStack;
+
+    /**
+     * @deprecated Use the request stack instead
+     *
      * @var Request|null
      */
     private $request;
 
+    public function __construct(RequestStack $requestStack = null)
+    {
+        $this->requestStack = $requestStack;
+    }
+
+    /**
+     * @deprecated since version 2.2. Pass a RequestStack to the constructor instead.
+     */
     public function setRequest(Request $request = null)
     {
+        @trigger_error(
+            sprintf(
+                'The %s() method is deprecated since version 2.2.
+                Pass a Symfony\Component\HttpFoundation\RequestStack
+                in the constructor instead.',
+            __METHOD__),
+            E_USER_DEPRECATED
+        );
+
         $this->request = $request;
     }
 
@@ -45,7 +70,8 @@ class UriPrefixVoter implements VoterInterface
      */
     public function matchItem(ItemInterface $item)
     {
-        if (!$this->request) {
+        $request = $this->getRequest();
+        if (!$request) {
             return;
         }
 
@@ -53,10 +79,19 @@ class UriPrefixVoter implements VoterInterface
 
         if ($content instanceof Route && $content->hasOption('currentUriPrefix')) {
             $currentUriPrefix = $content->getOption('currentUriPrefix');
-            $currentUriPrefix = str_replace('{_locale}', $this->request->getLocale(), $currentUriPrefix);
-            if (0 === strncmp($this->request->getPathInfo(), $currentUriPrefix, strlen($currentUriPrefix))) {
+            $currentUriPrefix = str_replace('{_locale}', $request->getLocale(), $currentUriPrefix);
+            if (0 === strncmp($request->getPathInfo(), $currentUriPrefix, strlen($currentUriPrefix))) {
                 return true;
             }
         }
+    }
+
+    private function getRequest()
+    {
+        if ($this->requestStack) {
+            return $this->requestStack->getMasterRequest();
+        }
+
+        return $this->request;
     }
 }

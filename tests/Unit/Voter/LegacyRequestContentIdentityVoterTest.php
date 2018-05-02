@@ -13,22 +13,24 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Voter;
 
 use Symfony\Cmf\Bundle\MenuBundle\Voter\RequestContentIdentityVoter;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
-class RequestContentIdentityVoterTest extends RequestContentIdentityVoterTestCase
+/**
+ * @legacy
+ */
+class LegacyRequestContentIdentityVoterTest extends RequestContentIdentityVoterTestCase
 {
     protected function buildVoter(Request $request)
     {
-        $requestStack = new RequestStack();
-        $requestStack->push($request);
+        $voter = new RequestContentIdentityVoter('_content');
+        $voter->setRequest($request);
 
-        return new RequestContentIdentityVoter('_content', $requestStack);
+        return $voter;
     }
 
     public function testSkipsWhenNoRequestIsAvailable()
     {
-        $voter = new RequestContentIdentityVoter('_content', new RequestStack());
+        $this->voter->setRequest(null);
 
-        $this->assertNull($voter->matchItem($this->createItem()));
+        $this->assertNull($this->voter->matchItem($this->createItem()));
     }
 }
