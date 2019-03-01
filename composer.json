@@ -16,8 +16,8 @@
     ],
     "require": {
         "php": "^7.1",
-        "symfony/framework-bundle": "^3.4 || ^4.0",
-        "symfony/validator": "^3.4 || ^4.0",
+        "symfony/framework-bundle": "^3.4 || ^4.1",
+        "symfony/validator": "^3.4 || ^4.1",
         "knplabs/knp-menu-bundle": "^2.2.0",
         "knplabs/knp-menu": "^2.0.0"
     },

@@ -7,33 +7,71 @@
 ############################################################################
 # This file is part of the Symfony CMF package.                            #
 #                                                                          #
-# (c) 2011-2017 Symfony CMF                                                #
+# (c) Symfony CMF                                                #
 #                                                                          #
 # For the full copyright and license information, please view the LICENSE  #
 # file that was distributed with this source code.                         #
 ############################################################################
 
 TESTING_SCRIPTS_DIR=vendor/symfony-cmf/testing/bin
-
-SYMFONY_PHPUNIT_VERSION=6
-SYMFONY_DEPRECATIONS_HELPER==weak
 CONSOLE=${TESTING_SCRIPTS_DIR}/console
-SYMFONY_PHPUNIT_DIR=.phpunit
-SYMFONY_PHPUNIT_REMOVE="symfony/yaml"
 VERSION=dev-master
 ifdef BRANCH
 	VERSION=dev-${BRANCH}
 endif
 PACKAGE=symfony-cmf/menu-bundle
+HAS_XDEBUG=$(shell php --modules|grep --quiet xdebug;echo $$?)
 
 list:
 	@echo 'test:                    will run all tests'
 	@echo 'unit_tests:               will run unit tests only'
 	@echo 'functional_tests_phpcr:  will run functional tests with PHPCR'
 
-
-include ${TESTING_SCRIPTS_DIR}/make/unit_tests.mk
-include ${TESTING_SCRIPTS_DIR}/make/functional_tests_phpcr.mk
+TEST_DEPENDENCIES := ""
+EXTRA_INCLUDES:=$(wildcard ${TESTING_SCRIPTS_DIR}/make/unit_tests.mk)
+ifneq ($(strip $(EXTRA_INCLUDES)),)
+  contents :=  $(shell echo including extra rules $(EXTRA_INCLUDES))
+  include $(EXTRA_INCLUDES)
+    TEST_DEPENDENCIES := $(TEST_DEPENDENCIES)" unit_tests"
+  endif
+EXTRA_INCLUDES:=$(wildcard ${TESTING_SCRIPTS_DIR}/make/functional_tests_phpcr.mk)
+ifneq ($(strip $(EXTRA_INCLUDES)),)
+  contents :=  $(shell echo including extra rules $(EXTRA_INCLUDES))
+  include $(EXTRA_INCLUDES)
+    TEST_DEPENDENCIES := $(TEST_DEPENDENCIES)" functional_tests_phpcr"
+  endif
 
 .PHONY: test
-test: unit_tests functional_tests_phpcr
+test: build/xdebug-filter.php$
+ifneq ($(strip $(wildcard ${TESTING_SCRIPTS_DIR}/make/unit_tests.mk)),)
+	@make unit_tests
+endif
+ifneq ($(strip $(wildcard ${TESTING_SCRIPTS_DIR}/make/functional_tests_phpcr.mk)),)
+	@make functional_tests_phpcr
+endif
+
+lint-php:
+	php-cs-fixer fix --ansi --verbose --diff --dry-run
+.PHONY: lint-php
+
+lint: lint-composer lint-php
+.PHONY: lint
+
+lint-composer:
+	composer validate
+.PHONY: lint-composer
+
+cs-fix: cs-fix-php
+.PHONY: cs-fix
+
+cs-fix-php:
+	php-cs-fixer fix --verbose
+.PHONY: cs-fix-php
+
+build:
+	mkdir $@
+
+build/xdebug-filter.php: phpunit.xml.dist build
+ifeq ($(HAS_XDEBUG), 0)
+	phpunit --dump-xdebug-filter $@
+endif

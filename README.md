@@ -23,7 +23,7 @@ The MenuBundle provides menus from a doctrine object manager with the help of Kn
 ## Requirements
 
 * PHP 7.1 / 7.2 / 7.3
-* Symfony 3.4 / 4.0 / 4.1 / 4.2
+* Symfony 3.4 / 4.1 / 4.2
 * See also the `require` section of [composer.json](composer.json)
 
 ## Documentation
