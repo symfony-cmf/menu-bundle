@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -66,7 +68,7 @@ class ContentExtension implements ExtensionInterface
 
             $options['uri'] = $this->contentRouter->generate(
                 $options['content'],
-                isset($options['routeParameters']) ? $options['routeParameters'] : [],
+                $options['routeParameters'] ?? [],
                 (isset($options['routeAbsolute']) && $options['routeAbsolute']) ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::ABSOLUTE_PATH
             );
         }
@@ -125,7 +127,7 @@ class ContentExtension implements ExtensionInterface
     private function validateLinkType($linkType)
     {
         $linkTypes = ['uri', 'route', 'content'];
-        if (!in_array($linkType, $linkTypes)) {
+        if (!\in_array($linkType, $linkTypes, true)) {
             throw new \InvalidArgumentException(sprintf(
                 'Invalid link type "%s", expected: "%s"',
                 $linkType,

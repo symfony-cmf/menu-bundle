@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -13,7 +15,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Loader;
 
 use Symfony\Cmf\Bundle\MenuBundle\Loader\VotingNodeLoader;
 
-class VotingNodeLoaderTest extends \PHPUnit_Framework_TestCase
+class VotingNodeLoaderTest extends \PHPUnit\Framework\TestCase
 {
     private $subject;
 
@@ -23,8 +25,8 @@ class VotingNodeLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->factory = $this->getMock('Knp\Menu\FactoryInterface');
-        $this->dispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $this->factory = $this->createMock('Knp\Menu\FactoryInterface');
+        $this->dispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
         $this->subject = new VotingNodeLoader($this->factory, $this->dispatcher);
     }
 
@@ -57,7 +59,7 @@ class VotingNodeLoaderTest extends \PHPUnit_Framework_TestCase
 
         $that = $this;
         $this->factory->expects($this->exactly($nodes))->method('createItem')->will($this->returnCallback(function () use ($that) {
-            return $that->getMock('Knp\Menu\ItemInterface');
+            return $that->createMock('Knp\Menu\ItemInterface');
         }));
 
         // test
@@ -78,7 +80,7 @@ class VotingNodeLoaderTest extends \PHPUnit_Framework_TestCase
 
     protected function getNode($name, $options = [], $children = [])
     {
-        $node = $this->getMock('Knp\Menu\NodeInterface');
+        $node = $this->createMock('Knp\Menu\NodeInterface');
 
         $node->expects($this->any())->method('getName')->willReturn($name);
         $node->expects($this->any())->method('getOptions')->willReturn($options);

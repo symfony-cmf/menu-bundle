@@ -16,14 +16,14 @@
     ],
     "require": {
         "php": "^7.1",
-        "symfony/framework-bundle": "^2.8 || ^3.3 || ^4.0",
-        "symfony/validator": "^2.8 || ^3.3 || ^4.0",
+        "symfony/framework-bundle": "^3.4 || ^4.1",
+        "symfony/validator": "^3.4 || ^4.1",
         "knplabs/knp-menu-bundle": "^2.2.0",
         "knplabs/knp-menu": "^2.0.0"
     },
     "require-dev": {
-        "symfony/monolog-bundle": "~3.1",
-        "symfony/phpunit-bridge": "^3.3 || ^4.0",
+        "symfony/monolog-bundle": "^3.1",
+        "symfony/phpunit-bridge": "^4.2.2",
         "symfony-cmf/routing-bundle": "^1.4 || ^2.0",
         "symfony-cmf/testing": "^2.1.8",
         "twig/twig": "^1.35 || ^2.4.4",

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -136,9 +138,9 @@ class PhpcrMenuProvider implements MenuProviderInterface
      *                        absolute PHPCR path or one relative to the menu root
      * @param array  $options
      *
-     * @return ItemInterface The menu (sub)tree starting with name
-     *
      * @throws \InvalidArgumentException if the menu can not be found
+     *
+     * @return ItemInterface The menu (sub)tree starting with name
      */
     public function get($name, array $options = [])
     {
@@ -170,16 +172,26 @@ class PhpcrMenuProvider implements MenuProviderInterface
     }
 
     /**
+     * Get the object manager named $managerName from the registry.
+     *
+     * @return DocumentManager
+     */
+    protected function getObjectManager()
+    {
+        return $this->managerRegistry->getManager($this->managerName);
+    }
+
+    /**
      * @param string $name  Name of the menu to load
      * @param bool   $throw Whether to throw an exception if the menu is not
      *                      found or no valid menu. Returns false if $throw is
      *                      false and there is no menu at $name
      *
-     * @return object|bool The menu root found with $name or false if $throw
-     *                     is false and the menu was not found
-     *
      * @throws \InvalidArgumentException Only if $throw is true throws this
      *                                   exception if the name is empty or no menu found
+     *
+     * @return object|bool The menu root found with $name or false if $throw
+     *                     is false and the menu was not found
      */
     private function find($name, $throw)
     {
@@ -208,7 +220,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
         if ($this->getPrefetch() > 0) {
             if ($session instanceof Session
                 && 0 < $session->getSessionOption(Session::OPTION_FETCH_DEPTH)
-                && 0 === strncmp($path, $this->getMenuRoot(), strlen($this->getMenuRoot()))
+                && 0 === strncmp($path, $this->getMenuRoot(), \strlen($this->getMenuRoot()))
             ) {
                 // we have jackalope with a fetch depth. prefetch all menu
                 // nodes of all menues.
@@ -254,15 +266,5 @@ class PhpcrMenuProvider implements MenuProviderInterface
         }
 
         return $menu;
-    }
-
-    /**
-     * Get the object manager named $managerName from the registry.
-     *
-     * @return DocumentManager
-     */
-    protected function getObjectManager()
-    {
-        return $this->managerRegistry->getManager($this->managerName);
     }
 }

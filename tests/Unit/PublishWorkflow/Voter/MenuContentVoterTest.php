@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,7 +19,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
-class MenuContentVoterTest extends \PHPUnit_Framework_Testcase
+class MenuContentVoterTest extends \PHPUnit\Framework\Testcase
 {
     /**
      * @var MenuContentVoter
@@ -44,7 +46,7 @@ class MenuContentVoterTest extends \PHPUnit_Framework_Testcase
         $this->pwfc = $this->getMockBuilder('Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishWorkflowChecker')
             ->disableOriginalConstructor()
             ->getMock();
-        $this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $this->container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $this->container
             ->expects($this->any())
             ->method('get')
@@ -57,7 +59,7 @@ class MenuContentVoterTest extends \PHPUnit_Framework_Testcase
 
     public function providePublishWorkflowChecker()
     {
-        $content = $this->getMock('Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableReadInterface');
+        $content = $this->createMock('Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableReadInterface');
 
         return [
             [
@@ -142,7 +144,7 @@ class MenuContentVoterTest extends \PHPUnit_Framework_Testcase
     public function testPublishWorkflowChecker($expected, $attributes, $content, $isMenuPusblishable, $isContentPublishable)
     {
         $attributes = (array) $attributes;
-        $menuNode = $this->getMock('Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode');
+        $menuNode = $this->createMock('Symfony\Cmf\Bundle\MenuBundle\Model\MenuNode');
         $menuNode->expects($this->any())
             ->method('getContent')
             ->will($this->returnValue($content))
