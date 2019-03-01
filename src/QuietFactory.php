@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -90,7 +92,7 @@ class QuietFactory implements FactoryInterface
         if (!method_exists($this->innerFactory, 'addExtension')) {
             throw new LogicException(sprintf(
                 'Wrapped factory "%s" does not have the method "addExtension".',
-                get_class($this->innerFactory)
+                \get_class($this->innerFactory)
             ));
         }
         $this->innerFactory->addExtension($extension, $priority);

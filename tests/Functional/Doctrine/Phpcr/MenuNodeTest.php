@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -120,7 +122,7 @@ class MenuNodeTest extends BaseTestCase
             $prop->setAccessible(true);
             $v = $prop->getValue($menuNode);
 
-            if (!is_object($value)) {
+            if (!\is_object($value)) {
                 $this->assertEquals($value, $v);
             }
         }
@@ -162,12 +164,11 @@ class MenuNodeTest extends BaseTestCase
         $this->assertCount(0, $menuNode->getChildren());
     }
 
-    /**
-     * @expectedException \Doctrine\ODM\PHPCR\Exception\OutOfBoundsException
-     * @expectedExceptionMessage Allowed child classes "Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode"
-     */
     public function testPersistInvalidChild()
     {
+        $this->expectException(\Doctrine\ODM\PHPCR\Exception\OutOfBoundsException::class);
+        $this->expectExceptionMessage('Allowed child classes "Symfony\\Cmf\\Bundle\\MenuBundle\\Doctrine\\Phpcr\\MenuNode"');
+
         $menuNode = new MenuNode();
         $menuNode->setName('menu-node');
         $menuNode->setParentDocument($this->rootDocument);

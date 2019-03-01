@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,7 +22,7 @@ use PHPCR\SessionInterface;
 use Prophecy\Argument;
 use Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider;
 
-class PhpcrMenuProviderTest extends \PHPUnit_Framework_Testcase
+class PhpcrMenuProviderTest extends \PHPUnit\Framework\Testcase
 {
     private $manager;
 

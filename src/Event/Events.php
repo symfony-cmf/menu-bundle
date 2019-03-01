@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,5 +20,5 @@ final class Events
      *
      * The event object is a CreateMenuItemFromNodeEvent.
      */
-    const CREATE_ITEM_FROM_NODE = 'cmf_menu.create_menu_item_from_node';
+    public const CREATE_ITEM_FROM_NODE = 'cmf_menu.create_menu_item_from_node';
 }

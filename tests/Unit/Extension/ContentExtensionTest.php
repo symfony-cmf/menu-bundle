@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,7 +16,7 @@ namespace Symfony\Cmf\Bundle\MenuBundle\Tests\Unit\Extension;
 use Symfony\Cmf\Bundle\MenuBundle\Extension\ContentExtension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class ContentExtensionTest extends \PHPUnit_Framework_TestCase
+class ContentExtensionTest extends \PHPUnit\Framework\TestCase
 {
     private $generator;
 
@@ -22,7 +24,7 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->generator = $this->getMock('Symfony\Component\Routing\Generator\UrlGeneratorInterface');
+        $this->generator = $this->createMock('Symfony\Component\Routing\Generator\UrlGeneratorInterface');
         $this->subject = new ContentExtension($this->generator);
     }
 
@@ -119,21 +121,19 @@ class ContentExtensionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Invalid link type
-     */
     public function testFailsOnInvalidLinkType()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid link type');
+
         $this->subject->buildOptions(['linkType' => 'not_valid']);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage could not find content option
-     */
     public function testFailsWhenContentIsNotAvailable()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('could not find content option');
+
         $this->subject->buildOptions(['linkType' => 'content']);
     }
 }

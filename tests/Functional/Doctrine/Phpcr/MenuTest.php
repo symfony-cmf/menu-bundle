@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Symfony CMF package.
  *
- * (c) 2011-2017 Symfony CMF
+ * (c) Symfony CMF
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -60,10 +62,11 @@ class MenuTest extends BaseTestCase
 
     /**
      * @dataProvider getInvalidChildren
-     * @expectedException \Doctrine\ODM\PHPCR\Exception\OutOfBoundsException
      */
     public function testPersistInvalidChild($invalidChild)
     {
+        $this->expectException(\Doctrine\ODM\PHPCR\Exception\OutOfBoundsException::class);
+
         $menu = new Menu();
         $menu->setPosition($this->rootDocument, 'main');
         $this->dm->persist($menu);
