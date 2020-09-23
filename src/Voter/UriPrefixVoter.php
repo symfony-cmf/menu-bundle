@@ -68,11 +68,11 @@ class UriPrefixVoter implements VoterInterface
     /**
      * {@inheritdoc}
      */
-    public function matchItem(ItemInterface $item)
+    public function matchItem(ItemInterface $item): ?bool
     {
         $request = $this->getRequest();
         if (!$request) {
-            return;
+            return false;
         }
 
         $content = $item->getExtra('content');
@@ -84,6 +84,8 @@ class UriPrefixVoter implements VoterInterface
                 return true;
             }
         }
+
+        return null;
     }
 
     private function getRequest()
