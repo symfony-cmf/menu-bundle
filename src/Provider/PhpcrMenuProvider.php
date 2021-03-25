@@ -140,7 +140,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
      *
      * @throws \InvalidArgumentException if the menu can not be found
      */
-    public function get($name, array $options = [])
+    public function get(string $name, array $options = []): ItemInterface
     {
         $menu = $this->find($name, true);
 
@@ -164,7 +164,7 @@ class PhpcrMenuProvider implements MenuProviderInterface
      *
      * @return bool Whether a menu with this name can be loaded by this provider
      */
-    public function has($name, array $options = [])
+    public function has(string $name, array $options = []): bool
     {
         return $this->find($name, false) instanceof NodeInterface;
     }
